@@ -1,0 +1,10 @@
+{
+  "assetHost": "qa.apartmentsUganda.com",
+  "assetPort": 443,
+  "hotModule": false,
+  "isLocal": false,
+  "loginHost": "https://qa.apartmentsUganda.com",
+  "toolsHost": "https://qa.apartmentsUganda.com",
+  "clientErrorLoggingEnabled": false,
+  "cookieDomain": ".qa.apartmentsUganda.com"
+}
