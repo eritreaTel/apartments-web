@@ -1,6 +1,7 @@
 const React = require('react');
 const ApplicationHelper = require('../helpers/application_helper');
 const Amenities = require('../components/apartment/amenties');
+const Anchor = require('../components/shared/anchor');
 
 class ApartmentPage extends React.Component {
 
@@ -29,11 +30,14 @@ class ApartmentPage extends React.Component {
 		);
 	}
 
-	_renderAmenities(apartment) {
+	_renderAmenitiesAndButtons(apartment) {
 		return (
 			<div className="col-md-5 mg-room-fecilities">
 				<h2 className="mg-sec-left-title">Apartment Amenities</h2>
 				<Amenities amenities={apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
+
+				<Anchor className="btn btn-main btn-next-tab">Select This Room</Anchor>
+				<Anchor className="btn btn-link">Keep Searching <i className="fa fa-angle-double-left"></i></Anchor>
 			</div>
 		);
 	}
@@ -86,7 +90,7 @@ class ApartmentPage extends React.Component {
 				<div className="container">
 					<div className="row">
 						{this._renderGalleries(apartment)}
-						{this._renderAmenities(apartment)}
+						{this._renderAmenitiesAndButtons(apartment)}
 					</div>
 					{this._renderApartmentDescription(apartment)}
 				</div>
