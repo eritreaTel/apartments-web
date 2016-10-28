@@ -2,7 +2,7 @@ const React = require('react');
 const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 
-class GuestHouses extends React.Component {
+class GuestHousesPage extends React.Component {
 
     renderTitle() {
         return (
@@ -1150,6 +1150,6 @@ function getDefaultProps() {
     return props;
 }
 
-GuestHouses.defaultProps = getDefaultProps();
+GuestHousesPage.defaultProps = getDefaultProps();
 
-module.exports = GuestHouses;
+module.exports = GuestHousesPage;

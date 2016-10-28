@@ -5,7 +5,7 @@ const Carousel = require('../components/shared/carousel')
 const AboutUs = require('../components/shared/about_us')
 const RecentNews = require('../components/blog/recent_news')
 
-class Home extends React.Component {
+class HomePage extends React.Component {
 
 	render() {
 		return (
@@ -20,4 +20,4 @@ class Home extends React.Component {
 	}
 };
 
-module.exports = Home;
+module.exports = HomePage;

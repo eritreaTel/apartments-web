@@ -2,7 +2,7 @@ const React = require('react');
 const ApplicationHelper = require('../helpers/application_helper');
 const Amenities = require('../components/apartment/amenties');
 
-class Apartment extends React.Component {
+class ApartmentPage extends React.Component {
 
 	renderTitle(apartment) {
 		return (
@@ -240,6 +240,6 @@ function getDefaultProps() {
 	return props;
 }
 
-Apartment.defaultProps = getDefaultProps();
+ApartmentPage.defaultProps = getDefaultProps();
 
-module.exports = Apartment;
+module.exports = ApartmentPage;

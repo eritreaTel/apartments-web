@@ -64843,7 +64843,7 @@
 /***/ },
 /* 597 */
 /*!***************************!*\
-  !*** ./app/pages/Home.js ***!
+  !*** ./app/pages/HomePage.js ***!
   \***************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66053,7 +66053,7 @@
 /***/ },
 /* 610 */
 /*!**********************************!*\
-  !*** ./app/pages/GuestHouses.js ***!
+  !*** ./app/pages/GuestHousesPage.js ***!
   \**********************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -70184,7 +70184,7 @@
 /***/ },
 /* 613 */
 /*!********************************!*\
-  !*** ./app/pages/Apartment.js ***!
+  !*** ./app/pages/ApartmentPage.js ***!
   \********************************/
 /***/ function(module, exports, __webpack_require__) {
 
