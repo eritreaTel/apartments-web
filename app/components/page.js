@@ -16,6 +16,8 @@ class Page extends React.Component {
         const {view} = store;
         DebugHelper.trackStore(this.props);
 
+        console.log('page defined in the view');
+        console.log(view.page);
         let content, loggedIn = true;
 
         switch (view.page) {

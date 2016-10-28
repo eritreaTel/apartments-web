@@ -15,7 +15,7 @@ class RecentNews extends React.Component {
 
     renderNewsGallery(gallery){
         const styledFullLi = gallery.map(item =>{
-            return <li><img src={item.full_img} alt={item.caption}/></li>;
+            return <li><img src={item.full} alt={item.caption}/></li>;
         });
 
         const styledThumbLi = gallery.map(item =>{
@@ -43,7 +43,7 @@ class RecentNews extends React.Component {
                 <div className="container">
                     <div className="row">
                         {this.renderNewsHeading(this.props.news)}
-                        {this.renderNewsGallery(this.props.gallery)}
+                        {this.renderNewsGallery(this.props.galleries)}
                     </div>
                 </div>
             </div>
@@ -71,34 +71,34 @@ function getDefaultProps() {
                 "created_at": "2016-10-09 09:43:26"
             }
         ],
-        gallery: [
+        galleries: [
             {
-                "full_img" : "images/gallery-01.png",
+                "full" : "images/gallery-01.png",
                 "thumb" : "images/gallery-thumb-01.png",
                 "caption" : "Partner Logo"
             },
             {
-                "full_img" : "images/gallery-02.png",
+                "full" : "images/gallery-02.png",
                 "thumb" : "images/gallery-thumb-02.png",
                 "caption" : "Partner Logo"
             },
             {
-                "full_img" : "images/gallery-05.png",
+                "full" : "images/gallery-05.png",
                 "thumb" : "images/gallery-thumb-05.png",
                 "caption" : "Partner Logo"
             },
             {
-                "full_img" : "images/gallery-06.png",
+                "full" : "images/gallery-06.png",
                 "thumb" : "images/gallery-thumb-06.png",
                 "caption" : "Partner Logo"
             },
             {
-                "full_img" : "images/gallery-07.png",
+                "full" : "images/gallery-07.png",
                 "thumb" : "images/gallery-thumb-07.png",
                 "caption" : "Partner Logo"
             },
             {
-                "full_img" : "images/gallery-08.png",
+                "full" : "images/gallery-08.png",
                 "thumb" : "images/gallery-thumb-08.png",
                 "caption" : "Partner Logo"
             }

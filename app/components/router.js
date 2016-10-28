@@ -42,8 +42,8 @@ const Router = React.createClass({
         Actions.setView({page: 'login', data});
     },
 
-    apartment(apartmentId) {
-        Actions.setView({page: 'apartment', apartmentId});
+    apartment(data) {
+        Actions.setView({page: 'apartment', data});
     },
 
     blog(blogId) {

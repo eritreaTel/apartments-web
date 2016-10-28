@@ -12,7 +12,7 @@ class ApartmentAvailable extends React.Component {
 
     onViewDetailsClicked = () => {
         //Actions.setRoute(`/apartment/${proposal.id}`);
-        Actions.setRoute(`/apartment/1`);
+        Actions.setRoute(`/apartment`);
     }
 
     render() {

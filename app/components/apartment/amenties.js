@@ -7,11 +7,12 @@ class Amenities extends React.Component {
     render() {
         const {amenities, outerDivClass, innerDivClass} = this.props;
         const len = amenities.length;
-        const sectionOne = amenities.slice(0, Math.ceil(len/2)).map(item =>{
+        const mid = Math.ceil(len/2);
+        const sectionOne = amenities.slice(0, mid).map(item =>{
             return <li><i className={item.icon_name}></i>{item.name}</li>
         });
 
-        const sectionTwo = amenities.slice(3, len).map(item => {
+        const sectionTwo = amenities.slice(mid, len).map(item => {
             return <li><i className={item.icon_name}></i>{item.name}</li>
         });
 

@@ -6,7 +6,7 @@ class GuestHouses extends React.Component {
 
     renderTitle() {
         return (
-            <div className="mg-page-title parallax">
+            <div className="mg-page-title-space parallax">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
