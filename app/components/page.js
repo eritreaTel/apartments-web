@@ -5,6 +5,7 @@ const AboutUsPage = require('../pages/AboutUsPage');
 const ContactUsPage = require('../pages/ContactUsPage');
 const BlogsPage = require('../pages/BlogsPage');
 const NotFoundPage = require('../pages/NotFoundPage');
+const BlogPage = require('../pages/BlogPage');
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
 const DebugHelper = require('../helpers/debug_helper');
@@ -21,8 +22,11 @@ class Page extends React.Component {
         DebugHelper.trackStore(this.props);
 
         let content, loggedIn = true;
-
         switch (view.page) {
+            case 'index' :
+            case 'home' :
+                content = <HomePage {...{store}}/>
+                break;
             case 'guest-houses':
                 content = <GuestHousesPage {...{store}} />
                 break;
@@ -31,6 +35,9 @@ class Page extends React.Component {
                 break;
             case 'blogs':
                 content = <BlogsPage {...{store}} />
+                break;
+            case 'blog':
+                content = <BlogPage {...{store}} />
                 break;
             case 'contact-us' :
                 content = <ContactUsPage {...{store}} />;

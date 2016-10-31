@@ -1,12 +1,10 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
+const Actions = require('../actions/actions');
 const Moment = require('moment');
 
 class BlogsPage extends React.Component {
-
-	onBlogTitleClicked = () => {
-	}
 
 	render() {
 		return (
@@ -42,7 +40,7 @@ class BlogsPage extends React.Component {
 
 	_renderImages(images) {
 		const styledImgs = images && images.map(blogImage => {
-			return <Anchor onClick={this.onBlogTitleClicked()}><img src={blogImage.full} alt="" className="img-responsive"/></Anchor>
+			return <Anchor onClick={()=>{Actions.setRoute('/blog')}}> <img src={blogImage.full} alt="" className="img-responsive"/> </Anchor>
 		});
 		return styledImgs ? <div className="mg-post-images-slider"> {styledImgs}</div> : '';
 	}
@@ -53,7 +51,7 @@ class BlogsPage extends React.Component {
 						<header>
 							{this._renderImages(blog.images)}
 							<h2 className="mg-post-title">
-								<Anchor onClick={this.onBlogTitleClicked()}> {blog.title}</Anchor>
+								<Anchor onClick={()=>{Actions.setRoute('/blog')}}> {blog.title}</Anchor>
 							</h2>
 							<div className="mg-post-meta">
 								<span><Anchor>{Moment(blog.created_at).format('D MMM, YYYY')}</Anchor></span>
