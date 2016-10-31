@@ -1,20 +1,7 @@
 const React = require('react');
+const PageTitleBar = require('../components/shared/pageTitleBar');
 
 class AboutUsPage extends React.Component {
-
-	renderTitle() {
-		return (
-			<div className="mg-page-title-space parallax">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
 
 	renderAboutUgandaGuestHouses() {
 		return (
@@ -130,7 +117,7 @@ class AboutUsPage extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.renderTitle()}
+				{<PageTitleBar/>}
 				{this.renderAboutUgandaGuestHouses()}
 				{this.renderTestimonials(this.props.testimonials)}
 				{this.renderOurStaff(this.props.teamMembers)}

@@ -2,6 +2,7 @@ const HomePage = require('../pages/HomePage');
 const GuestHousesPage = require('../pages/GuestHousesPage');
 const ApartmentPage = require('../pages/ApartmentPage');
 const AboutUsPage = require('../pages/AboutUsPage');
+const BlogsPage = require('../pages/BlogsPage');
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
 const DebugHelper = require('../helpers/debug_helper');
@@ -29,7 +30,7 @@ class Page extends React.Component {
                 content = <AboutUsPage {...{store}} />
                 break;
             case 'blogs':
-                content = 'Blogs';
+                content = <BlogsPage {...{store}} />
                 break;
             case 'contact-us' :
                 content = 'Contact US';

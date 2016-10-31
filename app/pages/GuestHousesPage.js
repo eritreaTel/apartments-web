@@ -1,21 +1,9 @@
 const React = require('react');
 const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
+const PageTitleBar = require('../components/shared/pageTitleBar');
 
 class GuestHousesPage extends React.Component {
-
-    renderTitle() {
-        return (
-            <div className="mg-page-title-space parallax">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
     _renderBookingStage() {
         return(
@@ -946,7 +934,7 @@ class GuestHousesPage extends React.Component {
     render() {
         return (
             <div>
-                {this.renderTitle()}
+                {<PageTitleBar />}
                 {this.renderBookingBody()}
             </div>
         );
