@@ -2,11 +2,11 @@ module.exports = {
   "/index" : "index",
   "/guest-houses": "guestHouses",
   "/error": "error",
-  "/login": "login",
+  "/sign-in": "signIn",
   "/reset-password": "resetPassword",
-  "/about": "about",
+  "/about-us": "aboutUs",
   "/apartment": "apartment",
-  "/contact": "contact",
+  "/contact-us": "contactUs",
   "/blogs": "blogs",
   "/blog/:id": "blog"
 };

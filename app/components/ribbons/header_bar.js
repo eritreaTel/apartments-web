@@ -45,7 +45,7 @@ function getDefaultProps() {
       },
       {
           "caption" : "About Us",
-          "route" : "/about",
+          "route" : "/about-us",
           "active" : ""
       },
       {
@@ -55,12 +55,12 @@ function getDefaultProps() {
       },
       {
           "caption" : "Contact Us",
-          "route" : "/contact",
+          "route" : "/contact-us",
           "active" : ""
       },
       {
           "caption" : "Sign In",
-          "route" : "/login",
+          "route" : "/sign-in",
           "active" : ""
       }
     ]

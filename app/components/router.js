@@ -22,12 +22,12 @@ const Router = React.createClass({
         Actions.setView({page: 'home', data});
     },
 
-    about(data) {
-        Actions.setView({page: 'about', data});
+    aboutUs(data) {
+        Actions.setView({page: 'about-us', data});
     },
 
-    contact(data) {
-        Actions.setView({page: 'contact', data});
+    contactUs(data) {
+        Actions.setView({page: 'contact-us', data});
     },
 
     guestHouses(data) {
@@ -38,8 +38,8 @@ const Router = React.createClass({
         Actions.setView({page: 'blogs', data});
     },
 
-    login(data) {
-        Actions.setView({page: 'login', data});
+    signIn(data) {
+        Actions.setView({page: 'sign-in', data});
     },
 
     apartment(data) {
