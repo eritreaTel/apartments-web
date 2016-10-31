@@ -11,16 +11,16 @@ class Footer extends React.Component {
                 <div className="widget">
                     <h2 className="mg-widget-title">Contact US</h2>
                     <address>
-                        <strong>Uganda Guest Houses</strong><br/>
+                        <strong>Uganda GuestHouses</strong><br/>
                         Level 13, 2 Elizabeth St<br/>
-                        Kampala 3000 Uganda
+                        Kampala, Uganda
                     </address>
                     <p>
                         +000-123-456-789<br/>
                         +000-123-456-789
                     </p>
                     <p>
-                        <span >info@ugandaGuestHouses.com</span>
+                        <span >support@ugandaGuestHouses.com</span>
                     </p>
                 </div>
             </div>
