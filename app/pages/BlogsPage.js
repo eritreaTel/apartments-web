@@ -1,5 +1,5 @@
 const React = require('react');
-const PageTitleBar = require('../components/shared/pageTitleBar');
+const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Moment = require('moment');
 
@@ -11,7 +11,7 @@ class BlogsPage extends React.Component {
 	render() {
 		return (
 			<div>
-				{<PageTitleBar />}
+				{<PageTitle parentClassName="mg-page-title-space parallax"/>}
 				{this.renderBlogList(this.props)}
 			</div>
 		);
@@ -80,7 +80,7 @@ class BlogsPage extends React.Component {
 					<aside className="mg-widget">
 						<input type="text" placeholder="Search..." className="form-control"/>
 					</aside>
-			
+
 					<aside className="mg-widget">
 						<h2 className="mg-widget-title">Recent Posts</h2>
 						{this._renderRecentPosts(props.news)}

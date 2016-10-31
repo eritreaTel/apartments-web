@@ -1,7 +1,7 @@
 const React = require('react');
 const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
-const PageTitleBar = require('../components/shared/pageTitleBar');
+const PageTitle = require('../components/shared/pageTitle');
 
 class GuestHousesPage extends React.Component {
 
@@ -934,7 +934,7 @@ class GuestHousesPage extends React.Component {
     render() {
         return (
             <div>
-                {<PageTitleBar />}
+                {<PageTitle parentClassName="mg-page-title-space parallax"/>}
                 {this.renderBookingBody()}
             </div>
         );

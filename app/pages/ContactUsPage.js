@@ -1,15 +1,15 @@
 const React = require('react');
-const PageTitleBar = require('../components/shared/pageTitleBar');
+const PageTitle = require('../components/shared/pageTitle');
 
-class HomePage extends React.Component {
+class ContactUsPage extends React.Component {
 
 	render() {
 		return (
 			<div>
-				<PageTitleBar />
+				{<PageTitle parentClassName="mg-page-title-space parallax"/>}
 			</div>
 		);
 	}
 };
 
-module.exports = HomePage;
+module.exports = ContactUsPage;

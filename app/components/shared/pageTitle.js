@@ -1,15 +1,17 @@
 const React = require('react');
 
 
-class PageTitleBar extends React.Component {
+class PageTitle extends React.Component {
 
     render() {
+        const {parentClassName} = this.props;
+
         return (
-            <div className="mg-page-title-space parallax">
+            <div className={parentClassName}>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
-
+                            {this.props.children}
                         </div>
                     </div>
                 </div>
@@ -18,4 +20,4 @@ class PageTitleBar extends React.Component {
     }
 };
 
-module.exports = PageTitleBar;
+module.exports = PageTitle;

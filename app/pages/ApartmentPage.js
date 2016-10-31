@@ -2,23 +2,9 @@ const React = require('react');
 const ApplicationHelper = require('../helpers/application_helper');
 const Amenities = require('../components/apartment/amenties');
 const Anchor = require('../components/shared/anchor');
+const PageTitle = require('../components/shared/pageTitle');
 
 class ApartmentPage extends React.Component {
-
-	renderTitle(apartment) {
-		return (
-			<div className="mg-page-title parallax">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<h2>{apartment.title}</h2>
-							<p>{apartment.short_description}</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
 
 	renderApartmentPrice(pricePerDay) {
 		return (
@@ -102,7 +88,10 @@ class ApartmentPage extends React.Component {
 		const apartment = this.props.apartment;
 		return (
 			<div>
-				{this.renderTitle(apartment)}
+				<PageTitle parentClassName="mg-page-title parallax">
+					<h2>{apartment.title}</h2>
+					<p>{apartment.short_description}</p>
+				</PageTitle>
 				{this.renderApartmentPrice(apartment.price_per_day)}
 				{this.renderApartment(apartment)}
 			</div>
