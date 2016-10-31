@@ -12,7 +12,7 @@ class NewsHeader extends React.Component {
                 <div className="mg-recnt-post">
                 <div className="mg-rp-date">{moment(singleNews.created_at).format('D')} <div className="mg-rp-month">{moment(singleNews.created_at).format('MMMM')}</div></div>
                 <h3><Anchor>{singleNews.title}</Anchor></h3>
-                <p>{singleNews.description_intro}...</p>
+                <p>{singleNews.short_description}...</p>
                 </div>
             </li>
         });

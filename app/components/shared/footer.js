@@ -28,8 +28,6 @@ class Footer extends React.Component {
     }
 
     renderInstagram(intagramImages) {
-        console.log(intagramImages);
-
         const syledLi = intagramImages.map(imgurl => {
             return <li><Anchor><img src={imgurl} alt=""/></Anchor></li>;
         });

@@ -57,17 +57,17 @@ function getDefaultProps() {
         news: [
             {
                 "title": "Uganda number one tourist destination",
-                "description_intro": "Uganda number one tourist destination, Uganda number one tourist destination",
+                "short_description": "Uganda number one tourist destination, Uganda number one tourist destination",
                 "created_at": "2016-10-17 09:43:26"
             },
             {
                 "title": "Uganda joining forces with Kenya",
-                "description_intro": "Uganda, Kenya and Rwanda joing tourist forces, Uganda, Kenya and Rwanda joing tourist forces",
+                "short_description": "Uganda, Kenya and Rwanda joing tourist forces, Uganda, Kenya and Rwanda joing tourist forces",
                 "created_at": "2016-10-12 09:43:26"
             },
             {
                 "title": "New park opened in Uganda",
-                "description_intro": "New national park opened in Uganda, New national park opened in Uganda",
+                "short_description": "New national park opened in Uganda, New national park opened in Uganda",
                 "created_at": "2016-10-09 09:43:26"
             }
         ],
