@@ -57,11 +57,6 @@ function getDefaultProps() {
           "caption" : "Contact Us",
           "route" : "/contact-us",
           "active" : ""
-      },
-      {
-          "caption" : "Sign In",
-          "route" : "/sign-in",
-          "active" : ""
       }
     ]
   }

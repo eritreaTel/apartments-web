@@ -4,6 +4,7 @@ const ApartmentPage = require('../pages/ApartmentPage');
 const AboutUsPage = require('../pages/AboutUsPage');
 const ContactUsPage = require('../pages/ContactUsPage');
 const BlogsPage = require('../pages/BlogsPage');
+const NotFoundPage = require('../pages/NotFoundPage');
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
 const DebugHelper = require('../helpers/debug_helper');
@@ -40,8 +41,9 @@ class Page extends React.Component {
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
                 break;
+            case '404':
             default:
-                content = <HomePage {...{store}}/>
+                content = <NotFoundPage {...{store}}/>
                 break;
         }
 
