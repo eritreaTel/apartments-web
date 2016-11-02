@@ -1,8 +1,8 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
-const Actions = require('../actions/actions');
-const Moment = require('moment');
+const RightSection = require('../components/blog/right_section');
+const BlogHeader = require('../components/blog/blog_header');
 
 class BlogsPage extends React.Component {
 
@@ -21,7 +21,7 @@ class BlogsPage extends React.Component {
 				<div className="container">
 					<div className="row">
 						{this._renderLeftSection(props.blogs)}
-						{this._renderRightSection(props)}
+						<RightSection  />
 					</div>
 				</div>
 			</div>
@@ -38,27 +38,10 @@ class BlogsPage extends React.Component {
 		);
 	}
 
-	_renderImages(images) {
-		const styledImgs = images && images.map(blogImage => {
-			return <Anchor onClick={()=>{Actions.setRoute('/blog')}}> <img src={blogImage.full} alt="" className="img-responsive"/> </Anchor>
-		});
-		return styledImgs ? <div className="mg-post-images-slider"> {styledImgs}</div> : '';
-	}
-
 	_renderArticles(blogs){
 		return blogs.map(blog => {
 			return 	<article className="mg-post">
-						<header>
-							{this._renderImages(blog.images)}
-							<h2 className="mg-post-title">
-								<Anchor onClick={()=>{Actions.setRoute('/blog')}}> {blog.title}</Anchor>
-							</h2>
-							<div className="mg-post-meta">
-								<span><Anchor>{Moment(blog.created_at).format('D MMM, YYYY')}</Anchor></span>
-								<span>by <Anchor>{blog.created_by}</Anchor></span>
-								<span><Anchor > {blog.comments_cnt} Comments</Anchor></span>
-							</div>
-						</header>
+						<BlogHeader blog={blog} />
 						<div>
 							<p>{blog.medium_description}</p>
 						</div>
@@ -71,72 +54,7 @@ class BlogsPage extends React.Component {
 		});
 	}
 
-	_renderRightSection(props) {
-		return (
-			<div className="col-md-4">
-				<div className="mg-widget-area">
-					<aside className="mg-widget">
-						<input type="text" placeholder="Search..." className="form-control"/>
-					</aside>
-
-					<aside className="mg-widget">
-						<h2 className="mg-widget-title">Recent Posts</h2>
-						{this._renderRecentPosts(props.news)}
-					</aside>
-
-					<aside className="mg-widget">
-						<h2 className="mg-widget-title">Category</h2>
-						{this._renderCategories(props.category)}
-					</aside>
-
-					<aside className="mg-widget">
-						<h2 className="mg-widget-title">Tags</h2>
-						{this._renderTags(props.tags)}
-					</aside>
-				</div>
-			</div>
-		);
-	}
-
-	_renderRecentPosts(news){
-		const styledLi = news.map(singleNews => {
-			return	<li>
-						<div className="mg-recnt-post">
-							<div className="mg-rp-date"> {Moment(singleNews.created_at).format('D')} <div className="mg-rp-month"> {Moment(singleNews.created_at).format('MMMM')} </div></div>
-							<h3><Anchor> {singleNews.title} </Anchor></h3>
-							<p>{singleNews.short_description}</p>
-						</div>
-					</li>
-		});
-
-		return (
-			<ul className="mg-recnt-posts">
-				{styledLi}
-			</ul>
-		);
-	}
-
-	_renderCategories(categories) {
-		const styledLi = categories.map(category => {
-			return <li><Anchor >{category.title}</Anchor></li>;
-		});
-
-		return (
-			<ul> {styledLi}</ul>
-		);
-	}
-
-	_renderTags(tags) {
-		const styledTags = tags.map(tag => {
-			return 	<Anchor>{tag.title}</Anchor>;
-		});
-
-		return (
-			<div className="tagcloud"> {styledTags} </div>
-		);
-	}
-
-};
+}
 
 function getDefaultProps() {
 	let props = {
@@ -181,73 +99,6 @@ function getDefaultProps() {
 				"comments_cnt" : 2
 			}
 
-		],
-		news: [
-			{
-				"title": "Uganda number one tourist",
-				"short_description": "Uganda number one tourist destination ...",
-				"created_at": "2016-10-17 09:43:26"
-			},
-			{
-				"title": "Uganda joining forces with ",
-				"short_description": "Uganda, Kenya and Rwanda joing tourist forces ...",
-				"created_at": "2016-10-12 09:43:26"
-			},
-			{
-				"title": "New park opened in Uganda",
-				"short_description": "New national park opened in Uganda, New national ...",
-				"created_at": "2016-10-09 09:43:26"
-			}
-		],
-		category: [
-			{
-				"id": "1",
-				"title": "Video"
-			},
-			{
-				"id": "2",
-				"title": "Apartments"
-			},
-			{
-				"id": "3",
-				"title": "Promotion"
-			},
-			,
-			{
-				"id": "4",
-				"title": "Events"
-			}
-		],
-		tags: [
-			{
-				"id": "1",
-				"title": "Video"
-			},
-			{
-				"id": "2",
-				"title": "Apartments"
-			},
-			{
-				"id": "3",
-				"title": "Promotion"
-			},
-			,
-			{
-				"id": "4",
-				"title": "Events"
-			},
-			{
-				"id": "5",
-				"title": "Gallery"
-			},
-			{
-				"id": "6",
-				"title": "New"
-			},
-			{
-				"id": "7",
-				"title": "Travel"
-			}
 		]
 	}
 
