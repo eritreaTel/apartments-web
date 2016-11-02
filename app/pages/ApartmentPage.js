@@ -3,6 +3,7 @@ const ApplicationHelper = require('../helpers/application_helper');
 const Amenities = require('../components/apartment/amenties');
 const Anchor = require('../components/shared/anchor');
 const PageTitle = require('../components/shared/pageTitle');
+const Moment = require('moment');
 
 class ApartmentPage extends React.Component {
 
@@ -94,6 +95,102 @@ class ApartmentPage extends React.Component {
 				</PageTitle>
 				{this.renderApartmentPrice(apartment.price_per_day)}
 				{this.renderApartment(apartment)}
+				{this.renderApartmentReviewSection(this.props.apartmentReviews)}
+			</div>
+		);
+	}
+
+	_renderApartmentReviews(apartmentReviews) {
+		const styledReview = apartmentReviews.map(review => {
+			return	<div className="media">
+						<div className="media-left">
+							<Anchor><img className="media-object" src="images/review.png" alt="..."/></Anchor>
+						</div>
+						<div className="media-body">
+							<h4 className="media-heading">{review.full_name}</h4>
+							<div className="mg-media-user-rating">
+								<span className="mg-rs-icon">
+									<i className="fa fa-star"></i>
+									<i className="fa fa-star"></i>
+									<i className="fa fa-star"></i>
+									<i className="fa fa-star"></i>
+									<i className="fa fa-star-o"></i>
+								</span>
+							</div>
+							<div className="media-date">{Moment(review.created_at).format('D MMM, YYYY')}</div>
+							<p>{review.comment}</p>
+						</div>
+					</div>
+		});
+
+		return (
+			<div className="col-md-7">
+				<div className="mg-reviews">
+					{styledReview}
+				</div>
+			</div>
+		);
+	}
+
+	_renderEnterApartmentReview() {
+		return (
+			<div className="col-md-5">
+				<div className="row">
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Position:</div> <div id="mg-star-position" className="starrr"></div>
+						<input type="hidden" id="mg-star-position-input"/>
+					</div>
+
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Comfort:</div> <div id="mg-star-comfort" className="starrr"></div>
+						<input type="hidden" id="mg-star-comfort-input"/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Price:</div> <div id="mg-star-price" className="starrr"></div>
+						<input type="hidden" id="mg-star-price-input"/>
+					</div>
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Quality:</div> <div id="mg-star-quality" className="starrr"></div>
+						<input type="hidden" id="mg-star-quality-input"/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-6">
+						<input type="text" className="form-control" placeholder="Your Name"/>
+					</div>
+					<div className="col-md-6">
+						<input type="text" className="form-control" placeholder="Your Email"/>
+					</div>
+				</div>
+
+				<textarea className="form-control" placeholder="Your Comment" rows="5"></textarea>
+				<input type="button" value="Submit Review" className="btn btn-dark pull-right"/>
+			</div>
+		);
+	}
+
+	renderApartmentReviewSection(apartmentReviews) {
+		return (
+			<div className="mg-single-room-review-sec">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-12 clearfix">
+
+							<div className="mg-sm-full-rating">
+								<h2 className="mg-sec-left-title">Apartment Reviews</h2>
+							</div>
+						</div>
+					</div>
+
+					<div className="row">
+						{this._renderApartmentReviews(apartmentReviews)}
+						{this._renderEnterApartmentReview()}
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -228,7 +325,57 @@ function getDefaultProps() {
 					"caption" : "Partner Logo"
 				}
 			]
-		}
+		},
+		apartmentReviews : [
+			{
+				"id"    : 1,
+				"apartment_id" : 1,
+				"user_id"  : 1,
+				"email_address" : 'amanuel@gmail.com',
+				"full_name" : 'Amanuel Yohannes',
+				"location_rating": 3,
+				"comfort_rating":  4,
+				"price_rating"  : 5,
+				"quality_rating" : 4,
+				"average_rating" : 4,
+				"comment" : "Tihs review is from Amanuel Yohannes. This is really great guest house. If feels like home",
+				"created_at": "2017-10-29 10:33:10",
+				"updated_at": "2017-10-29 10:33:10",
+				"deleted_at": null
+			},
+			{
+				"id"    : 2,
+				"apartment_id" : 1,
+				"user_id"  : 1,
+				"email_address" : 'ruth@gmail.com',
+				"full_name" : 'Ruth Yohannes',
+				"location_rating": 5,
+				"comfort_rating":  5,
+				"price_rating"  : 5,
+				"quality_rating" : 4,
+				"average_rating" : 5,
+				"comment" : "This review is from Ruth Natey, really great guest house. If feels like home",
+				"created_at": "2017-10-29 10:33:10",
+				"updated_at": "2017-10-29 10:33:10",
+				"deleted_at": null
+			},
+			{
+				"id"    : 3,
+				"apartment_id" : 1,
+				"user_id"  : 1,
+				"email_address" : 'youel@gmail.com',
+				"full_name" : 'Youel Tesfalem',
+				"location_rating": 3,
+				"comfort_rating":  2,
+				"price_rating"  : 3,
+				"quality_rating" : 2,
+				"average_rating" : 3,
+				"comment" : "This review is from Youel Tefalem. This is really great guest house. If feels like home",
+				"created_at": "2017-10-29 10:33:10",
+				"updated_at": "2017-10-29 10:33:10",
+				"deleted_at": null
+			}
+		]
 	};
 	return props;
 }
