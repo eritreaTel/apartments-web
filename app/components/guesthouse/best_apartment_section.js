@@ -2,16 +2,15 @@ const React = require('react');
 
 const ApartmentMedium = require('../apartment/apartment_medium');
 const withDataLoaded = require('../with_data_loaded');
+const Actions = require('../../actions/actions');
 
-class LoadingData extends React.component {
-    render () {
-        <div> loading ... </div>
-    }
-}
+class BestApartmentsSection extends React.Component {
 
-class BestApartments extends React.Component {
+    static propTypes = {
+        store: React.PropTypes.object.isRequired
+    };
 
-  renderApts(apartments) {
+    renderApts(apartments) {
         const bookAptClicked = (e) => {
           console.log("Book Apartment Clicked for apartmentId" );
         }
@@ -20,7 +19,7 @@ class BestApartments extends React.Component {
           console.log("View Aparment Details Clicked for apartmentId");
         }
 
-        const styledApartments = apartments.map(apt => {
+        const styledApartments = apartments && apartments.map(apt => {
                 return <div className="col-sm-4">
                           <ApartmentMedium apartment={apt} onViewDetails={viewAptDetailsClicked} onBookAptClicked={bookAptClicked}/>
                       </div>
@@ -31,38 +30,43 @@ class BestApartments extends React.Component {
               {styledApartments}
             </div>
         );
-  }
+}
 
-  renderTitle() {
-    return (
-        <div className="mg-sec-title">
-          <h2>Our Best Guest Houses</h2>
-          <p>These best guest houses are chosen by our customers</p>
-        </div>
-    );
-  }
+    renderTitle() {
+        return (
+            <div className="mg-sec-title">
+              <h2>Our Best Guest Houses</h2>
+              <p>These best guest houses are chosen by our customers</p>
+            </div>
+        );
+    }
 
-  render() {
+    render() {
+
         const {store: {bestApartments}} = this.props;
+
+        console.log('This is the propls');
+        console.log(store);
+
         return (
             <div className="mg-best-rooms">
                 <div className="container">
-                  <div className="row">
-                      <div className="col-md-12">
-                          {this.renderTitle()}
-                          {this.renderApts(bestApartments)}
+                      <div className="row">
+                          <div className="col-md-12">
+                              {this.renderTitle()}
+                              {this.renderApts(bestApartments)}
                           </div>
                       </div>
                 </div>
             </div>
         );
-  }
+    }
 }
 
 const WithUserLoaded = withDataLoaded({
-    WithData: BestApartments,
+    WithData: BestApartmentsSection,
     WithoutData: () => (
-        <LoadingData />
+        <div> loading ... </div>
     ),
     data: [
         {
@@ -72,4 +76,4 @@ const WithUserLoaded = withDataLoaded({
     ]
 });
 
-module.exports = BestApartments;
+module.exports = WithUserLoaded;

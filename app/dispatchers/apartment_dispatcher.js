@@ -21,9 +21,9 @@ module.exports = {
                             defaultErrorMessage: 'Cannot fetch customers'
                         }
                     });
+                }
+            this.releaseLock('getBestApartments');
+            }
         }
-        this.releaseLock('getBestApartments');
-      }
     }
-  }
 };
