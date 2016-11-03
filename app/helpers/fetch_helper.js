@@ -14,14 +14,6 @@ function checkStatus(response) {
     throw error;
 }
 
-function setOAuthEndpointOptions(path, options) {
-    options.url = `${loginHost}/${path}`;
-    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    if (typeof options.body === 'object') {
-        options.body = _.map(options.body, (v, k) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
-    }
-}
-
 function setRESTEndpointOptions(path, options) {
     options.url = `${loginHost}${baseURI}${version}/${path}`;
     options.headers['Content-Type'] = 'application/json';
@@ -47,11 +39,9 @@ module.exports = {
             headers: headers,
             ...options
         };
-        if (path.startsWith('oauth')) {
-            setOAuthEndpointOptions(path, options);
-        } else {
-            setRESTEndpointOptions(path, options);
-        }
+
+        setRESTEndpointOptions(path, options);
+
         let fetchPromise = fetch(options.url, options)
             .then(response => {
                 const {status, statusText} = response;

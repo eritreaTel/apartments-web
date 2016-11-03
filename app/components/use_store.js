@@ -26,19 +26,24 @@ module.exports = {
                 this.state = {
                     router,
                     store: {
+                        user: null,
                         guestHouses: [],
-                        apartment: null,
+                        apartments : [],
+                        bestApartments : [],
+                        apartmentFeatures : [],
+                        apartmentReviews : [],
+                        apartmentBookings : [],
+                        userSearches : [],
+                        userPreferences : [],
+                        blogs : [],
+                        documents : [],
+                        blogComments : [],
                         errors: [],
                         lastEvent: null,
                         locks: {},
                         messages: [],
                         view: {},
-                        user: null,
-                        pageNumber: null,
-                        resetPassword: {
-                            passing: null,
-                            emailAddress: null
-                        }
+                        pageNumber: null
                     }
                 };
             }

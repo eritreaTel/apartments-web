@@ -6,9 +6,8 @@
   "stylesheets": [
     "application.css"
   ],
-  "loginHost": "https://local.api.apartmentsUganda.com:5000",
   "baseURI": "/rest",
   "version": "/v1",
   "clientErrorLoggingEnabled": true,
-  "cookieDomain": ".local.apartmentsUganda.com"
+  "cookieDomain": ".localhost.com"
 }

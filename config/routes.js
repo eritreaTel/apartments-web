@@ -1,4 +1,5 @@
 module.exports = {
+  "/" : "index",
   "/index" : "index",
   "/guest-houses": "guestHouses",
   "/error": "error",

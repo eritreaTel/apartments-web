@@ -1,4 +1,5 @@
 {
-  "toolsHost": "https://local.apartmentsUganda.com",
-  "assetHost": "local.apartmentsUganda.com"
+  "loginHost": "http://www.apartments-api.com",
+  "toolsHost": "http://localhost:4000",
+  "assetHost": "http://localhost:4000"
 }

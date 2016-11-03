@@ -1,12 +1,19 @@
-const PageDispatcher = require('./page_dispatcher');
+const PageDispatcher      = require('./page_dispatcher');
+const ApartmentDispatcher = require('./apartment_dispatcher');
+const MessageDispatcher   = require('./message_dispatcher');
+const RequestDispatcher   = require('./request_dispatcher');
+const DebugHelper         = require('../helpers/debug_helper');
 
 const Dispatcher = {
     dispatch(action) {
-        //DebugHelper.trackAction(action);
+        DebugHelper.trackAction(action);
 
         const {type, data} = action;
         const dispatchers = [
-            PageDispatcher
+            RequestDispatcher,
+            PageDispatcher,
+            ApartmentDispatcher,
+            MessageDispatcher
         ];
 
         if (type === 'noop') {
