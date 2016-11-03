@@ -1,6 +1,13 @@
 const React = require('react');
 
 const ApartmentMedium = require('../apartment/apartment_medium');
+const withDataLoaded = require('../with_data_loaded');
+
+class LoadingData extends React.component {
+    render () {
+        <div> loading ... </div>
+    }
+}
 
 class BestApartments extends React.Component {
 
@@ -36,7 +43,7 @@ class BestApartments extends React.Component {
   }
 
   render() {
-        const {bestApartments} = this.props;
+        const {store: {bestApartments}} = this.props;
         return (
             <div className="mg-best-rooms">
                 <div className="container">
@@ -51,5 +58,18 @@ class BestApartments extends React.Component {
         );
   }
 }
+
+const WithUserLoaded = withDataLoaded({
+    WithData: BestApartments,
+    WithoutData: () => (
+        <LoadingData />
+    ),
+    data: [
+        {
+            storeKeys: ['bestApartments'],
+            loadDataFn: () => Actions.getBestApartments()
+        }
+    ]
+});
 
 module.exports = BestApartments;

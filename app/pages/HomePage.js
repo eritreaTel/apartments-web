@@ -12,7 +12,7 @@ class HomePage extends React.Component {
 			<div>
 				<Carousel/>
 				<SearchApartment parentClassName="mg-book-now"  wrapInContainer="container" />
-				<BestApartments bestApartments={this.props.bestApartments}/>
+				<BestApartments />
 				<AboutUs/>
 				<RecentNews />
 			</div>
@@ -20,7 +20,7 @@ class HomePage extends React.Component {
 	}
 };
 
-function getDefaultProps() {
+/*function getDefaultProps() {
 	let props = {
 		bestApartments: [
 			{
@@ -100,7 +100,6 @@ function getDefaultProps() {
 
 	return props;
 }
-
 HomePage.defaultProps = getDefaultProps();
-
+*/
 module.exports = HomePage;

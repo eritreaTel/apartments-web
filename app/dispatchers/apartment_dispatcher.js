@@ -2,17 +2,28 @@ const FetchHelper = require('../helpers/fetch_helper');
 
 
 module.exports = {
-  async getApartments({data}) {
-    try {
-      const bestApartments = await FetchHelper.fetchJson(`apartments`, {
-        method: 'get',
-        data
-      });
+    async getBestApartments() {
+        const url = 'apartments?bestApartments=true&pageSize=3';
+        if ( url !== this.getStoreVal('requestUrl')) {
+            this.setStoreVal('requestUrl', url);
 
-      this.setStoreVal('bestApartments', bestApartments);
-    } catch (error) {
-      this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Could not get best apartments'}});
-      throw error;
+            if (this.acquireLock('getBestApartments')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    if (response.count > 0) {
+                        this.concatStoreVal('bestApartments', response.results);
+                    }
+                } catch (error) {
+                    this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch customers'
+                        }
+                    });
+        }
+        this.releaseLock('getBestApartments');
+      }
     }
   }
 };
