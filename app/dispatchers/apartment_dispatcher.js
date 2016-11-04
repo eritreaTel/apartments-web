@@ -3,7 +3,7 @@ const FetchHelper = require('../helpers/fetch_helper');
 
 module.exports = {
     async getBestApartments() {
-        const url = 'apartments?bestApartments=true&pageSize=3';
+        const url = 'guesthouses?bestApartments=true&pageSize=3';
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 

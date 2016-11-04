@@ -25,17 +25,10 @@ function setRESTEndpointOptions(path, options) {
 module.exports = {
     fetchJson(path, {headers = {}, ...options} = {}) {
         headers.accept = 'application/json';
-        if (options.isBytes) headers.accept += ', application/pdf';
         headers['gh-ui'] = true;
 
-        const oauthToken = CookiesHelper.getSessionCookie();
-        if (oauthToken) headers.authorization = `Bearer ${oauthToken}`;
-
-        const impersonatedUserId = CookiesHelper.getImpersonateCookie();
-        if (impersonatedUserId) headers.impersonate = impersonatedUserId;
 
         options = {
-            credentials: 'include', redirect: 'follow', mode: 'cors', cache: 'default',
             headers: headers,
             ...options
         };

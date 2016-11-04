@@ -6,7 +6,7 @@
   "stylesheets": [
     "application.css"
   ],
-  "baseURI": "/rest",
+  "baseURI": "/api",
   "version": "/v1",
   "clientErrorLoggingEnabled": true,
   "cookieDomain": ".localhost.com"
