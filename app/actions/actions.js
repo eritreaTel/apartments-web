@@ -15,10 +15,11 @@ const Actions = {
 
     apartmentsList(data) {
         Dispatcher.dispatch({type: 'apartmentsList', data});
+    //this
     },
 
     getBestApartments() {
-        Dispatcher.dispatch({type: 'getBestApartments'});
+        return Dispatcher.dispatch({type: 'getBestApartments'});
     },
 
     apartment(data) {
