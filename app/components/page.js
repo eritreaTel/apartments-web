@@ -45,6 +45,9 @@ class Page extends React.Component {
             case 'sign-in':
                 content = 'Sign In';
                 break;
+            case 'my-account':
+                content = 'My - Account';
+                break;
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
                 break;

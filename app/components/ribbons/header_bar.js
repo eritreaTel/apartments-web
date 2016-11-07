@@ -31,35 +31,45 @@ class HeaderBar extends React.Component {
 };
 
 function getDefaultProps() {
-  let props = {
-    headerMenu : [
-      {
-          "caption" : "Home",
-          "route" : "/index",
-          "active" : "active"
-      },
-      {
-          "caption" : "Guest Houses",
-          "route" : "/guest-houses",
-          "active" : ""
-      },
-      {
-          "caption" : "About Us",
-          "route" : "/about-us",
-          "active" : ""
-      },
-      {
-          "caption" : "Blog",
-          "route" : "/blogs",
-          "active" : ""
-      },
-      {
-          "caption" : "Contact Us",
-          "route" : "/contact-us",
-          "active" : ""
-      }
-    ]
-  }
+    let props = {
+        headerMenu : [
+            {
+                  "caption" : "Home",
+                  "route" : "/index",
+                  "active" : "active"
+            },
+            {
+                  "caption" : "Guest Houses",
+                  "route" : "/guest-houses",
+                  "active" : ""
+            },
+            {
+                  "caption" : "About Us",
+                  "route" : "/about-us",
+                  "active" : ""
+            },
+            {
+                  "caption" : "Blog",
+                  "route" : "/blogs",
+                  "active" : ""
+            },
+            {
+                  "caption" : "Contact Us",
+                  "route" : "/contact-us",
+                  "active" : ""
+            },
+            {
+                "caption" : "Sign In",
+                "route" : "/sign-in",
+                "active" : ""
+            },
+            {
+                "caption" : "My Account",
+                "route" : "/my-account",
+                "active" : ""
+            }
+        ]
+    }
 
   return props;
 }

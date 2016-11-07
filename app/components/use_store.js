@@ -27,9 +27,9 @@ module.exports = {
                     router,
                     store: {
                         user: null,
-                        guestHouses: [],
                         apartments : [],
                         bestApartments : [],
+                        searchCriteria : null,
                         blogs : [],
                         blog : null,
                         blogComments : [],
