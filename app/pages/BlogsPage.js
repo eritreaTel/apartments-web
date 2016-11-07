@@ -6,6 +6,7 @@ const BlogHeader = require('../components/blog/blog_header');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
+const BlogHelper = require('../helpers/blog_helper');
 
 
 const BlogList = function(props) {
@@ -14,7 +15,7 @@ const BlogList = function(props) {
 			<div className="container">
 				<div className="row">
 					<Articles blogs = {props.blogs} />
-					<RightSection  />
+					<RightSection tags={BlogHelper.getTags(props.blogsMetaData)}  categories={BlogHelper.getCategories(props.blogsMetaData)} recentNews={props.recentNews}/>
 				</div>
 			</div>
 		</div>
@@ -59,11 +60,11 @@ const BlogsBody = function (props) {
 class BlogsPage extends React.Component {
 
 	render() {
-		const {store : {blogs}} = this.props;
+		const {store : {blogs, blogsMetaData, recentNews}} = this.props;
 
 		return (
 			<BlogsBody>
-				<BlogList blogs={blogs} />
+				<BlogList blogs={blogs} blogsMetaData={blogsMetaData} recentNews={recentNews} />
 			</BlogsBody>
 		);
 	}
