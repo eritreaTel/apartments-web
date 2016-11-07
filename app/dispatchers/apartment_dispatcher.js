@@ -49,5 +49,29 @@ module.exports = {
                 this.releaseLock('getApartments');
             }
         }
+    },
+    async getApartment() {
+        const url = 'apartments/1';
+        if ( url !== this.getStoreVal('requestUrl')) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getApartment')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    if (response.data && response.data.results && response.data.results.length > 0) {
+                        this.setStoreVal('apartment', response.data.results[0]);
+                    }
+                } catch (error) {
+                    this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch apartment'
+                        }
+                    });
+                }
+                this.releaseLock('getApartment');
+            }
+        }
     }
 };

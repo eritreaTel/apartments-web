@@ -25,6 +25,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartments'});
     },
 
+    getApartment() {
+        return Dispatcher.dispatch({type: 'getApartment'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },
