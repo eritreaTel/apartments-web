@@ -10,8 +10,6 @@ module.exports = {
             if (this.acquireLock('getBestApartments')) {
                 try {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                    console.log("response from API");
-                    console.log(response.data.results.length);
                     if (response.data && response.data.results && response.data.results.length > 0) {
                         this.setStoreVal('bestApartments', response.data.results);
                     }

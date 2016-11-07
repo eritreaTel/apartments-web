@@ -3,18 +3,17 @@ const React = require('react');
 const ApartmentMedium = require('../apartment/apartment_medium');
 const withDataLoaded = require('../with_data_loaded');
 const Actions = require('../../actions/actions');
+const SvgImage = require('../shared/svg_image');
 
 const Section = function(props) {
     console.log('stateless component');
-    console.log(props.bestApartments);
     return (
         <div className="mg-best-rooms">
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
                         <TitleSection />
-                        <ApartmentsSection bestApartments = {props.bestApartments} />
-
+                        {props.children}
                     </div>
                 </div>
             </div>
@@ -52,11 +51,11 @@ class BestApartmentsSection extends React.Component {
     };
 
     render() {
-
         const {store: {bestApartments}} = this.props;
-
         return (
-            <Section bestApartments={bestApartments} />
+            <Section >
+                <ApartmentsSection bestApartments = {bestApartments} />
+            </Section>
         );
     }
 }
@@ -64,7 +63,11 @@ class BestApartmentsSection extends React.Component {
 const WithUserLoaded = withDataLoaded({
     WithData: BestApartmentsSection,
     WithoutData: () => (
-        <Section />
+        <Section >
+            <div className="load-spin">
+                <SvgImage name="dark-sun"/> Loading
+            </div>
+        </Section>
     ),
     data: [
         {
