@@ -58,22 +58,22 @@ module.exports = {
                         {
                             "id": "1",
                             "type" : 'category',
-                            "title": "Video"
+                            "value": "Video"
                         },
                         {
                             "id": "2",
                             "type" : 'category',
-                            "title": "Apartments"
+                            "value": "Apartments"
                         },
                         {
                             "id": "3",
                             "type" : 'category',
-                            "title": "Promotion"
+                            "value": "Promotion"
                         },
                         {
                             "id": "4",
                             "type" : 'category',
-                            "title": "Events"
+                            "value": "Events"
                         }
                     ];
 
@@ -122,7 +122,7 @@ module.exports = {
                                     "value": "Travel"
                                 }
                             ],
-                            "category": [
+                            "categories": [
                                 {
                                     "id": "1",
                                     "type" : "category",
@@ -208,7 +208,7 @@ module.exports = {
                                     "value": "Travel"
                                 }
                             ],
-                            "category": [
+                            "categories": [
                                 {
                                     "id": "1",
                                     "type" : "category",
@@ -224,7 +224,6 @@ module.exports = {
                                     "type" : "category",
                                     "value": "Promotion",
                                 },
-                                ,
                                 {
                                     "id": "4",
                                     "type" : "category",
@@ -276,7 +275,7 @@ module.exports = {
                                     "value": "Travel"
                                 }
                             ],
-                            "category": [
+                            "categories": [
                                 {
                                     "id": "1",
                                     "type" : "category",
@@ -342,18 +341,103 @@ module.exports = {
         }
     },
 
-    async getRecentNews() {
+    async getBlog() {
         const url = 'blogs?recentNews=true';
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 
-            if (this.acquireLock('getRecentNews')) {
+            if (this.acquireLock('getBlog')) {
                 try {
                     //const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                     //if (response.data && response.data.results && response.data.results.length > 0) {
                     //    this.setStoreVal('apartment', response.data.results[0]);
                     //}
 
+                    const blog = {
+                        "id" : 2,
+                        "title": "Uganda joining forces with Kenya",
+                        "medium_description": "Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination",
+                        "images" : [
+                            {
+                                "id" : 1,
+                                "full" : "images/blog-2.png"
+                            },
+                            {
+                                "id" : 2,
+                                "full" : "images/blog-3.png"
+                            },
+                            {
+                                "id" : 3,
+                                "full" : "images/blog-4.png"
+                            },
+                            {
+                                "id" : 4,
+                                "full" : "images/blog-5.png"
+                            }
+                        ],
+                        "created_at": "2016-10-27 09:43:26",
+                        "created_by" : "Employee",
+                        "comments_cnt" : 7,
+                        "tags" :  [
+                            {
+                                "id": "1",
+                                "type" : "tag",
+                                "value": "Video"
+                            },
+                            {
+                                "id": "2",
+                                "type" : "tag",
+                                "value": "Apartments"
+                            },
+                            {
+                                "id": "3",
+                                "type" : "tag",
+                                "value": "Promotion"
+                            },
+                            {
+                                "id": "4",
+                                "type" : "tag",
+                                "value": "Events"
+                            },
+                            {
+                                "id": "5",
+                                "type" : "tag",
+                                "value": "Gallery"
+                            },
+                            {
+                                "id": "6",
+                                "type" : "tag",
+                                "value": "New"
+                            },
+                            {
+                                "id": "7",
+                                "type" : "tag",
+                                "value": "Travel"
+                            }
+                        ],
+                        "categories": [
+                            {
+                                "id": "1",
+                                "type" : "category",
+                                "value": "Video"
+                            },
+                            {
+                                "id": "2",
+                                "type" : "category",
+                                "value": "Apartments"
+                            },
+                            {
+                                "id": "3",
+                                "type" : "category",
+                                "value": "Promotion",
+                            },
+                            {
+                                "id": "4",
+                                "type" : "category",
+                                "value": "Events"
+                            }
+                        ]
+                    };
                     const recentNews = [
                         {
                             "id" : 1,
@@ -375,6 +459,7 @@ module.exports = {
                         }
                     ];
 
+                    this.setStoreVal('blog', blog);
                     this.setStoreVal('recentNews', recentNews);
 
                 } catch (error) {
@@ -386,7 +471,7 @@ module.exports = {
                         }
                     });
                 }
-                this.releaseLock('getRecentNews');
+                this.releaseLock('getBlog');
             }
         }
     }

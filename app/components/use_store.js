@@ -31,6 +31,7 @@ module.exports = {
                         apartments : [],
                         bestApartments : [],
                         blogs : [],
+                        blog : null,
                         blogComments : [],
                         blogsMetaData : [],
                         recentNews : [],

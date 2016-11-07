@@ -2,8 +2,9 @@ const BlogHelper = {
 
     getTags(blogMetadatas) {
         const tags = [];
+        console.log("inside get tags");
         blogMetadatas.forEach(function(metaData) {
-            if (metaData.type === 'tag') {
+            if (metaData.type == 'tag') {
                 tags.push( metaData);
             }
         });
@@ -13,7 +14,8 @@ const BlogHelper = {
   getCategories(blogMetadatas) {
     const categories = [];
     blogMetadatas.forEach(function(metaData) {
-      if (metaData.type === 'tag') {
+      if (metaData.type == 'category') {
+        console.log(metaData);
         categories.push(metaData);
       }
     });

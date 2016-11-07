@@ -39,29 +39,29 @@ const RightSectionBody = function (props) {
     );
 }
 
-class RightSection extends React.Component {
 
-    render() {
-        const {tags, recentNews, categories} = this.props;
-        return (
-            <RightSectionBody>
-                <aside className="mg-widget">
-                    <h2 className="mg-widget-title">Recent Posts</h2>
-                    <RecentPost news={recentNews} />
-                </aside>
+const RightSection =  function (props) {
+    const {tags, recentNews, categories} = props;
+    console.log('categoreis');
+    console.log(categories);
+    return (
+        <RightSectionBody>
+            <aside className="mg-widget">
+                <h2 className="mg-widget-title">Recent Posts</h2>
+                <RecentPost news={recentNews} />
+            </aside>
 
-                <aside className="mg-widget">
-                    <h2 className="mg-widget-title">Category</h2>
-                    <Categories categories={categories} />
-                </aside>
+            <aside className="mg-widget">
+                <h2 className="mg-widget-title">Category</h2>
+                <Categories categories={categories} />
+            </aside>
 
-                <aside className="mg-widget">
-                    <h2 className="mg-widget-title">Tags</h2>
-                    <BlogTags tags={tags} parentClassName="tagcloud" />
-                </aside>
-            </RightSectionBody>
-        );
-    }
+            <aside className="mg-widget">
+                <h2 className="mg-widget-title">Tags</h2>
+                <BlogTags tags={tags} parentClassName="tagcloud" />
+            </aside>
+        </RightSectionBody>
+    );
 }
 
 module.exports = RightSection;

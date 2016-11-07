@@ -33,6 +33,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBlogs'});
     },
 
+    getBlog() {
+        return Dispatcher.dispatch({type: 'getBlog'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },
