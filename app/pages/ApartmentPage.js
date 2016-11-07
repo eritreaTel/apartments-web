@@ -188,7 +188,8 @@ const ApartmentBody = function (props) {
 class ApartmentPage extends React.Component {
 
 	render() {
-		const apartment = this.props.apartment;
+		const {store : {apartment}} = this.props;
+
 		return (
 			<ApartmentBody>
 				<PageTitle parentClassName="mg-page-title parallax">
@@ -198,7 +199,7 @@ class ApartmentPage extends React.Component {
 
 				<ApartmentPrice pricePerDay = {apartment.price_per_day} />
 				<ApartmentMiddleSection apartment={apartment} />
-				<ApartmentReviewSection apartmentReviews={this.props.apartmentReviews} />
+				<ApartmentReviewSection apartmentReviews={apartment.apartmentReviews} />
 			</ApartmentBody>
 		);
 	}
