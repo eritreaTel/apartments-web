@@ -29,6 +29,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartment'});
     },
 
+    getBlogs() {
+        return Dispatcher.dispatch({type: 'getBlogs'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },

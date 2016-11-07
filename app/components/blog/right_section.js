@@ -3,6 +3,30 @@ const Moment = require('moment');
 const Anchor = require('../shared/anchor');
 const BlogTags = require('./blog_tags');
 
+
+const RecentPost = function (props) {
+    const styledLi = props.news.map(singleNews => {
+        return  <li>
+                    <div className="mg-recnt-post">
+                        <div className="mg-rp-date"> {Moment(singleNews.created_at).format('D')} <div className="mg-rp-month"> {Moment(singleNews.created_at).format('MMMM')} </div></div>
+                        <h3><Anchor> {singleNews.title} </Anchor></h3>
+                        <p>{singleNews.short_description}</p>
+                    </div>
+                </li>
+        });
+
+    return (<ul className="mg-recnt-posts"> {styledLi} </ul>);
+}
+
+const Categories = function (props) {
+    const styledLi = props.categories.map(category => {
+        return <li><Anchor >{category.title}</Anchor></li>;
+    });
+
+    return (<ul> {styledLi}</ul>);
+}
+
+
 class RightSection extends React.Component {
 
     render() {
@@ -21,12 +45,12 @@ class RightSection extends React.Component {
 
                     <aside className="mg-widget">
                         <h2 className="mg-widget-title">Recent Posts</h2>
-                        {this._renderRecentPosts(props.news)}
+                        <RecentPost news={props.news} />
                     </aside>
 
                     <aside className="mg-widget">
                         <h2 className="mg-widget-title">Category</h2>
-                        {this._renderCategories(props.category)}
+                        <Categories categories={props.category} />
                     </aside>
 
                     <aside className="mg-widget">
@@ -38,27 +62,8 @@ class RightSection extends React.Component {
         );
     }
 
-    _renderRecentPosts(news){
-        const styledLi = news.map(singleNews => {
-            return	<li>
-                        <div className="mg-recnt-post">
-                            <div className="mg-rp-date"> {Moment(singleNews.created_at).format('D')} <div className="mg-rp-month"> {Moment(singleNews.created_at).format('MMMM')} </div></div>
-                            <h3><Anchor> {singleNews.title} </Anchor></h3>
-                            <p>{singleNews.short_description}</p>
-                        </div>
-                    </li>
-        });
 
-        return (<ul className="mg-recnt-posts"> {styledLi} </ul>);
-    }
 
-    _renderCategories(categories) {
-        const styledLi = categories.map(category => {
-            return <li><Anchor >{category.title}</Anchor></li>;
-        });
-
-        return (<ul> {styledLi}</ul>);
-    }
 
 }
 
