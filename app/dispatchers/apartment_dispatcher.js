@@ -25,5 +25,29 @@ module.exports = {
                 this.releaseLock('getBestApartments');
             }
         }
+    },
+    async getApartments() {
+        const url = 'apartments?bestApartments=true&pageSize=3';
+        if ( url !== this.getStoreVal('requestUrl')) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getApartments')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    if (response.data && response.data.results && response.data.results.length > 0) {
+                        this.setStoreVal('apartments', response.data.results);
+                    }
+                } catch (error) {
+                    this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch apartments'
+                        }
+                    });
+                }
+                this.releaseLock('getApartments');
+            }
+        }
     }
 };

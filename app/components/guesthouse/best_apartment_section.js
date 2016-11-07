@@ -6,7 +6,6 @@ const Actions = require('../../actions/actions');
 const SvgImage = require('../shared/svg_image');
 
 const Section = function(props) {
-    console.log('stateless component');
     return (
         <div className="mg-best-rooms">
             <div className="container">

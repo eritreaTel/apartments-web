@@ -28,8 +28,8 @@ class Footer extends React.Component {
     }
 
     renderInstagram(intagramImages) {
-        const syledLi = intagramImages.map(imgurl => {
-            return <li><Anchor><img src={imgurl} alt=""/></Anchor></li>;
+        const syledLi = intagramImages.map(imgInfo => {
+            return <li><Anchor><img src={imgInfo.thumb} alt=""/></Anchor></li>;
         });
 
         return (
@@ -119,38 +119,70 @@ class Footer extends React.Component {
 function getDefaultProps() {
     let props = {
         instagramImages : [
-            "images/ins-01.png",
-            "images/ins-02.png",
-            "images/ins-03.png",
-            "images/ins-04.png",
-            "images/ins-05.png",
-            "images/ins-06.png",
-            "images/ins-07.png",
-            "images/ins-08.png",
-            "images/ins-09.png"
+            {
+                'id' : 1,
+                'thumb' : "images/ins-01.png"
+            },
+            {
+                'id' : 2,
+                'thumb' : "images/ins-02.png"
+            },
+            {
+                'id' : 3,
+                'thumb' : "images/ins-03.png"
+            },
+            {
+                'id' : 4,
+                'thumb' : "images/ins-04.png"
+            },
+            {
+                'id' : 5,
+                'thumb' : "images/ins-05.png"
+            },
+            {
+                'id' : 6,
+                'thumb' : "images/ins-06.png"
+            },
+            {
+                'id' : 7,
+                'thumb' : "images/ins-07.png"
+            },
+            {
+                'id' : 8,
+                'thumb' : "images/ins-08.png"
+            },
+            {
+                'id' : 9,
+                'thumb' : "images/ins-09.png"
+            }
         ],
         footerMenu : [
             {
+                "id" : 1,
                 "caption" : "Home",
                 "route" : "/index",
                 "active" : "active"
             },
             {
+                "id" : 2,
                 "caption" : "About Us",
                 "route" : "/about",
                 "active" : ""
             },
             {
+                "id" : 3,
                 "caption" : "Privacy Policy",
                 "route" : "/privacy-policy",
                 "active" : ""
             },
             {
+                "id" : 4,
                 "caption" : "Blog",
                 "route" : "/blogs",
                 "active" : ""
             },
             {
+                "id" : 5,
                 "caption" : "Contact Us",
                 "route" : "/contact",
                 "active" : ""
