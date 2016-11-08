@@ -10,7 +10,7 @@ const RecentPost = function (props) {
         return  <li>
                     <div className="mg-recnt-post">
                         <div className="mg-rp-date"> {Moment(singleNews.created_at).format('D')} <div className="mg-rp-month"> {Moment(singleNews.created_at).format('MMMM')} </div></div>
-                        <h3><Anchor> {singleNews.title} </Anchor></h3>
+                        <h3><Anchor onClick={() => {Actions.setRoute('/blog/' + singleNews.id)}} > {singleNews.title} </Anchor></h3>
                         <p>{singleNews.short_description}</p>
                     </div>
                 </li>
@@ -43,8 +43,6 @@ const RightSectionBody = function (props) {
 
 const RightSection =  function (props) {
     const {tags, recentNews, categories} = props;
-    console.log('categoreis');
-    console.log(categories);
     return (
         <RightSectionBody>
             <aside className="mg-widget">

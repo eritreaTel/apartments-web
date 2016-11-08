@@ -2,7 +2,6 @@ const BlogHelper = {
 
     getTags(blogMetadatas) {
         const tags = [];
-        console.log("inside get tags");
         blogMetadatas.forEach(function(metaData) {
             if (metaData.type == 'tag') {
                 tags.push( metaData);

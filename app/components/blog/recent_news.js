@@ -1,25 +1,41 @@
 const React = require('react');
-const NewsHeader = require('./news_header');
+const {assetPath} = require('../../helpers/asset_helper');
+const moment = require('moment');
+const Anchor = require('../shared/anchor');
+const Actions = require('../../actions/actions');
 
+
+const NewsHeading = function (props) {
+    const contents = props.recentNews.map(singleNews => {
+            return  <li>
+                        <div className="mg-recnt-post">
+                            <div className="mg-rp-date">{moment(singleNews.created_at).format('D')} <div className="mg-rp-month">{moment(singleNews.created_at).format('MMMM')}</div></div>
+                            <h3><Anchor onClick={()=>{Actions.setRoute('/blog/' + singleNews.id)}} >{singleNews.title}</Anchor></h3>
+                            <p>{singleNews.short_description}...</p>
+                        </div>
+                    </li>
+    });
+
+
+    return (
+        <div className="col-md-5">
+            <h2 className="mg-sec-left-title">Recent News</h2>
+            <ul className="mg-recnt-posts">
+                {contents}
+            </ul>
+        </div>
+    );
+}
 
 class RecentNews extends React.Component {
 
-    renderNewsHeading(newsHeading) {
-        return (
-            <div className="col-md-5">
-                <h2 className="mg-sec-left-title">Recent News</h2>
-                <NewsHeader news={newsHeading} />
-            </div>
-        );
-    }
-
     renderNewsGallery(gallery){
         const styledFullLi = gallery.map(item =>{
-            return <li><img src={item.full} alt={item.caption}/></li>;
+            return <li><img src={assetPath(item.full)} alt={item.caption}/></li>;
         });
 
         const styledThumbLi = gallery.map(item =>{
-            return <li><img src={item.thumb} alt={item.caption}/></li>;
+            return <li><img src={assetPath(item.thumb)} alt={item.caption}/></li>;
         });
 
         return(
@@ -42,8 +58,8 @@ class RecentNews extends React.Component {
             <div className="mg-news-gallery">
                 <div className="container">
                     <div className="row">
-                        {this.renderNewsHeading(this.props.news)}
-                        {this.renderNewsGallery(this.props.galleries)}
+                    <NewsHeading recentNews = {this.props.recentNews} />
+                    {this.renderNewsGallery(this.props.galleries)}
                     </div>
                 </div>
             </div>
@@ -54,18 +70,21 @@ class RecentNews extends React.Component {
 
 function getDefaultProps() {
     let props = {
-        news: [
+        recentNews: [
             {
+                "id"   : 1,
                 "title": "Uganda number one tourist destination",
                 "short_description": "Uganda number one tourist destination, Uganda number one tourist destination",
                 "created_at": "2016-10-17 09:43:26"
             },
             {
+                "id" : 2,
                 "title": "Uganda joining forces with Kenya",
                 "short_description": "Uganda, Kenya and Rwanda joing tourist forces, Uganda, Kenya and Rwanda joing tourist forces",
                 "created_at": "2016-10-12 09:43:26"
             },
             {
+                "id" : 3,
                 "title": "New park opened in Uganda",
                 "short_description": "New national park opened in Uganda, New national park opened in Uganda",
                 "created_at": "2016-10-09 09:43:26"
