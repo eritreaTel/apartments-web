@@ -20,6 +20,7 @@ class Page extends React.Component {
         const {store} = this.props;
         const {view} = store;
         DebugHelper.trackStore(this.props);
+console.log(store);
 
         let content, loggedIn = true;
         switch (view.page) {

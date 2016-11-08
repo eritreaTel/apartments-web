@@ -62,11 +62,6 @@ function getDefaultProps() {
                 "caption" : "Sign In",
                 "route" : "/sign-in",
                 "active" : ""
-            },
-            {
-                "caption" : "My Account",
-                "route" : "/my-account",
-                "active" : ""
             }
         ]
     }

@@ -6,7 +6,7 @@ module.exports = {
   "/sign-in": "signIn",
   "/reset-password": "resetPassword",
   "/about-us": "aboutUs",
-  "/apartment": "apartment",
+  "/apartment/:id": "viewApartment",
   "/contact-us": "contactUs",
   "/blogs": "blogs",
   "/blog": "blog"

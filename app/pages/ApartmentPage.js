@@ -7,6 +7,7 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const withDataLoaded = require('../components/with_data_loaded')
 const Moment = require('moment');
+const {assetPath} = require('../helpers/asset_helper');
 
 
 const ApartmentPrice = function(props) {
@@ -70,7 +71,7 @@ const ApartmentReviews = function (props) {
 	const styledReview = props.apartmentReviews.map(review => {
 		return 	<div className="media">
 					<div className="media-left">
-						<Anchor><img className="media-object" src="images/review.png" alt="..."/></Anchor>
+						<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
 					</div>
 					<div className="media-body">
 						<h4 className="media-heading">{review.full_name}</h4>
@@ -140,11 +141,11 @@ const ApartmentReviewForm = function () {
 
 const ApartmentGalleries = function (props) {
 	const styledFullLi = props.galleries.map(gallery => {
-		return 	<li><img src={gallery.full} alt={gallery.caption}/></li>;
+		return 	<li><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
 	});
 
 	const styledThumbLi = props.galleries.map(gallery => {
-		return 	<li><img src={gallery.thumb} alt={gallery.caption}/></li>;
+		return 	<li><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
 	});
 
 	return (
