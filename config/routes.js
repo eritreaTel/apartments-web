@@ -9,5 +9,5 @@ module.exports = {
   "/apartment/:id": "viewApartment",
   "/contact-us": "contactUs",
   "/blogs": "blogs",
-  "/blog": "blog"
+  "/blog/:id": "viewBlog"
 };

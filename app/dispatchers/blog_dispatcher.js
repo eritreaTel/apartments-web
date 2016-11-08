@@ -341,8 +341,9 @@ module.exports = {
         }
     },
 
-    async getBlog() {
-        const url = 'blogs?recentNews=true';
+    async getBlog({blogId}) {
+        const url = 'blogs/' + blogId;
+        console.log("Blog url" + url);
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 

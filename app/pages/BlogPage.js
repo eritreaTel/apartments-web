@@ -7,6 +7,7 @@ const BlogTags = require('../components/blog/blog_tags');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
+const {assetPath} = require('../helpers/asset_helper');
 
 
 const BlogContent = function (props) {
@@ -74,7 +75,7 @@ const SingleComment = function () {
 	return (
 		<div className="media">
 			<div className="media-left">
-				<Anchor><img className="media-object" src="images/comment3.png" alt=""/></Anchor>
+				<Anchor><img className="media-object" src={assetPath("images/comment3.png")} alt=""/></Anchor>
 			</div>
 			<div className="media-body">
 				<div className="mg-comment-body">
@@ -92,7 +93,7 @@ const SingleCommentWithFeedback = function () {
 	return (
 		<div className="media">
 			<div className="media-left">
-				<Anchor><img className="media-object" src="images/comment.png" alt=""/></Anchor>
+				<Anchor><img className="media-object" src={assetPath("images/comment.png")} alt=""/></Anchor>
 			</div>
 			<div className="media-body">
 				<div className="mg-comment-body">
@@ -168,7 +169,7 @@ const WithUserLoaded = withDataLoaded({
 	data: [
 		{
 			storeKeys: ['blog'],
-			loadDataFn: () => Actions.getBlog()
+			loadDataFn: ({view : {blogId}}) => Actions.getBlog({blogId})
 		}
 	]
 });

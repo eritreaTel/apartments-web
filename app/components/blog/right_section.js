@@ -2,6 +2,7 @@ const React = require('react');
 const Moment = require('moment');
 const Anchor = require('../shared/anchor');
 const BlogTags = require('./blog_tags');
+const Actions = require('../../actions/actions');
 
 
 const RecentPost = function (props) {
