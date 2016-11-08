@@ -2,6 +2,7 @@ const React = require('react');
 const Header = require('../shared/header');
 const Anchor = require('../shared/anchor');
 const Menu = require('../ribbons/menu/menu');
+const {assetPath} = require('../../helpers/asset_helper');
 
 class Footer extends React.Component {
 
@@ -29,7 +30,7 @@ class Footer extends React.Component {
 
     renderInstagram(intagramImages) {
         const syledLi = intagramImages.map(imgInfo => {
-            return <li><Anchor><img src={imgInfo.thumb} alt=""/></Anchor></li>;
+            return <li><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
         });
 
         return (

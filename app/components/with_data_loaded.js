@@ -26,7 +26,7 @@ function withDataLoaded({WithData, WithoutData = null, data}) {
     };
 
     componentDidMount() {
-			const {store} = this.props;
+       const {store} = this.props;
 
       _.each(data, (item) => {
         if (!hasItem(store, item)) {

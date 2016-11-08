@@ -188,6 +188,10 @@ const ApartmentBody = function (props) {
 
 class ApartmentPage extends React.Component {
 
+	componentWillUnmount() {
+		//Actions.clearApartment();
+	}
+
 	render() {
 		const {store : {apartment}} = this.props;
 
@@ -207,206 +211,22 @@ class ApartmentPage extends React.Component {
 };
 
 
-function getDefaultProps() {
-	let props = {
-		apartment : {
-			"id": 1,
-			"user_id": 1,
-			"guest_house_id" : 1,
-			"title" : "Super Deluxe",
-			"best_photo" : "images/room-1.png",
-			"total_count" : 15,
-			"free_count" : 10,
-			"bed" : 1,
-			"bath" : 1,
-			"price_per_day" : 40,
-			"price_per_week" :  180,
-			"price_per_month" : 600,
-			"street_address" : "477 Nsambia St",
-			"city" : "Kampala",
-			"country" : "Uganda",
-			"is_available" : true,
-			"short_description" : "This is a deluxe aparment in Kabala gala, 7 kms from city center.",
-			"medium_description" : "This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala ...",
-			"long_description_1" : "",
-			"long_description_2" : "This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala.This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala.This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala.This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala, 7 kms from city center. This is a deluxe aparment in Kabala gala.",
-			"star_rating" : "3.75",
-			"created_at": "2017-10-29 10:33:10",
-			"updated_at": "2017-10-29 10:33:10",
-			"deleted_at": null,
-			"amenities" : [
-				{
-					"id" : 1,
-					"name" : "Breakfast",
-					"value" : true,
-					"icon_name" : "fp-ht-food"
-				},
-				{
-					"id" : 2,
-					"name" : "Air conditioning",
-					"value" : true,
-					"icon_name" : "fa fa-sun-o"
-				},
-				{
-					"id" : 3,
-					"name" : "Free Parking",
-					"value" : true,
-					"icon_name" : "fp-ht-parking"
-				},
-				{
-					"id" : 4,
-					"name" : "Elevator",
-					"value" : true,
-					"icon_name" : "fp-ht-elevator"
-				},
-				{
-					"id" : 5,
-					"name" : "Room service",
-					"value" : true,
-					"icon_name" : "fp-ht-maid"
-				},
-
-				{
-					"id" : 6,
-					"name" : "GYM facility",
-					"value" : true,
-					"icon_name" : "fp-ht-dumbbell"
-				},
-				{
-					"id" : 7,
-					"name" : "TV LCD",
-					"value" : true,
-					"icon_name" : "fp-ht-tv"
-				},
-				{
-					"id" : 8,
-					"name" : "Wi-fi service",
-					"value" : true,
-					"icon_name" : "fp-ht-computer"
-				},
-				{
-					"id" : 9,
-					"name" : "2 King Beds",
-					"value" : true,
-					"icon_name" : "fp-ht-bed"
-				},
-				{
-					"id" : 10,
-					"name" : "Swimming Pool",
-					"value" : true,
-					"icon_name" : "fp-ht-swimmingpool"
-				}
-			],
-			"galleries" : [
-				{
-					"id" : 1,
-					"full" : "images/gallery-01.png",
-					"thumb" : "images/gallery-thumb-01.png",
-					"caption" : "Partner Logo"
-				},
-				{
-					"id" : 2,
-					"full" : "images/gallery-02.png",
-					"thumb" : "images/gallery-thumb-02.png",
-					"caption" : "Partner Logo"
-				},
-				{
-					"id" : 5,
-					"full" : "images/gallery-05.png",
-					"thumb" : "images/gallery-thumb-05.png",
-					"caption" : "Partner Logo"
-				},
-				{
-					"id" : 6,
-					"full" : "images/gallery-06.png",
-					"thumb" : "images/gallery-thumb-06.png",
-					"caption" : "Partner Logo"
-				},
-				{
-					"id" : 7,
-					"full" : "images/gallery-07.png",
-					"thumb" : "images/gallery-thumb-07.png",
-					"caption" : "Partner Logo"
-				},
-				{
-					"id" : 8,
-					"full" : "images/gallery-08.png",
-					"thumb" : "images/gallery-thumb-08.png",
-					"caption" : "Partner Logo"
-				}
-			]
-		},
-		apartmentReviews : [
-			{
-				"id"    : 1,
-				"apartment_id" : 1,
-				"user_id"  : 1,
-				"email_address" : 'amanuel@gmail.com',
-				"full_name" : 'Amanuel Yohannes',
-				"location_rating": 3,
-				"comfort_rating":  4,
-				"price_rating"  : 5,
-				"quality_rating" : 4,
-				"average_rating" : 4,
-				"comment" : "Tihs review is from Amanuel Yohannes. This is really great guest house. If feels like home",
-				"created_at": "2017-10-29 10:33:10",
-				"updated_at": "2017-10-29 10:33:10",
-				"deleted_at": null
-			},
-			{
-				"id"    : 2,
-				"apartment_id" : 1,
-				"user_id"  : 1,
-				"email_address" : 'ruth@gmail.com',
-				"full_name" : 'Ruth Yohannes',
-				"location_rating": 5,
-				"comfort_rating":  5,
-				"price_rating"  : 5,
-				"quality_rating" : 4,
-				"average_rating" : 5,
-				"comment" : "This review is from Ruth Natey, really great guest house. If feels like home",
-				"created_at": "2017-10-29 10:33:10",
-				"updated_at": "2017-10-29 10:33:10",
-				"deleted_at": null
-			},
-			{
-				"id"    : 3,
-				"apartment_id" : 1,
-				"user_id"  : 1,
-				"email_address" : 'youel@gmail.com',
-				"full_name" : 'Youel Tesfalem',
-				"location_rating": 3,
-				"comfort_rating":  2,
-				"price_rating"  : 3,
-				"quality_rating" : 2,
-				"average_rating" : 3,
-				"comment" : "This review is from Youel Tefalem. This is really great guest house. If feels like home",
-				"created_at": "2017-10-29 10:33:10",
-				"updated_at": "2017-10-29 10:33:10",
-				"deleted_at": null
-			}
-		]
-	};
-	return props;
-}
-
-
 const WithUserLoaded = withDataLoaded({
-		WithData: ApartmentPage,
-		WithoutData: () => (
-		<ApartmentBody >
-			<PageTitle parentClassName="mg-page-title parallax">
-				<div className='load-spin'>
-					<SvgImage name="dark-sun"/> Loading
-				</div>
-			</PageTitle >
-		</ApartmentBody>
+	WithData: ApartmentPage,
+	WithoutData: () => (
+	<ApartmentBody >
+		<PageTitle parentClassName="mg-page-title parallax">
+			<div className='load-spin'>
+				<SvgImage name="dark-sun"/> Loading
+			</div>
+		</PageTitle >
+	</ApartmentBody>
 	),
 	data: [
-	{
-		storeKeys: ['apartment'],
-		loadDataFn: () => Actions.getApartment()
-	}
+		{
+			storeKeys: ['apartment'],
+			loadDataFn: ({view : {apartmentId}}) => Actions.getApartment({apartmentId})
+		}
 	]
 });
 

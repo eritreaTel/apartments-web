@@ -1,6 +1,7 @@
 const React = require('react');
 const Header = require('../shared/header');
 const Menu = require('../ribbons/menu/menu.js');
+const {assetPath} = require('../../helpers/asset_helper');
 
 
 class HeaderBar extends React.Component {
@@ -17,7 +18,7 @@ class HeaderBar extends React.Component {
                           <span className="icon-bar"></span>
                           <span className="icon-bar"></span>
                       </button>
-                      <a className="navbar-brand" href="#"><img src="images/logo.png" alt="logo"/></a>
+                      <a className="navbar-brand" href="#"><img src={assetPath("images/logo.png")} alt="logo"/></a>
                   </div>
 
                   <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -25,8 +25,8 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartments'});
     },
 
-    getApartment() {
-        return Dispatcher.dispatch({type: 'getApartment'});
+    getApartment(data) {
+        return Dispatcher.dispatch({type: 'getApartment', data});
     },
 
     getBlogs() {
@@ -47,7 +47,12 @@ const Actions = {
 
     blog(data) {
         Dispatcher.dispatch({type: 'blog', data});
-    }
+    },
+
+    clearApartment() {
+        Dispatcher.dispatch({type: 'clearApartment'});
+    },
+
 };
 
 module.exports = Actions;

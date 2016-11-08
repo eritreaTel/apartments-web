@@ -2,6 +2,10 @@ const FetchHelper = require('../helpers/fetch_helper');
 
 
 module.exports = {
+    clearApartment() {
+        this.setStoreVal('apartment', null);
+    },
+
     async getBestApartments() {
         const url = 'apartments?bestApartments=true&pageSize=3';
         if ( url !== this.getStoreVal('requestUrl')) {
@@ -50,8 +54,8 @@ module.exports = {
             }
         }
     },
-    async getApartment() {
-        const url = 'apartments/1';
+    async getApartment({apartmentId}) {
+        const url = 'apartments/' + apartmentId;
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 
