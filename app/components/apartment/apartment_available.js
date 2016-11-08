@@ -21,7 +21,6 @@ class ApartmentAvailable extends React.Component {
                         <p>{apartment.medium_description}</p>
                         <Amenities amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
-
                         <Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
                         <Anchor onClick={()=>{}} className="btn btn-main pull-right">Book Now</Anchor>
                     </div>

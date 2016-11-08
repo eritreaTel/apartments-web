@@ -1,117 +1,120 @@
 const React = require('react');
 const Header = require('../shared/header');
 const Anchor = require('../shared/anchor');
-const Menu = require('../ribbons/menu/menu');
 const {assetPath} = require('../../helpers/asset_helper');
+const Actions = require('../../actions/actions');
 
-class Footer extends React.Component {
-
-    renderContactUs() {
-        return (
-            <div className="col-md-3 col-sm-6">
-                <div className="widget">
-                    <h2 className="mg-widget-title">Contact US</h2>
-                    <address>
-                        <strong>Uganda GuestHouses</strong><br/>
-                        Level 13, 2 Elizabeth St<br/>
-                        Kampala, Uganda
-                    </address>
-                    <p>
-                        +000-123-456-789<br/>
-                        +000-123-456-789
-                    </p>
-                    <p>
-                        <span >support@ugandaGuestHouses.com</span>
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    renderInstagram(intagramImages) {
-        const syledLi = intagramImages.map(imgInfo => {
-            return <li><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
-        });
-
-        return (
-            <div className="col-md-3 col-sm-6">
-                <div className="widget">
-                    <h2 className="mg-widget-title">Instagram</h2>
-                    <ul className="mg-instagram">
-                        {syledLi}
-                    </ul>
-                </div>
-            </div>
-        );
-    }
-
-    renderSocialMedias() {
-        return (
-            <div className="col-md-3 col-sm-6">
-                <div className="widget">
-                    <h2 className="mg-widget-title">Social Media</h2>
-                    <p>Follow us on Facebook, Twitter, Pintrest, GooglePlus. We will give you accurate and update information. We want you to get informed about Uganda guest houses information</p>
-                    <ul className="mg-footer-social">
-                        <li><Anchor><i className="fa fa-facebook"></i></Anchor></li>
-                        <li><Anchor><i className="fa fa-twitter"></i></Anchor></li>
-                        <li><Anchor><i className="fa fa-pinterest"></i></Anchor></li>
-                        <li><Anchor><i className="fa fa-google-plus"></i></Anchor></li>
-                        <li><Anchor><i className="fa fa-rss"></i></Anchor></li>
-                    </ul>
-                </div>
-            </div>
-        );
-    }
-
-    renderNewsLetter() {
-        const subscribeClicked = (e) => {
-            console.log("Email subscription clicked" );
-        }
-
-        return (
-            <div className="col-md-3 col-sm-6">
-                <div className="widget">
-                    <h2 className="mg-widget-title">Newsletter</h2>
-                    <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
-                    <p><input name="subscription_email" type="email" className="form-control" placeholder="Your Email"/></p>
-                    <input onClick={subscribeClicked} name="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
-                </div>
-            </div>
-        );
-    }
-
-    renderFooterMenus() {
-        return (
+const FooterMenu = function () {
+    return (
+        <div className="mg-copyright">
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                        <Menu items={this.props.footerMenu} ulClassName="mg-footer-nav" />
+                        <ul className="mg-footer-nav">
+                            <li><Anchor onClick={()=>{Actions.setRoute('/index')}}>Home</Anchor> </li>
+                            <li><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
+                            <li><Anchor onClick={()=>{Actions.setRoute('/privacy-policy')}}>Privacy Policy</Anchor> </li>
+                            <li><Anchor onClick={()=>{Actions.setRoute('/blogs')}}>Blogs</Anchor> </li>
+                            <li><Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
+                        </ul>
                     </div>
                     <div className="col-md-6">
                         <p>&copy; 2016 <a href="http://www.archsoftwaresolutions.com">Arch Software Solutions</a>. All rights reserved.</p>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
+}
 
+const ContactUs = function () {
+    return (
+        <div className="col-md-3 col-sm-6">
+            <div className="widget">
+                <h2 className="mg-widget-title">Contact US</h2>
+                <address>
+                    <strong>Uganda GuestHouses</strong><br/>
+                    Level 13, 2 Elizabeth St<br/>
+                    Kampala, Uganda
+                </address>
+                <p>
+                    +000-123-456-789<br/>
+                    +000-123-456-789
+                </p>
+                <p>
+                    <span >support@ugandaGuestHouses.com</span>
+                </p>
+            </div>
+        </div>
+    );
+}
+
+const Instagram = function (props) {
+    const syledLi = props.instagramImages.map(imgInfo => {
+        return <li><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
+    });
+
+    return (
+        <div className="col-md-3 col-sm-6">
+            <div className="widget">
+                <h2 className="mg-widget-title">Instagram</h2>
+                <ul className="mg-instagram">
+                    {syledLi}
+                </ul>
+            </div>
+        </div>
+    );
+
+}
+
+const SocialMedia = function () {
+    return (
+        <div className="col-md-3 col-sm-6">
+            <div className="widget">
+                <h2 className="mg-widget-title">Social Media</h2>
+                <p>Follow us on Facebook, Twitter, Pintrest, GooglePlus. We will give you accurate and update information. We want you to get informed about Uganda guest houses information</p>
+                <ul className="mg-footer-social">
+                    <li><Anchor><i className="fa fa-facebook"></i></Anchor></li>
+                    <li><Anchor><i className="fa fa-twitter"></i></Anchor></li>
+                    <li><Anchor><i className="fa fa-pinterest"></i></Anchor></li>
+                    <li><Anchor><i className="fa fa-google-plus"></i></Anchor></li>
+                    <li><Anchor><i className="fa fa-rss"></i></Anchor></li>
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+const NewsLetterSubscription = function () {
+    return (
+        <div className="col-md-3 col-sm-6">
+            <div className="widget">
+                <h2 className="mg-widget-title">Newsletter</h2>
+                <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
+                <p><input name="subscription_email" type="email" className="form-control" placeholder="Your Email"/></p>
+                <input onClick={() => {}} name="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
+            </div>
+        </div>
+    );
+}
+
+
+class Footer extends React.Component {
     render() {
         return (
             <footer className="mg-footer">
                 <div className="mg-footer-widget">
                     <div className="container">
                         <div className="row">
-                            {this.renderContactUs()}
-                            {this.renderInstagram(this.props.instagramImages)}
-                            {this.renderNewsLetter()}
-                            {this.renderSocialMedias()}
+                            <ContactUs />
+                            <Instagram  instagramImages = {this.props.instagramImages} />
+                            <NewsLetterSubscription />
+                            <SocialMedia />
                         </div>
                     </div>
                 </div>
 
-                <div className="mg-copyright">
-                    {this.renderFooterMenus()}
-                </div>
+                <FooterMenu />
             </footer>
         );
     }
@@ -155,38 +158,6 @@ function getDefaultProps() {
             {
                 'id' : 9,
                 'thumb' : "images/ins-09.png"
-            }
-        ],
-        footerMenu : [
-            {
-                "id" : 1,
-                "caption" : "Home",
-                "route" : "/index",
-                "active" : "active"
-            },
-            {
-                "id" : 2,
-                "caption" : "About Us",
-                "route" : "/about",
-                "active" : ""
-            },
-            {
-                "id" : 3,
-                "caption" : "Privacy Policy",
-                "route" : "/privacy-policy",
-                "active" : ""
-            },
-            {
-                "id" : 4,
-                "caption" : "Blog",
-                "route" : "/blogs",
-                "active" : ""
-            },
-            {
-                "id" : 5,
-                "caption" : "Contact Us",
-                "route" : "/contact",
-                "active" : ""
             }
         ]
     }
