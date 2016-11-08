@@ -81,7 +81,6 @@ module.exports = {
             }
         }
     },
-
     setApartmentSearchParams(data) {
         console.log(data);
         this.setStoreVal('apartmentSearchParams', data);
