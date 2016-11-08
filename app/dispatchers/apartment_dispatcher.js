@@ -8,7 +8,7 @@ module.exports = {
 
     async getBestApartments() {
         const url = 'apartments?bestApartments=true&pageSize=3';
-        if ( url !== this.getStoreVal('requestUrl')) {
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getBestApartments')) {
