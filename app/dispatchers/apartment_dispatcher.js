@@ -30,9 +30,12 @@ module.exports = {
             }
         }
     },
-    async getApartments() {
+    async getApartments(data) {
+        console.log('search apartment criterias');
+        console.log(data);
+
         const url = 'apartments?bestApartments=true&pageSize=3';
-        if ( url !== this.getStoreVal('requestUrl')) {
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getApartments')) {
@@ -77,5 +80,10 @@ module.exports = {
                 this.releaseLock('getApartment');
             }
         }
+    },
+
+    setApartmentSearchParams(data) {
+        console.log(data);
+        this.setStoreVal('apartmentSearchParams', data);
     }
 };

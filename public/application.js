@@ -65030,7 +65030,7 @@
 	                    { className: 'col-md-3' },
 	                    React.createElement(
 	                      'button',
-	                      { onClick: this.searchGueshouses, className: 'btn btn-main btn-block' },
+	                      { onClick: this.searchApartments, className: 'btn btn-main btn-block' },
 	                      'Check Now'
 	                    )
 	                  )

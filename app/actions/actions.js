@@ -21,8 +21,8 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBestApartments'});
     },
 
-    getApartments() {
-        return Dispatcher.dispatch({type: 'getApartments'});
+    getApartments(data) {
+        return Dispatcher.dispatch({type: 'getApartments', data});
     },
 
     getApartment(data) {
@@ -52,6 +52,12 @@ const Actions = {
     clearApartment() {
         Dispatcher.dispatch({type: 'clearApartment'});
     },
+
+    setApartmentSearchParams(data) {
+        Dispatcher.dispatch({type: 'setApartmentSearchParams', data});
+    }
+
+
 
 };
 

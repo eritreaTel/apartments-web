@@ -1,19 +1,20 @@
 const React = require('react');
 const Rooms = require('./inputs/rooms');
 const Beds = require('./inputs/beds');
+const Actions = require('../../actions/actions');
 
 class searchApartment extends React.Component {
 
-  searchGueshouses = (e) => {
-    console.log("searching guest houses");
-  }
+  searchApartments = (e) => {
+    const searchParams = {
+      'checkInDate'   : '11-05-2016',
+      'checkOutDate'  : '11-21-2016',
+      'rooms' : 1,
+      'bed' : 1
+    }
 
-  onRoomsChange = (e) => {
-    console.log("Rooms selection changed");
-  }
-
-  onBedsChange = (e) => {
-    console.log("Rooms selection changed");
+    Actions.setApartmentSearchParams(searchParams);
+    Actions.setRoute('/guest-houses');
   }
 
   render() {
@@ -33,30 +34,30 @@ class searchApartment extends React.Component {
                         <div className="col-md-3 col-sm-6 col-xs-6">
                           <div className="input-group date mg-check-in">
                             <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                              <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Check In"/>
+                              <input type="text" className="form-control" id="checkInDate" placeholder="Check In"/>
                             </div>
                           </div>
 
                           <div className="col-md-3 col-sm-6 col-xs-6">
                             <div className="input-group date mg-check-out">
                               <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                                <input type="text" className="form-control" id="exampleInputEmail1" placeholder="Check Out"/>
+                                <input type="text" className="form-control" id="checkOutDate" placeholder="Check Out"/>
                               </div>
                             </div>
 
                             <div className="col-md-3">
                               <div className="row">
                                 <div className="col-xs-6">
-                                  <Rooms className="cs-select cs-skin-elastic" onChange={this.onRoomsChange}/>
+                                  <Rooms className="cs-select cs-skin-elastic" onChange={this.searchApartments}/>
                                 </div>
                                 <div className="col-xs-6">
-                                  <Beds className="cs-select cs-skin-elastic" onChange={this.onBedsChange} />
+                                  <Beds className="cs-select cs-skin-elastic" onChange={this.searchApartments} />
                                 </div>
 
                               </div>
                             </div>
                             <div className="col-md-3">
-                              <button onClick={this.searchGueshouses}  className="btn btn-main btn-block">Check Now</button>
+                              <button onClick={this.searchApartments}  className="btn btn-main btn-block">Check Now</button>
                             </div>
                           </div>
                       </div>

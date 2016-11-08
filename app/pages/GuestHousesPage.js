@@ -104,7 +104,7 @@ const WithUserLoaded = withDataLoaded({
         data: [
             {
                 storeKeys: ['apartments'],
-                loadDataFn: () => Actions.getApartments()
+                loadDataFn: ({apartmentSearchParams}) => Actions.getApartments(apartmentSearchParams)
             }
         ]
 });
