@@ -25,7 +25,7 @@ const AmenitiesAndControlButtons = function(props) {
 	return (
 		<div className="col-md-5 mg-room-fecilities">
 			<h2 className="mg-sec-left-title">Apartment Amenities</h2>
-			<Amenities amenities={props.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
+			<Amenities amentiesToDisplay="8" amenities={props.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
 			<Anchor className="btn btn-main btn-next-tab">Select This Room</Anchor>
 			<Anchor className="btn btn-link">Keep Searching <i className="fa fa-angle-double-left"></i></Anchor>
 		</div>

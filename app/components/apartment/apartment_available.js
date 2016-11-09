@@ -19,7 +19,7 @@ class ApartmentAvailable extends React.Component {
                     <div className="col-sm-7">
                         <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}>{apartment.title}</Anchor> <span>{ApplicationHelper.formatCurrency(apartment.price_per_day)}<sup>.99</sup>/Night</span></h3>
                         <p>{apartment.medium_description}</p>
-                        <Amenities amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
+                        <Amenities amentiesToDisplay="6" amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
                         <Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
                         <Anchor onClick={()=>{}} className="btn btn-main pull-right">Book Now</Anchor>

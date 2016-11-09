@@ -45,10 +45,10 @@ class SearchControls extends React.Component {
                 <div className="col-md-3">
                     <div className="row">
                         <div className="col-xs-6">
-                            <Rooms className="cs-select cs-skin-elastic" onChange={this.searchApartments}/>
+                            <Rooms className="cs-select cs-skin-elastic"/>
                         </div>
                         <div className="col-xs-6">
-                            <Beds className="cs-select cs-skin-elastic" onChange={this.searchApartments} />
+                            <Beds className="cs-select cs-skin-elastic" />
                         </div>
                     </div>
                 </div>

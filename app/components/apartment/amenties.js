@@ -5,14 +5,13 @@ const ApplicationHelper = require('../../helpers/application_helper');
 class Amenities extends React.Component {
 
     render() {
-        const {amenities, outerDivClass, innerDivClass} = this.props;
-        const len = amenities.length;
-        const mid = Math.ceil(len/2);
+        const {amenities, outerDivClass, innerDivClass, amentiesToDisplay} = this.props;
+        const mid = Math.ceil(amentiesToDisplay/2);
         const sectionOne = amenities.slice(0, mid).map(item =>{
             return <li><i className={item.icon_name}></i>{item.name}</li>
         });
 
-        const sectionTwo = amenities.slice(mid, len).map(item => {
+        const sectionTwo = amenities.slice(mid, amentiesToDisplay).map(item => {
             return <li><i className={item.icon_name}></i>{item.name}</li>
         });
 
