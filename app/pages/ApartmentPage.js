@@ -139,28 +139,31 @@ const ApartmentReviewForm = function () {
 	);
 }
 
-const ApartmentGalleries = function (props) {
-	const styledFullLi = props.galleries.map(gallery => {
-		return 	<li><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
-	});
+const ApartmentGalleries extends React.Component {
 
-	const styledThumbLi = props.galleries.map(gallery => {
-		return 	<li><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
-	});
+	render(){
+		const styledFullLi = props.galleries.map(gallery => {
+			return 	<li><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
+		});
 
-	return (
-		<div className="col-md-7">
-			<div className="mg-gallery-container">
-				<ul className="mg-gallery" id="mg-gallery">
-					{styledFullLi}
-				</ul>
+		const styledThumbLi = props.galleries.map(gallery => {
+			return 	<li><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
+		});
 
-				<ul className="mg-gallery-thumb" id="mg-gallery-thumb">
-					{styledThumbLi}
-				</ul>
+		return (
+			<div className="col-md-7">
+				<div className="mg-gallery-container">
+					<ul className="mg-gallery" id="mg-gallery">
+						{styledFullLi}
+					</ul>
+
+					<ul className="mg-gallery-thumb" id="mg-gallery-thumb">
+						{styledThumbLi}
+					</ul>
+				</div>
 			</div>
-		</div>
-	);
+		);}
+
 }
 
 const ApartmentMiddleSection = function (props) {

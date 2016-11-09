@@ -27,18 +27,90 @@ const NewsHeading = function (props) {
     );
 }
 
-class RecentNews extends React.Component {
+class NewsGalleries extends React.Component {
 
-    renderNewsGallery(gallery){
-        const styledFullLi = gallery.map(item =>{
+    componentDidMount(){
+        function center(number){
+            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
+            var num = number;
+            var found = false;
+            for(var i in sync2visible){
+                if(num === sync2visible[i]){
+                    var found = true;
+                }
+            }
+
+            if(found===false){
+                if(num>sync2visible[sync2visible.length-1]){
+                    sync2.trigger("owl.goTo", num - sync2visible.length+2)
+                }else{
+                    if(num - 1 === -1){
+                        num = 0;
+                    }
+                    sync2.trigger("owl.goTo", num);
+                }
+            } else if(num === sync2visible[sync2visible.length-1]){
+                sync2.trigger("owl.goTo", sync2visible[1])
+            } else if(num === sync2visible[0]){
+                sync2.trigger("owl.goTo", num-1)
+            }
+
+        }
+
+        function syncPosition(el){
+            var current = this.currentItem;
+            $("#mg-gallery-thumb")
+                .find(".owl-item")
+                .removeClass("synced")
+                .eq(current)
+                .addClass("synced")
+            if($("#mg-gallery-thumb").data("owlCarousel") !== undefined){
+                center(current)
+            }
+        }
+        /*
+         * Owl Carousel for Gallery
+         */
+        var sync1 = $("#mg-gallery");
+        var sync2 = $("#mg-gallery-thumb");
+        sync1.owlCarousel({
+            navigation : true,
+            singleItem : true,
+            pagination: false,
+            afterAction : syncPosition,
+            navigationText: ['<i class="fa fa-long-arrow-left"></i>', '<i class="fa fa-long-arrow-right"></i>'],
+
+        });
+
+        sync2.owlCarousel({
+            items : 3,
+            itemsDesktop: [1199,3],
+            itemsDesktopSmall: [979,3],
+            itemsTablet: [768,3],
+            itemsMobile: [479,3],
+            navigation : false,
+            pagination: false,
+            navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            afterInit : function(el){
+                el.find(".owl-item").eq(0).addClass("synced");
+            }
+
+        });
+
+    }
+
+    render() {
+        const {galleries} = this.props;
+
+        const styledFullLi = galleries.map(item =>{
             return <li><img src={assetPath(item.full)} alt={item.caption}/></li>;
         });
 
-        const styledThumbLi = gallery.map(item =>{
-            return <li><img src={assetPath(item.thumb)} alt={item.caption}/></li>;
+        const styledThumbLi = galleries.map(item =>{
+                return <li><img src={assetPath(item.thumb)} alt={item.caption}/></li>;
         });
 
-        return(
+        return (
             <div className="col-md-7">
                 <h2 className="mg-sec-left-title">Our Gallery</h2>
                 <div className="mg-gallery-container">
@@ -52,6 +124,9 @@ class RecentNews extends React.Component {
             </div>
         );
     }
+}
+
+class RecentNews extends React.Component {
 
     render() {
         return (
@@ -59,7 +134,7 @@ class RecentNews extends React.Component {
                 <div className="container">
                     <div className="row">
                     <NewsHeading recentNews = {this.props.recentNews} />
-                    {this.renderNewsGallery(this.props.galleries)}
+                    <NewsGalleries galleries={this.props.galleries} />
                     </div>
                 </div>
             </div>

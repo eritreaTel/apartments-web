@@ -31,9 +31,6 @@ module.exports = {
         }
     },
     async getApartments(data) {
-        console.log('search apartment criterias');
-        console.log(data);
-
         const url = 'apartments?bestApartments=true&pageSize=3';
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             this.setStoreVal('requestUrl', url);
