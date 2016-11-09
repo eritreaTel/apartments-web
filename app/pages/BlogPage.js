@@ -9,6 +9,9 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const {assetPath} = require('../helpers/asset_helper');
 
+const onBlogFeedbackClicked = function () {
+	console.log('blog feedback clicked');
+}
 
 const BlogContent = function (props) {
 	return (
@@ -35,9 +38,9 @@ const BlogMainContent = function (props) {
 				<BlogHeader blog={props.blog} />
 
 				<div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suspicor magnitudinem venisset attento delectus ennii cursu constituamus, amarissimam infantes susciperet metrodorus, legimus videbitur. Electram optinere. Opibus innumerabiles appellat dediti nutu fuisset semper corpora perveniri aptissimum. Quem nonne cuiquam commune metrodorus quaeque umquam meminerimus maiorum stulti. Orestem tempus, debet habent percurri ponti quaeri aptior tradere, ennii solvantur dixerit veniam iisque, concederetur optari improborum, vide honesto. Opibus disputari permagna amet inter vitae patriam expleantur caelo angere, doctus attento videamus fecerit democritus triario porro.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pueros voluptatum dubitemus afferat cumque licebit corrupte. Modi accessio disputatione certamen. Eruditionem postea careret optime consequentium magnitudinem triario, omittam, torquatos verbi perturbatur, conducunt careat se provincias natum exitum molita desiderat viam, nullo historiae, efficiantur theatro parendum, sibi veritatis eos maiorum dicenda opinemur crudeli stultus, impendere occultum familiaritatem istius nescius physico fortitudo posuit graecos distinguantur, secutus istam comparaverit, aequo. Noster beate omnes patientia latine legant, sumus. Facultas detracto horreat horrent turpius amicitiam nondum.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Angusti stoicos gaudemus democritea uterque graeca confidet menandro desiderent, maximam, locos factorum videntur dolemus, contrariis meminerit expedire ceramico noris sol, dum pulcherrimum cui. Puerilis adiungimus ennius adduci futuros nullo numquidnam ducem expleantur, mala indicaverunt fere municipem theseo, voluptaria caritatem finiri protervi eruditionem expeteremus possit proprius tum maximis, seditione fugienda laboramus filio greges emancipaverat consistat hominem. Defuturum sophocles aliae iudicari parte infanti, dissensio summa, everti eruditus parvam futuros malo varias everti invidia, male.</p>
+					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination. </p>
+					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination.</p>
+					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination</p>
 				</div>
 
 				<footer className="clearfix">
@@ -130,7 +133,7 @@ const FeedBackForm = function () {
 				<textarea className="form-control" rows="7"></textarea>
 			</div>
 
-			<input type="button" value="Post Comment" className="btn btn-dark-main"/>
+			<input onClick={() => {onBlogFeedbackClicked()}} type="button" value="Post Comment" className="btn btn-dark-main"/>
 		</div>
 	);
 }

@@ -14,7 +14,6 @@ const BlogHelper = {
     const categories = [];
     blogMetadatas.forEach(function(metaData) {
       if (metaData.type == 'category') {
-        console.log(metaData);
         categories.push(metaData);
       }
     });

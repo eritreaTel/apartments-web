@@ -13,6 +13,11 @@ const GalleryHelper=  require('../helpers/gallery_helper');
 const onBookNowClicked = function (apartmentId) {
 	console.log('book now clicked for ' + apartmentId);
 }
+
+const onReviewApartmentClicked = function () {
+	console.log('Review apartment clicked');
+}
+
 const ApartmentPrice = function(props) {
 	return (
 		<div className="mg-single-room-price">
@@ -30,10 +35,10 @@ const AmenitiesAndControlButtons = function(props) {
 			<Amenities amentiesToDisplay="8" amenities={props.apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
 			<div className="row">
 				<div className="col-md-6">
-					<Anchor onClick = {() => {onBookNowClicked(props.apartment.id)}} className="btn btn-main btn-next-tab">Book Now</Anchor>
+					<Anchor className="btn btn-dark">Keep Searching</Anchor>
 				</div>
 				<div className="col-md-6">
-					<Anchor className="btn btn-dark pull-left">Keep Searching</Anchor>
+					<Anchor onClick = {() => {onBookNowClicked(props.apartment.id)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
 				</div>
 			</div>
 
@@ -144,7 +149,7 @@ const ApartmentReviewForm = function () {
 			</div>
 
 			<textarea className="form-control" placeholder="Your Comment" rows="5"></textarea>
-			<input type="button" value="Submit Review" className="btn btn-dark pull-right"/>
+			<input onClick={() => {onReviewApartmentClicked()}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
 		</div>
 	);
 }
