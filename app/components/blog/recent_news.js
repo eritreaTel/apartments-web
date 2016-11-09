@@ -3,6 +3,7 @@ const {assetPath} = require('../../helpers/asset_helper');
 const moment = require('moment');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
+const GalleryHelper = require('../../helpers/gallery_helper');
 
 
 const NewsHeading = function (props) {
@@ -30,44 +31,6 @@ const NewsHeading = function (props) {
 class NewsGalleries extends React.Component {
 
     componentDidMount(){
-        function center(number){
-            var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
-            var num = number;
-            var found = false;
-            for(var i in sync2visible){
-                if(num === sync2visible[i]){
-                    var found = true;
-                }
-            }
-
-            if(found===false){
-                if(num>sync2visible[sync2visible.length-1]){
-                    sync2.trigger("owl.goTo", num - sync2visible.length+2)
-                }else{
-                    if(num - 1 === -1){
-                        num = 0;
-                    }
-                    sync2.trigger("owl.goTo", num);
-                }
-            } else if(num === sync2visible[sync2visible.length-1]){
-                sync2.trigger("owl.goTo", sync2visible[1])
-            } else if(num === sync2visible[0]){
-                sync2.trigger("owl.goTo", num-1)
-            }
-
-        }
-
-        function syncPosition(el){
-            var current = this.currentItem;
-            $("#mg-gallery-thumb")
-                .find(".owl-item")
-                .removeClass("synced")
-                .eq(current)
-                .addClass("synced")
-            if($("#mg-gallery-thumb").data("owlCarousel") !== undefined){
-                center(current)
-            }
-        }
         /*
          * Owl Carousel for Gallery
          */
@@ -77,7 +40,7 @@ class NewsGalleries extends React.Component {
             navigation : true,
             singleItem : true,
             pagination: false,
-            afterAction : syncPosition,
+            afterAction : GalleryHelper.syncPosition(),
             navigationText: ['<i class="fa fa-long-arrow-left"></i>', '<i class="fa fa-long-arrow-right"></i>'],
 
         });
@@ -97,6 +60,11 @@ class NewsGalleries extends React.Component {
 
         });
 
+        sync2.on("click", ".owl-item", function(e){
+            e.preventDefault();
+            var number = $(this).data("owlItem");
+            sync1.trigger("owl.goTo",number);
+        });
     }
 
     render() {
