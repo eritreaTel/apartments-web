@@ -4,23 +4,17 @@ const Header = require('../shared/header');
 
 class Carousel extends React.Component {
 
-    componentDidMount(){
-        console.log('mega carousel is loaded');
-        $("#first_mega_slider").addClass('active');
-        $("#first_mega_item").removeClass('beactive').addClass("active")
-    }
-
     render() {
         return (
             <div id="mega-slider" className="carousel slide " data-ride="carousel">
                 <ol className="carousel-indicators">
-                    <li id='first_mega_slider' data-target="#mega-slider" data-slide-to="0"></li>
+                    <li data-target="#mega-slider" data-slide-to="0"></li>
                     <li data-target="#mega-slider" data-slide-to="1"></li>
                     <li data-target="#mega-slider" data-slide-to="2"></li>
                 </ol>
 
                 <div className="carousel-inner" role="listbox">
-                    <div id="first_mega_item" className="item beactive">
+                    <div className="item active">
                         <img src="images/slide-4.png" alt="..."/>
                         <div className="carousel-caption">
                             <img src="images/stars.png" alt=""/>
