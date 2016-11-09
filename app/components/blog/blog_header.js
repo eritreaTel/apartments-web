@@ -13,6 +13,17 @@ const BlogImage = function (props) {
 }
 
 class BlogHeader extends React.Component {
+
+    componentDidMount() {
+        $(".mg-post-images-slider").owlCarousel({
+            singleItem : true,
+            navigation : true,
+            pagination: false,
+            navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+
+        });
+    }
+
     render() {
         const {blog} = this.props;
 
