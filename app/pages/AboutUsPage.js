@@ -27,8 +27,8 @@ const AboutUgandaGuestHouse = function (props) {
 	);
 }
 
-const Testomonials = React.createClass({
-	render : function() {
+class Testomonials extends React.Component{
+	render() {
 		const styledTestomonials = this.props.testimonials.map(testimonial => {
 			return 	<blockquote>
 						<p>{testimonial.body}</p>
@@ -53,7 +53,8 @@ const Testomonials = React.createClass({
 				</div>
 			</div>
 		)
-	}});
+	}
+}
 
 
 const OurStaff = function (props) {
