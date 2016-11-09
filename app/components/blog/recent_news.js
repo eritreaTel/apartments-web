@@ -31,40 +31,7 @@ const NewsHeading = function (props) {
 class NewsGalleries extends React.Component {
 
     componentDidMount(){
-        /*
-         * Owl Carousel for Gallery
-         */
-        var sync1 = $("#mg-gallery");
-        var sync2 = $("#mg-gallery-thumb");
-        sync1.owlCarousel({
-            navigation : true,
-            singleItem : true,
-            pagination: false,
-            afterAction : GalleryHelper.syncPosition(),
-            navigationText: ['<i class="fa fa-long-arrow-left"></i>', '<i class="fa fa-long-arrow-right"></i>'],
-
-        });
-
-        sync2.owlCarousel({
-            items : 3,
-            itemsDesktop: [1199,3],
-            itemsDesktopSmall: [979,3],
-            itemsTablet: [768,3],
-            itemsMobile: [479,3],
-            navigation : false,
-            pagination: false,
-            navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            afterInit : function(el){
-                el.find(".owl-item").eq(0).addClass("synced");
-            }
-
-        });
-
-        sync2.on("click", ".owl-item", function(e){
-            e.preventDefault();
-            var number = $(this).data("owlItem");
-            sync1.trigger("owl.goTo",number);
-        });
+        GalleryHelper.reRenderGalleries();
     }
 
     render() {

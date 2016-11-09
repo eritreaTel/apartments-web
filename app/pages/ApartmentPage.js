@@ -8,6 +8,7 @@ const Actions = require('../actions/actions');
 const withDataLoaded = require('../components/with_data_loaded')
 const Moment = require('moment');
 const {assetPath} = require('../helpers/asset_helper');
+const GalleryHelper=  require('../helpers/gallery_helper');
 
 
 const ApartmentPrice = function(props) {
@@ -139,14 +140,19 @@ const ApartmentReviewForm = function () {
 	);
 }
 
-const ApartmentGalleries extends React.Component {
+class ApartmentGalleries extends React.Component {
+
+	componentDidMount() {
+		GalleryHelper.reRenderGalleries();
+	}
 
 	render(){
-		const styledFullLi = props.galleries.map(gallery => {
+		const {galleries} = this.props;
+		const styledFullLi = galleries.map(gallery => {
 			return 	<li><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
 		});
 
-		const styledThumbLi = props.galleries.map(gallery => {
+		const styledThumbLi = galleries.map(gallery => {
 			return 	<li><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
 		});
 

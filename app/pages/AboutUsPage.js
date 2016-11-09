@@ -108,12 +108,24 @@ const OurStaff = function (props) {
 	);
 }
 
-const OurClients = function (props) {
-	const styledLis = props.partners.map(apt => {
-			return  <li><img src={apt.full} alt={apt.caption}/></li>
-	});
+class OurClients extends React.Component {
 
-	return (
+	componentDidMount() {
+		$("#mg-part-logos-full").owlCarousel({
+			items : 5,
+			navigation : true,
+			pagination: false,
+			navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+
+		});
+	}
+
+	render() {
+		const styledLis = this.props.partners.map(apt => {
+			return  <li><img src={apt.full} alt={apt.caption}/></li>
+		});
+
+		return (
 			<div className="mg-about-clients">
 				<div className="container">
 					<div className="row">
@@ -125,7 +137,8 @@ const OurClients = function (props) {
 					</div>
 				</div>
 			</div>
-	);
+		);
+	}
 }
 
 
