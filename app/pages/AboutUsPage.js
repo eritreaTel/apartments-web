@@ -27,32 +27,34 @@ const AboutUgandaGuestHouse = function (props) {
 	);
 }
 
-const Testomonials = function (props) {
-	const styledTestomonials = props.testimonials.map(testimonial => {
-			return <blockquote>
+const Testomonials = React.createClass({
+	render : function() {
+		const styledTestomonials = this.props.testimonials.map(testimonial => {
+			return 	<blockquote>
 						<p>{testimonial.body}</p>
 						<footer>{testimonial.full_name}, {testimonial.title}</footer>
 					</blockquote>
-});
+		});
 
-	return(
-		<div className="mg-about-testimonial parallax">
-			<div className="container">
-				<div className="row">
-					<div className="col-md-12">
-						<div className="mg-sec-title">
-							<h2>Testimonials</h2>
-							<p>Here is some valuable word from our clients</p>
-						</div>
-						<div className="mg-testimonial-slider" id="mg-testimonial-slider">
-							{styledTestomonials}
+		return (
+			<div className="mg-about-testimonial parallax">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-12">
+							<div className="mg-sec-title">
+								<h2>Testimonials</h2>
+								<p>Here is some valuable word from our clients</p>
+							</div>
+							<div className="mg-testimonial-slider" id="mg-testimonial-slider">
+								{styledTestomonials}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	);
-}
+		)
+	}});
+
 
 const OurStaff = function (props) {
 	const styledTeams =props.teamMembers.map(member => {
