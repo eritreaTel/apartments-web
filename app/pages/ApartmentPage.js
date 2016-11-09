@@ -10,7 +10,9 @@ const Moment = require('moment');
 const {assetPath} = require('../helpers/asset_helper');
 const GalleryHelper=  require('../helpers/gallery_helper');
 
-
+const onBookNowClicked = function (apartmentId) {
+	console.log('book now clicked for ' + apartmentId);
+}
 const ApartmentPrice = function(props) {
 	return (
 		<div className="mg-single-room-price">
@@ -25,9 +27,16 @@ const AmenitiesAndControlButtons = function(props) {
 	return (
 		<div className="col-md-5 mg-room-fecilities">
 			<h2 className="mg-sec-left-title">Apartment Amenities</h2>
-			<Amenities amentiesToDisplay="8" amenities={props.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
-			<Anchor className="btn btn-main btn-next-tab">Select This Room</Anchor>
-			<Anchor className="btn btn-link">Keep Searching <i className="fa fa-angle-double-left"></i></Anchor>
+			<Amenities amentiesToDisplay="8" amenities={props.apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
+			<div className="row">
+				<div className="col-md-6">
+					<Anchor onClick = {() => {onBookNowClicked(props.apartment.id)}} className="btn btn-main btn-next-tab">Book Now</Anchor>
+				</div>
+				<div className="col-md-6">
+					<Anchor className="btn btn-dark pull-left">Keep Searching</Anchor>
+				</div>
+			</div>
+
 		</div>
 	);
 }
@@ -178,7 +187,7 @@ const ApartmentMiddleSection = function (props) {
 			<div className="container">
 				<div className="row">
 					<ApartmentGalleries galleries = {props.apartment.galleries} />
-					<AmenitiesAndControlButtons amenities={props.apartment.amenities} />
+					<AmenitiesAndControlButtons apartment={props.apartment} />
 				</div>
 				<ApartmentDescription apartment={props.apartment} />
 			</div>

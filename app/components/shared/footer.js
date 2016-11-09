@@ -4,6 +4,11 @@ const Anchor = require('../shared/anchor');
 const {assetPath} = require('../../helpers/asset_helper');
 const Actions = require('../../actions/actions');
 
+const onNewsLetterSubscriptionClicked = function (email_address) {
+    console.log('news letter subscription for ' + email_address);
+
+}
+
 const FooterMenu = function () {
     return (
         <div className="mg-copyright">
@@ -92,7 +97,7 @@ const NewsLetterSubscription = function () {
                 <h2 className="mg-widget-title">Newsletter</h2>
                 <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
                 <p><input name="subscription_email" type="email" className="form-control" placeholder="Your Email"/></p>
-                <input onClick={() => {}} name="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
+                <input onClick={() => {onNewsLetterSubscriptionClicked('dummy_email')}} name="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
             </div>
         </div>
     );

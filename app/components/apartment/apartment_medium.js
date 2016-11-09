@@ -2,6 +2,11 @@ const React = require('react');
 const Anchor = require('../shared/anchor')
 const ApplicationHelper = require('../../helpers/application_helper');
 
+const onBookNowClicked = function (apartmentId) {
+    console.log('book now clicked for ' + apartmentId);
+
+}
+
 class ApartmentMedium extends React.Component {
 
     render() {
@@ -16,7 +21,7 @@ class ApartmentMedium extends React.Component {
                     <div className="mg-room-price">{ApplicationHelper.formatCurrency(apartment.price_per_day)}<sup>.00/Night</sup></div>
                     <p>{apartment.short_description}</p>
                     <Anchor onClick={onViewDetails} className="btn btn-link">View Details <i className="fa fa-angle-double-right"></i></Anchor>
-                    <Anchor onClick={onBookAptClicked} className="btn btn-main">Book</Anchor>
+                    <Anchor onClick={() => {onBookNowClicked(apartment.id)}} className="btn btn-main">Book</Anchor>
                 </figcaption>
             </figure>
         );

@@ -6,23 +6,23 @@ const SearchDateHelper = require('../../helpers/search_date_helper');
 const selectFx = require('../../../public/js/selectFx');
 
 
+const onSearchApartmentsClicked = function (checkIn, checkOut, room, bed) {
+    const searchParams = {
+        'checkInDate'   : checkIn,
+        'checkOutDate'  : checkOut,
+        'room' : room,
+        'bed' : bed
+    }
+
+    Actions.setApartmentSearchParams(searchParams);
+    Actions.setRoute('/guest-houses');
+}
+
 
 class SearchControls extends React.Component {
 
     componentDidMount() {
         SearchDateHelper.initializeDatePickers();
-    }
-
-    searchApartments = (e) => {
-        const searchParams = {
-        'checkInDate'   : '11-05-2016',
-        'checkOutDate'  : '11-21-2016',
-        'rooms' : 1,
-        'bed' : 1
-        }
-
-        Actions.setApartmentSearchParams(searchParams);
-        Actions.setRoute('/guest-houses');
     }
 
     render() {
@@ -53,7 +53,7 @@ class SearchControls extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-3">
-                        <button onClick={this.searchApartments}  className="btn btn-main btn-block">Check Now</button>
+                        <button onClick={() =>{onSearchApartmentsClicked('11-05-2016', '11-21-2016', '1', '1')}}  className="btn btn-main btn-block">Check Now</button>
                 </div>
             </div>
         );

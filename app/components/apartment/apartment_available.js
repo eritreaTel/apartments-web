@@ -6,10 +6,17 @@ const Actions = require('../../actions/actions');
 const ActionWithLoading = require('../shared/action_with_loading');
 const {assetPath} = require('../../helpers/asset_helper');
 
+
+const onBookNowClicked = function (apartmentId) {
+    console.log('book now clicked for ' + apartmentId);
+
+}
+
 class ApartmentAvailable extends React.Component {
 
     render() {
         const {apartment } = this.props;
+
         return (
             <div className="mg-avl-room">
                 <div className="row">
@@ -22,7 +29,7 @@ class ApartmentAvailable extends React.Component {
                         <Amenities amentiesToDisplay="6" amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
                         <Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
-                        <Anchor onClick={()=>{}} className="btn btn-main pull-right">Book Now</Anchor>
+                        <Anchor onClick={() => {onBookNowClicked(apartment.id)}} className="btn btn-main pull-right">Book Now</Anchor>
                     </div>
                 </div>
             </div>
