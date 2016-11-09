@@ -28,6 +28,17 @@ const AboutUgandaGuestHouse = function (props) {
 }
 
 class Testomonials extends React.Component{
+	componentDidMount() {
+		$("#mg-testimonial-slider").owlCarousel({
+			navigation : true,
+			singleItem : true,
+			pagination: false,
+			navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+			transitionStyle : "backSlide"
+
+		});
+	}
+
 	render() {
 		const styledTestomonials = this.props.testimonials.map(testimonial => {
 			return 	<blockquote>
