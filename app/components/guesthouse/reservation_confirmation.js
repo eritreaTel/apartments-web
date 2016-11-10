@@ -3,7 +3,7 @@ const React = require('react');
 const ReservationConfirmation = function () {
 
       return(
-          <div role="tabpanel" className="tab-pane in active" ref="confirmation">
+          <div role="tabpanel" className="tab-pane in active" id="confirmation">
           <div className="alert alert-success clearfix">
           <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <div className="mg-alert-icon"><i className="fa fa-check"></i></div>

@@ -88,19 +88,19 @@ class GuestHousesPage extends React.Component {
         let section ;
             switch (activeStage) {
                 case 'search':
-                    section =   <div role="tabpanel" className="tab-pane fade in active" ref="select-room">
+                    section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                     <SearchApartments />
                                     <AvailableApartments apartments = {apartments} />
                                 </div>
                     break;
                 case 'personal' :
-                    section =   <div role="tabpanel" className="tab-pane in active" ref="personal-info">
+                    section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
                                     <PersonalInfo apartment={apartment} />
                                 </div>
                     break;
 
                 case 'payment' :
-                    section =   <div role="tabpanel" className="tab-pane in active" ref="payment">
+                    section =   <div role="tabpanel" className="tab-pane in active" id="payment">
                                     <PaymentInfo />
                                 </div>
                     break;
