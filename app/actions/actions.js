@@ -59,8 +59,15 @@ const Actions = {
 
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
-    }
+    },
 
+    goToPaymentClicked() {
+        Dispatcher.dispatch({type: 'goToPaymentClicked'});
+    },
+
+    goToConfirmationClicked() {
+        Dispatcher.dispatch({type: 'goToConfirmationClicked'});
+    }
 
 
 };

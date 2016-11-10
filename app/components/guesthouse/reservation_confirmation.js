@@ -1,10 +1,9 @@
 const React = require('react');
 
-class ThankYou extends React.Component {
+const ReservationConfirmation = function () {
 
-  render() {
       return(
-          <div role="tabpanel" className="tab-pane fade" id="thank-you">
+          <div role="tabpanel" className="tab-pane in active" ref="confirmation">
           <div className="alert alert-success clearfix">
           <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <div className="mg-alert-icon"><i className="fa fa-check"></i></div>
@@ -57,9 +56,8 @@ class ThankYou extends React.Component {
       </div>
       </aside>
       </div>
-      </div>
+        </div>
     );
-  }
 }
 
-module.exports = ThankYou;
+module.exports = ReservationConfirmation;

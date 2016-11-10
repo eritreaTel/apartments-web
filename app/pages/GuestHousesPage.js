@@ -2,6 +2,8 @@ const React = require('react');
 const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
+const PaymentInfo   = require('../components/guesthouse/payment_info');
+const ReservationConfirmation      = require('../components/guesthouse/reservation_confirmation');
 const PageTitle = require('../components/shared/pageTitle');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
@@ -86,23 +88,26 @@ class GuestHousesPage extends React.Component {
         let section ;
             switch (activeStage) {
                 case 'search':
-                    section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                    section =   <div role="tabpanel" className="tab-pane fade in active" ref="select-room">
                                     <SearchApartments />
                                     <AvailableApartments apartments = {apartments} />
                                 </div>
                     break;
                 case 'personal' :
-                    section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
+                    section =   <div role="tabpanel" className="tab-pane in active" ref="personal-info">
                                     <PersonalInfo apartment={apartment} />
                                 </div>
                     break;
 
                 case 'payment' :
+                    section =   <div role="tabpanel" className="tab-pane in active" ref="payment">
+                                    <PaymentInfo />
+                                </div>
                     break;
+                case 'confirmation' :
+                    section =  <ReservationConfirmation />
 
-                case 'thankyou' :
                     break;
-
                 default:
                     section = <AvailableApartments apartments = {apartments} />
             }

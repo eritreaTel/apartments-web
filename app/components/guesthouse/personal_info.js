@@ -1,5 +1,12 @@
 const React = require('react');
-const Countries = require('../shared/countries');
+const Country = require('../shared/country');
+const Anchor = require('../shared/anchor');
+const Actions = require('../../actions/actions');
+
+
+const goToPaymentInfoClicked = function () {
+    Actions.goToPaymentClicked();
+}
 
 const BookingDetails = function (props) {
     let apartment = props.apartment;
@@ -85,7 +92,7 @@ class PersonalInfo extends React.Component {
                                 </div>
                                 <div className="mg-book-form-input">
                                     <label>Country</label>
-                                    <Countries />
+                                    <Country />
                                 </div>
                             </div>
                         </div>
@@ -120,8 +127,8 @@ class PersonalInfo extends React.Component {
                             </div>
                         </div>
 
-                        <a href="#payment" className="btn btn-dark-main btn-next-tab pull-right">Next</a>
-                        <a href="#select-room" className="btn btn-default btn-prev-tab pull-left">Back</a>
+                        <Anchor onClick={() => {goToPaymentInfoClicked()}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
+                        <Anchor className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                     </div>
                 </div>
                 <BookingDetails apartment={apartment} />

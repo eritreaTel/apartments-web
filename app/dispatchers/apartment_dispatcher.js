@@ -90,5 +90,13 @@ module.exports = {
         this.setStoreVal('apartment', apartment);
         console.log(apartment);
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+    },
+
+    goToPaymentClicked() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+    },
+
+    goToConfirmationClicked() {
+    this.mergeStoreVal('bookingStage', {activeStage: 'confirmation'});
     }
 };
