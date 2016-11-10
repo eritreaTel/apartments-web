@@ -53,8 +53,12 @@ const Actions = {
         Dispatcher.dispatch({type: 'clearApartment'});
     },
 
-    setApartmentSearchParams(data) {
-        Dispatcher.dispatch({type: 'setApartmentSearchParams', data});
+    searchApartmentsClicked(data) {
+        Dispatcher.dispatch({type: 'searchApartmentsClicked', data});
+    },
+
+    bookApartmentClicked(data) {
+        Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     }
 
 

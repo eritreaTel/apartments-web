@@ -30,8 +30,20 @@ module.exports = {
                         apartments : [],
                         bestApartments : [],
                         searchCriteria : null,
+                        bookingStage : {
+                            activeStage : null,
+                            searchingInfo : null,
+                            personal : {
+                                personalInfo : null,
+                                accountInfo  : null
+                            },
+                            payment : {
+                                addressInfo : null,
+                                cardInfo : null
+                            },
+                            thankyou : null
+                        },
                         blogs : [],
-                        apartmentSearchParams : null,
                         blog : null,
                         blogComments : [],
                         blogsMetaData : [],

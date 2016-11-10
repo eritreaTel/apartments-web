@@ -6,6 +6,7 @@ const PageTitle = require('../components/shared/pageTitle');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
+const Anchor = require('../components/shared/anchor');
 
 
 
@@ -13,16 +14,16 @@ const BookingStaging = function(props) {
     return(
         <ul className="nav nav-tabs" role="tablist">
             <li role="presentation" className="active">
-                <a href="#select-room" aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Room</a>
+                <Anchor aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Room</Anchor>
             </li>
             <li role="presentation">
-                <a href="#personal-info" aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</a>
+                <Anchor aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
             </li>
             <li role="presentation">
-                <a href="#payment" aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</a>
+                <Anchor aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</Anchor>
             </li>
             <li role="presentation">
-                <a href="#thank-you" aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</a>
+                <Anchor aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</Anchor>
             </li>
         </ul>
     );
@@ -65,10 +66,7 @@ const GuestHouseBody = function(props) {
                                 <BookingStaging />
 
                                 <div className="tab-content">
-                                    <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                        <SearchApartments />
-                                        {props.children}
-                                    </div>
+                                    {props.children}
                                 </div>
                             </div>
                         </div>
@@ -83,12 +81,32 @@ const GuestHouseBody = function(props) {
 
 class GuestHousesPage extends React.Component {
     render() {
-        const {store : {apartments}} = this.props;
-        return (
-            <GuestHouseBody>
-                <AvailableApartments apartments = {apartments} />
-            </GuestHouseBody>
-        );
+        const {store : {apartments, apartment, bookingStage: {activeStage}}} = this.props;
+        console.log('active state : ' + activeStage);
+        let section ;
+            switch (activeStage) {
+                case 'search':
+                    section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                                    <SearchApartments />
+                                    <AvailableApartments apartments = {apartments} />
+                                </div>
+                    break;
+                case 'personal' :
+                    section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
+                                    <PersonalInfo apartment={apartment} />
+                                </div>
+                    break;
+
+                case 'payment' :
+                    break;
+
+                case 'thankyou' :
+                    break;
+
+                default:
+                    section = <AvailableApartments apartments = {apartments} />
+            }
+        return ( <GuestHouseBody> {section} </GuestHouseBody> );
     }
 };
 
@@ -96,15 +114,18 @@ const WithUserLoaded = withDataLoaded({
         WithData: GuestHousesPage,
         WithoutData: () => (
             <GuestHouseBody >
-                <div className="load-spin">
-                    <SvgImage name="dark-sun"/> Loading
+                <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                    <SearchApartments />
+                    <div className="load-spin">
+                        <SvgImage name="dark-sun"/> Loading
+                    </div>
                 </div>
             </GuestHouseBody>
         ),
         data: [
             {
                 storeKeys: ['apartments'],
-                loadDataFn: ({apartmentSearchParams}) => Actions.getApartments(apartmentSearchParams)
+                loadDataFn: ({bookingStage : {searchingInfo}}) => Actions.getApartments(searchingInfo)
             }
         ]
 });

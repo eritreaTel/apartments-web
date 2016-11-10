@@ -41,6 +41,7 @@ module.exports = {
                     if (response.data && response.data.results && response.data.results.length > 0) {
                         this.setStoreVal('apartments', response.data.results);
                     }
+                    this.mergeStoreVal('bookingStage', {activeStage: 'search'}); // now in searching stage
                 } catch (error) {
                     this.dispatch({
                         type: 'handleRequestError',
@@ -50,6 +51,7 @@ module.exports = {
                         }
                     });
                 }
+
                 this.releaseLock('getApartments');
             }
         }
@@ -78,8 +80,15 @@ module.exports = {
             }
         }
     },
-    setApartmentSearchParams(data) {
-        console.log(data);
-        this.setStoreVal('apartmentSearchParams', data);
+    searchApartmentsClicked(data) {
+        this.mergeStoreVal('bookingStage', {searchingInfo: data});
+        this.mergeStoreVal('bookingStage', {activeStage: 'search'});
+    },
+
+    bookApartmentClicked({apartmentId}) {
+        let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
+        this.setStoreVal('apartment', apartment);
+        console.log(apartment);
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
     }
 };

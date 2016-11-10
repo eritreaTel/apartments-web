@@ -13,7 +13,7 @@ const onSearchApartmentsClicked = function (checkIn, checkOut, room, bed) {
         'bed' : bed
     }
 
-    Actions.setApartmentSearchParams(searchParams);
+    Actions.searchApartmentsClicked(searchParams);
     Actions.setRoute('/guest-houses');
 }
 

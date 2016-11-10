@@ -11,7 +11,7 @@ const {assetPath} = require('../helpers/asset_helper');
 const GalleryHelper=  require('../helpers/gallery_helper');
 
 const onBookNowClicked = function (apartmentId) {
-	console.log('book now clicked for ' + apartmentId);
+	Actions.bookApartmentClicked({apartmentId});
 }
 
 const onReviewApartmentClicked = function () {

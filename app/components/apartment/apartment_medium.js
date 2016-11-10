@@ -1,9 +1,10 @@
 const React = require('react');
 const Anchor = require('../shared/anchor')
 const ApplicationHelper = require('../../helpers/application_helper');
+const Actions = require('../../actions/actions');
 
 const onBookNowClicked = function (apartmentId) {
-    console.log('book now clicked for ' + apartmentId);
+    Actions.bookApartmentClicked({apartmentId});
 
 }
 

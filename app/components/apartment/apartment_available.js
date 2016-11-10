@@ -8,7 +8,7 @@ const {assetPath} = require('../../helpers/asset_helper');
 
 
 const onBookNowClicked = function (apartmentId) {
-    console.log('book now clicked for ' + apartmentId);
+    Actions.bookApartmentClicked({apartmentId});
 
 }
 
