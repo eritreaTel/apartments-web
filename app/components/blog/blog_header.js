@@ -6,7 +6,7 @@ const {assetPath} = require('../../helpers/asset_helper');
 
 const BlogImage = function (props) {
     const styledImgs = props.blog.images && props.blog.images.map(blogImage => {
-        return <Anchor onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img src={assetPath(blogImage.full)} alt="" className="img-responsive"/> </Anchor>
+        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img src={assetPath(blogImage.full)} alt="" className="img-responsive"/> </Anchor>
     });
 
     return styledImgs ? <div className="mg-post-images-slider"> {styledImgs}</div> : <div/>;

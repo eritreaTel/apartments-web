@@ -38,7 +38,7 @@ const SearchApartments = function (props) {
 
 const AvailableApartments = function(props) {
     const AvailableApartments = props.apartments.map(apt => {
-        return <ApartmentAvailable apartment={apt} />
+        return <ApartmentAvailable apartment={apt} key={apt.id} />
     });
 
     return(

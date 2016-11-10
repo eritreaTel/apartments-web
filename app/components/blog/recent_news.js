@@ -8,7 +8,7 @@ const GalleryHelper = require('../../helpers/gallery_helper');
 
 const NewsHeading = function (props) {
     const contents = props.recentNews.map(singleNews => {
-            return  <li>
+            return  <li key={singleNews.id}>
                         <div className="mg-recnt-post">
                             <div className="mg-rp-date">{moment(singleNews.created_at).format('D')} <div className="mg-rp-month">{moment(singleNews.created_at).format('MMMM')}</div></div>
                             <h3><Anchor onClick={()=>{Actions.setRoute('/blog/' + singleNews.id)}} >{singleNews.title}</Anchor></h3>
@@ -38,11 +38,11 @@ class NewsGalleries extends React.Component {
         const {galleries} = this.props;
 
         const styledFullLi = galleries.map(item =>{
-            return <li><img src={assetPath(item.full)} alt={item.caption}/></li>;
+            return <li key={item.id}><img src={assetPath(item.full)} alt={item.caption}/></li>;
         });
 
         const styledThumbLi = galleries.map(item =>{
-                return <li><img src={assetPath(item.thumb)} alt={item.caption}/></li>;
+                return <li key={item.id*2}><img src={assetPath(item.thumb)} alt={item.caption}/></li>;
         });
 
         return (
@@ -102,31 +102,37 @@ function getDefaultProps() {
         ],
         galleries: [
             {
+                "id" : 1,
                 "full" : "images/gallery-01.png",
                 "thumb" : "images/gallery-thumb-01.png",
                 "caption" : "Partner Logo"
             },
             {
+                "id" : 2,
                 "full" : "images/gallery-02.png",
                 "thumb" : "images/gallery-thumb-02.png",
                 "caption" : "Partner Logo"
             },
             {
+                "id" : 3,
                 "full" : "images/gallery-05.png",
                 "thumb" : "images/gallery-thumb-05.png",
                 "caption" : "Partner Logo"
             },
             {
+                "id" : 4,
                 "full" : "images/gallery-06.png",
                 "thumb" : "images/gallery-thumb-06.png",
                 "caption" : "Partner Logo"
             },
             {
+                "id" : 5,
                 "full" : "images/gallery-07.png",
                 "thumb" : "images/gallery-thumb-07.png",
                 "caption" : "Partner Logo"
             },
             {
+                "id" : 6,
                 "full" : "images/gallery-08.png",
                 "thumb" : "images/gallery-thumb-08.png",
                 "caption" : "Partner Logo"

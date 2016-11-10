@@ -84,7 +84,7 @@ const ApartmentReviewSection = function (props) {
 
 const ApartmentReviews = function (props) {
 	const styledReview = props.apartmentReviews.map(review => {
-		return 	<div className="media">
+		return 	<div className="media" key={review.id}>
 					<div className="media-left">
 						<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
 					</div>
@@ -163,11 +163,11 @@ class ApartmentGalleries extends React.Component {
 	render(){
 		const {galleries} = this.props;
 		const styledFullLi = galleries.map(gallery => {
-			return 	<li><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
+			return 	<li key={gallery.id}><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
 		});
 
 		const styledThumbLi = galleries.map(gallery => {
-			return 	<li><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
+			return 	<li key={gallery.id * 2}><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
 		});
 
 		return (

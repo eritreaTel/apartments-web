@@ -18,7 +18,7 @@ const AboutUgandaGuestHouse = function (props) {
 					</div>
 					<div className="col-md-6">
 						<div className="video-responsive">
-							<iframe src="https://player.vimeo.com/video/134008155" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+							<iframe src="https://player.vimeo.com/video/134008155" width="500" height="281" frameBorder="0"  allowFullScreen></iframe>
 						</div>
 					</div>
 				</div>
@@ -41,7 +41,7 @@ class Testomonials extends React.Component{
 
 	render() {
 		const styledTestomonials = this.props.testimonials.map(testimonial => {
-			return 	<blockquote>
+			return 	<blockquote key={testimonial.id}>
 						<p>{testimonial.body}</p>
 						<footer>{testimonial.full_name}, {testimonial.title}</footer>
 					</blockquote>
@@ -70,7 +70,7 @@ class Testomonials extends React.Component{
 
 const OurStaff = function (props) {
 	const styledTeams =props.teamMembers.map(member => {
-			return  <div className="col-md-3 col-sm-6">
+			return  <div className="col-md-3 col-sm-6" key={member.id}>
 						<div className="mg-team-member">
 							<figure>
 								<img src={member.photo} alt="" className="img-responsive"/>
@@ -122,7 +122,7 @@ class OurClients extends React.Component {
 
 	render() {
 		const styledLis = this.props.partners.map(apt => {
-			return  <li><img src={apt.full} alt={apt.caption}/></li>
+			return  <li key={apt.id}><img src={apt.full} alt={apt.caption}/></li>
 		});
 
 		return (
@@ -162,7 +162,8 @@ function getDefaultProps() {
 	let props = {
 		teamMembers : [
 			{
-				full_name: "Amanuel Yohannes",
+				"id" : 1,
+ 				full_name: "Amanuel Yohannes",
 				title: "Chief Executive Officer, CEO",
 				photo : "images/member1.png",
 				fb_link : "#",
@@ -170,6 +171,7 @@ function getDefaultProps() {
 				ld_link : "#"
 			},
 			{
+				"id" : 2,
 				full_name: "Rafael Orozco",
 				title: "Chief Technology Officer, CTO",
 				photo : "images/member2.png",
@@ -178,6 +180,7 @@ function getDefaultProps() {
 				ld_link : "#"
 			},
 			{
+				"id" : 3,
 				full_name: "Ruth Tekle",
 				title: "Chief Operating Officer, COO",
 				photo : "images/member3.png",
@@ -186,6 +189,7 @@ function getDefaultProps() {
 				ld_link : "#"
 			},
 			{
+				"id" : 4,
 				full_name: "Kenneth Ogali",
 				title: "VP of Sales and Marketting",
 				photo : "images/member4.png",
@@ -196,58 +200,71 @@ function getDefaultProps() {
 		],
 		partners: [
 			{
+				"id" : 1,
 				"full" : "images/part-logo-5.png",
 				"caption" : "Partner Logo 5"
 			},
 			{
+				"id" : 2,
 				"full" : "images/part-logo-6.png",
 				"caption" : "Partner Logo 6"
 			},
 			{
+				"id" : 3,
 				"full" : "images/part-logo-7.png",
 				"caption" : "Partner Logo 7"
 			},
 			{
+				"id" : 4,
 				"full" : "images/part-logo-8.png",
 				"caption" : "Partner Logo 8"
 			},
 			{
+				"id" : 5,
 				"full" : "images/part-logo-9.png",
 				"caption" : "Partner Logo 9"
 			},
 			{
+				"id" : 6,
 				"full" : "images/part-logo-5.png",
 				"caption" : "Partner Logo 5"
 			},
 			{
+				"id" : 7,
 				"full" : "images/part-logo-6.png",
 				"caption" : "Partner Logo 6"
 			},
 			{
+				"id" : 8,
 				"full" : "images/part-logo-7.png",
 				"caption" : "Partner Logo 7"
 			},
 			{
+				"id" : 9,
 				"full" : "images/part-logo-8.png",
 				"caption" : "Partner Logo 8"
 			},
 			{
+				"id" : 10,
 				"full" : "images/part-logo-9.png",
 				"caption" : "Partner Logo 9"
 			}
 		],
 		testimonials : [
 			{
+				"id"        : 1,
 				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
 				"full_name" : "Ruth Tekle",
 				"title" 	: "Arch Software Solutions, CEO"
 			},
 			{
+				"id"        : 2,
 				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
 				"full_name" : "Asmerom Haile",
 				"title" 	: "BlueSoft, CEO"
 			},
 			{
+				"id"        : 3,
 				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
 				"full_name" : "Habtom Beraki",
 				"title" 	: "BlueGold, CEO"

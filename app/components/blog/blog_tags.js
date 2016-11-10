@@ -7,7 +7,7 @@ class BlogTags extends React.Component {
         const {tags, parentClassName} = this.props;
 
         const styledTags = tags.map(tag => {
-            return 	<Anchor>{tag.value}</Anchor>;
+            return 	<Anchor key={tag.id}>{tag.value}</Anchor>;
         });
 
         return (

@@ -24,7 +24,7 @@ const BlogList = function(props) {
 
 const Articles = function (props) {
 	const StyledArticles = props.blogs.map(blog => {
-		return 	<article className="mg-post">
+		return 	<article className="mg-post" key={blog.id}>
 					<BlogHeader blog={blog} />
 					<div>
 						<p>{blog.medium_description}</p>

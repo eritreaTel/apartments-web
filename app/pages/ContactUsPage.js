@@ -17,19 +17,19 @@ class ContactUsForm extends React.Component {
 					<div className="col-md-5">
 						<h2 className="mg-sec-left-title">Send an E-mail</h2>
 						<div className="mg-contact-form-input">
-							<label for="full-name">Full Name</label>
+							<label htmlFor="full-name">Full Name</label>
 							<input type="text" className="form-control" id="full-name"/>
 						</div>
 						<div className="mg-contact-form-input">
-							<label for="email">E-mail</label>
+							<label htmlFor="email">E-mail</label>
 							<input type="text" className="form-control" id="email"/>
 						</div>
 						<div className="mg-contact-form-input">
-							<label for="subject">Subject</label>
+							<label htmlFor="subject">Subject</label>
 							<input type="text" className="form-control" id="subject"/>
 						</div>
 						<div className="mg-contact-form-input">
-							<label for="subject">Message</label>
+							<label htmlFor="subject">Message</label>
 							<textarea className="form-control" id="subject" rows="5"></textarea>
 						</div>
 						<input onClick={submitContactUsForm}  type="submit" className="btn btn-dark-main pull-right" value="Send"/>

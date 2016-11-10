@@ -7,7 +7,7 @@ const Actions = require('../../actions/actions');
 
 const RecentPost = function (props) {
     const styledLi = props.news.map(singleNews => {
-        return  <li>
+        return  <li key={singleNews.id}>
                     <div className="mg-recnt-post">
                         <div className="mg-rp-date"> {Moment(singleNews.created_at).format('D')} <div className="mg-rp-month"> {Moment(singleNews.created_at).format('MMMM')} </div></div>
                         <h3><Anchor onClick={() => {Actions.setRoute('/blog/' + singleNews.id)}} > {singleNews.title} </Anchor></h3>
@@ -21,7 +21,7 @@ const RecentPost = function (props) {
 
 const Categories = function (props) {
     const styledLi = props.categories.map(category => {
-        return <li><Anchor >{category.value}</Anchor></li>;
+        return <li key={category.id}><Anchor>{category.value}</Anchor></li>;
     });
 
     return (<ul> {styledLi}</ul>);

@@ -17,7 +17,7 @@ class AboutUs extends React.Component {
         return (
             <div className="col-md-5">
                 <div className="video-responsive">
-                    <iframe src="https://player.vimeo.com/video/134008155" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                    <iframe src="https://player.vimeo.com/video/134008155" width="500" height="281" frameBorder="0"  allowFullScreen></iframe>
                 </div>
             </div>
         );
