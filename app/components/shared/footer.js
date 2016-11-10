@@ -56,7 +56,7 @@ const ContactUs = function () {
 
 const Instagram = function (props) {
     const syledLi = props.instagramImages.map(imgInfo => {
-        return <li><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
+        return <li key={imgInfo.id}><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
     });
 
     return (
