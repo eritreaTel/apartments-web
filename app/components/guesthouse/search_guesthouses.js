@@ -3,7 +3,6 @@ const Rooms = require('./inputs/rooms');
 const Beds = require('./inputs/beds');
 const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
-const selectFx = require('../../../public/js/selectFx');
 
 
 const onSearchApartmentsClicked = function (checkIn, checkOut, room, bed) {
