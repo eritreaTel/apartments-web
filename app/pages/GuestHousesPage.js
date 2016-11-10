@@ -2,6 +2,7 @@ const React = require('react');
 const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
+const PaymentInfo = require('../components/guesthouse/payment_info');
 const PageTitle = require('../components/shared/pageTitle');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
@@ -81,25 +82,26 @@ const GuestHouseBody = function(props) {
 
 class GuestHousesPage extends React.Component {
     render() {
-        const {store : {apartments, apartment, bookingStage: {activeStage}}} = this.props;
-        console.log('active state : ' + activeStage);
+        const {store} = this.props;
+        const {apartments, apartment, bookingStage: {activeStage}} = store;
         let section ;
             switch (activeStage) {
                 case 'search':
                     section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                     <SearchApartments />
-                                    <AvailableApartments apartments = {apartments} />
+                                    <AvailableApartments {...{store}} />
                                 </div>
                     break;
                 case 'personal' :
                     section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                    <PersonalInfo apartment={apartment} />
+                                    <PersonalInfo {...{store}} />
                                 </div>
                     break;
-
                 case 'payment' :
+                    section =   <div role="tabpanel" className="tab-pane in active" id="payment">
+                                    <PaymentInfo {...{store}} />
+                                </div>
                     break;
-
                 case 'thankyou' :
                     break;
 

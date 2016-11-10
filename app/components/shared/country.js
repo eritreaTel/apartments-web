@@ -1,7 +1,7 @@
 const React = require('react');
 
 
-class Countries extends React.Component {
+class Country extends React.Component {
 
     render() {
         return (
@@ -273,4 +273,4 @@ class Countries extends React.Component {
     }
 };
 
-module.exports = Countries;
+module.exports = Country;
