@@ -88,10 +88,7 @@ module.exports = {
     bookApartmentClicked({apartmentId}) {
         let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
         this.setStoreVal('apartment', apartment);
+        console.log(apartment);
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
-    },
-
-    goToPaymentSectionClicked() {
-        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
     }
 };

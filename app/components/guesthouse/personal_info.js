@@ -1,11 +1,44 @@
 const React = require('react');
-const Country = require('../shared/country');
-const Anchor = require('../shared/anchor');
-const BookingDetails = require('./booking_details');
-const Action = require('../../actions/actions');
+const Countries = require('../shared/countries');
 
-const goToPaymentSectionClicked = function () {
-    Action.goToPaymentSectionClicked();
+const BookingDetails = function (props) {
+    let apartment = props.apartment;
+
+    return(
+        <div className="col-md-4">
+            <div className="mg-cart-container">
+                <aside className="mg-widget mt50" id="mg-room-cart">
+                    <h2 className="mg-widget-title">Booking Details</h2>
+                    <div className="mg-widget-cart">
+                        <div className="mg-cart-room">
+                            <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
+                            <h3>{apartment.title}</h3>
+                        </div>
+                        <div className="mg-widget-cart-row">
+                            <strong>Check In:</strong>
+                            <span>27 Jan, 2015</span>
+                        </div>
+                        <div className="mg-widget-cart-row">
+                            <strong>Check Out:</strong>
+                            <span>28 Jan, 2015</span>
+                        </div>
+                        <div className="mg-widget-cart-row">
+                            <strong>Adults:</strong>
+                            <span>2</span>
+                        </div>
+                        <div className="mg-widget-cart-row">
+                            <strong>Child:</strong>
+                            <span>1</span>
+                        </div>
+                        <div className="mg-cart-total">
+                            <strong>Total:</strong>
+                            <span>$249.99</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    );
 }
 
 
@@ -52,7 +85,7 @@ class PersonalInfo extends React.Component {
                                 </div>
                                 <div className="mg-book-form-input">
                                     <label>Country</label>
-                                    <Country />
+                                    <Countries />
                                 </div>
                             </div>
                         </div>
@@ -83,12 +116,12 @@ class PersonalInfo extends React.Component {
 
                         <div className="clearfix mg-terms-input">
                             <div className="pull-right">
-                                <label><input type="checkbox"/> By Sign up you are agree with our <Anchor >terms and condition</Anchor></label>
+                                <label><input type="checkbox"/> By Sign up you are agree with our <a href="#">terms and condition</a></label>
                             </div>
                         </div>
 
-                        <Anchor onClick={() => goToPaymentSectionClicked() } className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
-                        <Anchor className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                        <a href="#payment" className="btn btn-dark-main btn-next-tab pull-right">Next</a>
+                        <a href="#select-room" className="btn btn-default btn-prev-tab pull-left">Back</a>
                     </div>
                 </div>
                 <BookingDetails apartment={apartment} />
