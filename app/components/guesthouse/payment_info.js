@@ -4,10 +4,12 @@ const Month = require('../shared/month');
 const Year  = require('../shared/year');
 const Anchor  = require('../shared/anchor');
 const Actions = require('../../actions/actions');
+const BookingDetails = require('./booking_details');
 
 class PaymentInfo extends React.Component {
 
       render() {
+            const {apartment} = this.props;
             return(
                   <div className="row">
                         <div className="col-md-8">
@@ -86,47 +88,7 @@ class PaymentInfo extends React.Component {
                                     <Anchor onClick={() => {Actions.goBackToPersonal()}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
-                        <div className="col-md-4">
-                              <div className="mg-cart-container">
-                                    <aside className="mg-widget mt50" id="mg-room-cart">
-                                          <h2 className="mg-widget-title">Booking Details</h2>
-                                          <div className="mg-widget-cart">
-                                                <div className="mg-cart-room">
-                                                      <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
-                                                      <h3>Super Delux</h3>
-                                                </div>
-                                                <div className="mg-widget-cart-row">
-                                                      <strong>Check In:</strong>
-                                                      <span>27 Jan, 2015</span>
-                                                </div>
-                                                <div className="mg-widget-cart-row">
-                                                      <strong>Check Out:</strong>
-                                                      <span>28 Jan, 2015</span>
-                                                </div>
-                                                <div className="mg-widget-cart-row">
-                                                      <strong>Adults:</strong>
-                                                      <span>2</span>
-                                                </div>
-                                                <div className="mg-widget-cart-row">
-                                                      <strong>Child:</strong>
-                                                      <span>1</span>
-                                                </div>
-                                                <div className="mg-cart-address">
-                                                      <strong>Your Address:</strong>
-                                                      <address>
-                                                            <strong>John Doe</strong><br/>
-                                                            Level 13, Kabalagala St, Kamapa<br/>
-                                                            Uganda
-                                                      </address>
-                                                </div>
-                                                <div className="mg-cart-total">
-                                                      <strong>Total:</strong>
-                                                      <span>$249.99</span>
-                                                </div>
-                                          </div>
-                                    </aside>
-                              </div>
-                        </div>
+                        <BookingDetails apartment={apartment} />
                   </div>
             );
       }

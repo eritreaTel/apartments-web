@@ -13,7 +13,7 @@ class  ReservationConfirmation extends React.Component {
                 <div className="alert alert-success clearfix">
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <div className="mg-alert-icon"><i className="fa fa-check"></i></div>
-                        <h3 className="mg-alert-payment">Thank you! Your booking is confirmed. Invoice is Sent to your email address</h3>
+                        <h3 className="mg-alert-payment">Thank you! Your booking is confirmed. Invoice is sent to your email address</h3>
                     </div>
                     <div className="mg-cart-container mg-paid">
                     <aside className="mg-widget mt50" id="mg-room-cart">

@@ -4,8 +4,6 @@ const SearchDateHelper = require('../../helpers/search_date_helper');
 
 
 const onSearchApartmentsClicked = function (e) {
-    console.log(e.refs.bedCmp.refs.bed.value);
-
     const searchParams = {
         'checkInDate'   : e.refs.checkInDate.value,
         'checkOutDate'  : e.refs.checkOutDate.value,
