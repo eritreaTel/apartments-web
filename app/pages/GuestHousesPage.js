@@ -13,18 +13,35 @@ const Anchor = require('../components/shared/anchor');
 
 
 const BookingStaging = function(props) {
+    let searching,personal,payment,confirmation;
+    if (props.activeStage == 'searching') {
+        searching = 'active';
+    } else if (props.activeStage == 'personal') {
+        searching = 'mg-step-done';
+        personal = 'active';
+    } else if (props.activeStage == 'payment') {
+        searching = 'mg-step-done';
+        personal = 'mg-step-done';
+        payment='active';
+    } else if (props.activeStage == 'confirmation') {
+        searching = 'mg-step-done';
+        personal = 'mg-step-done';
+        payment='mg-step-done';
+        confirmation ='mg-step-done';
+    }
+
     return(
         <ul className="nav nav-tabs" role="tablist">
-            <li role="presentation" className="active">
+            <li role="presentation" className={searching}>
                 <Anchor aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Room</Anchor>
             </li>
-            <li role="presentation">
+            <li role="presentation" className={personal}>
                 <Anchor aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
             </li>
-            <li role="presentation">
+            <li role="presentation" className={payment}>
                 <Anchor aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</Anchor>
             </li>
-            <li role="presentation">
+            <li role="presentation" className={confirmation}>
                 <Anchor aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</Anchor>
             </li>
         </ul>
@@ -65,7 +82,7 @@ const GuestHouseBody = function(props) {
                     <div className="row">
                         <div className="col-md-12">
                             <div className="mg-booking-form">
-                                <BookingStaging />
+                                <BookingStaging activeStage={props.activeStage} />
 
                                 <div className="tab-content">
                                     {props.children}
@@ -86,32 +103,33 @@ class GuestHousesPage extends React.Component {
         const {store : {apartments, apartment, bookingStage: {activeStage}}} = this.props;
         console.log('active state : ' + activeStage);
         let section ;
-            switch (activeStage) {
-                case 'search':
-                    section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                    <SearchApartments />
-                                    <AvailableApartments apartments = {apartments} />
-                                </div>
-                    break;
-                case 'personal' :
-                    section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                    <PersonalInfo apartment={apartment} />
-                                </div>
-                    break;
 
-                case 'payment' :
-                    section =   <div role="tabpanel" className="tab-pane in active" id="payment">
-                                    <PaymentInfo />
-                                </div>
-                    break;
-                case 'confirmation' :
-                    section =  <ReservationConfirmation />
-
-                    break;
-                default:
-                    section = <AvailableApartments apartments = {apartments} />
-            }
-        return ( <GuestHouseBody> {section} </GuestHouseBody> );
+        switch (activeStage) {
+            case 'search':
+                section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                                <SearchApartments />
+                                <AvailableApartments apartments = {apartments} />
+                            </div>
+                break;
+            case 'personal' :
+                section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
+                                <PersonalInfo apartment={apartment} />
+                            </div>
+                break;
+            case 'payment' :
+                section =   <div role="tabpanel" className="tab-pane in active" id="payment">
+                                <PaymentInfo />
+                            </div>
+                break;
+            case 'confirmation' :
+                section =  <ReservationConfirmation />
+                break;
+            default:
+                section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                                <AvailableApartments apartments = {apartments} />
+                            </div>
+        }
+        return ( <GuestHouseBody activeStage={activeStage}> {section} </GuestHouseBody> );
     }
 };
 

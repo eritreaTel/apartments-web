@@ -97,6 +97,11 @@ module.exports = {
     },
 
     goToConfirmationClicked() {
-    this.mergeStoreVal('bookingStage', {activeStage: 'confirmation'});
+        this.mergeStoreVal('bookingStage', {activeStage: 'confirmation'});
+    },
+
+    confirmationIsDone() {
+        this.mergeStoreVal('bookingStage', {activeStage: ''});
     }
+
 };

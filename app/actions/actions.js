@@ -67,9 +67,11 @@ const Actions = {
 
     goToConfirmationClicked() {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
+    },
+
+    confirmationIsDone() {
+        Dispatcher.dispatch({type: 'confirmationIsDone'});
     }
-
-
 };
 
 module.exports = Actions;
