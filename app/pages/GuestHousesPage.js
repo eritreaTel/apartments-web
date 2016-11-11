@@ -13,10 +13,9 @@ const Anchor = require('../components/shared/anchor');
 
 
 const BookingStaging = function(props) {
-    let searching,personal,payment,confirmation;
-    if (props.activeStage == 'searching') {
-        searching = 'active';
-    } else if (props.activeStage == 'personal') {
+    let searching = 'active';
+    let personal,payment,confirmation;
+    if (props.activeStage == 'personal') {
         searching = 'mg-step-done';
         personal = 'active';
     } else if (props.activeStage == 'payment') {
