@@ -5,7 +5,19 @@ const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 
 
-const goToPaymentInfoClicked = function () {
+const goToPaymentInfoClicked = function (e) {
+    let personalInfo = {
+        'first_name' : e.refs.first_name.value,
+        'last_name'  : e.refs.last_name.value,
+        'city'  : e.refs.city.value,
+        'country' : e.refs.countryCmp.refs.country.value,
+        'phone_number' : e.refs.phone_number.value,
+        'email' : e.refs.email.value,
+        'password' : e.refs.password.value,
+        'renter_password' : e.refs.renter_password.value,
+        'terms' : e.refs.terms.value
+    }
+    console.log(personalInfo);
     Actions.goToPaymentClicked();
 }
 
@@ -36,7 +48,7 @@ class PersonalInfo extends React.Component {
                                     </div>
                                     <div className="mg-book-form-input">
                                         <label>Country</label>
-                                        <Country />
+                                        <Country ref='countryCmp' />
                                     </div>
                                 </div>
                             </div>
@@ -46,32 +58,32 @@ class PersonalInfo extends React.Component {
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Phone</label>
-                                        <input type="tel" className="form-control"/>
+                                        <input ref='phone_number' type="tel" className="form-control"/>
                                     </div>
                                     <div className="mg-book-form-input">
                                         <label>Password</label>
-                                        <input type="password" className="form-control"/>
+                                        <input ref='password' type="password" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Email Address</label>
-                                        <input type="email" className="form-control"/>
+                                        <input ref='email' type="email" className="form-control"/>
                                     </div>
                                     <div className="mg-book-form-input">
                                         <label>Re-Password</label>
-                                        <input type="password" className="form-control"/>
+                                        <input ref='renter_password' type="password" className="form-control"/>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="clearfix mg-terms-input">
                                 <div className="pull-right">
-                                    <label><input type="checkbox"/> By Sign up you are agree with our <a href="#">terms and condition</a></label>
+                                    <label><input ref ='terms' type="checkbox"/> By Sign up you are agree with our <Anchor>terms and condition</Anchor></label>
                                 </div>
                             </div>
 
-                            <Anchor onClick={() => {goToPaymentInfoClicked()}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
+                            <Anchor onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
                             <Anchor onClick={() => {Actions.goBackToSearch()}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>

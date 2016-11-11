@@ -38,11 +38,11 @@ class  ReservationConfirmation extends React.Component {
                                         <span>28 Jan, 2015</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
-                                        <strong>Adults:</strong>
+                                        <strong>Room:</strong>
                                         <span>2</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
-                                        <strong>Child:</strong>
+                                        <strong>Bed:</strong>
                                         <span>1</span>
                                     </div>
                                     <div className="mg-cart-address">
