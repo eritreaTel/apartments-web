@@ -12,6 +12,7 @@ const GalleryHelper=  require('../helpers/gallery_helper');
 
 const onBookNowClicked = function (apartmentId) {
 	Actions.bookApartmentClicked({apartmentId});
+	Actions.setRoute('/guest-houses');
 }
 
 const onReviewApartmentClicked = function () {
@@ -83,7 +84,7 @@ const ApartmentReviewSection = function (props) {
 }
 
 const ApartmentReviews = function (props) {
-	const styledReview = props.apartmentReviews.map(review => {
+	const styledReview = props.apartmentReviews && props.apartmentReviews.map(review => {
 		return 	<div className="media" key={review.id}>
 					<div className="media-left">
 						<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
@@ -162,11 +163,11 @@ class ApartmentGalleries extends React.Component {
 
 	render(){
 		const {galleries} = this.props;
-		const styledFullLi = galleries.map(gallery => {
+		const styledFullLi = galleries && galleries.map(gallery => {
 			return 	<li key={gallery.id}><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
 		});
 
-		const styledThumbLi = galleries.map(gallery => {
+		const styledThumbLi = galleries && galleries.map(gallery => {
 			return 	<li key={gallery.id * 2}><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
 		});
 
@@ -210,10 +211,6 @@ const ApartmentBody = function (props) {
 
 
 class ApartmentPage extends React.Component {
-
-	componentWillUnmount() {
-		//Actions.clearApartment();
-	}
 
 	render() {
 		const {store : {apartment}} = this.props;

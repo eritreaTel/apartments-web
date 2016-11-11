@@ -19,7 +19,7 @@ const BookingStaging = function(props) {
     return(
         <ul className="nav nav-tabs" role="tablist">
             <li role="presentation" className={searching}>
-                <Anchor aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Room</Anchor>
+                <Anchor aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Apartment</Anchor>
             </li>
             <li role="presentation" className={personal}>
                 <Anchor aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
