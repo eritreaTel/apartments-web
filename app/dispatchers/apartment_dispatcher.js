@@ -30,6 +30,7 @@ module.exports = {
             }
         }
     },
+
     async getApartments(data) {
         const url = 'apartments?bestApartments=true&pageSize=3';
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
@@ -56,6 +57,7 @@ module.exports = {
             }
         }
     },
+
     async getApartment({apartmentId}) {
         const url = 'apartments/' + apartmentId;
         if ( url !== this.getStoreVal('requestUrl')) {
@@ -80,6 +82,7 @@ module.exports = {
             }
         }
     },
+
     searchApartmentsClicked(data) {
         this.mergeStoreVal('bookingStage', {searchingInfo: data});
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
@@ -102,6 +105,17 @@ module.exports = {
 
     confirmationIsDone() {
         this.mergeStoreVal('bookingStage', {activeStage: ''});
-    }
+    },
 
+    goBackToSearch() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'search'});
+    },
+
+    goBackToPersonal() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+    },
+
+    goBackToPayment() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+    }
 };

@@ -69,6 +69,18 @@ const Actions = {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
     },
 
+    goBackToPersonal() {
+        Dispatcher.dispatch({type: 'goBackToPersonal'});
+    },
+
+    goBackToSearch() {
+        Dispatcher.dispatch({type: 'goBackToSearch'});
+    },
+
+    goBackToPayment() {
+        Dispatcher.dispatch({type: 'goBackToPayment'});
+    },
+
     confirmationIsDone() {
         Dispatcher.dispatch({type: 'confirmationIsDone'});
     }
