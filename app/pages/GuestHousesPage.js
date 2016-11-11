@@ -9,25 +9,12 @@ const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
+const ApartmentHelper = require('../helpers/apartment_helper');
 
 
 
 const BookingStaging = function(props) {
-    let searching = 'active';
-    let personal,payment,confirmation;
-    if (props.activeStage == 'personal') {
-        searching = 'mg-step-done';
-        personal = 'active';
-    } else if (props.activeStage == 'payment') {
-        searching = 'mg-step-done';
-        personal = 'mg-step-done';
-        payment='active';
-    } else if (props.activeStage == 'confirmation') {
-        searching = 'mg-step-done';
-        personal = 'mg-step-done';
-        payment='mg-step-done';
-        confirmation ='mg-step-done';
-    }
+    let {searching, personal, payment, confirmation} = ApartmentHelper.getReservationStatuses(props.activeStage);
 
     return(
         <ul className="nav nav-tabs" role="tablist">
