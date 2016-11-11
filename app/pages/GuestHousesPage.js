@@ -19,16 +19,16 @@ const BookingStaging = function(props) {
     return(
         <ul className="nav nav-tabs" role="tablist">
             <li role="presentation" className={searching}>
-                <Anchor aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Apartment</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Apartment</Anchor>
             </li>
             <li role="presentation" className={personal}>
-                <Anchor aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
             </li>
             <li role="presentation" className={payment}>
-                <Anchor aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</Anchor>
             </li>
             <li role="presentation" className={confirmation}>
-                <Anchor aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</Anchor>
             </li>
         </ul>
     );

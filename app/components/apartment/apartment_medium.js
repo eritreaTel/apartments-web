@@ -5,6 +5,7 @@ const Actions = require('../../actions/actions');
 
 const onBookNowClicked = function (apartmentId) {
     Actions.bookApartmentClicked({apartmentId});
+    Actions.setRoute('/guest-houses');
 
 }
 
