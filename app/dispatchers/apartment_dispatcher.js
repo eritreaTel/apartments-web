@@ -84,7 +84,8 @@ module.exports = {
     },
 
     searchApartmentsClicked(data) {
-        this.mergeStoreVal('bookingStage', {searchingInfo: data});
+        console.log(data);
+        this.mergeStoreVal('bookingStage', {searchInfo: data});
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },
 

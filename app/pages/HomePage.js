@@ -9,10 +9,11 @@ class HomePage extends React.Component {
 
 	render() {
 		const {store} = this.props;
+		const {bookingStage :{searchInfo}} = store;
 		return (
 			<div>
 				<Carousel/>
-				<SearchApartment parentClassName="mg-book-now"  wrapInContainer="container" />
+				<SearchApartment searchInfo={searchInfo} parentClassName="mg-book-now"  wrapInContainer="container" />
 				<BestApartmentsSection store={store} />
 				<AboutUs/>
 				<RecentNews />

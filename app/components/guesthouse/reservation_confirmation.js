@@ -24,7 +24,7 @@ class  ReservationConfirmation extends React.Component {
                                     <div className="mg-cart-room">
                                         <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
                                         <h3>Super Delux</h3>
-                                        <p>Verbis texit statua status suo quidque concordia. Octavio, ignavi, iudicante intereant accusamus vitiis primos ullum paranda zenonem. Censes cadere urbanitas texit dicebas maius tranquilli, foris morborum divinum que medium utilior crudelis affert, quaerendum refert sequimur atqui ullus d ornamenta consumeret ut divinum, concedo percurri elaborare.</p>
+                                        <p>Gueshouse uganda cares about customer satisfaction. Please write us on contact us page if you think there is a better way to server you. We thank you again for trusting us with your travel accomodation which is the most important decision you do when you decide to travel to Uganda. Please feel free to contact us at 1-877-540-9000 during your stay in Uganda. We are happy to help you</p>
                                     </div>
                                 </div>
                                 <div className="col-md-6">

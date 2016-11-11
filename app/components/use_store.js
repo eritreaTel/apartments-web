@@ -32,7 +32,7 @@ module.exports = {
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,
-                            searchingInfo : null,
+                            searchInfo : null,
                             personal : {
                                 personalInfo : null,
                                 accountInfo  : null

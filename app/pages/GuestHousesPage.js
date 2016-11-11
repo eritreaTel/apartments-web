@@ -37,7 +37,7 @@ const BookingStaging = function(props) {
 const SearchApartments = function (props) {
     return (
         <div className="mg-saerch-room">
-            <SearchApartment parentClassName="mg-book-now mt80" />
+            <SearchApartment searchInfo={props.searchInfo} parentClassName="mg-book-now mt80" />
         </div>
     );
 }
@@ -86,14 +86,14 @@ const GuestHouseBody = function(props) {
 
 class GuestHousesPage extends React.Component {
     render() {
-        const {store : {apartments, apartment, bookingStage: {activeStage}}} = this.props;
+        const {store : {apartments, apartment, bookingStage: {searchInfo, activeStage}}} = this.props;
         console.log('active state : ' + activeStage);
         let section ;
 
         switch (activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                <SearchApartments />
+                                <SearchApartments searchInfo={searchInfo} />
                                 <AvailableApartments apartments = {apartments} />
                             </div>
                 break;
@@ -134,7 +134,7 @@ const WithUserLoaded = withDataLoaded({
         data: [
             {
                 storeKeys: ['apartments'],
-                loadDataFn: ({bookingStage : {searchingInfo}}) => Actions.getApartments(searchingInfo)
+                loadDataFn: ({bookingStage : {searchInfo}}) => Actions.getApartments(searchInfo)
             }
         ]
 });
