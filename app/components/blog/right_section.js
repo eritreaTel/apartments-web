@@ -31,9 +31,6 @@ const RightSectionBody = function (props) {
     return (
         <div className="col-md-4">
             <div className="mg-widget-area">
-                <aside className="mg-widget">
-                    <input type="text" placeholder="Search..." className="form-control"/>
-                </aside>
                 {props.children}
             </div>
         </div>

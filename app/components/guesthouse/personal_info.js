@@ -63,33 +63,17 @@ class PersonalInfo extends React.Component {
                             <div className="col-md-6">
                                 <div className="mg-book-form-input">
                                     <label>First Name</label>
-                                    <input type="text" className="form-control"/>
-                                </div>
-                                <div className="mg-book-form-input">
-                                    <label>Address Line 1</label>
-                                    <input type="text" className="form-control"/>
+                                    <input ref='first_name' type="text" className="form-control"/>
                                 </div>
                                 <div className="mg-book-form-input">
                                     <label>City</label>
-                                    <input type="text" className="form-control"/>
-                                </div>
-                                <div className="mg-book-form-input">
-                                    <label>State/Region</label>
-                                    <input type="text" className="form-control"/>
+                                    <input ref='city' type="text" className="form-control"/>
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="mg-book-form-input">
                                     <label>Last Name</label>
-                                    <input type="text" className="form-control"/>
-                                </div>
-                                <div className="mg-book-form-input">
-                                    <label>Address Line 2</label>
-                                    <input type="text" className="form-control"/>
-                                </div>
-                                <div className="mg-book-form-input">
-                                    <label>Zip/Post Code</label>
-                                    <input type="text" className="form-control"/>
+                                    <input ref='last_name' type="text" className="form-control"/>
                                 </div>
                                 <div className="mg-book-form-input">
                                     <label>Country</label>
