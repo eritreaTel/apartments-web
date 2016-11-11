@@ -3,16 +3,20 @@ const Anchor = require('../shared/anchor')
 const ApplicationHelper = require('../../helpers/application_helper');
 const Actions = require('../../actions/actions');
 
-const onBookNowClicked = function (apartmentId) {
-    Actions.bookApartmentClicked({apartmentId});
+const bookBestApartmentClicked = function (apartmentId) {
+    Actions.bookBestApartmentClicked({apartmentId});
     Actions.setRoute('/guest-houses');
+}
 
+const viewBestApartmentClicked = function (apartmentId) {
+    Actions.viewBestApartmentClicked({apartmentId});
+    Actions.setRoute('/apartment/' + apartmentId);
 }
 
 class ApartmentMedium extends React.Component {
 
     render() {
-        const {apartment, onViewDetails, onBookAptClicked } = this.props;
+        const {apartment} = this.props;
 
         return (
             <figure className="mg-room">
@@ -22,8 +26,8 @@ class ApartmentMedium extends React.Component {
                     <div className="mg-room-rating"><i className="fa fa-star"></i> {apartment.star_rating}</div>
                     <div className="mg-room-price">{ApplicationHelper.formatCurrency(apartment.price_per_day)}<sup>.00/Night</sup></div>
                     <p>{apartment.short_description}</p>
-                    <Anchor onClick={onViewDetails} className="btn btn-link">View Details <i className="fa fa-angle-double-right"></i></Anchor>
-                    <Anchor onClick={() => {onBookNowClicked(apartment.id)}} className="btn btn-main">Book</Anchor>
+                    <Anchor onClick={() => {viewBestApartmentClicked(apartment.id);}} className="btn btn-link">View Details <i className="fa fa-angle-double-right"></i></Anchor>
+                    <Anchor onClick={() =>{bookBestApartmentClicked(apartment.id);}} className="btn btn-main">Book</Anchor>
                 </figcaption>
             </figure>
         );

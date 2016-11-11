@@ -61,6 +61,14 @@ const Actions = {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },
 
+    bookBestApartmentClicked(data) {
+        Dispatcher.dispatch({type: 'bookBestApartmentClicked', data});
+    },
+
+    viewBestApartmentClicked(data) {
+        Dispatcher.dispatch({type: 'viewBestApartmentClicked', data});
+    },
+
     goToPaymentClicked() {
         Dispatcher.dispatch({type: 'goToPaymentClicked'});
     },

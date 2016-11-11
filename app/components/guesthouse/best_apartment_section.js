@@ -32,7 +32,7 @@ const TitleSection  = function() {
 const  ApartmentsSection = function(props) {
     const styledApartments = props.bestApartments && props.bestApartments.map(apt => {
         return  <div className="col-sm-4">
-                    <ApartmentMedium key={apt.id} apartment={apt} onViewDetails={() => {Actions.setRoute('/apartment/' + apt.id)}} onBookAptClicked={() => {}}/>
+                    <ApartmentMedium key={apt.id} apartment={apt}/>
                 </div>
     });
 
