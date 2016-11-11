@@ -22,5 +22,51 @@ module.exports = {
 
     setRoute(data) {
         this.router.setRoute(data);
+    },
+
+    searchApartmentsClicked(data) {
+        this.mergeStoreVal('bookingStage', {searchInfo: data});
+        this.mergeStoreVal('bookingStage', {activeStage: 'search'});
+    },
+
+    bookApartmentClicked({apartmentId}) {
+        let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
+        this.setStoreVal('apartment', apartment);
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+    },
+
+    bookBestApartmentClicked({apartmentId}) {
+        let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
+        this.setStoreVal('apartment', apartment);
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+    },
+
+    viewBestApartmentClicked({apartmentId}) {
+        let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
+        this.setStoreVal('apartment', apartment);
+    },
+
+    goToPaymentClicked() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+    },
+
+    goToConfirmationClicked() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'confirmation'});
+    },
+
+    confirmationIsDone() {
+        this.mergeStoreVal('bookingStage', {activeStage: ''});
+    },
+
+    goBackToSearch() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'search'});
+    },
+
+    goBackToPersonal() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+    },
+
+    goBackToPayment() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
     }
 };
