@@ -6,6 +6,7 @@ const ContactUsPage = require('../pages/ContactUsPage');
 const BlogsPage = require('../pages/BlogsPage');
 const NotFoundPage = require('../pages/NotFoundPage');
 const BlogPage = require('../pages/BlogPage');
+const SignInPage = require('../pages/SignInPage');
 const SeekerDashboardPage = require('../pages/SeekerDashboardPage');
 const OwnerDashboardPage = require('../pages/OwnerDashboardPage');
 const AdminDashboardPage = require('../pages/AdminDashboardPage');
@@ -50,7 +51,7 @@ class Page extends React.Component {
                 content = <ContactUsPage {...{store}} />;
                 break;
             case 'sign-in':
-                content = 'Sign In';
+                content = <SignInPage {...{store}} />
                 break;
             case 'my-account':
                 content = 'My - Account';
