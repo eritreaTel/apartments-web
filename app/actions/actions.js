@@ -81,8 +81,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'goBackToPersonal'});
     },
 
-    goBackToSearch(data) {
-        Dispatcher.dispatch({type: 'goBackToSearch', data});
+    goBackToSearch(personalInfo) {
+        Dispatcher.dispatch({type: 'goBackToSearch', personalInfo});
     },
 
     goBackToPayment() {

@@ -15,6 +15,11 @@ const onBookNowClicked = function (apartmentId) {
 	Actions.setRoute('/guest-houses');
 }
 
+const onKeepSearchingClicked = function () {
+	Actions.goBackToSearch(null);
+	Actions.setRoute('/guest-houses');
+}
+
 const onReviewApartmentClicked = function () {
 	console.log('Review apartment clicked');
 }
@@ -36,7 +41,7 @@ const AmenitiesAndControlButtons = function(props) {
 			<Amenities amentiesToDisplay="8" amenities={props.apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
 			<div className="row">
 				<div className="col-md-6">
-					<Anchor className="btn btn-dark">Keep Searching</Anchor>
+					<Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark">Keep Searching</Anchor>
 				</div>
 				<div className="col-md-6">
 					<Anchor onClick = {() => {onBookNowClicked(props.apartment.id)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>

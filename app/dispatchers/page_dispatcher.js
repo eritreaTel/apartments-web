@@ -59,9 +59,11 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: ''});
     },
 
-    goBackToSearch(data) {
+    goBackToSearch(personalInfo) {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
-        this.mergeStoreVal('bookingStage', {personal: data});
+        if (personalInfo != null || personalInfo != undefined) {
+            this.mergeStoreVal('bookingStage', {personal: data});
+        }
     },
 
     goBackToPersonal() {
