@@ -32,16 +32,10 @@ module.exports = {
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,
-                            searchInfo : null,
-                            personal : {
-                                personalInfo : null,
-                                accountInfo  : null
-                            },
-                            payment : {
-                                addressInfo : null,
-                                cardInfo : null
-                            },
-                            thankyou : null
+                            searchInfo  : null,
+                            personal    : null,
+                            payment     : null,
+                            thankyou    : null
                         },
                         blogs : [],
                         blog : null,

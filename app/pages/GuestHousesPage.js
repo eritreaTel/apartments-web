@@ -86,20 +86,20 @@ const GuestHouseBody = function(props) {
 
 class GuestHousesPage extends React.Component {
     render() {
-        const {store : {apartments, apartment, bookingStage: {searchInfo, activeStage}}} = this.props;
-        console.log('active state : ' + activeStage);
+        const {store : {apartments, apartment, bookingStage}} = this.props;
+        console.log('active state : ' + bookingStage.activeStage);
         let section ;
 
-        switch (activeStage) {
+        switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                <SearchApartments searchInfo={searchInfo} />
+                                <SearchApartments searchInfo={bookingStage.searchInfo} />
                                 <AvailableApartments apartments = {apartments} />
                             </div>
                 break;
             case 'personal' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                <PersonalInfo apartment={apartment} />
+                                <PersonalInfo apartment={apartment} bookingStage={bookingStage} />
                             </div>
                 break;
             case 'payment' :
@@ -115,7 +115,7 @@ class GuestHousesPage extends React.Component {
                                 <AvailableApartments apartments = {apartments} />
                             </div>
         }
-        return ( <GuestHouseBody activeStage={activeStage}> {section} </GuestHouseBody> );
+        return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );
     }
 };
 

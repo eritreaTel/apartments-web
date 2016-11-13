@@ -9,5 +9,9 @@ module.exports = {
   "/apartment/:id": "viewApartment",
   "/contact-us": "contactUs",
   "/blogs": "blogs",
-  "/blog/:id": "viewBlog"
+  "/blog/:id": "viewBlog",
+  "guesthouse-seeker" : "guesthouseSeeker",
+  "guesthouse-owner" : "guesthouseOwner",
+  "guesthouse-admin" : "guesthouseAdmin",
+  "guesthouse-employee" : "guesthouseEmployee",
 };

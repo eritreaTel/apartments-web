@@ -6,6 +6,12 @@ const ContactUsPage = require('../pages/ContactUsPage');
 const BlogsPage = require('../pages/BlogsPage');
 const NotFoundPage = require('../pages/NotFoundPage');
 const BlogPage = require('../pages/BlogPage');
+const SeekerDashboardPage = require('../pages/SeekerDashboardPage');
+const OwnerDashboardPage = require('../pages/OwnerDashboardPage');
+const AdminDashboardPage = require('../pages/AdminDashboardPage');
+const EmployeeDashboardPage = require('../pages/EmployeeDashboardPage');
+
+
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
 const DebugHelper = require('../helpers/debug_helper');
@@ -51,6 +57,18 @@ class Page extends React.Component {
                 break;
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
+                break;
+            case 'guesthouse-seeker' :
+                content = <SeekerDashboardPage {...{store}}/>;
+                break;
+            case 'guesthouse-owner' :
+                content = <OwnerDashboardPage {...{store}}/>;
+                break;
+            case 'guesthouse-admin' :
+                content = <AdminDashboardPage {...{store}}/>;
+                break;
+            case 'guesthouse-employee' :
+                content = <EmployeeDashboardPage {...{store}}/>;
                 break;
             case '404':
             default:

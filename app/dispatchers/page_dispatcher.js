@@ -46,8 +46,9 @@ module.exports = {
         this.setStoreVal('apartment', apartment);
     },
 
-    goToPaymentClicked() {
+    goToPaymentClicked(data) {
         this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+        this.mergeStoreVal('bookingStage', {personal: data});
     },
 
     goToConfirmationClicked() {
@@ -58,8 +59,9 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: ''});
     },
 
-    goBackToSearch() {
+    goBackToSearch(data) {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
+        this.mergeStoreVal('bookingStage', {personal: data});
     },
 
     goBackToPersonal() {

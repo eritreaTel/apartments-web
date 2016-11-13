@@ -48,7 +48,24 @@ const Router = React.createClass({
 
     viewBlog(blogId) {
         Actions.setView({page: 'blog', blogId});
+    },
+
+    guesthouseSeeker() {
+        Actions.setView({page: 'guesthouse-seeker'});
+    },
+
+    guesthouseOwner() {
+        Actions.setView({page: 'guesthouse-owner'});
+    },
+
+    guesthouseAdmin() {
+        Actions.setView({page: 'guesthouse-admin'});
+    },
+
+    guesthouseEmployee() {
+        Actions.setView({page: 'guesthouse-employee'});
     }
+
 });
 
 module.exports = Router;

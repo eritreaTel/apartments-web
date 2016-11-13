@@ -6,7 +6,17 @@ const BookingDetails = require('./booking_details');
 
 
 const goToPaymentInfoClicked = function (e) {
-    let personalInfo = {
+    let info = getPersonalInfo(e);
+    Actions.createUser(info);
+    Actions.goToPaymentClicked(info);
+}
+
+const goBackToSearch = function (e) {
+    Actions.goBackToSearch(getPersonalInfo(e))
+}
+
+const getPersonalInfo = function (e) {
+    return {
         'first_name' : e.refs.first_name.value,
         'last_name'  : e.refs.last_name.value,
         'city'  : e.refs.city.value,
@@ -17,15 +27,27 @@ const goToPaymentInfoClicked = function (e) {
         'renter_password' : e.refs.renter_password.value,
         'terms' : e.refs.terms.value
     }
-    console.log(personalInfo);
-    Actions.goToPaymentClicked();
 }
 
 class PersonalInfo extends React.Component {
 
-  render() {
-      const {apartment} = this.props;
-      return (
+    componentDidMount() {
+        const {bookingStage} =  this.props;
+        let personal = bookingStage ? bookingStage.personal : null;
+        if (personal != null) {
+            this.refs.first_name.value      = personal.first_name;
+            this.refs.last_name.value       = personal.last_name;
+            this.refs.city.value            = personal.city;
+            this.refs.phone_number.value    = personal.phone_number;
+            this.refs.email.value           = personal.email;
+            this.refs.terms.value           = personal.terms;
+            this.refs.country.value         = personal.country;
+        }
+    }
+
+    render() {
+        const {apartment} = this.props;
+        return (
                 <div className="row">
                     <div className="col-md-8">
                         <div className="mg-book-form-personal">
@@ -84,13 +106,13 @@ class PersonalInfo extends React.Component {
                             </div>
 
                             <Anchor onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
-                            <Anchor onClick={() => {Actions.goBackToSearch()}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} />
                 </div>
             );
-    }
+        }
 }
 
 module.exports = PersonalInfo;

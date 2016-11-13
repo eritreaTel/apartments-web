@@ -69,8 +69,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'viewBestApartmentClicked', data});
     },
 
-    goToPaymentClicked() {
-        Dispatcher.dispatch({type: 'goToPaymentClicked'});
+    goToPaymentClicked(data) {
+        Dispatcher.dispatch({type: 'goToPaymentClicked', data});
     },
 
     goToConfirmationClicked() {
@@ -81,8 +81,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'goBackToPersonal'});
     },
 
-    goBackToSearch() {
-        Dispatcher.dispatch({type: 'goBackToSearch'});
+    goBackToSearch(data) {
+        Dispatcher.dispatch({type: 'goBackToSearch', data});
     },
 
     goBackToPayment() {
@@ -91,6 +91,10 @@ const Actions = {
 
     confirmationIsDone() {
         Dispatcher.dispatch({type: 'confirmationIsDone'});
+    },
+
+    createUser(data) {
+        Dispatcher.dispatch({type: 'createUser'});
     }
 };
 
