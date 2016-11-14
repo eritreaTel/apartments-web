@@ -37,8 +37,6 @@ module.exports = {
         let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
         this.setStoreVal('apartment', apartment);
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
-        console.log('right after click');
-        console.log(this.getStoreVal('bookingStage'));
     },
 
     bookBestApartmentClicked({apartmentId}) {

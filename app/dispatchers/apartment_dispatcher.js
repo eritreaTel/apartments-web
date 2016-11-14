@@ -42,7 +42,6 @@ module.exports = {
                     if (response.data && response.data.results && response.data.results.length > 0) {
                         this.setStoreVal('apartments', response.data.results);
                     }
-                    this.mergeStoreVal('bookingStage', {activeStage: 'search'}); // now in searching stage
                 } catch (error) {
                     this.dispatch({
                         type: 'handleRequestError',
