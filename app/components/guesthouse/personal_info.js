@@ -106,7 +106,7 @@ class PersonalInfo extends React.Component {
                             </div>
 
                             <Anchor onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
-                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} bookingStage={bookingStage} />

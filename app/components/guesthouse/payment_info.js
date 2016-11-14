@@ -135,7 +135,7 @@ class PaymentInfo extends React.Component {
                                     </div>
 
                                     <Anchor  onClick={() => {processPaymentClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
-                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
                         <BookingDetails apartment={apartment} bookingStage={bookingStage}/>
