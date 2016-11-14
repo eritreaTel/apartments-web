@@ -30,7 +30,8 @@ const TitleSection  = function() {
 }
 
 const  ApartmentsSection = function(props) {
-    const styledApartments = props.bestApartments && props.bestApartments.map(apt => {
+    //display top 3 best guest houses only
+    const styledApartments = props.bestApartments && props.bestApartments.slice(0, 3).map(apt => {
         return  <div key={apt.id} className="col-sm-4">
                     <ApartmentMedium apartment={apt}/>
                 </div>

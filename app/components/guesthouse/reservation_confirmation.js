@@ -67,10 +67,10 @@ class  ReservationConfirmation extends React.Component {
                                         <span>{totalDays}</span>
                                     </div>
                                     <div className="mg-cart-address">
-                                        <strong>Booking Details:</strong>
+                                        <strong>Booking Details:</strong> <br />
                                         <address>
-                                            Guest House Name: <strong>{guestHouseName}</strong><br/>
-                                            Guest House Address: {guestHouseAddress}, Uganda <br/>
+                                            Name: <strong>{guestHouseName}</strong><br/>
+                                            Address: {guestHouseAddress}, Uganda <br/>
                                             Tel : {guestHousePhone}
                                         </address>
                                     </div>

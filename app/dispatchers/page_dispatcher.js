@@ -45,14 +45,10 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
 
         let apartments = this.getStoreVal('apartments');
-        if (apartments.length == 0) {
-            this.setStoreVal('apartments', this.getStoreVal('bestApartments'));
-        } else {
-            let found = apartments.find(apt => apt.id == apartmentId);
-            if (found == null) {
-                apartments.push(apartment);
-                this.setStoreVal('apartments', apartments);
-            }
+        let found = apartments && apartments.find(apt => apt.id == apartmentId);
+        if (found == null) {
+            apartments.push(apartment);
+            this.setStoreVal('apartments', apartments);
         }
     },
 
