@@ -24,5 +24,28 @@ module.exports = {
             }
             this.releaseLock('createUser');
         }
+    },
+
+    async authenticateUser(data) {
+        const url = 'user/authenticate';
+        this.setStoreVal('requestUrl', url);
+        if (this.acquireLock('authenticateUser')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
+
+                if (response.data && response.data.results && response.data.results.length > 0) {
+                    this.setStoreVal('user', response.data.results[0]);
+                }
+            } catch (error) {
+                this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot authenticate user'
+                    }
+                });
+            }
+            this.releaseLock('authenticateUser');
+        }
     }
 };

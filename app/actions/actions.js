@@ -112,6 +112,10 @@ const Actions = {
 
     createContactUs(data) {
         Dispatcher.dispatch({type: 'createContactUs', data});
+    },
+
+    authenticateUser(data) {
+        Dispatcher.dispatch({type: 'authenticateUser', data});
     }
 };
 
