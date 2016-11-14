@@ -9,7 +9,6 @@ const saveSearchInfo = function(e) {
 }
 
 const onSearchApartmentsClicked = function (e) {
-    console.log('on seach apartments clicked');
     let searchParams = getSearchParams(e);
     Actions.searchApartmentsClicked(searchParams);
     Actions.setRoute('/guest-houses');
