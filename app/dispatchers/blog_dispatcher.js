@@ -343,7 +343,6 @@ module.exports = {
 
     async getBlog({blogId}) {
         const url = 'blogs/' + blogId;
-        console.log("Blog url" + url);
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 
@@ -474,6 +473,28 @@ module.exports = {
                 }
                 this.releaseLock('getBlog');
             }
+        }
+    },
+
+    async createContactUs(data) {
+        const url = 'contact-us';
+        this.setStoreVal('requestUrl', url);
+        if (this.acquireLock('createContactUs')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
+                if (response.data && response.data.results && response.data.results.length > 0) {
+                    this.setStoreVal('contactUs', response.data.results[0]);
+                }
+            } catch (error) {
+                this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Can not send email. Message is sent to system admin and we will look at it shortly'
+                    }
+                });
+            }
+            this.releaseLock('createContactUs');
         }
     }
 };

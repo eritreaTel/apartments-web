@@ -2,8 +2,9 @@ const FetchHelper = require('../helpers/fetch_helper');
 
 
 module.exports = {
-    clearApartment() {
+    clearApartments() {
         this.setStoreVal('apartment', null);
+        this.setStoreVal('apartments', []);
     },
 
     async getBestApartments() {
@@ -32,9 +33,11 @@ module.exports = {
     },
 
     async getApartments(data) {
-        const url = 'apartments?bestApartments=true&pageSize=3';
+        const url = 'apartments?pageSize=3';
+        console.log('I am here for get apartments');
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             this.setStoreVal('requestUrl', url);
+
 
             if (this.acquireLock('getApartments')) {
                 try {

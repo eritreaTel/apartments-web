@@ -10,7 +10,6 @@ module.exports = {
 
     async createApartmentBooking(data) {
         const url = 'apartment-bookings';
-
         this.setStoreVal('requestUrl', url);
 
         if (this.acquireLock('createApartmentBooking')) {

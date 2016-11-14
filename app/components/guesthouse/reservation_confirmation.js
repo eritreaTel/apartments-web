@@ -9,7 +9,8 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment, bookingStage : {searchInfo, personal}} = this.props;
+        let {apartment, bookingStage : {searchInfo, personal, confirmation}} = this.props;
+        //Get all the below information from confirmation
         let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY');
         let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY');
         let bed =  searchInfo.bed ;

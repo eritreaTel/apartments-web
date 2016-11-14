@@ -49,8 +49,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'blog', data});
     },
 
-    clearApartment() {
-        Dispatcher.dispatch({type: 'clearApartment'});
+    clearApartments() {
+        Dispatcher.dispatch({type: 'clearApartments'});
     },
 
     searchApartmentsClicked(data) {
@@ -108,6 +108,10 @@ const Actions = {
 
     createApartmentBooking(data) {
         Dispatcher.dispatch({type: 'createApartmentBooking', data});
+    },
+
+    createContactUs(data) {
+        Dispatcher.dispatch({type: 'createContactUs', data});
     }
 };
 

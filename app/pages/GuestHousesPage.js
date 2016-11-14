@@ -112,6 +112,7 @@ class GuestHousesPage extends React.Component {
                 break;
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                                <SearchApartments searchInfo={bookingStage.searchInfo} />
                                 <AvailableApartments apartments = {apartments} />
                             </div>
         }
