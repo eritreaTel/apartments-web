@@ -1,8 +1,8 @@
 const React = require('react');
-const Moment = require('moment');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
+const DateHelper = require('../../helpers/date_helper');
 
 const BlogImage = function (props) {
     const styledImgs = props.blog.images && props.blog.images.map(blogImage => {
@@ -34,7 +34,7 @@ class BlogHeader extends React.Component {
                     <Anchor onClick={()=>{Actions.setRoute('/blog/' + blog.id)}}> {blog.title}</Anchor>
                 </h2>
                 <div className="mg-post-meta">
-                    <span><Anchor>{Moment(blog.created_at).format('D MMM, YYYY')}</Anchor></span>
+                    <span><Anchor>{ DateHelper.formatDate(blog.created_at, 'D MMM, YYYY')}</Anchor></span>
                     <span>by <Anchor>{blog.created_by}</Anchor></span>
                     <span><Anchor > {blog.comments_cnt} Comments</Anchor></span>
                 </div>

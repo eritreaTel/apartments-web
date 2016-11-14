@@ -57,6 +57,10 @@ const Actions = {
         Dispatcher.dispatch({type: 'searchApartmentsClicked', data});
     },
 
+    saveSearchInfo(data) {
+        Dispatcher.dispatch({type: 'saveSearchInfo', data});
+    },
+
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },

@@ -1,18 +1,27 @@
 const React = require('react');
 const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
+const DateHelper = require('../../helpers/date_helper');
 
+const saveSearchInfo = function(e) {
+    let searchParams = getSearchParams(e);
+    Actions.saveSearchInfo(searchParams);
+}
 
 const onSearchApartmentsClicked = function (e) {
-    const searchParams = {
-        'checkInDate'   : e.refs.checkInDate.value,
-        'checkOutDate'  : e.refs.checkOutDate.value,
-        'room' : e.refs.roomCmp.refs.room.value,
-        'bed' : e.refs.bedCmp.refs.bed.value
-    }
-
+    let searchParams = getSearchParams(e);
     Actions.searchApartmentsClicked(searchParams);
     Actions.setRoute('/guest-houses');
+}
+
+const getSearchParams = function (e) {
+    return {
+            'checkInDate'   : e.refs.checkInDate.value,
+            'checkOutDate'  : e.refs.checkOutDate.value,
+            'room' : e.refs.roomCmp.refs.room.value,
+            'bed' : e.refs.bedCmp.refs.bed.value,
+            'totalDays' : DateHelper.getDaysTotalBetweenDates(e.refs.checkInDate.value, e.refs.checkOutDate.value)
+        }
 }
 
 class Room extends React.Component {
@@ -64,6 +73,14 @@ class SearchControls extends React.Component {
             this.refs.checkOutDate.value = checkOutDate;
             this.refs.roomCmp.refs.room.value = room;
             this.refs.bedCmp.refs.bed.value = bed;
+        } else {
+            //Initialize default search data
+            this.refs.checkInDate.value = DateHelper.getTomorrow();
+            this.refs.checkOutDate.value = DateHelper.addDaysToDate(DateHelper.getTomorrow(), 7);
+            this.refs.roomCmp.refs.room.value = 1;
+            this.refs.bedCmp.refs.bed.value = 1;
+
+            saveSearchInfo(this); // persist the default search paramters
         }
     }
 

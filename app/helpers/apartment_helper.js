@@ -1,4 +1,4 @@
-const BlogHelper = {
+const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
         let searching = 'active';
@@ -30,4 +30,4 @@ const BlogHelper = {
   }
 };
 
-module.exports = BlogHelper;
+module.exports = ApartmentHelper;

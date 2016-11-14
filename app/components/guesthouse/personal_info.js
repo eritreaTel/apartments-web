@@ -46,7 +46,7 @@ class PersonalInfo extends React.Component {
     }
 
     render() {
-        const {apartment} = this.props;
+        const {apartment, bookingStage} = this.props;
         return (
                 <div className="row">
                     <div className="col-md-8">
@@ -109,7 +109,7 @@ class PersonalInfo extends React.Component {
                             <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
-                    <BookingDetails apartment={apartment} />
+                    <BookingDetails apartment={apartment} bookingStage={bookingStage} />
                 </div>
             );
         }

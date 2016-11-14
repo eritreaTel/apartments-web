@@ -6,9 +6,9 @@ const PageTitle = require('../components/shared/pageTitle');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const withDataLoaded = require('../components/with_data_loaded')
-const Moment = require('moment');
 const {assetPath} = require('../helpers/asset_helper');
 const GalleryHelper=  require('../helpers/gallery_helper');
+const DateHelper = require('../helpers/date_helper');
 
 const onBookNowClicked = function (apartmentId) {
 	Actions.bookApartmentClicked({apartmentId});
@@ -105,7 +105,7 @@ const ApartmentReviews = function (props) {
 								<i className="fa fa-star-o"></i>
 							</span>
 						</div>
-						<div className="media-date">{Moment(review.created_at).format('D MMM, YYYY')}</div>
+						<div className="media-date">{DateHelper.formatDate(review.created_at, 'D MMM, YYYY')}</div>
 						<p>{review.comment}</p>
 					</div>
 				</div>

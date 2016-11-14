@@ -1,16 +1,16 @@
 const React = require('react');
 const {assetPath} = require('../../helpers/asset_helper');
-const moment = require('moment');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const GalleryHelper = require('../../helpers/gallery_helper');
+const DateHelper = require('../../helpers/date_helper');
 
 
 const NewsHeading = function (props) {
     const contents = props.recentNews.map(singleNews => {
             return  <li key={singleNews.id}>
                         <div className="mg-recnt-post">
-                            <div className="mg-rp-date">{moment(singleNews.created_at).format('D')} <div className="mg-rp-month">{moment(singleNews.created_at).format('MMMM')}</div></div>
+                            <div className="mg-rp-date">{ DateHelper.formatDate(singleNews.created_at,'D')} <div className="mg-rp-month">{ DateHelper.formatDate(singleNews.created_at, 'MMMM')}</div></div>
                             <h3><Anchor onClick={()=>{Actions.setRoute('/blog/' + singleNews.id)}} >{singleNews.title}</Anchor></h3>
                             <p>{singleNews.short_description}...</p>
                         </div>

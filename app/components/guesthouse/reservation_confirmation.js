@@ -1,5 +1,6 @@
 const React = require('react');
 const Actions = require('../../actions/actions');
+const DateHelper = require('../../helpers/date_helper');
 
 class  ReservationConfirmation extends React.Component {
 
@@ -8,6 +9,15 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
+        let {apartment, bookingStage : {searchInfo}} = this.props;
+        let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY');
+        let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY');
+        let bed =  searchInfo.bed ;
+        let room = searchInfo.room ;
+        let totalDays = searchInfo.totalDays;
+        let totalAmount = '$249.99';
+
+
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
                 <div className="alert alert-success clearfix">
@@ -31,19 +41,23 @@ class  ReservationConfirmation extends React.Component {
                                     <h3 className="mg-payment-id">Your Payment ID: #105152396140</h3>
                                     <div className="mg-widget-cart-row">
                                         <strong>Check In:</strong>
-                                        <span>27 Jan, 2015</span>
+                                        <span>{checkInDate}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Check Out:</strong>
-                                        <span>28 Jan, 2015</span>
+                                        <span>{checkOutDate}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Room:</strong>
-                                        <span>2</span>
+                                        <span>{room}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Bed:</strong>
-                                        <span>1</span>
+                                        <span>{bed}</span>
+                                    </div>
+                                    <div className="mg-widget-cart-row">
+                                        <strong>Number of Days:</strong>
+                                        <span>{totalDays}</span>
                                     </div>
                                     <div className="mg-cart-address">
                                         <strong>Your Address:</strong>
@@ -55,7 +69,7 @@ class  ReservationConfirmation extends React.Component {
                                     </div>
                                     <div className="mg-cart-total">
                                         <strong>Total:</strong>
-                                        <span>$249.99</span>
+                                        <span>{totalAmount}</span>
                                     </div>
                                 </div>
                             </div>
