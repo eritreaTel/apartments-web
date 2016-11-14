@@ -77,12 +77,14 @@ const Actions = {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
     },
 
-    goBackToPersonal() {
-        Dispatcher.dispatch({type: 'goBackToPersonal'});
+    goBackToPersonal(data) {
+        console.log('inside action');
+        console.log(data);
+        Dispatcher.dispatch({type: 'goBackToPersonal', data});
     },
 
-    goBackToSearch(personalInfo) {
-        Dispatcher.dispatch({type: 'goBackToSearch', personalInfo});
+    goBackToSearch(data) {
+        Dispatcher.dispatch({type: 'goBackToSearch', data});
     },
 
     goBackToPayment() {
@@ -95,6 +97,13 @@ const Actions = {
 
     createUser(data) {
         Dispatcher.dispatch({type: 'createUser'});
+    },
+    processPayment(data) {
+        Dispatcher.dispatch({type: 'processPayment', data});
+    },
+
+    createApartmentBooking(data) {
+        Dispatcher.dispatch({type: 'createApartmentBooking', data});
     }
 };
 

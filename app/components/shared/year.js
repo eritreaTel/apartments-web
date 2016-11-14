@@ -1,9 +1,11 @@
 const React = require('react');
 
 
-const Year  = function () {
+class Year  extends React.Component {
+
+    render() {
         return(
-            <select className="form-control">
+            <select ref='year' className="form-control">
                 <option value="">Year</option>
                 <option value="16">16</option>
                 <option value="17">17</option>
@@ -18,6 +20,7 @@ const Year  = function () {
                 <option value="26">26</option>
             </select>
         );
-};
+    }
+}
 
 module.exports = Year;

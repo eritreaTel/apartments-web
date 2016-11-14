@@ -2,9 +2,11 @@ const React = require('react');
 
 
 
-const Month  = function () {
+class Month  extends React.Component {
+
+    render() {
         return(
-            <select className="form-control">
+            <select ref='month' className="form-control">
                 <option value="">Month</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -20,6 +22,7 @@ const Month  = function () {
                 <option value="12">12</option>
             </select>
         );
-};
+    }
+}
 
 module.exports = Month;

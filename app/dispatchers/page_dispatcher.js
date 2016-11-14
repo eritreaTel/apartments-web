@@ -59,15 +59,18 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: ''});
     },
 
-    goBackToSearch(personalInfo) {
+    goBackToSearch(data) {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
-        if (personalInfo != null || personalInfo != undefined) {
+        if (data != null || data != undefined) {
             this.mergeStoreVal('bookingStage', {personal: data});
         }
     },
 
-    goBackToPersonal() {
+    goBackToPersonal(data) {
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+        if (data != null || data != undefined) {
+            this.mergeStoreVal('bookingStage', {payment: data});
+        }
     },
 
     goBackToPayment() {

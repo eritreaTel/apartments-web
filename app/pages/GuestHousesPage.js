@@ -104,11 +104,11 @@ class GuestHousesPage extends React.Component {
                 break;
             case 'payment' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="payment">
-                                <PaymentInfo apartment={apartment} />
+                                <PaymentInfo apartment={apartment} bookingStage={bookingStage} />
                             </div>
                 break;
             case 'confirmation' :
-                section =  <ReservationConfirmation />
+                section =  <ReservationConfirmation apartment={apartment} bookingStage={bookingStage} />
                 break;
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">

@@ -35,7 +35,7 @@ module.exports = {
                             searchInfo  : null,
                             personal    : null,
                             payment     : null,
-                            thankyou    : null
+                            confirmation    : null
                         },
                         blogs : [],
                         blog : null,
