@@ -9,14 +9,17 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment, bookingStage : {searchInfo}} = this.props;
+        let {apartment, bookingStage : {searchInfo, personal}} = this.props;
         let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY');
         let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY');
         let bed =  searchInfo.bed ;
         let room = searchInfo.room ;
         let totalDays = searchInfo.totalDays;
         let totalAmount = '$249.99';
-
+        let customerName = personal.first_name + ' ' + personal.last_name;
+        let guestHouseName = 'Pearl of Africa';
+        let guestHouseAddress = '236 Kabala Gala St, Kamapala';
+        let guestHousePhone = '+256 1 123 123 1234';
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
@@ -40,6 +43,10 @@ class  ReservationConfirmation extends React.Component {
                                 <div className="col-md-6">
                                     <h3 className="mg-payment-id">Your Payment ID: #105152396140</h3>
                                     <div className="mg-widget-cart-row">
+                                        <strong>Customer Name:</strong>
+                                        <span>{customerName}</span>
+                                    </div>
+                                    <div className="mg-widget-cart-row">
                                         <strong>Check In:</strong>
                                         <span>{checkInDate}</span>
                                     </div>
@@ -60,11 +67,11 @@ class  ReservationConfirmation extends React.Component {
                                         <span>{totalDays}</span>
                                     </div>
                                     <div className="mg-cart-address">
-                                        <strong>Your Address:</strong>
+                                        <strong>Booking Details:</strong>
                                         <address>
-                                            <strong>Amanuel Yohannes</strong><br/>
-                                            Level 13, 2 Elizabeth St, Kamapla<br/>
-                                            Uganda
+                                            Guest House Name: <strong>{guestHouseName}</strong><br/>
+                                            Guest House Address: {guestHouseAddress}, Uganda <br/>
+                                            Tel : {guestHousePhone}
                                         </address>
                                     </div>
                                     <div className="mg-cart-total">
