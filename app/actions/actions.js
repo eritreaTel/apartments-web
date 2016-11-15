@@ -100,7 +100,7 @@ const Actions = {
     },
 
     createUser(data) {
-        Dispatcher.dispatch({type: 'createUser'});
+        Dispatcher.dispatch({type: 'createUser', data});
     },
     processPayment(data) {
         Dispatcher.dispatch({type: 'processPayment', data});
@@ -114,8 +114,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'createContactUs', data});
     },
 
-    authenticateUser(data) {
-        Dispatcher.dispatch({type: 'authenticateUser', data});
+    logIn(data) {
+        Dispatcher.dispatch({type: 'logIn', data});
     }
 };
 

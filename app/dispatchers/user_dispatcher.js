@@ -1,9 +1,10 @@
 const FetchHelper = require('../helpers/fetch_helper');
+const CookiesHelper = require('../helpers/cookies_helper');
 
 
 module.exports = {
     async createUser(data) {
-        const url = 'user';
+        const url = 'users';
         this.setStoreVal('requestUrl', url);
 
         if (this.acquireLock('createUser')) {
@@ -26,15 +27,19 @@ module.exports = {
         }
     },
 
-    async authenticateUser(data) {
-        const url = 'user/authenticate';
+    async logIn(data) {
+        const url = 'users/login';
         this.setStoreVal('requestUrl', url);
-        if (this.acquireLock('authenticateUser')) {
+        if (this.acquireLock('logIn')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
                 if (response.data && response.data.results && response.data.results.length > 0) {
-                    this.setStoreVal('user', response.data.results[0]);
+                    let user = response.data.results[0];
+                    this.setStoreVal('user', user);
+                    CookiesHelper.setSessionCookie(user.php_session_id, 3600);
+                    this.dispatch({type: 'setRoute', data: '/guesthouse-seeker'});
+
                 }
             } catch (error) {
                 this.dispatch({
@@ -45,7 +50,7 @@ module.exports = {
                     }
                 });
             }
-            this.releaseLock('authenticateUser');
+            this.releaseLock('logIn');
         }
     }
 };

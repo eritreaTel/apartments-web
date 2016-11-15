@@ -9,7 +9,7 @@ const authenticateUser = function (e) {
 		username : e.refs.username.value,
 		password : e.refs.password.value
 	}
-	Actions.authenticateUser(credentials);
+	Actions.logIn(credentials);
 }
 
 class SignInBody extends React.Component {

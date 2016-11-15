@@ -22,10 +22,11 @@ const getPersonalInfo = function (e) {
         'city'  : e.refs.city.value,
         'country' : e.refs.countryCmp.refs.country.value,
         'phone_number' : e.refs.phone_number.value,
-        'email' : e.refs.email.value,
+        'username' : e.refs.username.value,
         'password' : e.refs.password.value,
         'renter_password' : e.refs.renter_password.value,
-        'terms' : e.refs.terms.value
+        'terms' : e.refs.terms.value,
+        'type' : 'seeker'
     }
 }
 
@@ -39,7 +40,7 @@ class PersonalInfo extends React.Component {
             this.refs.last_name.value       = personal.last_name;
             this.refs.city.value            = personal.city;
             this.refs.phone_number.value    = personal.phone_number;
-            this.refs.email.value           = personal.email;
+            this.refs.username.value        = personal.username;
             this.refs.terms.value           = personal.terms;
             this.refs.country.value         = personal.country;
         }
@@ -90,7 +91,7 @@ class PersonalInfo extends React.Component {
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Email Address</label>
-                                        <input ref='email' type="email" className="form-control"/>
+                                        <input ref='username' type="email" className="form-control"/>
                                     </div>
                                     <div className="mg-book-form-input">
                                         <label>Re-Password</label>

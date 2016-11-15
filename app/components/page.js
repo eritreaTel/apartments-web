@@ -11,7 +11,7 @@ const SeekerDashboardPage = require('../pages/SeekerDashboardPage');
 const OwnerDashboardPage = require('../pages/OwnerDashboardPage');
 const AdminDashboardPage = require('../pages/AdminDashboardPage');
 const EmployeeDashboardPage = require('../pages/EmployeeDashboardPage');
-
+const CookiesHelper = require('../helpers/cookies_helper');
 
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
@@ -25,11 +25,15 @@ class Page extends React.Component {
 
     render() {
         const {store} = this.props;
-        const {view} = store;
+        const {view, user} = store;
         DebugHelper.trackStore(this.props);
 
 
-        let content, loggedIn = true;
+        var content, loggedIn = true, type = 'seeker';
+        loggedIn = true ;//(!!CookiesHelper.getSessionCookie());
+        type = 'seeker'; // get it from cookie
+        console.log("user type is " + type);
+        console.log("user logged in" + loggedIn);
         switch (view.page) {
             case 'index' :
             case 'home' :
@@ -53,23 +57,21 @@ class Page extends React.Component {
             case 'sign-in':
                 content = <SignInPage {...{store}} />
                 break;
-            case 'my-account':
-                content = 'My - Account';
-                break;
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
                 break;
             case 'guesthouse-seeker' :
-                content = <SeekerDashboardPage {...{store}}/>;
+
+                content = ((loggedIn == true) && (type='seeker')) ? <SeekerDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-owner' :
-                content = <OwnerDashboardPage {...{store}}/>;
+                content = ((loggedIn == true) && (type='owner')) ? <OwnerDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-admin' :
-                content = <AdminDashboardPage {...{store}}/>;
+                content = ((loggedIn == true) && (type='owner')) ? <AdminDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-employee' :
-                content = <EmployeeDashboardPage {...{store}}/>;
+                content = ((loggedIn == true) && (type='owner')) ? <EmployeeDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case '404':
             default:

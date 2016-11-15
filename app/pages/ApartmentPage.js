@@ -120,44 +120,68 @@ const ApartmentReviews = function (props) {
 		);
 }
 
-const ApartmentReviewForm = function () {
-	return (
-		<div className="col-md-5">
-			<div className="row">
-				<div className="col-xs-6 mg-star-rating">
-					<div className="mg-star-rating-title">Position:</div> <div id="mg-star-position" className="starrr"></div>
-					<input type="hidden" id="mg-star-position-input"/>
-				</div>
-				<div className="col-xs-6 mg-star-rating">
-					<div className="mg-star-rating-title">Comfort:</div> <div id="mg-star-comfort" className="starrr"></div>
-					<input type="hidden" id="mg-star-comfort-input"/>
-				</div>
-			</div>
+class ApartmentReviewForm extends React.Component {
 
-			<div className="row">
-				<div className="col-xs-6 mg-star-rating">
-					<div className="mg-star-rating-title">Price:</div> <div id="mg-star-price" className="starrr"></div>
-					<input type="hidden" id="mg-star-price-input"/>
-				</div>
-				<div className="col-xs-6 mg-star-rating">
-					<div className="mg-star-rating-title">Quality:</div> <div id="mg-star-quality" className="starrr"></div>
-					<input type="hidden" id="mg-star-quality-input"/>
-				</div>
-			</div>
+	componentDidMount() {
+		/*
+		 * Single room review ratting
+		 */
+		$('#mg-star-position').on('starrr:change', function(e, value){
+			$('#mg-star-position-input').val(value);
+		});
 
-			<div className="row">
-				<div className="col-md-6">
-					<input type="text" className="form-control" placeholder="Your Name"/>
-				</div>
-				<div className="col-md-6">
-					<input type="text" className="form-control" placeholder="Your Email"/>
-				</div>
-			</div>
+		$('#mg-star-comfort').on('starrr:change', function(e, value){
+			$('#mg-star-comfort-input').val(value);
+		});
 
-			<textarea className="form-control" placeholder="Your Comment" rows="5"></textarea>
-			<input onClick={() => {onReviewApartmentClicked()}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
-		</div>
-	);
+		$('#mg-star-price').on('starrr:change', function(e, value){
+			$('#mg-star-price-input').val(value);
+		});
+
+		$('#mg-star-quality').on('starrr:change', function(e, value){
+			$('#mg-star-quality-input').val(value);
+		});
+	}
+
+	render() {
+		return (
+			<div className="col-md-5">
+				<div className="row">
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Location:</div> <div id="mg-star-position" className="starrr"></div>
+						<input type="hidden" id="mg-star-position-input"/>
+					</div>
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Comfort:</div> <div id="mg-star-comfort" className="starrr"></div>
+						<input type="hidden" id="mg-star-comfort-input"/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Price:</div> <div id="mg-star-price" className="starrr"></div>
+						<input type="hidden" id="mg-star-price-input"/>
+					</div>
+					<div className="col-xs-6 mg-star-rating">
+						<div className="mg-star-rating-title">Quality:</div> <div id="mg-star-quality" className="starrr"></div>
+						<input type="hidden" id="mg-star-quality-input"/>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-6">
+						<input type="text" className="form-control" placeholder="Your Name"/>
+					</div>
+					<div className="col-md-6">
+						<input type="text" className="form-control" placeholder="Your Email"/>
+					</div>
+				</div>
+
+				<textarea className="form-control" placeholder="Your Comment" rows="5"></textarea>
+				<input onClick={() => {onReviewApartmentClicked()}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
+			</div>
+		);
+	}
 }
 
 class ApartmentGalleries extends React.Component {
