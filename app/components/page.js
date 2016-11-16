@@ -29,9 +29,10 @@ class Page extends React.Component {
         DebugHelper.trackStore(this.props);
 
 
-        var content, loggedIn = true, type = 'seeker';
-        loggedIn = true ;//(!!CookiesHelper.getSessionCookie());
-        type = 'seeker'; // get it from cookie
+        var content, loggedIn, type ;
+        loggedIn = (!!CookiesHelper.getSessionCookie());
+        type = CookiesHelper.getDataFromCookie('type');
+
         console.log("user type is " + type);
         console.log("user logged in" + loggedIn);
         switch (view.page) {

@@ -38,7 +38,7 @@ const helpers = {
     const [start, stop, step = 1] = args.length === 1 ? [0, args[0]] : args;
     return Array.from(Array(Math.ceil((stop - start) / step)), (k, i) => start + i * step);
   },
-  
+
   animationsDisabled() {
     return typeof ANIMATIONS_DISABLED !== 'undefined' && !!ANIMATIONS_DISABLED;
   },
