@@ -8,7 +8,7 @@ const sendCodeToEmail = function (e) {
 }
 
 const updatePassword = function (e) {
-	
+
 }
 
 class ResetPasswordBody extends React.Component {
@@ -149,7 +149,7 @@ class ResetPasswordPage extends React.Component {
 		return (
 			<div>
 				<PageTitle parentClassName="mg-page-title-space parallax"/>
-				<CreatePasswordBody />
+				<ResetPasswordBody />
 			</div>
 		);
 	}
