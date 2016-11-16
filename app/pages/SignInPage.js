@@ -14,10 +14,6 @@ const authenticateUser = function (e) {
 	Actions.logIn(credentials);
 }
 
-const forgetPassword = function (e) {
-
-}
-
 class SignInBody extends React.Component {
 
 	componentWillMount() {
@@ -56,7 +52,7 @@ class SignInBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {() => {forgetPassword(this)}} className="primary-blue">reset password</Anchor>
+									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">reset password</Anchor>
 								</div>
 							</div>
 						</div>

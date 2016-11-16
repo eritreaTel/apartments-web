@@ -10,5 +10,6 @@ module.exports = {
   "/contact-us": "contactUs",
   "/blogs": "blogs",
   "/blog/:id": "viewBlog",
-  "my-account" : "myAccount"
+  "/my-account" : "myAccount",
+  "/reset-password" : "resetPassword",
 };

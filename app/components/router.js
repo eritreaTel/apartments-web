@@ -52,6 +52,10 @@ const Router = React.createClass({
 
     myAccount() {
         Actions.setView({page: 'my-account'});
+    },
+
+    resetPassword() {
+        Actions.setView({page: 'reset-password'});
     }
 });
 

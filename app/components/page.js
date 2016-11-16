@@ -8,6 +8,7 @@ const NotFoundPage = require('../pages/NotFoundPage');
 const BlogPage = require('../pages/BlogPage');
 const SignInPage = require('../pages/SignInPage');
 const MyAccountPage = require('../pages/MyAccountPage');
+const ResetPasswordPage = require('../pages/ResetPasswordPage');
 const CookiesHelper = require('../helpers/cookies_helper');
 
 const HeaderBar = require('./ribbons/header_bar');
@@ -56,6 +57,9 @@ class Page extends React.Component {
                 break;
             case 'my-account' :
                 content = loggedIn == true? <MyAccountPage {...{store}} /> : <SignInPage {...{store}} />;
+                break;
+            case 'reset-password' :
+                content = <ResetPasswordPage {...{store}} />
                 break;
             case '404':
             default:
