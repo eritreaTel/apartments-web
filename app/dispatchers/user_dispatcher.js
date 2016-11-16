@@ -85,7 +85,7 @@ module.exports = {
         }
     },
 
-    async fetchAuthenticatedUser() {
+    async getAuthenticatedUser() {
         try {
             let user;
             let userId = CookiesHelper.getDataFromCookie('userId');
@@ -97,7 +97,7 @@ module.exports = {
                 this.setStoreVal('user', user);
             }
         } catch (error) {
-            this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to fetch authenticated user'}});
+            this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to get authenticated user'}});
         }
         return user;
     }

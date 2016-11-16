@@ -122,8 +122,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'logOut'});
     },
 
-    fetchAuthenticatedUser() {
-        Dispatcher.dispatch({type: 'fetchAuthenticatedUser'});
+    getAuthenticatedUser() {
+        Dispatcher.dispatch({type: 'getAuthenticatedUser'});
     },
 };
 
