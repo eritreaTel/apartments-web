@@ -27,7 +27,7 @@ class MyAccountPage extends React.Component {
         const {store : {user}} = this.props;
         console.log('authenticated user is');
         console.log(user);
-        
+
         let  dashboard;
         switch (user.type) {
             case 'seeker':
