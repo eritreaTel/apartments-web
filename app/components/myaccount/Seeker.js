@@ -27,7 +27,7 @@ const MySearchs = function () {
 }
 
 
-class SeekerDashboardPage extends React.Component {
+class Seeker extends React.Component {
 
 	render() {
 		return (
@@ -40,4 +40,4 @@ class SeekerDashboardPage extends React.Component {
 	}
 };
 
-module.exports = SeekerDashboardPage;
+module.exports = Seeker;

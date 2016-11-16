@@ -1,6 +1,6 @@
 const React = require('react');
 
-class OwnerDashboardPage extends React.Component {
+class Owner extends React.Component {
 
 	render() {
 		return (
@@ -11,4 +11,4 @@ class OwnerDashboardPage extends React.Component {
 	}
 };
 
-module.exports = OwnerDashboardPage;
+module.exports = Owner;

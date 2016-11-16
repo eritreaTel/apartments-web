@@ -1,6 +1,6 @@
 const React = require('react');
 
-class AdminDashboardPage extends React.Component {
+class Admin extends React.Component {
 
 	render() {
 		return (
@@ -11,4 +11,4 @@ class AdminDashboardPage extends React.Component {
 	}
 };
 
-module.exports = AdminDashboardPage;
+module.exports = Admin;

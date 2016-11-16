@@ -50,22 +50,9 @@ const Router = React.createClass({
         Actions.setView({page: 'blog', blogId});
     },
 
-    guesthouseSeeker() {
-        Actions.setView({page: 'guesthouse-seeker'});
-    },
-
-    guesthouseOwner() {
-        Actions.setView({page: 'guesthouse-owner'});
-    },
-
-    guesthouseAdmin() {
-        Actions.setView({page: 'guesthouse-admin'});
-    },
-
-    guesthouseEmployee() {
-        Actions.setView({page: 'guesthouse-employee'});
+    myAccount() {
+        Actions.setView({page: 'my-account'});
     }
-
 });
 
 module.exports = Router;

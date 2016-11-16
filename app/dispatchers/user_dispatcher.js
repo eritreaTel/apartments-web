@@ -40,7 +40,7 @@ module.exports = {
                     CookiesHelper.setSessionCookie(user.php_session_id, 3600);
                     CookiesHelper.addDataToCookie('userId', user.id, 3600);
                     CookiesHelper.addDataToCookie('userType', user.type, 3600);
-                    //this.dispatch({type: 'setRoute', data: '/guesthouse-seeker'});
+                    this.dispatch({type: 'setRoute', data: '/my-account'});
 
                 }
             } catch (error) {

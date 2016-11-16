@@ -10,8 +10,5 @@ module.exports = {
   "/contact-us": "contactUs",
   "/blogs": "blogs",
   "/blog/:id": "viewBlog",
-  "guesthouse-seeker" : "guesthouseSeeker",
-  "guesthouse-owner" : "guesthouseOwner",
-  "guesthouse-admin" : "guesthouseAdmin",
-  "guesthouse-employee" : "guesthouseEmployee",
+  "my-account" : "myAccount"
 };

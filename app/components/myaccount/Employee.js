@@ -1,6 +1,6 @@
 const React = require('react');
 
-class EmployeeDashboardPage extends React.Component {
+class Employee extends React.Component {
 
 	render() {
 		return (
@@ -11,4 +11,4 @@ class EmployeeDashboardPage extends React.Component {
 	}
 };
 
-module.exports = EmployeeDashboardPage;
+module.exports = Employee;
