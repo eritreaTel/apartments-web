@@ -116,7 +116,15 @@ const Actions = {
 
     logIn(data) {
         Dispatcher.dispatch({type: 'logIn', data});
-    }
+    },
+
+    logOut() {
+        Dispatcher.dispatch({type: 'logOut'});
+    },
+
+    fetchAuthenticatedUser() {
+        Dispatcher.dispatch({type: 'fetchAuthenticatedUser'});
+    },
 };
 
 module.exports = Actions;

@@ -3,13 +3,23 @@ const Header = require('../shared/header');
 const {assetPath} = require('../../helpers/asset_helper');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
+const CookiesHelper = require('../../helpers/cookies_helper');
 
+const logOut = function () {
+    Actions.logOut();
+    Actions.setRoute('/index');
+}
+
+const goToMyAccount = function () {
+    console.log('Go to my account');
+}
 
 
 class HeaderBar extends React.Component {
 
     render() {
-        const {store : {view : {page}}} = this.props;
+        const {store : {view : {page}}, user} = this.props;
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
 
 
         return (
@@ -33,7 +43,12 @@ class HeaderBar extends React.Component {
                                 <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
                                 <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/blogs')}}>Blog</Anchor> </li>
                                 <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
-                                <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>
+                                {loggedIn == true ?  <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{goToMyAccount()}}>My Account</Anchor> </li> : '' }
+
+                                {loggedIn == true ?  <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{logOut()()}}>Log Out</Anchor> </li> :
+                                                     <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>
+                                }
+
                             </ul>
                         </div>
                     </div>

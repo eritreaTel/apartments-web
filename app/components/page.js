@@ -26,15 +26,12 @@ class Page extends React.Component {
     render() {
         const {store} = this.props;
         const {view, user} = store;
-        DebugHelper.trackStore(this.props);
 
 
-        var content, loggedIn, type ;
+        var content, loggedIn, type, userId ;
         loggedIn = (!!CookiesHelper.getSessionCookie());
-        type = CookiesHelper.getDataFromCookie('type');
-
-        console.log("user type is " + type);
-        console.log("user logged in" + loggedIn);
+        type = CookiesHelper.getDataFromCookie('userType');
+        userId = CookiesHelper.getDataFromCookie('userId');
         switch (view.page) {
             case 'index' :
             case 'home' :
@@ -56,23 +53,36 @@ class Page extends React.Component {
                 content = <ContactUsPage {...{store}} />;
                 break;
             case 'sign-in':
-                content = <SignInPage {...{store}} />
+                if (loggedIn == true) {
+                    if (type == 'seeker') {
+                        content =  <SeekerDashboardPage {...{store}}/> ;
+                    } else if (type == 'owner') {
+                        content = <OwnerDashboardPage {...{store}}/>;
+                    } else if (type == 'admin') {
+                        content = <AdminDashboardPage {...{store}}/>;
+                    } else if (type == 'employee') {
+                        content = <EmployeeDashboardPage {...{store}}/>;
+                    } else {
+                        content = <SignInPage {...{store}} />
+                    }
+                } else {
+                    content = <SignInPage {...{store}} />
+                }
                 break;
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
                 break;
             case 'guesthouse-seeker' :
-
                 content = ((loggedIn == true) && (type='seeker')) ? <SeekerDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-owner' :
                 content = ((loggedIn == true) && (type='owner')) ? <OwnerDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-admin' :
-                content = ((loggedIn == true) && (type='owner')) ? <AdminDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
+                content = ((loggedIn == true) && (type='admin')) ? <AdminDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case 'guesthouse-employee' :
-                content = ((loggedIn == true) && (type='owner')) ? <EmployeeDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
+                content = ((loggedIn == true) && (type='employee')) ? <EmployeeDashboardPage {...{store}}/> : <SignInPage {...{store}} />;
                 break;
             case '404':
             default:

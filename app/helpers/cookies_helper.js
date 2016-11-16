@@ -25,8 +25,6 @@ module.exports = {
   },
 
   getSessionCookie() {
-    console.log('getting session cookie');
-    console.log(cookie.load(`${this.oauthToken}`));
     return cookie.load(`${this.oauthToken}`);
   }
 };
