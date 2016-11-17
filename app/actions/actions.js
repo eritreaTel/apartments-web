@@ -125,6 +125,22 @@ const Actions = {
     getAuthenticatedUser() {
         Dispatcher.dispatch({type: 'getAuthenticatedUser'});
     },
+
+    sendResetPasswordToken(data) {
+        Dispatcher.dispatch({type: 'sendResetPasswordToken', data});
+    },
+
+    validateResetPasswordToken(data) {
+        Dispatcher.dispatch({type: 'validateResetPasswordToken', data});
+    },
+
+    updatePassword(data) {
+        Dispatcher.dispatch({type: 'updatePassword', data});
+    },
+
+    goBackToResetPasswordBody(data) {
+        Dispatcher.dispatch({type: 'goBackToResetPasswordBody'});
+    }
 };
 
 module.exports = Actions;

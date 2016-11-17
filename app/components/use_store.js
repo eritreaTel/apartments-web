@@ -37,6 +37,10 @@ module.exports = {
                             payment     : null,
                             confirmation    : null
                         },
+                        resetPassword: {
+                            stage: null,
+                            email: null
+                        },
                         blogs : [],
                         blog : null,
                         blogComments : [],

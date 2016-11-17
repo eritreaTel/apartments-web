@@ -4,14 +4,41 @@ const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
 
 const sendCodeToEmail = function (e) {
-	//Send code to Email
+	let data = {
+		email : e.refs.email.value
+	}
+	Actions.sendResetPasswordToken(data);
+}
+
+const submitCode = function (e) {
+	let data = {
+		code : e.refs.code.value
+	};
+
+	Actions.validateResetPasswordToken(data);
 }
 
 const updatePassword = function (e) {
+	let data = {
+		'password' : e.refs.password.value,
+		'confirmPassword' : e.refs.confirm_password.value
+	};
+	console.log('update password');
+	console.log(data);
+	Actions.updatePassword(data);
+}
 
+const goBackToResetPasswordBody = function () {
+	Actions.goBackToResetPasswordBody();
 }
 
 class ResetPasswordBody extends React.Component {
+
+	componentDidMount() {
+		const {resetPassword : {email}} = this.props;
+		this.refs.email.value = email
+	}
+
 	render() {
 		return (
 			<div className="mg-about-features">
@@ -21,7 +48,7 @@ class ResetPasswordBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
-								<input ref='username' type="text" className="form-control" />
+								<input ref='email' type="text" className="form-control" />
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -43,7 +70,7 @@ class ResetPasswordBody extends React.Component {
 }
 
 
-class SendCodeBody extends React.Component {
+class EnterCodeBody extends React.Component {
 	render() {
 		return (
 			<div className="mg-about-features">
@@ -65,7 +92,7 @@ class SendCodeBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">resend code</Anchor>
+									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="primary-blue">resend code</Anchor>
 								</div>
 							</div>
 						</div>
@@ -76,7 +103,7 @@ class SendCodeBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {resetPassword(this)}} className="width-260 btn btn-primary">Submit Code</Anchor>
+								<Anchor onClick = {() => {submitCode(this)}} className="width-260 btn btn-primary">Submit Code</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -144,12 +171,30 @@ const ResetMyPasswordBody = function (props) {
 
 class ResetPasswordPage extends React.Component {
 
-
 	render() {
+		const{store: {resetPassword}} = this.props;
+		const {email, stage} = resetPassword;
+		console.log('email is' + email);
+		console.log('stage is ' + stage);
+
+		let section ;
+
+		switch (stage) {
+			case 'code-sent':
+				section = (email)? <EnterCodeBody resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} />
+				break;
+			case 'code-validated' :
+				section = (email)?  <CreatePasswordBody resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} />
+				break;
+			default :
+				section = <ResetPasswordBody resetPassword={resetPassword} />
+				break;
+		}
+
 		return (
 			<div>
 				<PageTitle parentClassName="mg-page-title-space parallax"/>
-				<ResetPasswordBody />
+				{section}
 			</div>
 		);
 	}

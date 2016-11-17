@@ -8,7 +8,7 @@ const ValidationHelper = require('../helpers/validation_helper');
 
 const authenticateUser = function (e) {
 	let credentials = {
-		username : e.refs.username.value,
+		email : e.refs.email.value,
 		password : e.refs.password.value
 	}
 	Actions.logIn(credentials);
@@ -29,7 +29,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
-								<input ref='username' name='username' type="text" className="form-control" validations={['required', 'email']}/>
+								<input ref='email' name='email' type="text" className="form-control" validations={['required', 'email']}/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
