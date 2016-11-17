@@ -4,6 +4,7 @@ const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
 import Validation from 'react-validation';
 const ValidationHelper = require('../helpers/validation_helper');
+const Danger = require('../components/ribbons/danger');
 
 
 const authenticateUser = function (e) {
@@ -24,6 +25,13 @@ class SignInBody extends React.Component {
 		return (
 			<div className="mg-about-features">
 				<div className="container">
+					<div className="row">
+						<div className="col-md-3"> </div>
+						<div className="col-md-6 show">
+							<Danger message="Invalid credentials, make sure you have correct email and password" />
+						</div>
+						<div className="col-md-3"> </div>
+					</div>
 					<div className="row">
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">

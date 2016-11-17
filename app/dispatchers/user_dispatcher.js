@@ -1,5 +1,6 @@
 const FetchHelper = require('../helpers/fetch_helper');
 const CookiesHelper = require('../helpers/cookies_helper');
+const ResponseHelper = require('../helpers/response_helper');
 
 
 module.exports = {
@@ -35,15 +36,23 @@ module.exports = {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    let user = response.data.results[0];
-                    this.setStoreVal('user', user);
-                    CookiesHelper.setSessionCookie(user.php_session_id, 3600);
-                    CookiesHelper.addDataToCookie('userId', user.id, 3600);
-                    CookiesHelper.addDataToCookie('userType', user.type, 3600);
-                    this.dispatch({type: 'setRoute', data: '/my-account'});
-
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (!error) {
+                    // dispatch to the message controller and return from here
+                    return;
                 }
+                console.log('resturn object is');
+                console.log(object);
+
+                console.log('error object is ');
+                console.log(error);
+
+                this.setStoreVal('user', object);
+                CookiesHelper.setSessionCookie(object.php_session_id, 3600);
+                CookiesHelper.addDataToCookie('userId', object.id, 3600);
+                CookiesHelper.addDataToCookie('userType', object.type, 3600);
+               // this.dispatch({type: 'setRoute', data: '/my-account'});
+
             } catch (error) {
                 this.dispatch({
                     type: 'handleRequestError',

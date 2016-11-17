@@ -2,7 +2,6 @@ const PageDispatcher      = require('./page_dispatcher');
 const ApartmentDispatcher = require('./apartment_dispatcher');
 const BlogDispatcher      = require('./blog_dispatcher');
 const MessageDispatcher   = require('./message_dispatcher');
-const RequestDispatcher   = require('./request_dispatcher');
 const UserDispatcher      = require('./user_dispatcher');
 const DebugHelper         = require('../helpers/debug_helper');
 
@@ -12,7 +11,6 @@ const Dispatcher = {
 
         const {type, data} = action;
         const dispatchers = [
-            RequestDispatcher,
             PageDispatcher,
             ApartmentDispatcher,
             BlogDispatcher,
