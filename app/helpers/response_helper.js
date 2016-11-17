@@ -8,11 +8,28 @@ const ResponseHelper = {
             if (response.data) {
                 object = response.data.results[0];
             } else if(response.errors) {
-                //console.log('raw error response is ');
-                //console.log(response.errors);
-                // @TODO:Amanuel please parse the errors and return an array. - Hint, use lodash
+
+                try {
+                    const text =  response.errors.text();
+                    console.log('parsed text is ');
+                    console.log(text);
+
+                    const parsed = JSON.parse(text);
+
+                    console.log('parsed is ');
+                    console.log(parsed);
+                    if (parsed.messages && parsed.messages.length) errorMessages = parsed.messages;
+
+                    console.log('error messages');
+                    console.log(errorMessages);
+                } catch (e) {
+                    console.log('run in to error');
+                    console.log(e);
+                    //add airbrake once it is figure out
+                }
+
                 //errors = response.errors.map(error => {return _keys(error)});
-                errors = ['The email must be a valid email address.'];
+                errors = 'The email must be a valid email address.';
                 //console.log('proccessed error response is ');
                 //console.log(errors);
             }

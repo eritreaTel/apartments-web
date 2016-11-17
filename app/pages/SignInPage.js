@@ -22,13 +22,15 @@ class SignInBody extends React.Component {
 	}
 
 	render() {
+		const errorMessage = this.props.errorMessage;
+		let errorClass = (errorMessage == null || errorMessage == undefined) ? ' col-md-6 hide' : 'col-md-6 show';
 		return (
 			<div className="mg-about-features">
 				<div className="container">
 					<div className="row">
 						<div className="col-md-3"> </div>
-						<div className="col-md-6 show">
-							<Danger message="Invalid credentials, make sure you have correct email and password" />
+						<div className={errorClass}>
+							<Danger message= {errorMessage} />
 						</div>
 						<div className="col-md-3"> </div>
 					</div>
@@ -99,10 +101,16 @@ const ResetMyPasswordBody = function (props) {
 class SignInPage extends React.Component {
 
 	render() {
+
+		const {store: {errors}} = this.props;
+		console.log('inside signIn page');
+		let errorMessage = errors ? errors[0] : null;
+		console.log(errors[0]);
+
 		return (
 			<div>
 				<PageTitle parentClassName="mg-page-title-space parallax"/>
-				<SignInBody />
+				<SignInBody errorMessage={errorMessage} />
 			</div>
 		);
 	}

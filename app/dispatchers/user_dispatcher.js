@@ -37,21 +37,19 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
-                if (!error) {
-                    // dispatch to the message controller and return from here
+                console.log(errors);
+                if (errors) {
+                    console.log('calling setErrorMessage with ');
+                    console.log(errors);
+                    this.releaseLock('logIn');
+                    this.dispatch({type: 'setErrorMessages', errors});  //@ TODO:Amanuel, pass the whole array
                     return;
                 }
-                console.log('resturn object is');
-                console.log(object);
-
-                console.log('error object is ');
-                console.log(error);
-
                 this.setStoreVal('user', object);
                 CookiesHelper.setSessionCookie(object.php_session_id, 3600);
                 CookiesHelper.addDataToCookie('userId', object.id, 3600);
                 CookiesHelper.addDataToCookie('userType', object.type, 3600);
-               // this.dispatch({type: 'setRoute', data: '/my-account'});
+                this.dispatch({type: 'setRoute', data: '/my-account'});
 
             } catch (error) {
                 this.dispatch({
