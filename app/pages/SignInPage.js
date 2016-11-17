@@ -70,7 +70,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="row">
 								<div className="col-md-6"> </div>
-								<div className="col-md-6 margin-right-10">
+								<div className="col-md-6 margin-left-minus-10">
 									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">forgot password</Anchor>
 								</div>
 							</div>
