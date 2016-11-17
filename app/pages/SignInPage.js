@@ -2,10 +2,14 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-import Validation from 'react-validation';
-const ValidationHelper = require('../helpers/validation_helper');
+//import Validation from 'react-validation';
+//const ValidationHelper = require('../helpers/validation_helper');
 const Danger = require('../components/ribbons/danger');
+const ReactValiation = require('react-validate');
 
+function validateLength(value) {
+	return value.length > 2;
+}
 
 const authenticateUser = function (e) {
 	let credentials = {
@@ -18,7 +22,8 @@ const authenticateUser = function (e) {
 class SignInBody extends React.Component {
 
 	componentWillMount() {
-		Object.assign(Validation.rules, ValidationHelper.getRules());
+		//Object.assign(Validation.rules, ValidationHelper.getRules());
+
 	}
 
 	render() {
@@ -39,7 +44,11 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
-								<input ref='email' name='email' type="text" className="form-control" validations={['required', 'email']}/>
+
+								<ReactValiation.Validate validators={[validateLength]}>
+									<input ref='email' name='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
+									<ReactValiation.ErrorMessage>*</ReactValiation.ErrorMessage>
+								</ReactValiation.Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -50,7 +59,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Password</label>
-								<input name='password' ref='password' type="password" className="form-control" validations={['required']}/>
+								<input name='password' ref='password' type="password" className="float-left  width-250 form-control" validations={['required']}/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -61,8 +70,8 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="row">
 								<div className="col-md-6"> </div>
-								<div className="col-md-6">
-									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue"> &nbsp; forgot password</Anchor>
+								<div className="col-md-6 margin-right-10">
+									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">forgot password</Anchor>
 								</div>
 							</div>
 						</div>
@@ -74,7 +83,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {authenticateUser(this)}} className="width-260 btn btn-primary">Sign In</Anchor>
+								<Anchor onClick = {() => {authenticateUser(this)}} className="width-250 btn btn-primary">Sign In</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>

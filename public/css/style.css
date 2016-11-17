@@ -4323,14 +4323,39 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   height: 24px;
   vertical-align: middle; }
 
-.width-260 {
-  width: 260px;
+.width-250 {
+  width: 250px;
+}
+
+.primary-blue {
+  color: #3b95e8;
+}
+
+.validate-component {
+  display: inline;
+}
+
+.float-left {
+  float: left;
+  background:inherit;
+}
+
+.error-message {
+  display: inline;
+  float: right;
+  color: #FF0000;
+}
+
+.error {
+  background: #ffff85;
+  border-radius: 3px;
+}
+
+.margin-left-minus-10 {
+  margin-left: -10px;
 }
 
 .margin-bottom-20 {
   margin-bottom: 20px;
 }
 
-.primary-blue {
-  color: #3b95e8;
-}
