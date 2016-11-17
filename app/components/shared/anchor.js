@@ -8,7 +8,7 @@ const Anchor = ({onClick, ...others}) => {
     onClick(e);
   };
 
-  return <a {...others} onClick={click}/>;
+  return <a {...others} href="#" onClick={click}/>;
 };
 
 module.exports = Anchor;
