@@ -71,14 +71,45 @@ class PaymentInfo extends React.Component {
                                                       <label>First Name</label>
                                                       <input type="text" ref='first_name' className="form-control"/>
                                                 </div>
+                                          </div>
+                                          <div className="col-md-6">
+                                                <div className="mg-book-form-input">
+                                                      <label>Last Name</label>
+                                                      <input type="text" ref='last_name' className="form-control"/>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div className="row pb40">
+                                          <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Address Line 1</label>
                                                       <input type="text" ref='address_line_1' className="form-control"/>
                                                 </div>
+                                          </div>
+
+                                          <div className="col-md-6">
+                                                <div className="mg-book-form-input">
+                                                      <label>Address Line 2</label>
+                                                      <input type="text" ref='address_line_2' className="form-control"/>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div className="row pb40">
+                                          <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>City</label>
                                                       <input type="text" ref='city' className="form-control"/>
                                                 </div>
+                                          </div>
+                                          <div className="col-md-6">
+                                                <div className="mg-book-form-input">
+                                                      <label>Zip/Post Code</label>
+                                                      <input type="text" ref='zip' className="form-control"/>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div className="row pb40">
+                                          <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>State/Region</label>
                                                       <input type="text" ref='state' className="form-control"/>
@@ -86,24 +117,12 @@ class PaymentInfo extends React.Component {
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Last Name</label>
-                                                      <input type="text" ref='last_name' className="form-control"/>
-                                                </div>
-                                                <div className="mg-book-form-input">
-                                                      <label>Address Line 2</label>
-                                                      <input type="text" ref='address_line_2' className="form-control"/>
-                                                </div>
-                                                <div className="mg-book-form-input">
-                                                      <label>Zip/Post Code</label>
-                                                      <input type="text" ref='zip' className="form-control"/>
-                                                </div>
-
-                                                <div className="mg-book-form-input">
                                                       <label>Country</label>
                                                       <Country ref='countryCmp' />
                                                 </div>
                                           </div>
                                     </div>
+
 
                                     <h2 className="mg-sec-left-title">Card Info</h2>
                                     <div className="row">
