@@ -46,7 +46,7 @@ class SignInBody extends React.Component {
 								<label>Email Address</label>
 
 								<ReactValiation.Validate validators={[validateLength]}>
-									<input ref='email' name='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
+									<input tabindex="1" ref='email' name='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
 									<ReactValiation.ErrorMessage>*</ReactValiation.ErrorMessage>
 								</ReactValiation.Validate>
 							</div>
@@ -59,7 +59,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Password</label>
-								<input name='password' ref='password' type="password" className="float-left  width-250 form-control" validations={['required']}/>
+								<input tabindex="2" name='password' ref='password' type="password" className="float-left  width-250 form-control" validations={['required']}/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -71,7 +71,7 @@ class SignInBody extends React.Component {
 							<div className="row">
 								<div className="col-md-6"> </div>
 								<div className="col-md-6 margin-left-minus-10">
-									<Anchor onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">forgot password</Anchor>
+									<Anchor tabindex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">forgot password</Anchor>
 								</div>
 							</div>
 						</div>
@@ -83,7 +83,7 @@ class SignInBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {authenticateUser(this)}} className="width-250 btn btn-primary">Sign In</Anchor>
+								<Anchor tabindex="4" onClick = {() => {authenticateUser(this)}} className="width-250 btn btn-primary">Sign In</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
