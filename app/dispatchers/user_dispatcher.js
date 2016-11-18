@@ -70,6 +70,7 @@ module.exports = {
 
         try {
             CookiesHelper.deleteSessionCookie();
+            this.setStoreVal('user', null);
         } catch (error) {
             this.dispatch({
                 type: 'handleRequestError',
@@ -84,10 +85,17 @@ module.exports = {
     async getAuthenticatedUser() {
         try {
             let user;
+            let loggedIn = !!CookiesHelper.getSessionCookie();
+            // If user is not logged in, do nothing and return null object
+            if (loggedIn == false) {
+                this.setStoreVal('user', null);
+                return;
+            }
+
             let userId = CookiesHelper.getDataFromCookie('userId');
             let url = 'users/' + userId;
             const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-            console.log(response);
+
             if (response.data && response.data.results && response.data.results.length > 0) {
                 user = response.data.results[0];
                 this.setStoreVal('user', user);
@@ -95,7 +103,7 @@ module.exports = {
         } catch (error) {
             this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to get authenticated user'}});
         }
-        return user;
+
     },
 
     async sendResetPasswordToken(data) {

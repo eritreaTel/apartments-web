@@ -6,9 +6,11 @@ const Actions = require('../actions/actions');
 //const ValidationHelper = require('../helpers/validation_helper');
 const Danger = require('../components/ribbons/danger');
 const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
 
-function validateLength(value) {
-	return value.length > 2;
+function isRequired(value) {
+	return value.length > 0;
 }
 
 const authenticateUser = function (e) {
@@ -45,10 +47,10 @@ class SignInBody extends React.Component {
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
 
-								<ReactValiation.Validate validators={[validateLength]}>
+								<Validate validators={[isRequired]}>
 									<input tabindex="1" ref='email' name='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
-									<ReactValiation.ErrorMessage>*</ReactValiation.ErrorMessage>
-								</ReactValiation.Validate>
+									<ErrorMessage>*</ErrorMessage>
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>

@@ -85,9 +85,16 @@ const GuestHouseBody = function(props) {
 
 
 class GuestHousesPage extends React.Component {
+
+    componentWillMount() {
+        Actions.getAuthenticatedUser();
+    }
+
     render() {
-        const {store : {apartments, apartment, bookingStage}} = this.props;
+        const {store : {user, apartments, apartment, bookingStage}} = this.props;
         console.log('active state : ' + bookingStage.activeStage);
+        console.log('authenticated user is');
+        console.log(user);
         let section ;
 
         switch (bookingStage.activeStage) {
