@@ -46,9 +46,8 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
-
 								<Validate validators={[isRequired]}>
-									<input tabindex="1" ref='email' name='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
+									<input tabindex="1" ref='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
 									<ErrorMessage>*</ErrorMessage>
 								</Validate>
 							</div>
@@ -61,7 +60,10 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Password</label>
-								<input tabindex="2" name='password' ref='password' type="password" className="float-left  width-250 form-control" validations={['required']}/>
+								<Validate validators={[isRequired]}>
+									<input tabindex="2"  ref='password' type="password" className="float-left width-250 form-control" validations={['required']}/>
+									<ErrorMessage>*</ErrorMessage>
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
