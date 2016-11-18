@@ -112,9 +112,9 @@ class SignInPage extends React.Component {
 	render() {
 
 		const {store: {errors}} = this.props;
-		console.log('inside signIn page');
+		//console.log('inside signIn page');
 		let errorMessage = errors ? errors[0] : null;
-		console.log(errors[0]);
+		//console.log(errors[0]);
 
 		return (
 			<div>

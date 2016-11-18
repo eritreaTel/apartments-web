@@ -4,7 +4,7 @@ const React = require('react');
 class Country  extends React.Component {
         render() {
             return (
-                <select ref='country' className="form-control">
+                <select  ref='country' className="form-control">
                     <option value="">Select your country</option>
                     <option value="United States">United States</option>
                     <option value="United Kingdom">United Kingdom</option>

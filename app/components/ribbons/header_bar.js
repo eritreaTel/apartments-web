@@ -7,6 +7,7 @@ const CookiesHelper = require('../../helpers/cookies_helper');
 
 const logOut = function () {
     Actions.logOut();
+    //@TODO:Amanuel please do hard refresh at this time, that will help to clear the store and start things from scratch
     Actions.setRoute('/index');
 }
 

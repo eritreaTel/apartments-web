@@ -59,6 +59,16 @@ class PersonalInfo extends React.Component {
                                         <label>First Name</label>
                                         <input ref='first_name' type="text" className="form-control"/>
                                     </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="mg-book-form-input">
+                                        <label>Last Name</label>
+                                        <input ref='last_name' type="text" className="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row pb40">
+                                <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>City</label>
                                         <input ref='city' type="text" className="form-control"/>
@@ -66,33 +76,36 @@ class PersonalInfo extends React.Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Last Name</label>
-                                        <input ref='last_name' type="text" className="form-control"/>
-                                    </div>
-                                    <div className="mg-book-form-input">
                                         <label>Country</label>
                                         <Country ref='countryCmp' />
                                     </div>
                                 </div>
                             </div>
 
+
                             <h2 className="mg-sec-left-title">Account Info</h2>
                             <div className="row">
+                                <div className="col-md-6">
+                                    <div className="mg-book-form-input">
+                                        <label>Email Address</label>
+                                        <input ref='username' type="email" className="form-control"/>
+                                    </div>
+                                </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Phone</label>
                                         <input ref='phone_number' type="tel" className="form-control"/>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Password</label>
                                         <input ref='password' type="password" className="form-control"/>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Email Address</label>
-                                        <input ref='username' type="email" className="form-control"/>
-                                    </div>
                                     <div className="mg-book-form-input">
                                         <label>Re-Password</label>
                                         <input ref='renter_password' type="password" className="form-control"/>

@@ -30,7 +30,7 @@ class Room extends React.Component {
     render() {
         const {className} = this.props;
         return (
-            <select  ref='room' className={className}>
+            <select tabindex="3"  ref='room' className={className}>
                 <option selected value=""  disabled>Room</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -48,7 +48,7 @@ class Bed extends React.Component {
     render() {
         const {className} = this.props;
         return (
-            <select ref='bed'  className={className}>
+            <select tabindex="4" ref='bed'  className={className}>
                 <option selected value="" disabled>Bed</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -92,14 +92,14 @@ class SearchControls extends React.Component {
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date mg-check-in">
                         <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                        <input type="text" className="form-control" ref="checkInDate" placeholder="Check In"/>
+                        <input tabindex="1" type="text" className="form-control" ref="checkInDate" placeholder="Check In"/>
                     </div>
                 </div>
 
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date mg-check-out">
                     <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                        <input type="text" className="form-control" ref="checkOutDate" placeholder="Check Out"/>
+                        <input tabindex="2" type="text" className="form-control" ref="checkOutDate" placeholder="Check Out"/>
                     </div>
                 </div>
 
@@ -114,7 +114,7 @@ class SearchControls extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-3">
-                        <button onClick={() =>{onSearchApartmentsClicked(this)}}  className="btn btn-main btn-block">Check Now</button>
+                        <button tabindex="5" onClick={() =>{onSearchApartmentsClicked(this)}}  className="btn btn-main btn-block">Check Now</button>
                 </div>
             </div>
         );

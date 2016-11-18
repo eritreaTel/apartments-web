@@ -69,19 +69,7 @@ module.exports = {
         this.setStoreVal('requestUrl', url);
 
         try {
-            console.log('getting authenticated user');
-            this.dispatch({type: 'fetchAuthenticatedUser'});
-            console.log('after fetching authetnciated user');
-            let user = this.getStoreVal('user');
-            console.log(user);
-            data = {'userId' : user.id};
-
-            console.log('data for logout is');
-            console.log(data);
-
-
             CookiesHelper.deleteSessionCookie();
-            await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
         } catch (error) {
             this.dispatch({
                 type: 'handleRequestError',
