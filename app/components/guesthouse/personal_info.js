@@ -4,6 +4,11 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 
+const ValidationHelper = require('../../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+
 
 const goToPaymentInfoClicked = function (e) {
     let info = getPersonalInfo(e);
@@ -56,28 +61,36 @@ class PersonalInfo extends React.Component {
                             <div className="row pb40">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>First Name</label>
-                                        <input ref='first_name' type="text" className="form-control"/>
+                                        <label>First Name</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='first_name' type="text" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Last Name</label>
-                                        <input ref='last_name' type="text" className="form-control"/>
+                                        <label>Last Name</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='last_name' type="text" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                             </div>
                             <div className="row pb40">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>City</label>
-                                        <input ref='city' type="text" className="form-control"/>
+                                        <label>City</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='city' type="text" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Country</label>
-                                        <Country ref='countryCmp' />
+                                        <label>Country</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <Country ref='countryCmp' />
+                                        </Validate>
                                     </div>
                                 </div>
                             </div>
@@ -87,28 +100,36 @@ class PersonalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Email Address</label>
-                                        <input ref='username' type="email" className="form-control"/>
+                                        <label>Email Address</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='username' type="email" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Phone</label>
-                                        <input ref='phone_number' type="tel" className="form-control"/>
+                                        <label>Phone</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='phone_number' type="tel" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Password</label>
-                                        <input ref='password' type="password" className="form-control"/>
+                                        <label>Password</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='password' type="password" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Re-Password</label>
-                                        <input ref='renter_password' type="password" className="form-control"/>
+                                        <label>Re-Password</label><span className='required-input'> * </span>
+                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                            <input ref='renter_password' type="password" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                             </div>
