@@ -10,6 +10,11 @@ const {assetPath} = require('../helpers/asset_helper');
 const GalleryHelper=  require('../helpers/gallery_helper');
 const DateHelper = require('../helpers/date_helper');
 
+const ValidationHelper = require('../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+
 const onBookNowClicked = function (apartmentId) {
 	Actions.bookApartmentClicked({apartmentId});
 	Actions.setRoute('/guest-houses');
@@ -164,20 +169,27 @@ class ApartmentReviewForm extends React.Component {
 					</div>
 					<div className="col-xs-6 mg-star-rating">
 						<div className="mg-star-rating-title">Quality:</div> <div id="mg-star-quality" className="starrr"></div>
-						<input type="hidden" id="mg-star-quality-input"/>
+						<Validate validators={[ValidationHelper.isRequired]}>
+							<input type="hidden" id="mg-star-quality-input"/>
+						</Validate>
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-md-6">
-						<input type="text" className="form-control" placeholder="Your Name"/>
+					<Validate validators={[ValidationHelper.isRequired]}>
+						<input type="text" className="input-with-validation form-control" placeholder="Your Name *"/>
+					</Validate>
 					</div>
 					<div className="col-md-6">
-						<input type="text" className="form-control" placeholder="Your Email"/>
+						<Validate validators={[ValidationHelper.isRequired]}>
+							<input type="text" className="input-with-validation form-control" placeholder="Your Email *"/>
+						</Validate>
 					</div>
 				</div>
-
-				<textarea className="form-control" placeholder="Your Comment" rows="5"></textarea>
+				<Validate validators={[ValidationHelper.isRequired]}>
+					<textarea className="input-with-validation form-control" placeholder="Your Comment *" rows="5"></textarea>
+				</Validate>
 				<input onClick={() => {onReviewApartmentClicked()}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
 			</div>
 		);
