@@ -6,6 +6,11 @@ const Anchor  = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 
+const ValidationHelper = require('../../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+
 const processPaymentClicked = function (e) {
       let payment = getPaymentInfo(e);
       Actions.processPayment(payment);
@@ -68,22 +73,28 @@ class PaymentInfo extends React.Component {
                                     <div className="row pb40">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>First Name</label>
-                                                      <input type="text" ref='first_name' className="form-control"/>
+                                                      <label>First Name</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='first_name' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Last Name</label>
-                                                      <input type="text" ref='last_name' className="form-control"/>
+                                                      <label>Last Name</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='last_name' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                     </div>
                                     <div className="row pb40">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Address Line 1</label>
-                                                      <input type="text" ref='address_line_1' className="form-control"/>
+                                                      <label>Address Line 1</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='address_line_1' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
 
@@ -97,27 +108,33 @@ class PaymentInfo extends React.Component {
                                     <div className="row pb40">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>City</label>
-                                                      <input type="text" ref='city' className="form-control"/>
+                                                      <label>City</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='city' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Zip/Post Code</label>
-                                                      <input type="text" ref='zip' className="form-control"/>
+                                                      <label>Zip/Post Code</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='zip' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                     </div>
                                     <div className="row pb40">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>State/Region</label>
-                                                      <input type="text" ref='state' className="form-control"/>
+                                                      <label>State/Region</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='state' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Country</label>
+                                                      <label>Country</label><span className='input-with-validation required-input'> * </span>
                                                       <Country ref='countryCmp' />
                                                 </div>
                                           </div>
@@ -128,19 +145,23 @@ class PaymentInfo extends React.Component {
                                     <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Card Number</label>
-                                                      <input type="text" ref='card_number' className="form-control"/>
+                                                      <label>Card Number</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="text" ref='card_number' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>CVV</label>
-                                                      <input type="password" ref='cvv' className="form-control"/>
+                                                      <label>CVV</label><span className='required-input'> * </span>
+                                                      <Validate validators={[ValidationHelper.isRequired]}>
+                                                            <input type="password" ref='cvv' className="input-with-validation form-control"/>
+                                                      </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-12">
                                                 <div className="mg-book-form-input">
-                                                      <label>Expire</label>
+                                                      <label>Expire</label><span className='required-input'> * </span>
                                                       <div className="row">
                                                             <div className="col-md-6">
                                                                   <Month ref='monthCmp' />
@@ -154,7 +175,7 @@ class PaymentInfo extends React.Component {
                                     </div>
 
                                     <Anchor  onClick={() => {processPaymentClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
-                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
                         <BookingDetails apartment={apartment} bookingStage={bookingStage}/>
