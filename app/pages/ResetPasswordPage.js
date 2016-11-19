@@ -3,6 +3,11 @@ const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
 
+const ValidationHelper = require('../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+
 const sendCodeToEmail = function (e) {
 	let data = {
 		email : e.refs.email.value
@@ -47,8 +52,10 @@ class ResetPasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<label>Email Address</label>
-								<input ref='email' type="text" className="form-control" />
+								<label>Email Address</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input ref='email' type="text" className="input-with-validation form-control" />
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -56,7 +63,7 @@ class ResetPasswordBody extends React.Component {
 
 					<div className="row">
 						<div className="col-md-4"> </div>
-						<div className="col-md-3">
+						<div className="col-md-4">
 							<div className="mg-book-form-input">
 								<Anchor onClick = {() => {sendCodeToEmail(this)}} className="width-260 btn btn-primary">Send Code To Email</Anchor>
 							</div>
@@ -79,8 +86,10 @@ class EnterCodeBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<label>Enter Code</label>
-								<input ref='code' type="code" className="form-control"/>
+								<label>Enter Code</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input ref='code' type="code" className="input-with-validation form-control"/>
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -123,8 +132,10 @@ class CreatePasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<label>Password</label>
-								<input ref='password' type="password" className="form-control"/>
+								<label>Password</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input ref='password' type="password" className="input-with-validation form-control"/>
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -134,8 +145,10 @@ class CreatePasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<label>Confirm Password</label>
-								<input ref='confirm_password' type="password" className="form-control"/>
+								<label>Confirm Password</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input ref='confirm_password' type="password" className="input-with-validation form-control"/>
+								</Validate>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
