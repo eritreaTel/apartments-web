@@ -2,16 +2,13 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-//import Validation from 'react-validation';
-//const ValidationHelper = require('../helpers/validation_helper');
+
+const ValidationHelper = require('../helpers/validation_helper');
 const Danger = require('../components/ribbons/danger');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
-function isRequired(value) {
-	return value.length > 0;
-}
 
 const authenticateUser = function (e) {
 	let credentials = {
@@ -46,9 +43,8 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label>
-								<Validate validators={[isRequired]}>
-									<input tabindex="1" ref='email' type="text" className="width-250 float-left form-control" validations={['required', 'email']}/>
-									<ErrorMessage>*</ErrorMessage>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input tabindex="1" ref='email' type="text" className="input-with-validation form-control" />
 								</Validate>
 							</div>
 						</div>
@@ -60,9 +56,8 @@ class SignInBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Password</label>
-								<Validate validators={[isRequired]}>
-									<input tabindex="2"  ref='password' type="password" className="float-left width-250 form-control" validations={['required']}/>
-									<ErrorMessage>*</ErrorMessage>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input tabindex="2"  ref='password' type="password" className="input-with-validation width-250 form-control"/>
 								</Validate>
 							</div>
 						</div>

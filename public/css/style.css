@@ -4335,14 +4335,11 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   display: inline;
 }
 
-.float-left {
-  float: left;
+.input-with-validation {
   background:inherit;
 }
 
-.error-message {
-  display: inline;
-  float: right;
+.required-input {
   color: #FF0000;
 }
 

@@ -1,6 +1,10 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Actions = require('../actions/actions');
+const ValidationHelper = require('../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
 
 
 const submitContactUsForm = function (e) {
@@ -24,20 +28,28 @@ class ContactUsForm extends React.Component {
 					<div className="col-md-5">
 						<h2 className="mg-sec-left-title">Send an E-mail</h2>
 						<div className="mg-contact-form-input">
-							<label htmlFor="full-name">Full Name</label>
-							<input ref='full_name' type="text" className="form-control" />
+							<label htmlFor="full-name">Full Name</label><span className='required-input'> * </span>
+							<Validate validators={[ValidationHelper.isRequired]}>
+								<input ref='full_name' type="text" className="input-with-validation form-control" />
+							</Validate>
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="email">E-mail</label>
-							<input type="text" className="form-control" ref="email"/>
+							<label htmlFor="email">E-mail</label><span className='required-input'> * </span>
+							<Validate validators={[ValidationHelper.isRequired]}>
+								<input type="text" className="input-with-validation form-control" ref="email"/>
+							</Validate>
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="subject">Subject</label>
-							<input type="text" className="form-control" ref="subject"/>
+							<label htmlFor="subject">Subject</label><span className='required-input'> * </span>
+							<Validate validators={[ValidationHelper.isRequired]}>
+								<input type="text" className="input-with-validation form-control" ref="subject"/>
+							</Validate>
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="subject">Message</label>
-							<textarea className="form-control" ref="message" rows="5"></textarea>
+							<label htmlFor="subject">Message</label><span className='required-input'> * </span>
+							<Validate validators={[ValidationHelper.isRequired]}>
+								<textarea className="input-with-validation form-control" ref="message" rows="5"></textarea>
+							</Validate>
 						</div>
 						<input onClick={() => {submitContactUsForm(this)}}  type="submit" className="btn btn-dark-main pull-right" value="Send"/>
 					</div>
