@@ -106,7 +106,7 @@ class GuestHousesPage extends React.Component {
                 break;
             case 'personal' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                <PersonalInfo apartment={apartment} bookingStage={bookingStage} />
+                                <PersonalInfo apartment={apartment} user={user} bookingStage={bookingStage} />
                             </div>
                 break;
             case 'payment' :

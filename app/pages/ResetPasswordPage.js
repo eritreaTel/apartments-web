@@ -65,7 +65,7 @@ class ResetPasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-4">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {sendCodeToEmail(this)}} className="width-260 btn btn-primary">Send Code To Email</Anchor>
+								<Anchor onClick = {() => {sendCodeToEmail(this)}} className="width-265 btn btn-primary">Send Code To Email</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -101,7 +101,7 @@ class EnterCodeBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="primary-blue">resend code</Anchor>
+									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="margin-left-20 primary-blue">resend code</Anchor>
 								</div>
 							</div>
 						</div>
@@ -112,7 +112,7 @@ class EnterCodeBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {submitCode(this)}} className="width-260 btn btn-primary">Submit Code</Anchor>
+								<Anchor onClick = {() => {submitCode(this)}} className="width-265 btn btn-primary">Submit Code</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -158,7 +158,7 @@ class CreatePasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {updatePassword(this)}} className="width-260 btn btn-primary">Update Password</Anchor>
+								<Anchor onClick = {() => {updatePassword(this)}} className="width-265 btn btn-primary">Update Password</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>

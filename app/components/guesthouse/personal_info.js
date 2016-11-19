@@ -38,16 +38,21 @@ const getPersonalInfo = function (e) {
 class PersonalInfo extends React.Component {
 
     componentDidMount() {
-        const {bookingStage} =  this.props;
-        let personal = bookingStage ? bookingStage.personal : null;
-        if (personal != null) {
-            this.refs.first_name.value      = personal.first_name;
-            this.refs.last_name.value       = personal.last_name;
-            this.refs.city.value            = personal.city;
-            this.refs.phone_number.value    = personal.phone_number;
-            this.refs.username.value        = personal.username;
-            this.refs.terms.value           = personal.terms;
-            this.refs.country.value         = personal.country;
+        const {user, bookingStage} =  this.props;
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        if (loggedIn && user != null) { // If the user is loggedIn, we don't want to get information again
+
+        } else { //If the user is not logged in, but is back from payment info, re-populate data
+            let personal = bookingStage ? bookingStage.personal : null;
+            if (personal != null) {
+                this.refs.first_name.value      = personal.first_name;
+                this.refs.last_name.value       = personal.last_name;
+                this.refs.city.value            = personal.city;
+                this.refs.phone_number.value    = personal.phone_number;
+                this.refs.username.value        = personal.username;
+                this.refs.terms.value           = personal.terms;
+                this.refs.country.value         = personal.country;
+            }
         }
     }
 
