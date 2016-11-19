@@ -96,7 +96,7 @@ const NewsLetterSubscription = function () {
             <div className="widget">
                 <h2 className="mg-widget-title">Newsletter</h2>
                 <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
-                <p><input tabindex="100" name="subscription_email" type="email" className="form-control" placeholder="Your Email"/></p>
+                <p><input tabIndex="100" name="subscription_email" type="email" className="form-control" placeholder="Your Email"/></p>
                 <input onClick={() => {onNewsLetterSubscriptionClicked('dummy_email')}} name="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
             </div>
         </div>
