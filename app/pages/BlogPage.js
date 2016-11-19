@@ -9,6 +9,11 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const {assetPath} = require('../helpers/asset_helper');
 
+const ValidationHelper = require('../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+
 const onBlogFeedbackClicked = function () {
 	console.log('blog feedback clicked');
 }
@@ -117,20 +122,26 @@ const FeedBackForm = function () {
 		<div className="">
 			<h2 className="mg-sec-left-title">Leave a Reply</h2>
 			<div>
-				<label>Full Name</label>
-				<input type="text" className="form-control"/>
+				<label>Full Name</label><span className='required-input'> * </span>
+				<Validate validators={[ValidationHelper.isRequired]}>
+					<input type="text" className="input-with-validation form-control"/>
+				</Validate>
 			</div>
 			<div>
-				<label>Email</label>
-				<input type="email" className="form-control"/>
+				<label>Email</label><span className='required-input'> * </span>
+				<Validate validators={[ValidationHelper.isRequired]}>
+					<input type="email" className="input-with-validation form-control"/>
+				</Validate>
 			</div>
 			<div>
 				<label>Website</label>
 				<input type="text" className="form-control"/>
 			</div>
 			<div>
-				<label>Comment</label>
-				<textarea className="form-control" rows="7"></textarea>
+				<label>Comment</label><span className='required-input'> * </span>
+				<Validate validators={[ValidationHelper.isRequired]}>
+					<textarea className="input-with-validation form-control" rows="7"></textarea>
+				</Validate>
 			</div>
 
 			<input onClick={() => {onBlogFeedbackClicked()}} type="button" value="Post Comment" className="btn btn-dark-main"/>

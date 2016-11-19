@@ -1,6 +1,7 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Actions = require('../actions/actions');
+
 const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
