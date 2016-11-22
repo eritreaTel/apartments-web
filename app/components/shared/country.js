@@ -1,9 +1,9 @@
 const React = require('react');
 
 
-class Country  extends React.Component {
-        render() {
-            return (
+class CountrySelect  extends React.Component {
+    render () {
+        return (
                 <select  ref='country' className="form-control">
                     <option value="">Select your country</option>
                     <option value="United States">United States</option>
@@ -268,6 +268,29 @@ class Country  extends React.Component {
                     <option value="Zambia">Zambia</option>
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select>
+        );
+    }
+}
+
+class OneCountry extends React.Component {
+    render() {
+        return (
+            <input ref='countryDisplay' disabled='disabled' type="text" className='form-control' />
+        );
+    }
+}
+
+
+class Country  extends React.Component {
+        render() {
+            const {disabled} = this.props;
+
+            let country = (disabled == 'disabled') ? <OneCountry ref='countryCmp' /> : <CountrySelect ref='countryCmp'/>
+
+            return (
+                <div>
+                    {country}
+                </div>
             );
         }
 }

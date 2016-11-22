@@ -34,7 +34,7 @@ const getPaymentInfo = function (e) {
             'city' : e.refs.city.value,
             'state' : e.refs.state.value,
             'zip'  : e.refs.zip.value,
-            'country' : e.refs.countryCmp.refs.country.value,
+            'country' : e.refs.countryCmp.refs.countryCmp.refs.country.value,
             'card_number'  : e.refs.card_number.value,
             'cvv'  : e.refs.cvv.value,
             'month' : e.refs.monthCmp.refs.month.value,
