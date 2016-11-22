@@ -1,7 +1,7 @@
 const React = require('react');
-const ApartmentAvailable = require('../components/apartment/apartment_available');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
+const SearchResult   = require('../components/guesthouse/search_result');
 const PaymentInfo   = require('../components/guesthouse/payment_info');
 const ReservationConfirmation      = require('../components/guesthouse/reservation_confirmation');
 const PageTitle = require('../components/shared/pageTitle');
@@ -10,7 +10,6 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
 const ApartmentHelper = require('../helpers/apartment_helper');
-
 
 
 const BookingStaging = function(props) {
@@ -42,23 +41,6 @@ const SearchApartments = function (props) {
     );
 }
 
-const AvailableApartments = function(props) {
-    const AvailableApartments = props.apartments.map(apt => {
-        return <ApartmentAvailable apartment={apt} key={apt.id} />
-    });
-
-    return(
-        <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-            <div className="mg-available-rooms">
-                <h2 className="mg-sec-left-title">Available Apartments</h2>
-                <div className="mg-avl-rooms">
-                    {AvailableApartments}
-                </div>
-            </div>
-        </div>
-    );
-}
-
 const GuestHouseBody = function(props) {
     return (
         <div>
@@ -86,22 +68,22 @@ const GuestHouseBody = function(props) {
 
 class GuestHousesPage extends React.Component {
 
+    state = {};
+
     componentWillMount() {
         Actions.getAuthenticatedUser();
     }
 
     render() {
-        const {store : {user, apartments, apartment, bookingStage}} = this.props;
-        console.log('active state : ' + bookingStage.activeStage);
-        console.log('authenticated user is');
-        console.log(user);
+        const {store : {user, pageNumber, apartments, apartment, bookingStage}} = this.props;
+        console.log('page number inside guestHouse page component is : ' + pageNumber );
         let section ;
 
         switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <AvailableApartments apartments = {apartments} />
+                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
                 break;
             case 'personal' :
@@ -120,7 +102,7 @@ class GuestHousesPage extends React.Component {
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <AvailableApartments apartments = {apartments} />
+                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo} />
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );

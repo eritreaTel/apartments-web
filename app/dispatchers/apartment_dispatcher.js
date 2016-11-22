@@ -32,18 +32,26 @@ module.exports = {
         }
     },
 
-    async getApartments(data) {
-        const url = 'apartments?pageSize=3';
-        console.log('I am here for get apartments');
+    async getApartments({checkInDate, checkOutDate, room, bed, totalDays, pageNumber}) {
+
+
+        if (typeof pageNumber ==='undefined') {
+            pageNumber = 1;
+        }
+        const url = 'apartments?checkInDate=' + checkInDate + '&checkOutDate=' + checkOutDate + '&room=' + room + '&bed='+bed + '&pageNumber=' + pageNumber;
+        console.log(url);
+
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             this.setStoreVal('requestUrl', url);
 
-
             if (this.acquireLock('getApartments')) {
+
+                console.log('getting apartments from database');
                 try {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                     if (response.data && response.data.results && response.data.results.length > 0) {
-                        this.setStoreVal('apartments', response.data.results);
+                        this.setStoreVal('pageNumber', pageNumber);
+                        this.concatStoreVal('apartments', response.data.results);
                     }
                 } catch (error) {
                     this.dispatch({
