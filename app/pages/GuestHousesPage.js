@@ -101,7 +101,6 @@ class GuestHousesPage extends React.Component {
                 section =  <ReservationConfirmation apartment={apartment} bookingStage={bookingStage} />
                 break;
             default:
-                console.log('in here reding search results');
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
                                 <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>

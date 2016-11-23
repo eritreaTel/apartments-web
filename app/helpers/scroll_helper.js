@@ -4,7 +4,7 @@ module.exports = {
       let containerBottom = container.innerHeight || container.getBoundingClientRect().bottom;
       let containedBottom = contained.innerHeight || contained.getBoundingClientRect().bottom;
 
-      const check = (Math.abs(containerBottom - containedBottom) <= 100);
+      const check = (Math.abs(containerBottom - containedBottom) <= 575);
 
       if (check) {
         cb();
@@ -14,7 +14,6 @@ module.exports = {
     return handleScroll;
   },
   uninstallScroll(container, listener) {
-    console.log('in uninstall scroller');
     container.removeEventListener('scroll', listener);
   }
 };

@@ -8,22 +8,26 @@ class SearchResult extends React.Component {
     state = {}
     componentDidMount() {
         const {pageNumber, searchInfo} = this.props;
-        console.log('the page number');
-        console.log(pageNumber);
-
         let nextPageSearchInfo = {...searchInfo,  pageNumber: pageNumber + 1};
-        console.log(nextPageSearchInfo);
 
-        //console.log(pageNumber + 1);
         this.state.scrollListener = ScrollHelper.installScroll(window, document.body, () => {
             Actions.getApartments(nextPageSearchInfo);
         });
     }
 
     shouldComponentUpdate(){
-        console.log('component will update');
+        ScrollHelper.uninstallScroll(window, this.state.scrollListener);
         return true;
     }
+
+    componentDidUpdate() {
+        const {pageNumber, searchInfo} = this.props;
+        let nextPageSearchInfo = {...searchInfo,  pageNumber: pageNumber + 1};
+        this.state.scrollListener = ScrollHelper.installScroll(window, document.body, () => {
+                Actions.getApartments(nextPageSearchInfo);
+        });
+    }
+
 
     componentWillUnmount() {
         ScrollHelper.uninstallScroll(window, this.state.scrollListener);
