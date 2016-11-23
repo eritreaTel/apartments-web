@@ -14,6 +14,7 @@ module.exports = {
     return handleScroll;
   },
   uninstallScroll(container, listener) {
+    console.log('in uninstall scroller');
     container.removeEventListener('scroll', listener);
   }
 };

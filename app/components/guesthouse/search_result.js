@@ -5,8 +5,7 @@ const Actions = require('../../actions/actions');
 
 class SearchResult extends React.Component {
 
-    state ={}
-
+    state = {}
     componentDidMount() {
         const {pageNumber, searchInfo} = this.props;
         console.log('the page number');
@@ -19,6 +18,11 @@ class SearchResult extends React.Component {
         this.state.scrollListener = ScrollHelper.installScroll(window, document.body, () => {
             Actions.getApartments(nextPageSearchInfo);
         });
+    }
+
+    shouldComponentUpdate(){
+        console.log('component will update');
+        return true;
     }
 
     componentWillUnmount() {

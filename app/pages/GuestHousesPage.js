@@ -75,8 +75,9 @@ class GuestHousesPage extends React.Component {
     }
 
     render() {
+        const {store} = this.props;
         const {store : {user, pageNumber, apartments, apartment, bookingStage}} = this.props;
-        console.log('page number inside guestHouse page component is : ' + pageNumber );
+        console.log('page number inside guestHouse page component is : ' + pageNumber + ' and stage is '+ bookingStage.activeStage );
         let section ;
 
         switch (bookingStage.activeStage) {
@@ -100,9 +101,10 @@ class GuestHousesPage extends React.Component {
                 section =  <ReservationConfirmation apartment={apartment} bookingStage={bookingStage} />
                 break;
             default:
+                console.log('in here reding search results');
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo} />
+                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );

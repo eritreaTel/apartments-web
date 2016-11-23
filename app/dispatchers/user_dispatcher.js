@@ -50,7 +50,6 @@ module.exports = {
                 CookiesHelper.addDataToCookie('userId', object.id, 3600);
                 CookiesHelper.addDataToCookie('userType', object.type, 3600);
                 this.dispatch({type: 'setRoute', data: '/my-account'});
-
             } catch (error) {
                 this.dispatch({
                     type: 'handleRequestError',
@@ -71,6 +70,7 @@ module.exports = {
         try {
             CookiesHelper.deleteSessionCookie();
             this.setStoreVal('user', null);
+            //window.location.reload()
         } catch (error) {
             this.dispatch({
                 type: 'handleRequestError',
