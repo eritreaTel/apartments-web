@@ -43,6 +43,16 @@ const getPersonalInfo = function (e) {
     }
 }
 
+const populatePersonalInfo = function(e, user) {
+    e.refs.first_name.value      = user.first_name;
+    e.refs.last_name.value       = user.last_name;
+    e.refs.city.value            = user.city;
+    e.refs.phone_number.value    = user.phone_number;
+    e.refs.email.value           = user.email;
+    e.refs.terms.value           = user.terms;
+    e.refs.countryCmp.refs.countryCmp.refs.countryDisplay.value = user.country;
+}
+
 class PersonalInfo extends React.Component {
 
     componentDidMount() {
@@ -50,13 +60,7 @@ class PersonalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         if (loggedIn) { // If the user is loggedIn, we don't want to get information again
-            this.refs.first_name.value      = user.first_name;
-            this.refs.last_name.value       = user.last_name;
-            this.refs.city.value            = user.city;
-            this.refs.phone_number.value    = user.phone_number;
-            this.refs.email.value           = user.email;
-            this.refs.terms.value           = user.terms;
-            this.refs.countryCmp.refs.countryCmp.refs.countryDisplay.value = user.country;
+            populatePersonalInfo(this, user);
         } else { //If the user is not logged in, but is back from payment info, re-populate data
             let personal = bookingStage ? bookingStage.personal : null;
             if (personal != null) {
@@ -68,6 +72,14 @@ class PersonalInfo extends React.Component {
                 this.refs.terms.value           = personal.terms;
                 this.refs.countryCmp.refs.countryCmp.refs.country.value = personal.country;
             }
+        }
+    }
+
+    componentDidUpdate(){
+        const {user, bookingStage} =  this.props;
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        if (loggedIn) { // If the user is loggedIn, we don't want to get information again
+            populatePersonalInfo(this, user);
         }
     }
 
