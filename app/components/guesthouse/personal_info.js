@@ -88,6 +88,7 @@ class PersonalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
         let disableElement = loggedIn ? 'disabled' : '';
         let passwordSectionClass = loggedIn ? 'hide row' : 'row';
+        let acceptTermsCss = loggedIn ? 'hide clearfix mg-terms-input' : 'clearfix mg-terms-input';
 
         return (
                 <div className="row">
@@ -170,7 +171,7 @@ class PersonalInfo extends React.Component {
                                 </div>
                             </div>
 
-                            <div className="clearfix mg-terms-input">
+                            <div className={acceptTermsCss}>
                                 <div className="pull-right">
                                     <label><input disabled={disableElement} ref ='terms' type="checkbox"/> By Sign up you are agree with our <Anchor>terms and condition</Anchor></label>
                                 </div>
