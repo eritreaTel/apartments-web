@@ -39,7 +39,9 @@ module.exports = {
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
                     this.releaseLock('logIn');
-                    this.dispatch({type: 'setErrorMessages', errors});
+                    console.log('right before calling setErrorMessages');
+                    console.log(errors);
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
                     return;
                 }
                 this.setStoreVal('user', object);

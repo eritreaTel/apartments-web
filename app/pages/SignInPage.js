@@ -21,14 +21,9 @@ const authenticateUser = function (e) {
 
 class SignInBody extends React.Component {
 
-	componentWillMount() {
-		//Object.assign(Validation.rules, ValidationHelper.getRules());
-
-	}
-
 	render() {
-		const errorMessage = this.props.errorMessage;
-		let errorClass = (errorMessage == null || errorMessage == undefined) ? 'row hide' : 'row show';
+		const {errors} = this.props;
+		let errorClass = (errors.length == 0) ? 'row hide' : 'row show';
 		return (
 			<div className="mg-about-features">
 				<ValidateGroup>
@@ -36,7 +31,7 @@ class SignInBody extends React.Component {
 						<div className={errorClass}>
 							<div className="col-md-3"> </div>
 							<div className='col-md-6'>
-								<Danger message= {errorMessage} />
+								<Danger errors= {errors} />
 							</div>
 							<div className="col-md-3"> </div>
 						</div>
@@ -114,14 +109,11 @@ class SignInPage extends React.Component {
 	render() {
 
 		const {store: {errors}} = this.props;
-		//console.log('inside signIn page');
-		let errorMessage = errors ? errors[0] : null;
-		//console.log(errors[0]);
 
 		return (
 			<div>
 				<PageTitle parentClassName="mg-page-title-space parallax"/>
-				<SignInBody errorMessage={errorMessage} />
+				<SignInBody errors={errors} />
 			</div>
 		);
 	}

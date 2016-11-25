@@ -1,4 +1,5 @@
 const React = require('react');
+const MessageList = require('./messageList');
 
 const Danger = function (props) {
     return (
@@ -7,7 +8,7 @@ const Danger = function (props) {
                 <span aria-hidden="true"> &times;</span>
             </button>
             <i className="fa fa-question-circle"></i> <strong>Oh error! </strong>
-            {props.message}
+            <MessageList messages={props.errors} />
         </div>
     );
 }

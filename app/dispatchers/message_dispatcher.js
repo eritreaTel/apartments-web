@@ -47,11 +47,9 @@ module.exports = {
     },
 
     setErrorMessages(data) {
-        console.log('beging setErrorMessage');
-        data = ['invalid username and password'];
-        console.log(data);
-        console.log('end setErrorMessage');
-        this.setStoreVal('errors', data);
+        let {errors, errorMessage} = data;
+        this.setStoreVal('errors', errors);
+        this.setStoreVal('errorMessage', errorMessage);
         this.dispatch({type: 'scheduleClearErrorsAndMessages'});
     },
 

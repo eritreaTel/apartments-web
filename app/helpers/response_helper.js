@@ -1,7 +1,7 @@
 const ResponseHelper = {
 
     processResponseReturnOne(response) {
-        let object = null, errors = [] ;
+        let object = null, errors = [], errorMessage = '' ;
         if (response) {
             if (response.data) {
                 object = response.data.results[0];
@@ -11,7 +11,7 @@ const ResponseHelper = {
                     _.each(response.errors[0], (error) => {
                         errors.push(error);
                     });
-                    console.log(errors);
+
                 } catch (e) {
                     console.log('run in to error');
                     //console.log(e);
