@@ -2,7 +2,7 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-const Danger = require('../components/ribbons/danger');
+const ShowMessage = require('../components/ribbons/showMessage');
 
 const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -47,19 +47,13 @@ class ResetPasswordBody extends React.Component {
 
 	render() {
 		const {errors} = this.props;
-		let errorClass = (errors.length == 0) ? 'row hide' : 'row show';
+		console.log('inside reset password');
+		console.log(errors);
 
 		return (
 			<div className="mg-about-features">
 				<div className="container">
-					<div className={errorClass}>
-						<div className="col-md-3"> </div>
-						<div className='col-md-6'>
-							<Danger errors= {errors} />
-						</div>
-						<div className="col-md-3"> </div>
-					</div>
-
+					<ShowMessage errors={errors} />
 					<div className="row">
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
@@ -197,22 +191,22 @@ const ResetMyPasswordBody = function (props) {
 class ResetPasswordPage extends React.Component {
 
 	render() {
-		const{store: {resetPassword}} = this.props;
+		const{store: {resetPassword, errors}} = this.props;
 		const {email, stage} = resetPassword;
 		console.log('email is' + email);
 		console.log('stage is ' + stage);
-
+		
 		let section ;
 
 		switch (stage) {
 			case 'code-sent':
-				section = (email)? <EnterCodeBody resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} />
+				section = (email)? <EnterCodeBody errors={errors} resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} errors={errors}/>
 				break;
 			case 'code-validated' :
-				section = (email)?  <CreatePasswordBody resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} />
+				section = (email)?  <CreatePasswordBody errors={errors} resetPassword={resetPassword} /> : <ResetPasswordBody errors={errors} resetPassword={resetPassword} />
 				break;
 			default :
-				section = <ResetPasswordBody resetPassword={resetPassword} />
+				section = <ResetPasswordBody errors={errors} resetPassword={resetPassword} />
 				break;
 		}
 

@@ -4372,3 +4372,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 .bold {
   font-weight: 600;
 }
+
+.float-left {
+  float:left;
+}

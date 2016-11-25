@@ -39,8 +39,6 @@ module.exports = {
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
                     this.releaseLock('logIn');
-                    console.log('right before calling setErrorMessages');
-                    console.log(errors);
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
                     return;
                 }
@@ -112,10 +110,16 @@ module.exports = {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    let {email} = data;
-                    this.mergeStoreVal('resetPassword', {email: email, stage: 'code-sent'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.releaseLock('sendResetPasswordToken');
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    return;
                 }
+
+                let {email} = data;
+                this.mergeStoreVal('resetPassword', {email: email, stage: 'code-sent'});
+
             } catch (error) {
                 this.dispatch({
                     type: 'handleRequestError',
