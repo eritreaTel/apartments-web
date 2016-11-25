@@ -2,9 +2,9 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
+const ShowMessage = require('../components/ribbons/showMessage');
 
 const ValidationHelper = require('../helpers/validation_helper');
-const Danger = require('../components/ribbons/danger');
 const ReactValiation = require('react-validate');
 const Validate     	= ReactValiation.Validate;
 const ErrorMessage 	= ReactValiation.ErrorMessage;
@@ -23,18 +23,11 @@ class SignInBody extends React.Component {
 
 	render() {
 		const {errors} = this.props;
-		let errorClass = (errors.length == 0) ? 'row hide' : 'row show';
 		return (
 			<div className="mg-about-features">
 				<ValidateGroup>
 					<div className="container">
-						<div className={errorClass}>
-							<div className="col-md-3"> </div>
-							<div className='col-md-6'>
-								<Danger errors= {errors} />
-							</div>
-							<div className="col-md-3"> </div>
-						</div>
+						<ShowMessage errors={errors} />
 						<div className="row">
 							<div className="col-md-4"> </div>
 							<div className="col-md-3">

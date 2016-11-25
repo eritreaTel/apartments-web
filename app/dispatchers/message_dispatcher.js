@@ -4,7 +4,7 @@ const MESSAGE_LIFETIME = 4000;
 module.exports = {
     clearErrorsAndMessages() {
         this.setStoreVal('errors', []);
-        this.setStoreVal('messages', []);
+        this.setStoreVal('message', null);
     },
 
     async handleRequestError({error, defaultErrorMessage, override}) {

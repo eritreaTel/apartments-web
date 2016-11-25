@@ -49,7 +49,7 @@ module.exports = {
                         errors: [],
                         lastEvent: null,
                         locks: {},
-                        messages: [],
+                        message: null,
                         view: {},
                         pageNumber: null,
                         acceptToS : false
