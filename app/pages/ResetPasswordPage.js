@@ -85,9 +85,11 @@ class ResetPasswordBody extends React.Component {
 
 class EnterCodeBody extends React.Component {
 	render() {
+		let {errors} = this.props;
 		return (
 			<div className="mg-about-features">
 				<div className="container">
+					<ShowMessage errors={errors} />
 					<div className="row">
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
@@ -195,7 +197,7 @@ class ResetPasswordPage extends React.Component {
 		const {email, stage} = resetPassword;
 		console.log('email is' + email);
 		console.log('stage is ' + stage);
-		
+
 		let section ;
 
 		switch (stage) {

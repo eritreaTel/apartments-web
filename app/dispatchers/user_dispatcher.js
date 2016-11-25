@@ -141,9 +141,15 @@ module.exports = {
                 let {email} = this.getStoreVal('resetPassword');
                 const response = await FetchHelper.fetchJson(url, {body: {code, email} , method: 'POST'});
 
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.releaseLock('validateResetPasswordToken');
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    return;
                 }
+
+                this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
+
             } catch (error) {
                 this.dispatch({
                     type: 'handleRequestError',
