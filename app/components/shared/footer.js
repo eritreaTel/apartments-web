@@ -19,6 +19,7 @@ const FooterMenu = function () {
                             <li><Anchor onClick={()=>{Actions.setRoute('/index')}}>Home</Anchor> </li>
                             <li><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
                             <li><Anchor onClick={()=>{Actions.setRoute('/privacy-policy')}}>Privacy Policy</Anchor> </li>
+                            <li><Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>Terms of Use</Anchor> </li>
                             <li><Anchor onClick={()=>{Actions.setRoute('/blogs')}}>Blogs</Anchor> </li>
                             <li><Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
                         </ul>

@@ -191,5 +191,9 @@ module.exports = {
 
     async goBackToResetPasswordBody() {
         this.mergeStoreVal('resetPassword', {stage: ''});
+    },
+
+    acceptTermsAndServices({checked}) {
+        this.setStoreVal('acceptToS', checked);
     }
 };

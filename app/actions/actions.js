@@ -140,6 +140,10 @@ const Actions = {
 
     goBackToResetPasswordBody(data) {
         Dispatcher.dispatch({type: 'goBackToResetPasswordBody'});
+    },
+
+    acceptTermsAndServices(data) {
+        Dispatcher.dispatch({type: 'acceptTermsAndServices', data});
     }
 };
 

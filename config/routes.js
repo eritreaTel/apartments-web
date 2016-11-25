@@ -12,4 +12,6 @@ module.exports = {
   "/blog/:id": "viewBlog",
   "/my-account" : "myAccount",
   "/reset-password" : "resetPassword",
+  "/terms-of-use" : "termsOfUse",
+  "/privacy-policy" : "privacyPolicy"
 };

@@ -76,7 +76,7 @@ class GuestHousesPage extends React.Component {
 
     render() {
         const {store} = this.props;
-        const {store : {user, pageNumber, apartments, apartment, bookingStage}} = this.props;
+        const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS}} = this.props;
         console.log('page number inside guestHouse page component is : ' + pageNumber + ' and stage is '+ bookingStage.activeStage );
         let section ;
 
@@ -89,7 +89,7 @@ class GuestHousesPage extends React.Component {
                 break;
             case 'personal' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                <PersonalInfo apartment={apartment} user={user} bookingStage={bookingStage} />
+                                <PersonalInfo acceptToS={acceptToS} apartment={apartment} user={user} bookingStage={bookingStage} />
                             </div>
                 break;
             case 'payment' :

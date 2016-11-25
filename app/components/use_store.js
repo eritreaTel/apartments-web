@@ -51,7 +51,8 @@ module.exports = {
                         locks: {},
                         messages: [],
                         view: {},
-                        pageNumber: null
+                        pageNumber: null,
+                        acceptToS : false
                     }
                 };
             }

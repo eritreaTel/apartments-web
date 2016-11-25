@@ -8,6 +8,8 @@ const NotFoundPage = require('../pages/NotFoundPage');
 const BlogPage = require('../pages/BlogPage');
 const SignInPage = require('../pages/SignInPage');
 const MyAccountPage = require('../pages/MyAccountPage');
+const TermsOfUse = require('../pages/TermsOfUse');
+const PrivacyPolicy = require('../pages/PrivacyPolicy');
 const ResetPasswordPage = require('../pages/ResetPasswordPage');
 const CookiesHelper = require('../helpers/cookies_helper');
 
@@ -60,6 +62,12 @@ class Page extends React.Component {
                 break;
             case 'reset-password' :
                 content = <ResetPasswordPage {...{store}} />
+                break;
+            case 'terms-of-use' :
+                content = <TermsOfUse {...{store}} />
+                break;
+            case 'privacy-policy' :
+                content = <PrivacyPolicy {...{store}} />
                 break;
             case '404':
             default:

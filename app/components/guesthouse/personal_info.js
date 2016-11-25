@@ -4,6 +4,7 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
+const Checkbox = require('../shared/checkbox');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -37,7 +38,7 @@ const getPersonalInfo = function (e) {
         'email' : e.refs.email.value,
         'password' : e.refs.password.value,
         'renter_password' : e.refs.renter_password.value,
-        'terms' : e.refs.terms.value,
+        'terms' : e.refs.termsCmp.refs.terms.value,
         'type' : 'seeker',
         'is_active' : 1
     }
@@ -69,7 +70,6 @@ class PersonalInfo extends React.Component {
                 this.refs.city.value            = personal.city;
                 this.refs.phone_number.value    = personal.phone_number;
                 this.refs.email.value           = personal.email;
-                this.refs.terms.value           = personal.terms;
                 this.refs.countryCmp.refs.countryCmp.refs.country.value = personal.country;
             }
         }
@@ -84,7 +84,7 @@ class PersonalInfo extends React.Component {
     }
 
     render() {
-        const {apartment, bookingStage} = this.props;
+        const {apartment, bookingStage, acceptToS} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
         let disableElement = loggedIn ? 'disabled' : '';
         let passwordSectionClass = loggedIn ? 'hide row' : 'row';
@@ -173,7 +173,7 @@ class PersonalInfo extends React.Component {
 
                             <div className={acceptTermsCss}>
                                 <div className="pull-right">
-                                    <label><input disabled={disableElement} ref ='terms' type="checkbox"/> By Sign up you are agree with our <Anchor>terms and condition</Anchor></label>
+                                    <Checkbox name='terms' defaultChecked={acceptToS} checked={acceptToS} ref ='termsCmp' label=' By Sign up you are agree with our terms and condition' />
                                 </div>
                             </div>
 
