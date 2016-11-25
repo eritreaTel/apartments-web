@@ -59,7 +59,7 @@ class SignInBody extends React.Component {
 								<div className="mg-book-form-input">
 									<label>Password</label><span className='required-input'> * </span>
 									<Validate validators={[ValidationHelper.isRequired]}>
-										<input tabIndex="2"  ref='password' type="password" className="input-with-validation form-control"/>
+										<input tabIndex="2"  ref='password' onEnter = {() => {authenticateUser(this)}} type="password" className="input-with-validation form-control"/>
 									</Validate>
 								</div>
 							</div>
