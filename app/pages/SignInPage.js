@@ -28,14 +28,14 @@ class SignInBody extends React.Component {
 
 	render() {
 		const errorMessage = this.props.errorMessage;
-		let errorClass = (errorMessage == null || errorMessage == undefined) ? ' col-md-6 hide' : 'col-md-6 show';
+		let errorClass = (errorMessage == null || errorMessage == undefined) ? 'row hide' : 'row show';
 		return (
 			<div className="mg-about-features">
 				<ValidateGroup>
 					<div className="container">
-						<div className="row">
+						<div className={errorClass}>
 							<div className="col-md-3"> </div>
-							<div className={errorClass}>
+							<div className='col-md-6'>
 								<Danger message= {errorMessage} />
 							</div>
 							<div className="col-md-3"> </div>
@@ -59,7 +59,7 @@ class SignInBody extends React.Component {
 								<div className="mg-book-form-input">
 									<label>Password</label><span className='required-input'> * </span>
 									<Validate validators={[ValidationHelper.isRequired]}>
-										<input tabIndex="2"  ref='password' onEnter = {() => {authenticateUser(this)}} type="password" className="input-with-validation form-control"/>
+										<input tabIndex="2"  ref='password' onClick = {() => {authenticateUser(this)}} type="password" className="input-with-validation form-control"/>
 									</Validate>
 								</div>
 							</div>
@@ -72,7 +72,7 @@ class SignInBody extends React.Component {
 								<div className="row">
 									<div className="col-md-6"> </div>
 									<div className="col-md-6">
-										<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="margin-left-6 primary-blue">forgot password</Anchor>
+										<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="margin-left-20 primary-blue">forgot password</Anchor>
 									</div>
 								</div>
 							</div>

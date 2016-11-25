@@ -1,37 +1,23 @@
-const _ = require('lodash');
-
 const ResponseHelper = {
 
     processResponseReturnOne(response) {
-        let object = null, errors = null ;
+        let object = null, errors = [] ;
         if (response) {
             if (response.data) {
                 object = response.data.results[0];
             } else if(response.errors) {
 
                 try {
-                    const text =  response.errors.text();
-                    console.log('parsed text is ');
-                    console.log(text);
-
-                    const parsed = JSON.parse(text);
-
-                    console.log('parsed is ');
-                    console.log(parsed);
-                    if (parsed.messages && parsed.messages.length) errorMessages = parsed.messages;
-
-                    console.log('error messages');
-                    console.log(errorMessages);
+                    _.each(response.errors[0], (error) => {
+                        errors.push(error);
+                    });
+                    console.log(errors);
                 } catch (e) {
                     console.log('run in to error');
-                    console.log(e);
-                    //add airbrake once it is figure out
+                    //console.log(e);
+                    //TODO.Amanuel, please change this to json error
+                    errors.push("Run in to error. Please contact  us if you believe you getting this error by mistake.");
                 }
-
-                //errors = response.errors.map(error => {return _keys(error)});
-                errors = 'The email must be a valid email address.';
-                //console.log('proccessed error response is ');
-                //console.log(errors);
             }
         }
         return {object, errors};

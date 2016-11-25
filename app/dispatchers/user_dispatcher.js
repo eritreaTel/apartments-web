@@ -37,12 +37,9 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
-                console.log(errors);
-                if (errors) {
-                    console.log('calling setErrorMessage with ');
-                    console.log(errors);
+                if (errors.length > 0) {
                     this.releaseLock('logIn');
-                    this.dispatch({type: 'setErrorMessages', errors});  //@ TODO:Amanuel, pass the whole array
+                    this.dispatch({type: 'setErrorMessages', errors});
                     return;
                 }
                 this.setStoreVal('user', object);
