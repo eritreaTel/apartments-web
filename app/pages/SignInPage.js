@@ -21,6 +21,12 @@ const authenticateUser = function (e) {
 
 class SignInBody extends React.Component {
 
+	handleKeyPress(target) {
+		if(target.charCode==13){
+			//authenticateUser(this); implement this in the future
+		}
+	}
+
 	render() {
 		const {errors} = this.props;
 		return (
@@ -47,7 +53,7 @@ class SignInBody extends React.Component {
 								<div className="mg-book-form-input">
 									<label>Password</label><span className='required-input'> * </span>
 									<Validate validators={[ValidationHelper.isRequired]}>
-										<input tabIndex="2"  ref='password' onClick = {() => {authenticateUser(this)}} type="password" className="input-with-validation form-control"/>
+										<input tabIndex="2"  ref='password' onKeyPress = {this.handleKeyPress} type="password" className="input-with-validation form-control"/>
 									</Validate>
 								</div>
 							</div>
@@ -60,7 +66,7 @@ class SignInBody extends React.Component {
 								<div className="row">
 									<div className="col-md-6"> </div>
 									<div className="col-md-6">
-										<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="margin-left-20 primary-blue">forgot password</Anchor>
+										<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="primary-blue">forgot password</Anchor>
 									</div>
 								</div>
 							</div>

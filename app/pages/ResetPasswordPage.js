@@ -109,7 +109,7 @@ class EnterCodeBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="margin-left-20 primary-blue">resend code</Anchor>
+									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="primary-blue">resend code</Anchor>
 								</div>
 							</div>
 						</div>
