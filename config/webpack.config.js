@@ -9,9 +9,18 @@ module.exports = {
       // if you need different loaders (in a specific config file in webpack*.js),
       // please note that the entire loaders array must be replaced
       loaders: [
-        {test: /config\.js$/, loader: path.join(__dirname, 'config_loader')},
-        {test: /\.json$/, loader: "json"},
-        {test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader'}
+        {
+            test: /config\.js$/,
+            loader: path.join(__dirname, 'config_loader')
+        },
+        {
+            test: /\.json$/,
+            loader: "json-loader"
+        },
+        {   test: /\.jsx?$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        }
       ]
     },
     port: 8000,
