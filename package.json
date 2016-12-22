@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Fullstack.io",
   "scripts": {
-    "start": "webpack-dev-server  --config config/local_webpack.config.js",
+    "start": "webpack-dev-server  --config config/webpack.config.js",
     "go": "open http://localhost:3000; npm run server",
     "e2e": "nightwatch; npm run reset-data;",
     "server": "./node_modules/.bin/babel-node server.js"

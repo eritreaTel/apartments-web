@@ -1,6 +1,11 @@
 const camelCase = require('lodash.camelcase');
-let enviroment = process.env["NODE_ENV"];
-console.log(enviroment);
+let localConfig;
+
+try {
+    localConfig = process.env.NODE_ENV === 'development' ? require('./local.json') : {};
+} catch(e) {
+    localConfig = {};
+}
 
 const env = require('./env.json').reduce((memo, key) => {
         if (key in process.env) {
@@ -14,4 +19,4 @@ const env = require('./env.json').reduce((memo, key) => {
 return memo;
 }, {});
 
-module.exports = Object.assign({}, require('./application.json'), require(`./${enviroment}.json`), env);
+module.exports = Object.assign({}, require('./application.json'), require(`./local.json`), env, localConfig);
