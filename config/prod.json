@@ -3,7 +3,7 @@
   "assetPort": 443,
   "hotModule": false,
   "isLocal": false,
-  "loginHost": "http://35.166.73.121",
+  "loginHost": "http://172.31.22.24",
   "toolsHost": "http://ugandabooking.com",
   "clientErrorLoggingEnabled": false,
   "cookieDomain": ".ugandabooking.com"
