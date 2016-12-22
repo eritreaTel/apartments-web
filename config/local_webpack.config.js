@@ -1,4 +1,5 @@
 const path = require('path');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 module.exports = {
     bail: false,
@@ -35,5 +36,12 @@ module.exports = {
         colors: true,
         historyApiFallback: true,
         inline: true
-    }
+    },
+    plugins: [
+        new DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify("local")
+            }
+        })
+    ]
 };
