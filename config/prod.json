@@ -1,6 +1,6 @@
 {
-  "assetHost": "ugandabooking.com",
-  "assetPort": 443,
+  "assetHost": "https://s3.eu-west-2.amazonaws.com",
+  "bucketInfo" : "ugandabooking-assets/prod/system",
   "hotModule": false,
   "isLocal": false,
   "loginHost": "http://35.162.253.99",
