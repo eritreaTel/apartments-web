@@ -24,8 +24,29 @@ module.exports = {
         this.router.setRoute(data);
     },
 
-    searchApartmentsClicked(data) {
+    searchApartmentsUpdated({checkInDate, checkOutDate, room, bed}) {
+        let bookingStage = this.getStoreVal('bookingStage');
+        let data = (bookingStage.searchInfo != null) ? bookingStage.searchInfo : {};
+
+        if (checkInDate != null) {
+            data.checkInDate = checkInDate;
+        }
+        if (checkOutDate != null) {
+            data.checkOutDate = checkOutDate;
+        }
+        if (checkInDate != null) {
+            data.room = room;
+        }
+        if (checkInDate != null) {
+            data.bed = bed;
+        }
+
+        console.log("inside update search apartment clicked, and data is: ");
+        console.log(data);
         this.mergeStoreVal('bookingStage', {searchInfo: data});
+    },
+
+    searchApartmentsClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },
 

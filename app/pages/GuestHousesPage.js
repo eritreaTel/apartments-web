@@ -10,6 +10,7 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
 const ApartmentHelper = require('../helpers/apartment_helper');
+const DateHelper = require('../helpers/date_helper');
 
 
 const BookingStaging = function(props) {
@@ -125,7 +126,21 @@ const WithUserLoaded = withDataLoaded({
         data: [
             {
                 storeKeys: ['apartments'],
-                loadDataFn: ({bookingStage : {searchInfo}}) => Actions.getApartments(searchInfo)
+                loadDataFn: (store) => {
+                    let searchInfo;
+                    let {bookingStage} = store;
+                    searchInfo = bookingStage.searchInfo;
+                    if (searchInfo == null) {
+                        searchInfo = {
+                            'checkInDate'   : DateHelper.getOneWeeksFromNow(),
+                            'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
+                            'room' : 1,
+                            'bed' : 1
+                        };
+                        Actions.saveSearchInfo(searchInfo);
+                    }
+                    Actions.getApartments(searchInfo);
+                }
             }
         ]
 });

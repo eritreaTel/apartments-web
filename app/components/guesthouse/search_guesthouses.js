@@ -2,30 +2,13 @@ const React = require('react');
 const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
-
-const saveSearchInfo = function(e) {
-    let searchParams = getSearchParams(e);
-    Actions.saveSearchInfo(searchParams);
-}
+const DatePicker = require('react-bootstrap-date-picker');
 
 const onSearchApartmentsClicked = function (e) {
-    let searchParams = getSearchParams(e);
-    Actions.searchApartmentsClicked(searchParams);
-    Actions.clearApartments();
-    Actions.getApartments(searchParams);
+    Actions.searchApartmentsClicked();
+    Actions.getApartments();
     Actions.setRoute('/guest-houses');
 }
-
-const getSearchParams = function (e) {
-    return {
-            'checkInDate'   : e.refs.checkInDate.value,
-            'checkOutDate'  : e.refs.checkOutDate.value,
-            'room' : e.refs.roomCmp.refs.room.value,
-            'bed' : e.refs.bedCmp.refs.bed.value,
-            'totalDays' : DateHelper.getDaysTotalBetweenDates(e.refs.checkInDate.value, e.refs.checkOutDate.value)
-        }
-}
-
 class Room extends React.Component {
     render() {
         const {className} = this.props;
@@ -64,42 +47,57 @@ class Bed extends React.Component {
 
 class SearchControls extends React.Component {
 
+    onCheckInDateChanged(value, formattedValue) {
+        let updatedData =  {'checkInDate'  : value};
+        Actions.searchApartmentsUpdated(updatedData);
+    }
+
+    onCheckOutDateChanged(value, formattedValue) {
+        let updatedData =  {'checkOutDate'  : value};
+        Actions.searchApartmentsUpdated(updatedData);
+    }
+
+    componentWillMount() {
+        const {searchInfo} = this.props;
+    }
+
     componentDidMount() {
         SearchDateHelper.initializeDatePickers();
-
-        //populate exiting search data if present
-        const{searchInfo} = this.props;
-        if (!(searchInfo == undefined || searchInfo == null)) {
-            const {checkInDate, checkOutDate, room, bed} = searchInfo;
-            this.refs.checkInDate.value = checkInDate;
-            this.refs.checkOutDate.value = checkOutDate;
-            this.refs.roomCmp.refs.room.value = room;
-            this.refs.bedCmp.refs.bed.value = bed;
-        } else {
-            //Initialize default search data
-            this.refs.checkInDate.value = DateHelper.getTomorrow();
-            this.refs.checkOutDate.value = DateHelper.addDaysToDate(DateHelper.getTomorrow(), 7);
-            this.refs.roomCmp.refs.room.value = 1;
-            this.refs.bedCmp.refs.bed.value = 1;
-
-            saveSearchInfo(this); // persist the default search paramters
-        }
     }
 
     render() {
+        let checkInDate, checkOutDate, room, bed;
+        let {searchInfo} = this.props;
+
+        if (searchInfo != null) {
+            checkInDate     = searchInfo.checkInDate;
+            checkOutDate    = searchInfo.checkOutDate;
+            room            = searchInfo.room;
+            bed             = searchInfo.bed;
+        }/* else {
+            checkInDate  = DateHelper.getOneWeeksFromNow();
+            checkOutDate = DateHelper.getThreeWeeksFromNow();
+            room = 1;
+            bed = 1;
+        }*/
+
+
+        console.log('inside render function');
+        console.log("checkIn date = " + checkInDate);
+        console.log('checkOut date = ' + checkOutDate);
+        console.log(this.props);
+
         return (
             <div className="row">
                 <div className="col-md-3 col-sm-6 col-xs-6">
-                    <div className="input-group date mg-check-in">
-                        <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                        <input tabIndex="1" type="text" className="form-control" ref="checkInDate" placeholder="Check In"/>
+                    <div className="input-group date">
+                        <DatePicker ref="checkInDate" placeholder='Check In' value={checkInDate} showClearButton = {false} onChange={this.onCheckInDateChanged} />
                     </div>
                 </div>
 
                 <div className="col-md-3 col-sm-6 col-xs-6">
-                    <div className="input-group date mg-check-out">
-                    <div className="input-group-addon"><i className="fa fa-calendar"></i></div>
-                        <input tabIndex="2" type="text" className="form-control" ref="checkOutDate" placeholder="Check Out"/>
+                    <div className="input-group date">
+                        <DatePicker ref="checkOutDate" placeholder='Check Out' value={checkOutDate} showClearButton = {false} onChange={this.onCheckOutDateChanged} />
                     </div>
                 </div>
 

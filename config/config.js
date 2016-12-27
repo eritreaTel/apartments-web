@@ -1,6 +1,5 @@
 const camelCase = require('lodash.camelcase');
 let enviroment = process.env["NODE_ENV"];
-console.log(enviroment);
 
 const env = require('./env.json').reduce((memo, key) => {
         if (key in process.env) {

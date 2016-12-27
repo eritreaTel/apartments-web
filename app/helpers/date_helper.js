@@ -5,12 +5,12 @@ const DateHelper = {
         return 12;
     },
 
-    getTomorrow() {
-        return '11/20/2016';
+    getOneWeeksFromNow() {
+        return Moment().add(7, 'days').format("YYYY-MM-DD");
     },
 
-    addDaysToDate(inputDays, days) {
-        return '11/27/2016';
+    getThreeWeeksFromNow() {
+        return Moment().add(21, 'days').format("YYYY-MM-DD");
     },
 
     formatDate(inputDate, format){

@@ -21,8 +21,8 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBestApartments'});
     },
 
-    getApartments(data) {
-        return Dispatcher.dispatch({type: 'getApartments', data});
+    getApartments() {
+        return Dispatcher.dispatch({type: 'getApartments'});
     },
 
     getApartment(data) {
@@ -53,8 +53,12 @@ const Actions = {
         Dispatcher.dispatch({type: 'clearApartments'});
     },
 
-    searchApartmentsClicked(data) {
-        Dispatcher.dispatch({type: 'searchApartmentsClicked', data});
+    searchApartmentsClicked() {
+        Dispatcher.dispatch({type: 'searchApartmentsClicked'});
+    },
+
+    searchApartmentsUpdated(data) {
+        Dispatcher.dispatch({type: 'searchApartmentsUpdated', data});
     },
 
     saveSearchInfo(data) {

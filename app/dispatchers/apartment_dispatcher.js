@@ -32,8 +32,12 @@ module.exports = {
         }
     },
 
-    async getApartments({checkInDate, checkOutDate, room, bed, totalDays, pageNumber}) {
-
+    async getApartments() {
+        let bookingStage = this.getStoreVal('bookingStage');
+        let {searchInfo} = bookingStage;
+        console.log('inside get apartments' );
+        console.log(searchInfo);
+        let {checkInDate, checkOutDate, room, bed, pageNumber} = searchInfo;
 
         if (typeof pageNumber ==='undefined') {
             pageNumber = 1;
@@ -45,8 +49,6 @@ module.exports = {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getApartments')) {
-
-                console.log('getting apartments from database');
                 try {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                     if (response.data && response.data.results && response.data.results.length > 0) {
