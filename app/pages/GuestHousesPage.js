@@ -78,9 +78,8 @@ class GuestHousesPage extends React.Component {
     render() {
         const {store} = this.props;
         const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS}} = this.props;
-        console.log('page number inside guestHouse page component is : ' + pageNumber + ' and stage is '+ bookingStage.activeStage );
         let section ;
-
+        
         switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">

@@ -1,49 +1,56 @@
 const React = require('react');
+const DatePicker = require('react-bootstrap-date-picker');
+var Select = require('react-select');
 const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
-const DatePicker = require('react-bootstrap-date-picker');
 
 const onSearchApartmentsClicked = function (e) {
     Actions.searchApartmentsClicked();
     Actions.getApartments();
     Actions.setRoute('/guest-houses');
 }
-class Room extends React.Component {
-    render() {
-        const {className} = this.props;
-        return (
-            <select tabIndex="3"  ref='room' className={className}>
-                <option selected value=""  disabled>Room</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value=">=7">&gt;= 7</option>
-            </select>
-        );
-    }
+
+function onRoomChanged(val) {
+    let updatedData =  {'room'  : val.value};
+    Actions.searchApartmentsUpdated(updatedData);
 }
 
-class Bed extends React.Component {
-    render() {
-        const {className} = this.props;
-        return (
-            <select tabIndex="4" ref='bed'  className={className}>
-                <option selected value="" disabled>Bed</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value=">=6">&gt;= 6</option>
-            </select>
-        );
-    }
+function onBedChanged(val) {
+    let updatedData =  {'bed'  : val.value};
+    Actions.searchApartmentsUpdated(updatedData);
 }
 
+const Room  = function (props) {
+    var options = [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+        { value: '3', label: '3' },
+        { value: '4', label: '4' },
+        { value: '5', label: '5' },
+        { value: '6', label: '6' },
+        { value: '>6', label: '>6' }
+    ];
+
+    return (
+        <Select value={props.value} placeholder='Room' clearable={false}  searchable={false}  options={options} onChange={onRoomChanged} />
+    );
+}
+
+const Bed  = function (props) {
+    var options = [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+        { value: '3', label: '3' },
+        { value: '4', label: '4' },
+        { value: '5', label: '5' },
+        { value: '>6', label: '>6' }
+    ];
+
+    return (
+        <Select value={props.value} placeholder='Bed' clearable={false}  searchable={false}  options={options} onChange={onBedChanged} />
+    );
+}
 
 class SearchControls extends React.Component {
 
@@ -74,18 +81,7 @@ class SearchControls extends React.Component {
             checkOutDate    = searchInfo.checkOutDate;
             room            = searchInfo.room;
             bed             = searchInfo.bed;
-        }/* else {
-            checkInDate  = DateHelper.getOneWeeksFromNow();
-            checkOutDate = DateHelper.getThreeWeeksFromNow();
-            room = 1;
-            bed = 1;
-        }*/
-
-
-        console.log('inside render function');
-        console.log("checkIn date = " + checkInDate);
-        console.log('checkOut date = ' + checkOutDate);
-        console.log(this.props);
+        }
 
         return (
             <div className="row">
@@ -104,10 +100,10 @@ class SearchControls extends React.Component {
                 <div className="col-md-3">
                     <div className="row">
                         <div className="col-xs-6">
-                            <Room ref='roomCmp' className="cs-select cs-skin-elastic"/>
+                            <Room id='room' value={room}/>
                         </div>
                         <div className="col-xs-6">
-                            <Bed ref='bedCmp' className="cs-select cs-skin-elastic" />
+                            <Bed id='bed' value={bed} />
                         </div>
                     </div>
                 </div>

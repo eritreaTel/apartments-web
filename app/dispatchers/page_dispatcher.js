@@ -34,10 +34,10 @@ module.exports = {
         if (checkOutDate != null) {
             data.checkOutDate = checkOutDate;
         }
-        if (checkInDate != null) {
+        if (room != null) {
             data.room = room;
         }
-        if (checkInDate != null) {
+        if (bed != null) {
             data.bed = bed;
         }
 
