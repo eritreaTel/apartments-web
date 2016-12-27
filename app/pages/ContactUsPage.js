@@ -61,7 +61,7 @@ class ContactUsForm extends React.Component {
 						<ul className="mg-contact-info">
 							<li><i className="fa fa-map-marker"></i> Level 13, 2 Elizabeth St, Kampala, Uganda</li>
 							<li><i className="fa fa-phone"></i> +000-123-456-789 (Sale)</li>
-							<li><i className="fa fa-envelope"></i> <a href="mailto:#">support@ugandaGuestHouses.com</a></li>
+							<li><i className="fa fa-envelope"></i> <a href="mailto:#">support@ugandaBooking.com</a></li>
 						</ul>
 						<div id="mg-map" className="mg-map">
 
