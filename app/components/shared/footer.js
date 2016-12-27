@@ -48,7 +48,7 @@ const ContactUs = function () {
                     +000-123-456-789
                 </p>
                 <p>
-                    <span >support@ugandaGuestHouses.com</span>
+                    <span >support@ugandaBooking.com</span>
                 </p>
             </div>
         </div>
@@ -78,13 +78,10 @@ const SocialMedia = function () {
         <div className="col-md-3 col-sm-6">
             <div className="widget">
                 <h2 className="mg-widget-title">Social Media</h2>
-                <p>Follow us on Facebook, Twitter, Pintrest, GooglePlus. We will give you accurate and update information. We want you to get informed about Uganda guest houses information</p>
+                <p>Follow us on Facebook and Twitter. We will give you accurate and update information. We want you to get informed about trousim in Uganda and also UgandBooking.com</p>
                 <ul className="mg-footer-social">
                     <li><Anchor><i className="fa fa-facebook"></i></Anchor></li>
                     <li><Anchor><i className="fa fa-twitter"></i></Anchor></li>
-                    <li><Anchor><i className="fa fa-pinterest"></i></Anchor></li>
-                    <li><Anchor><i className="fa fa-google-plus"></i></Anchor></li>
-                    <li><Anchor><i className="fa fa-rss"></i></Anchor></li>
                 </ul>
             </div>
         </div>
