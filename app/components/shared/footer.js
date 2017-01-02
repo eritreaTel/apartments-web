@@ -13,7 +13,6 @@ const ValidateGroup = ReactValiation.ValidateGroup;
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import MDSpinner from "react-md-spinner";
-import Loader from 'react-loader-advanced';
 
 const onNewsLetterSubscriptionClicked = function (e) {
     let email = e.refs.subscription_email.value;
@@ -22,6 +21,7 @@ const onNewsLetterSubscriptionClicked = function (e) {
         return;
     }
 
+    e.refs.subscription_button.setAttribute("disabled", "disabled");
     let info = {
         'first_name' : 'subscriber',
         'last_name'  : 'subscriber',
@@ -37,6 +37,7 @@ const onNewsLetterSubscriptionClicked = function (e) {
     }
     Actions.createUser(info);
     NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
+    e.refs.subscription_button.removeAttribute("disabled");
 }
 
 const FooterMenu = function () {
@@ -110,8 +111,8 @@ const SocialMedia = function () {
                 <h2 className="mg-widget-title">Social Media</h2>
                 <p>Follow us on Facebook and Twitter. We will give you accurate and update information. We want you to get informed about trousim in Uganda and also UgandBooking.com</p>
                 <ul className="mg-footer-social">
-                    <li><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}><i className="fa fa-facebook"></i></Anchor></li>
-                    <li><Anchor><i className="fa fa-twitter"></i></Anchor></li>
+                    <li><a target="_blank" href='https://www.facebook.com/ugandabooking'><i className="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" href="https://www.twitter.com/ugandaBoooking"><i className="fa fa-twitter"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -121,22 +122,20 @@ const SocialMedia = function () {
 class NewsLetterSubscription extends React.Component {
     render() {
         return (
-            <Loader show={true} message={'loading'}>
-                <ValidateGroup>
-                    <NotificationContainer/>
-                    <div className="col-md-3 col-sm-6">
-                        <div className="widget">
-                            <h2 className="mg-widget-title">Newsletter</h2>
-                            <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
-                            <Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-                                <input tabIndex="100" ref="subscription_email" type="email" className="form-control" placeholder="Your Email"/>
-                            </Validate>
-                            <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
-                            <MDSpinner className="margin-left-20" />
-                        </div>
+            <ValidateGroup>
+                <NotificationContainer/>
+                <div className="col-md-3 col-sm-6">
+                    <div className="widget">
+                        <h2 className="mg-widget-title">Newsletter</h2>
+                        <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
+                        <Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
+                            <input tabIndex="100" ref="subscription_email" type="email" className="form-control" placeholder="Your Email"/>
+                        </Validate>
+                        <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
+                        <MDSpinner className="margin-left-20" />
                     </div>
-                </ValidateGroup>
-            </Loader>
+                </div>
+            </ValidateGroup>
         );
     }
 }
