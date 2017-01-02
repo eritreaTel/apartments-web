@@ -12,6 +12,8 @@ const ValidateGroup = ReactValiation.ValidateGroup;
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+import MDSpinner from "react-md-spinner";
+
 const onNewsLetterSubscriptionClicked = function (e) {
     let email = e.refs.subscription_email.value;
     if (email == '' || email == null || email == undefined) {

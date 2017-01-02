@@ -4,6 +4,7 @@ const ApartmentMedium = require('../apartment/apartment_medium');
 const withDataLoaded = require('../with_data_loaded');
 const Actions = require('../../actions/actions');
 const SvgImage = require('../shared/svg_image');
+import MDSpinner from "react-md-spinner";
 
 const Section = function(props) {
     return (
@@ -65,7 +66,7 @@ const WithUserLoaded = withDataLoaded({
     WithoutData: () => (
         <Section >
             <div className="load-spin">
-                <SvgImage name="dark-sun"/> Loading
+                 <MDSpinner>Loading </MDSpinner>
             </div>
         </Section>
     ),
