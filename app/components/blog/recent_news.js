@@ -83,8 +83,8 @@ function getDefaultProps() {
         recentNews: [
             {
                 "id"   : 1,
-                "title": "Uganda number one tourist destination",
-                "short_description": "Uganda number one tourist destination, Uganda number one tourist destination",
+                "title": "Queen Elizabeth National Park",
+                "short_description": "Queen Elizabeth National Park is understandably Uganda’s most popular tourist ...",
                 "created_at": "2016-10-17 09:43:26"
             },
             {
