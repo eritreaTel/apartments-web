@@ -148,6 +148,10 @@ const Actions = {
 
     acceptTermsAndServices(data) {
         Dispatcher.dispatch({type: 'acceptTermsAndServices', data});
+    },
+
+    setIsProcessing(data) {
+        Dispatcher.dispatch({type: 'setIsProcessing', data});
     }
 };
 

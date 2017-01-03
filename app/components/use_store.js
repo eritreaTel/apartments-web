@@ -52,7 +52,10 @@ module.exports = {
                         message: null,
                         view: {},
                         pageNumber: null,
-                        acceptToS : false
+                        acceptToS : false,
+                        isProcessing : {
+                            'newsLetterSubscription' : false
+                        }
                     }
                 };
             }

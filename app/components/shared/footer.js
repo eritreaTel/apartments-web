@@ -17,11 +17,13 @@ import MDSpinner from "react-md-spinner";
 const onNewsLetterSubscriptionClicked = function (e) {
     let email = e.refs.subscription_email.value;
     if (email == '' || email == null || email == undefined) {
-        NotificationManager.error('Please provide email address.', 'Email Subscription', 5000);
+        NotificationManager.error('Please provide email address.', 'Email Subscription', 3000);
         return;
     }
 
-    e.refs.subscription_button.setAttribute("disabled", "disabled");
+    let isProcessing = {newsLetterSubscription: true};
+    Actions.setIsProcessing(isProcessing);
+
     let info = {
         'first_name' : 'subscriber',
         'last_name'  : 'subscriber',
@@ -37,7 +39,11 @@ const onNewsLetterSubscriptionClicked = function (e) {
     }
     Actions.createUser(info);
     NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
-    e.refs.subscription_button.removeAttribute("disabled");
+
+    isProcessing.newsLetterSubscription = false;
+    Actions.setIsProcessing(isProcessing);
+
+
 }
 
 const FooterMenu = function () {
@@ -121,6 +127,12 @@ const SocialMedia = function () {
 
 class NewsLetterSubscription extends React.Component {
     render() {
+        const {isProcessing} = this.props;
+
+        let spinnerClassName = (isProcessing.newsLetterSubscription == true) ? 'margin-left-20' : 'margin-left-20 hide';
+        let disableInput   = (isProcessing.newsLetterSubscription == true) ? true : false;
+        let buttonClassname  = (isProcessing.newsLetterSubscription == true) ? 'btn btn-main disabled' : 'btn btn-main';
+
         return (
             <ValidateGroup>
                 <NotificationContainer/>
@@ -129,10 +141,11 @@ class NewsLetterSubscription extends React.Component {
                         <h2 className="mg-widget-title">Newsletter</h2>
                         <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
                         <Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-                            <input tabIndex="100" ref="subscription_email" type="email" className="form-control" placeholder="Your Email"/>
+                            <input tabIndex="100" ref="subscription_email" type="email" className="form-control" disabled={disableInput} placeholder="Your Email"/>
                         </Validate>
-                        <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className="btn btn-main" value="Subscribe"/>
-                        <MDSpinner className="margin-left-20" />
+                        <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className={buttonClassname} value="Subscribe"/>
+                        <MDSpinner ref='footer_spinner' className={spinnerClassName} />
+
                     </div>
                 </div>
             </ValidateGroup>
@@ -143,6 +156,11 @@ class NewsLetterSubscription extends React.Component {
 
 class Footer extends React.Component {
     render() {
+
+        const {store : {isProcessing}} = this.props;
+        //console.log("Inside footer, and is processing is");
+        //console.log(isProcessing);
+
         return (
             <footer className="mg-footer">
                 <div className="mg-footer-widget">
@@ -150,7 +168,7 @@ class Footer extends React.Component {
                         <div className="row">
                             <ContactUs />
                             <Instagram  instagramImages = {this.props.instagramImages} />
-                            <NewsLetterSubscription />
+                            <NewsLetterSubscription isProcessing={isProcessing} />
                             <SocialMedia />
                         </div>
                     </div>
