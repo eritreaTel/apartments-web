@@ -37,13 +37,23 @@ const onNewsLetterSubscriptionClicked = function (e) {
         'type' : 'subscriber',
         'is_active' : 0
     }
-    Actions.createUser(info);
-    NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
+    const createUserPromise = Actions.createUser(info);
+    console.log("outside create user promise is");
+    console.log(createUserPromise);
 
-    isProcessing.newsLetterSubscription = false;
-    Actions.setIsProcessing(isProcessing);
+    createUserPromise.then(response => {
+        console.log("inside user promise is");
+        console.log(response);
+        if (response.status == 'fail') {
+            NotificationManager.error(response.error, 'Email Subscription', 3000);
+        } else {
+            NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
+        }
 
 
+        isProcessing.newsLetterSubscription = false;
+        Actions.setIsProcessing(isProcessing);
+    });
 }
 
 const FooterMenu = function () {

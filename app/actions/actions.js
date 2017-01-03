@@ -104,7 +104,7 @@ const Actions = {
     },
 
     createUser(data) {
-        Dispatcher.dispatch({type: 'createUser', data});
+        return Dispatcher.dispatch({type: 'createUser', data});
     },
     processPayment(data) {
         Dispatcher.dispatch({type: 'processPayment', data});

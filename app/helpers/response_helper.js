@@ -13,9 +13,6 @@ const ResponseHelper = {
                     });
 
                 } catch (e) {
-                    console.log('run in to error');
-                    //console.log(e);
-                    //TODO.Amanuel, please change this to json error
                     errors.push("Run in to error. Please contact  us if you believe you getting this error by mistake.");
                 }
             }

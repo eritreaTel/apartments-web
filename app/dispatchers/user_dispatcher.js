@@ -12,8 +12,11 @@ module.exports = {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    this.setStoreVal('user', response.data.results[0]);
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    this.setStoreVal('user', object);
                 }
             } catch (error) {
                 this.dispatch({
@@ -25,6 +28,7 @@ module.exports = {
                 });
             }
             this.releaseLock('createUser');
+            return this.dispatch({type: 'prepareResponse'});
         }
     },
 
@@ -167,7 +171,7 @@ module.exports = {
         const url = 'users';
         this.setStoreVal('requestUrl', url);
 
-        if (this.acquireLock('createUser')) {
+        if (this.acquireLock('updatePassword')) {
             try {
                 let {email} = this.getStoreVal('resetPassword');
 
@@ -194,7 +198,7 @@ module.exports = {
                     }
                 });
             }
-            this.releaseLock('createUser');
+            this.releaseLock('updatePassword');
         }
     },
 

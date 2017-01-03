@@ -107,5 +107,13 @@ module.exports = {
 
     goBackToPayment() {
         this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+    },
+
+    setIsProcessing(data) {
+        let isProcessing = this.getStoreVal('isProcessing');
+        _.forEach(data, function(value, key) {
+            isProcessing.key = value;
+        });
+        this.mergeStoreVal('isProcessing', data);
     }
 };
