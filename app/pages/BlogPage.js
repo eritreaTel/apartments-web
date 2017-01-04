@@ -31,7 +31,7 @@ const BlogContent = function (props) {
 						<BlogComments />
 						<FeedBackForm />
 					</div>
-					<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
+				<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
 				</div>
 			</div>
 		</div>
@@ -39,25 +39,17 @@ const BlogContent = function (props) {
 }
 
 const BlogMainContent = function (props) {
-	console.log("inside blog main content");
-	console.log(props.blog);
+
+	let content = props.blog.content;
 	return (
 		<main>
 			<article className="mg-post">
 				<BlogHeader blog={props.blog} />
 
-				<div>
-					{props.blog.content}
-				</div>
-
-				<div>
-					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination. </p>
-					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination.</p>
-					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination</p>
-				</div>
+				<div dangerouslySetInnerHTML={{__html: content}}></div>
 
 				<footer className="clearfix">
-					<BlogTags blogMetaData={props.blog.metaData} parentClassName="mg-single-post-tags tagcloud" />
+					<BlogTags tags={props.blog.tags} parentClassName="mg-single-post-tags tagcloud" />
 				</footer>
 			</article>
 		</main>
