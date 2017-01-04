@@ -20,8 +20,10 @@ const RecentPost = function (props) {
 }
 
 const Categories = function (props) {
-    const styledLi = props.categories.map(category => {
-        return <li key={category.id}><Anchor>{category.value}</Anchor></li>;
+    const styledLi =  props.blogMetaData && props.blogMetaData.map(metaData => {
+            if (metaData.type == 'category') {
+                return <li key={metaData.id}><Anchor>{metaData.value}</Anchor></li>;
+            }
     });
 
     return (<ul> {styledLi}</ul>);
@@ -39,7 +41,8 @@ const RightSectionBody = function (props) {
 
 
 const RightSection =  function (props) {
-    const {tags, recentNews, categories} = props;
+    const {blogMetaData, recentNews} = props;
+
     return (
         <RightSectionBody>
             <aside className="mg-widget">
@@ -49,12 +52,12 @@ const RightSection =  function (props) {
 
             <aside className="mg-widget">
                 <h2 className="mg-widget-title">Category</h2>
-                <Categories categories={categories} />
+                <Categories blogMetaData={blogMetaData} />
             </aside>
 
             <aside className="mg-widget">
                 <h2 className="mg-widget-title">Tags</h2>
-                <BlogTags tags={tags} parentClassName="tagcloud" />
+                <BlogTags blogMetaData={blogMetaData} parentClassName="tagcloud" />
             </aside>
         </RightSectionBody>
     );

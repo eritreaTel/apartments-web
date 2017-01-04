@@ -14,6 +14,8 @@ const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
+import MDSpinner from "react-md-spinner";
+
 const onBlogFeedbackClicked = function () {
 	console.log('blog feedback clicked');
 }
@@ -29,7 +31,7 @@ const BlogContent = function (props) {
 						<BlogComments />
 						<FeedBackForm />
 					</div>
-				<RightSection tags={props.blog.tags} categories={props.blog.categories} recentNews={props.recentNews}/>
+					<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
 				</div>
 			</div>
 		</div>
@@ -37,10 +39,16 @@ const BlogContent = function (props) {
 }
 
 const BlogMainContent = function (props) {
+	console.log("inside blog main content");
+	console.log(props.blog);
 	return (
 		<main>
 			<article className="mg-post">
 				<BlogHeader blog={props.blog} />
+
+				<div>
+					{props.blog.content}
+				</div>
 
 				<div>
 					<p>Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination, Uganda number one tourist destination. </p>
@@ -49,7 +57,7 @@ const BlogMainContent = function (props) {
 				</div>
 
 				<footer className="clearfix">
-					<BlogTags tags={props.blog.tags} parentClassName="mg-single-post-tags tagcloud" />
+					<BlogTags blogMetaData={props.blog.metaData} parentClassName="mg-single-post-tags tagcloud" />
 				</footer>
 			</article>
 		</main>
@@ -161,10 +169,10 @@ const BlogBody = function (props) {
 class BlogPage extends React.Component {
 
 	render() {
-		const {store : {blog, recentNews}} = this.props;
+		const {store : {blog, recentNews, blogMetaData}} = this.props;
 		return (
 			<BlogBody>
-				<BlogContent blog={blog} recentNews={recentNews} />
+				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} />
 			</BlogBody>
 		);
 	}
@@ -176,7 +184,7 @@ const WithUserLoaded = withDataLoaded({
 	WithoutData: () => (
 		<BlogBody >
 			<div className="load-spin">
-				<SvgImage name="dark-sun"/> Loading
+				<MDSpinner />
 			</div>
 		</BlogBody>
 	),
@@ -184,6 +192,14 @@ const WithUserLoaded = withDataLoaded({
 		{
 			storeKeys: ['blog'],
 			loadDataFn: ({view : {blogId}}) => Actions.getBlog({blogId})
+		},
+		{
+			storeKeys: ['blogMetaData'],
+			loadDataFn: ({view : {blogId}}) => Actions.getBlogMetaData()
+		},
+		{
+			storeKeys: ['recentNews'],
+			loadDataFn: () => Actions.getRecentNews()
 		}
 	]
 });

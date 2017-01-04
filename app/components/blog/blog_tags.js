@@ -4,10 +4,12 @@ const Anchor = require('../shared/anchor');
 class BlogTags extends React.Component {
 
     render() {
-        const {tags, parentClassName} = this.props;
+        const {blogMetaData, parentClassName} = this.props;
 
-        const styledTags = tags.map(tag => {
-            return 	<Anchor key={tag.id}>{tag.value}</Anchor>;
+        const styledTags = blogMetaData && blogMetaData.map(metaData => {
+            if (metaData.type == 'tag') {
+                return 	<Anchor key={metaData.id}>{metaData.value}</Anchor>;
+            }
         });
 
         return (

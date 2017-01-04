@@ -41,6 +41,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getRecentNews'});
     },
 
+    getBlogMetaData() {
+        return Dispatcher.dispatch({type: 'getBlogMetaData'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },
@@ -90,8 +94,6 @@ const Actions = {
     },
 
     goBackToPersonal(data) {
-        console.log('inside action');
-        console.log(data);
         Dispatcher.dispatch({type: 'goBackToPersonal', data});
     },
 
