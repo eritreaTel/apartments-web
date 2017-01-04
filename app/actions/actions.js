@@ -37,6 +37,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBlog', data});
     },
 
+    getRecentNews() {
+        return Dispatcher.dispatch({type: 'getRecentNews'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },

@@ -31,7 +31,7 @@ class HomePage extends React.Component {
 				<SearchApartment searchInfo={searchInfo} parentClassName="mg-book-now"  wrapInContainer="container" />
 				<BestApartmentsSection store={store} />
 				<AboutUs/>
-				<RecentNews />
+				<RecentNews store={store}/>
 			</div>
 		);
 	}
