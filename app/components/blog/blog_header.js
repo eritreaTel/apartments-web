@@ -5,11 +5,11 @@ const {assetPath} = require('../../helpers/asset_helper');
 const DateHelper = require('../../helpers/date_helper');
 
 const BlogImage = function (props) {
-    const styledImgs = props.blog.images && props.blog.images.map(blogImage => {
-        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img src={assetPath(blogImage.full)} alt="" className="img-responsive"/> </Anchor>
+    const styledImgs = props.blog.galleries && props.blog.galleries.map(blogImage => {
+        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
     });
 
-    return styledImgs ? <div className="mg-post-images-slider"> {styledImgs}</div> : <div/>;
+    return styledImgs ? <div className="margin-bottom-20 mg-post-images-slider"> {styledImgs}</div> : <div/>;
 }
 
 class BlogHeader extends React.Component {
@@ -29,7 +29,6 @@ class BlogHeader extends React.Component {
 
         return (
             <header>
-                <BlogImage blog = {blog} />
                 <h2 className="mg-post-title">
                     <Anchor onClick={()=>{Actions.setRoute('/blog/' + blog.id)}}> {blog.title}</Anchor>
                 </h2>
@@ -38,6 +37,9 @@ class BlogHeader extends React.Component {
                     <span>by <Anchor>{blog.created_by}</Anchor></span>
                     <span><Anchor > {blog.comments_cnt} Comments</Anchor></span>
                 </div>
+
+                <BlogImage blog = {blog} />
+
             </header>
         );
     }
