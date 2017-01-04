@@ -8,13 +8,23 @@ const withDataLoaded = require('../with_data_loaded');
 import MDSpinner from "react-md-spinner";
 
 
-const NewsTitle = function (props) {
+const NewsBody = function (props) {
     return (
-        <div className="col-md-5">
-            <h2 className="mg-sec-left-title">Recent News</h2>
-            <ul className="mg-recnt-posts">
-                {props.children}
-            </ul>
+        <div className="mg-news-gallery">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-5">
+                        <h2 className="mg-sec-left-title">Recent News</h2>
+                    </div>
+                    <div className="col-md-7">
+                        <h2 className="mg-sec-left-title">Our Gallery</h2>
+                    </div>
+                </div>
+
+                <div className="row">
+                    {props.children}
+                </div>
+            </div>
         </div>
     );
 }
@@ -32,9 +42,11 @@ const NewsHeading = function (props) {
 
 
     return (
-        <NewsTitle>
-            {contents}
-        </NewsTitle>
+        <div className="col-md-5">
+            <ul className="mg-recnt-posts">
+                {contents}
+            </ul>
+        </div>
     );
 }
 
@@ -63,7 +75,6 @@ class NewsGalleries extends React.Component {
 
         return (
             <div className="col-md-7">
-                <h2 className="mg-sec-left-title">Our Gallery</h2>
                 <div className="mg-gallery-container">
                     <ul className="mg-gallery" id="mg-gallery">
                         {styledFullLi}
@@ -82,15 +93,10 @@ class RecentNews extends React.Component {
         const {store: {recentNews}} = this.props;
 
         return (
-            <div className="mg-news-gallery">
-                <div className="container">
-                    <div className="row">
-                        <NewsHeading recentNews = {recentNews} />
-                        <NewsGalleries recentNews={recentNews} />
-                    </div>
-                </div>
-            </div>
-
+            <NewsBody recentNews = {recentNews}>
+                <NewsHeading recentNews = {recentNews} />
+                <NewsGalleries recentNews={recentNews} />
+            </NewsBody>
         );
     }
 }
@@ -99,11 +105,19 @@ class RecentNews extends React.Component {
 const WithUserLoaded = withDataLoaded({
         WithData: RecentNews,
         WithoutData: () => (
-            <NewsTitle >
-                <div className="load-spin">
-                    <MDSpinner>Loading </MDSpinner>
+            <NewsBody >
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-5">
+                            <MDSpinner>Loading </MDSpinner>
+                        </div>
+
+                        <div className="col-md-5">
+                            <MDSpinner>Loading </MDSpinner>
+                        </div>
+                    </div>
                 </div>
-            </NewsTitle>
+            </NewsBody>
         ),
         data: [
             {
