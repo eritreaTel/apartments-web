@@ -1,4 +1,5 @@
 const FetchHelper = require('../helpers/fetch_helper');
+const ResponseHelper = require('../helpers/response_helper');
 
 
 module.exports = {
@@ -496,5 +497,34 @@ module.exports = {
             }
             this.releaseLock('createContactUs');
         }
-    }
+    },
+
+    async getRecentNews() {
+        const url = 'blogs?recentNews=true' ;
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('recentNews').length == 0) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getRecentNews')) {
+                try {
+                    let response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    let {results, errors} = ResponseHelper.processResponseReturnMany(response);
+
+                    if (errors.length > 0) {
+                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    } else {
+                        this.setStoreVal('recentNews', results);
+                    }
+                } catch (error) {
+                    this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch recent News'
+                        }
+                    });
+                }
+                this.releaseLock('getRecentNews');
+            }
+        }
+    },
 };

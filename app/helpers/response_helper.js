@@ -13,9 +13,6 @@ const ResponseHelper = {
                     });
 
                 } catch (e) {
-                    console.log('run in to error');
-                    //console.log(e);
-                    //TODO.Amanuel, please change this to json error
                     errors.push("Run in to error. Please contact  us if you believe you getting this error by mistake.");
                 }
             }
@@ -24,12 +21,21 @@ const ResponseHelper = {
     },
 
     processResponseReturnMany(response) {
-        let result ;
+        let results, errors = [] ;
 
         if (response && response.data && response.data.results && response.data.results.length > 0) {
-            result = response.data.results;
+            results = response.data.results;
+        } else if (response.errors) {
+            try {
+                _.each(response.errors[0], (error) => {
+                    errors.push(error);
+            });
+
+            } catch (e) {
+                errors.push("Run in to error. Please contact  us if you believe you getting this error by mistake.");
+            }
         }
-        return result;
+        return {results, errors};
     }
 };
 

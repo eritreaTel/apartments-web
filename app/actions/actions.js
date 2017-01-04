@@ -37,6 +37,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBlog', data});
     },
 
+    getRecentNews() {
+        return Dispatcher.dispatch({type: 'getRecentNews'});
+    },
+
     apartment(data) {
         Dispatcher.dispatch({type: 'apartment', data});
     },
@@ -104,7 +108,7 @@ const Actions = {
     },
 
     createUser(data) {
-        Dispatcher.dispatch({type: 'createUser', data});
+        return Dispatcher.dispatch({type: 'createUser', data});
     },
     processPayment(data) {
         Dispatcher.dispatch({type: 'processPayment', data});
@@ -148,6 +152,10 @@ const Actions = {
 
     acceptTermsAndServices(data) {
         Dispatcher.dispatch({type: 'acceptTermsAndServices', data});
+    },
+
+    setIsProcessing(data) {
+        Dispatcher.dispatch({type: 'setIsProcessing', data});
     }
 };
 

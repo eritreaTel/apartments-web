@@ -23,10 +23,6 @@ module.exports = {
         }
 
         errorMessages = errorMessages || [defaultErrorMessage];
-        if (error && error.response && error.response.status >= 500 && error.response.status <= 599) {
-            this.dispatch({type: 'setFailWhaleMessages', data: errorMessages});
-            return;
-        }
 
         this.dispatch({
             type: 'setErrorMessages', data: errorMessages
@@ -56,5 +52,18 @@ module.exports = {
         const messages = this.getStoreVal('messages');
         this.setStoreVal('messages', messages.concat(data));
         this.dispatch({type: 'scheduleClearErrorsAndMessages'});
+    },
+
+    prepareResponse(){
+        let response;
+        const errors = this.getStoreVal('errors');
+        if (errors && errors.length >0) {
+            response = {'status' : 'fail', 'error' : errors.pop()}
+        } else {
+            response = {'status' : 'success'}
+        }
+        return response;
     }
+
+
 };

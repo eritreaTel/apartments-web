@@ -84,7 +84,7 @@ class Page extends React.Component {
                 <div className="preloader hidden"></div>
                 <HeaderBar {...{store}}/>
                 {content}
-                <Footer/>
+                <Footer {...{store}}/>
             </div>
         );
     }
