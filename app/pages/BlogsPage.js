@@ -6,16 +6,21 @@ const BlogHeader = require('../components/blog/blog_header');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
-const BlogHelper = require('../helpers/blog_helper');
 
+import MDSpinner from "react-md-spinner";
 
 const BlogList = function(props) {
+	console.log('metadata');
+	console.log(props.blogMetaData);
+
+	console.log('recent news');
+	console.log(props.recentNews);
 	return (
 		<div className="mg-blog-list">
 			<div className="container">
 				<div className="row">
 					<Articles blogs = {props.blogs} />
-					<RightSection tags={BlogHelper.getTags(props.blogsMetaData)}  categories={BlogHelper.getCategories(props.blogsMetaData)} recentNews={props.recentNews}/>
+					<RightSection blogMetaData={props.blogMetaData}  recentNews={props.recentNews}/>
 				</div>
 			</div>
 		</div>
@@ -60,11 +65,11 @@ const BlogsBody = function (props) {
 class BlogsPage extends React.Component {
 
 	render() {
-		const {store : {blogs, blogsMetaData, recentNews}} = this.props;
+		const {store : {blogs, blogMetaData, recentNews}} = this.props;
 
 		return (
 			<BlogsBody>
-				<BlogList blogs={blogs} blogsMetaData={blogsMetaData} recentNews={recentNews} />
+				<BlogList blogs={blogs} blogMetaData={blogMetaData} recentNews={recentNews} />
 			</BlogsBody>
 		);
 	}
@@ -76,7 +81,7 @@ const WithUserLoaded = withDataLoaded({
 	WithoutData: () => (
 		<BlogsBody >
 			<div className="load-spin">
-				<SvgImage name="dark-sun"/> Loading
+				<MDSpinner />
 			</div>
 		</BlogsBody>
 	),
@@ -84,6 +89,14 @@ const WithUserLoaded = withDataLoaded({
 		{
 			storeKeys: ['blogs'],
 			loadDataFn: () => Actions.getBlogs()
+		},
+		{
+			storeKeys: ['blogMetaData'],
+			loadDataFn: () => Actions.getBlogMetaData()
+		},
+		{
+			storeKeys: ['recentNews'],
+				loadDataFn: () => Actions.getRecentNews()
 		}
 	]
 });

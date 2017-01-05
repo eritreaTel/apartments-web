@@ -50,7 +50,7 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },
 
-    saveSearchInfo(data) {
+    persistSearchInfo(data) {
         this.mergeStoreVal('bookingStage', {searchInfo: data});
     },
 

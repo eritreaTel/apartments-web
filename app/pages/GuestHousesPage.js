@@ -136,7 +136,7 @@ const WithUserLoaded = withDataLoaded({
                             'room' : 1,
                             'bed' : 1
                         };
-                        Actions.saveSearchInfo(searchInfo);
+                        Actions.persistSearchInfo(searchInfo);
                     }
                     Actions.getApartments(searchInfo);
                 }

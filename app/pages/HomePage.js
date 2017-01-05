@@ -18,7 +18,7 @@ class HomePage extends React.Component {
 					'room' : 1,
 					'bed' : 1
 			};
-			Actions.saveSearchInfo(searchParams);
+			Actions.persistSearchInfo(searchParams);
 		}
 	}
 

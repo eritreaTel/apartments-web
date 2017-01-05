@@ -69,8 +69,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'searchApartmentsUpdated', data});
     },
 
-    saveSearchInfo(data) {
-        Dispatcher.dispatch({type: 'saveSearchInfo', data});
+    persistSearchInfo(data) {
+        Dispatcher.dispatch({type: 'persistSearchInfo', data});
     },
 
     bookApartmentClicked(data) {
@@ -112,6 +112,11 @@ const Actions = {
     createUser(data) {
         return Dispatcher.dispatch({type: 'createUser', data});
     },
+
+    saveUserSearches(data) {
+        Dispatcher.dispatch({type: 'saveUserSearches', data});
+    },
+
     processPayment(data) {
         Dispatcher.dispatch({type: 'processPayment', data});
     },

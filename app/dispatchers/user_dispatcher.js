@@ -32,6 +32,33 @@ module.exports = {
         }
     },
 
+    async saveUserSearches({checkInDate, checkOutDate, room, bed}) {
+        const url = 'user_searches';
+        this.setStoreVal('requestUrl', url);
+        let user = this.getStoreVal('user');
+        let userId = user? user.id : null;
+
+        if (this.acquireLock('saveUserSearches')) {
+            try {
+                let searchInfo = {'check_in_date' : checkInDate, 'check_out_date' : checkOutDate, 'room' : room, 'bed' : bed, 'user_id' : userId };
+                const response = await FetchHelper.fetchJson(url, {body: searchInfo , method: 'POST'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                }
+            } catch (error) {
+                this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot create user'
+                    }
+                });
+            }
+            this.releaseLock('saveUserSearches');
+        }
+    },
+
     async logIn(data) {
         const url = 'users/login';
         

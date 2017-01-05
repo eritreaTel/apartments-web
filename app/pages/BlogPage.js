@@ -187,7 +187,7 @@ const WithUserLoaded = withDataLoaded({
 		},
 		{
 			storeKeys: ['blogMetaData'],
-			loadDataFn: ({view : {blogId}}) => Actions.getBlogMetaData()
+			loadDataFn: () => Actions.getBlogMetaData()
 		},
 		{
 			storeKeys: ['recentNews'],

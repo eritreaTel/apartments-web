@@ -5,8 +5,9 @@ const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
 
-const onSearchApartmentsClicked = function (e) {
+const onSearchApartmentsClicked = function (searchInfo) {
     Actions.searchApartmentsClicked();
+    Actions.saveUserSearches(searchInfo);
     Actions.getApartments();
     Actions.setRoute('/guest-houses');
 }
@@ -109,7 +110,7 @@ class SearchControls extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-3">
-                        <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(this)}}  className="btn btn-main btn-block">Check Now</button>
+                        <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block">Check Now</button>
                 </div>
             </div>
         );
