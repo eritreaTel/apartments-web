@@ -11,7 +11,6 @@ module.exports = {
         if (this.acquireLock('createUser')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
-
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
@@ -23,7 +22,7 @@ module.exports = {
                     type: 'handleRequestError',
                     data: {
                         error,
-                        defaultErrorMessage: 'Cannot create user'
+                        defaultErrorMessage: 'Cannot create user. Please try again'
                     }
                 });
             }

@@ -11,10 +11,11 @@ module.exports = {
         let errorMessages;
         if (error && !override) {
             try {
-
                 const text = await error.response.text();
                 const parsed = JSON.parse(text);
-                if (parsed.messages && parsed.messages.length) errorMessages = parsed.messages;
+                if (parsed.messages && parsed.messages.length) {
+                    errorMessages = parsed.messages;
+                }
             } catch (e) {
                 //add airbrake once it is figure out
             }
@@ -25,7 +26,7 @@ module.exports = {
         errorMessages = errorMessages || [defaultErrorMessage];
 
         this.dispatch({
-            type: 'setErrorMessages', data: errorMessages
+            type: 'setErrorMessages', data: {errors: errorMessages}
         });
     },
 
