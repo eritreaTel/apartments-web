@@ -45,6 +45,7 @@ module.exports = {
 
     setErrorMessages(data) {
         let {errors} = data;
+        
         this.setStoreVal('errors', errors);
         this.dispatch({type: 'scheduleClearErrorsAndMessages'});
     },

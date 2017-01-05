@@ -1,4 +1,5 @@
 const FetchHelper = require('../helpers/fetch_helper');
+const ResponseHelper = require('../helpers/response_helper');
 
 
 module.exports = {
@@ -8,15 +9,23 @@ module.exports = {
     },
 
     async getBestApartments() {
-        const url = 'apartments?bestApartments=true&pageSize=3';
+        let url = 'available_apartments?best_apartments=1';
+        let bookingStage = this.getStoreVal('bookingStage');
+        let {searchInfo : {checkInDate, checkOutDate, room, bed}} = bookingStage;
+        url = url + '&check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&room=' + room + '&bed=' + bed;
+        console.log("best apartments url is");
+        console.log(url);
+
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
-
             if (this.acquireLock('getBestApartments')) {
                 try {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                    if (response.data && response.data.results && response.data.results.length > 0) {
-                        this.setStoreVal('bestApartments', response.data.results);
+                    const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                    if (errors.length > 0) {
+                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    } else {
+                        this.setStoreVal('bestApartments', results);
                     }
                 } catch (error) {
                     this.dispatch({
