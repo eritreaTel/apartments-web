@@ -30,7 +30,7 @@ module.exports = {
                         this.setStoreVal('bestApartments', results);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -67,7 +67,7 @@ module.exports = {
                         this.concatStoreVal('apartments', results);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -93,7 +93,7 @@ module.exports = {
                         this.setStoreVal('apartment', response.data.results[0]);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -120,7 +120,7 @@ module.exports = {
                     this.setStoreVal('apartmentReviews', results);
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -128,6 +128,7 @@ module.exports = {
                     }
                 });
             }
+
             this.releaseLock('saveApartmentReview');
             return this.dispatch({type: 'prepareResponse'});
         }
@@ -150,7 +151,7 @@ module.exports = {
                     this.setStoreVal('apartmentReviews', results);
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,

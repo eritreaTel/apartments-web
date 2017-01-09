@@ -55,7 +55,8 @@ module.exports = {
                         pageNumber: null,
                         acceptToS : false,
                         isProcessing : {
-                            'newsLetterSubscription' : false
+                            'newsLetterSubscription' : false,
+                            'reviewAnApartment' : false,
                         }
                     }
                 };

@@ -37,6 +37,9 @@ const onReviewApartmentClicked = function (e, ratingInfo) {
 	let comment = e.refs.comment.value;
 	let apartmentReviewInfo = {...ratingInfo, email, full_name, comment};
 
+	let isProcessing = {reviewAnApartment: true};
+	Actions.setIsProcessing(isProcessing);
+
 	let createApartmentReviewsPromise = Actions.saveApartmentReview(apartmentReviewInfo);
 
 	createApartmentReviewsPromise.then(response => {
@@ -45,6 +48,9 @@ const onReviewApartmentClicked = function (e, ratingInfo) {
 		} else {
 			NotificationManager.success('Thank you for your review.', 'Apartment Review');
 		}
+
+		isProcessing.reviewAnApartment = false;
+		Actions.setIsProcessing(isProcessing);
 	});
 }
 
@@ -117,7 +123,7 @@ class ApartmentReviewSection  extends React.Component {
 
 					<div className="row">
 						<ApartmentReviews apartmentReviews = {this.props.apartmentReviews} />
-						<ApartmentReviewForm user={this.props.user} apartment={this.props.apartment}/>
+						<ApartmentReviewForm isProcessing={this.props.isProcessing} user={this.props.user} apartment={this.props.apartment}/>
 					</div>
 				</div>
 			</div>
@@ -127,9 +133,6 @@ class ApartmentReviewSection  extends React.Component {
 
 class ApartmentReviews extends React.Component {
 	render () {
-
-		console.log('start of styled reviews');
-		console.log(this.props.apartmentReviews);
 
 		let	styledReview = this.props.apartmentReviews && this.props.apartmentReviews.map(review => {
 					return 	<div className="media" key={review.id}>
@@ -187,7 +190,7 @@ class ApartmentReviewForm extends React.Component {
 
 	render() {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
-		let {apartment, user} = this.props;
+		let {apartment, user, isProcessing} = this.props;
 		let apartment_id = apartment.id;
 		let user_id = null; let email = null;
 		if (user) {
@@ -196,46 +199,54 @@ class ApartmentReviewForm extends React.Component {
 		}
 		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id, user_id};
 
+		let spinnerClassName = (isProcessing.reviewAnApartment == true) ? 'margin-left-20' : 'margin-left-20 hide';
+		let disableInput   = (isProcessing.reviewAnApartment == true) ? true : false;
+		let buttonClassname  = (isProcessing.reviewAnApartment == true) ? 'btn btn-dark pull-left disabled' : 'btn btn-dark pull-left';
+		let editStars = (isProcessing.reviewAnApartment == true) ? false : true;
+
+
+
 		return (
 			<div className="col-md-5">
 				<div className="row">
 					<div className="col-xs-6 mg-star-rating">
 						<div className="mg-star-rating-title">Location: </div>
-						<StarRatingComponent name="location_rating" starCount={5} value={location_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
+						<StarRatingComponent name="location_rating" editing={editStars} starCount={5} value={location_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 					<div className="col-xs-6 mg-star-rating">
 						<div className="mg-star-rating-title">Comfort:</div>
-						<StarRatingComponent name="comfort_rating" starCount={5} value={comfort_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
+						<StarRatingComponent name="comfort_rating" editing={editStars} starCount={5} value={comfort_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-xs-6 mg-star-rating">
 						<div className="mg-star-rating-title">Price:</div>
-						<StarRatingComponent name="price_rating" starCount={5} value={price_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
+						<StarRatingComponent name="price_rating" editing={editStars} starCount={5} value={price_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 					<div className="col-xs-6 mg-star-rating">
 						<div className="mg-star-rating-title">Quality:</div>
-						<StarRatingComponent name="quality_rating" starCount={5} value={quality_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
+						<StarRatingComponent name="quality_rating" editing={editStars} starCount={5} value={quality_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-md-6">
 					<Validate validators={[ValidationHelper.isRequired]}>
-						<input ref='full_name' type="text" className="input-with-validation form-control" placeholder="Your Name *"/>
+						<input ref='full_name' type="text" className="input-with-validation form-control" disabled={disableInput} placeholder="Your Name *"/>
 					</Validate>
 					</div>
 					<div className="col-md-6">
 						<Validate validators={[ValidationHelper.isRequired]}>
-							<input ref='email' type="text" value={email} className="input-with-validation form-control" placeholder="Your Email *"/>
+							<input ref='email' type="text" value={email} className="input-with-validation form-control" disabled={disableInput} placeholder="Your Email *"/>
 						</Validate>
 					</div>
 				</div>
 				<Validate validators={[ValidationHelper.isRequired]}>
-					<textarea ref='comment' className="input-with-validation form-control" placeholder="Your Comment *" rows="5"></textarea>
+					<textarea ref='comment' className="input-with-validation form-control" disabled={disableInput} placeholder="Your Comment *" rows="5"></textarea>
 				</Validate>
-				<input onClick={() => {onReviewApartmentClicked(this, ratingInfo)}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
+				<input onClick={() => {onReviewApartmentClicked(this, ratingInfo)}} type="submit" value="Submit Review" className={buttonClassname}/>
+				<MDSpinner ref='footer_spinner' className={spinnerClassName} />
 			</div>
 		);
 	}
@@ -310,7 +321,7 @@ class ApartmentPage extends React.Component {
 	}
 
 	render() {
-		const {store : {apartment, user, apartmentReviews}} = this.props;
+		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
 
 		return (
 			<ApartmentBody>
@@ -321,7 +332,7 @@ class ApartmentPage extends React.Component {
 
 				<ApartmentPrice apartment = {apartment} />
 				<ApartmentMiddleSection apartment={apartment} />
-				<ApartmentReviewSection user={user} apartment={apartment} apartmentReviews={apartmentReviews} />
+				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartment={apartment} apartmentReviews={apartmentReviews} />
 			</ApartmentBody>
 		);
 	}
