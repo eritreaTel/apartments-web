@@ -125,39 +125,39 @@ class ApartmentReviewSection  extends React.Component {
 	}
 }
 
-const ApartmentReviews = function (props) {
-	console.log('list of all reviews');
-	console.log(props.apartmentReviews);
-	let thereAreReviews = true;// props.apartmentReviews && props.apartmentReviews.length > 0 && props.apartmentReviews[0].length > 0;
-	let styledReview;
+class ApartmentReviews extends React.Component {
+	render () {
 
-	if (thereAreReviews) {
-		styledReview = props.apartmentReviews.map(review => {
-			return 	<div className="media" key={review.id}>
-						<div className="media-left">
-							<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
-						</div>
-						<div className="media-body">
-							<h4 className="media-heading">{review.full_name}</h4>
-							<div className="mg-media-user-rating">
-								<StarRatingComponent edit={false} name="overall_rating" starCount={5} value={Math.ceil(review.average_rating)} emptyStarColor={"#d3d3d3"} />
+		console.log('start of styled reviews');
+		console.log(this.props.apartmentReviews);
+
+		let	styledReview = this.props.apartmentReviews && this.props.apartmentReviews.map(review => {
+					return 	<div className="media" key={review.id}>
+								<div className="media-left">
+									<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
+								</div>
+								<div className="media-body">
+									<h4 className="media-heading">{review.full_name}</h4>
+									<div className="mg-media-user-rating">
+										<StarRatingComponent edit={false} name="overall_rating" starCount={5} value={Math.ceil(review.average_rating)} emptyStarColor={"#d3d3d3"} />
+									</div>
+									<div className="media-date">{DateHelper.formatDate(review.created_at, 'D MMM, YYYY')}</div>
+									<p>{review.comment}</p>
+								</div>
 							</div>
-							<div className="media-date">{DateHelper.formatDate(review.created_at, 'D MMM, YYYY')}</div>
-							<p>{review.comment}</p>
-						</div>
-					</div>
-			});
-	} else {
-		styledReview = 'Please be the first one to review this apartment';
-	}
+		});
 
-	return (
-		<div className="col-md-7">
-			<div className="mg-reviews">
-				{styledReview}
+		styledReview = this.props.apartmentReviews && this.props.apartmentReviews.length ==0 ? 'Please be the first one to review this apartment' : styledReview  ;
+
+
+		return (
+			<div className="col-md-7">
+				<div className="mg-reviews">
+					{styledReview}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 }
 
 class ApartmentReviewForm extends React.Component {
@@ -326,11 +326,12 @@ class ApartmentPage extends React.Component {
 		Actions.getAuthenticatedUser();
 	}
 
+	componentWillUnmount() {
+		Actions.clearApartment();
+	}
+
 	render() {
 		const {store : {apartment, user, apartmentReviews}} = this.props;
-
-		console.log('inside render');
-		console.log(apartmentReviews);
 
 		return (
 			<ApartmentBody>

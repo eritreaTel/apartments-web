@@ -29,6 +29,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartment', data});
     },
 
+    clearApartment() {
+        return Dispatcher.dispatch({type: 'clearApartment'});
+    },
+
     saveApartmentReview(data) {
         return Dispatcher.dispatch({type: 'saveApartmentReview', data});
     },

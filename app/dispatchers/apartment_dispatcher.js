@@ -8,6 +8,10 @@ module.exports = {
         this.setStoreVal('apartments', []);
     },
 
+    clearApartment() {
+        this.setStoreVal('apartment', null);
+    },
+
     async getBestApartments() {
         let url = 'available_apartments?best_apartments=1';
         let bookingStage = this.getStoreVal('bookingStage');
@@ -49,9 +53,6 @@ module.exports = {
         }
 
         url = url + 'check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&room=' + room + '&bed=' + bed + '&pageNumber=' + pageNumber;
-        console.log('inside get apartments' );
-        console.log(url);
-
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             this.setStoreVal('requestUrl', url);
 
@@ -135,11 +136,11 @@ module.exports = {
     async getApartmentReviews({apartmentId}) {
         const url = 'apartment_reviews?apartmentId=' + apartmentId;
         this.setStoreVal('requestUrl', url);
+        console.log('url is ' + url);
 
         if (this.acquireLock('getApartmentReviews')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                console.log(url);
                 const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                 console.log('results of get apartment reviews are ');
                 console.log(results);
