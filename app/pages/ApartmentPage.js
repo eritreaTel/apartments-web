@@ -16,6 +16,10 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
 import MDSpinner from "react-md-spinner";
+import ReactDOM from 'react-dom';
+import StarRatingComponent from 'react-star-rating-component';
+
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const onBookNowClicked = function (apartmentId) {
 	Actions.bookApartmentClicked({apartmentId});
@@ -27,8 +31,21 @@ const onKeepSearchingClicked = function () {
 	Actions.setRoute('/guest-houses');
 }
 
-const onReviewApartmentClicked = function () {
-	console.log('Review apartment clicked');
+const onReviewApartmentClicked = function (e, ratingInfo) {
+	let email = e.refs.email.value;
+	let full_name = e.refs.full_name.value;
+	let comment = e.refs.comment.value;
+	let apartmentReviewInfo = {...ratingInfo, email, full_name, comment};
+
+	let createApartmentReviewsPromise = Actions.saveApartmentReview(apartmentReviewInfo);
+
+	createApartmentReviewsPromise.then(response => {
+		if (response.status == 'fail') {
+			NotificationManager.error(response.error, 'Apartment Review', 3000);
+		} else {
+			NotificationManager.success('Thank you for your review.', 'Apartment Review');
+		}
+	});
 }
 
 const ApartmentPrice = function(props) {
@@ -87,7 +104,7 @@ const ApartmentReviewSection = function (props) {
 
 				<div className="row">
 					<ApartmentReviews apartmentReviews = {props.apartmentReviews} />
-					<ApartmentReviewForm/>
+					<ApartmentReviewForm user={props.user} apartment={props.apartment}/>
 				</div>
 			</div>
 		</div>
@@ -128,6 +145,29 @@ const ApartmentReviews = function (props) {
 
 class ApartmentReviewForm extends React.Component {
 
+	constructor() {
+		super();
+
+		this.state = {
+			location_rating: 0,
+			comfort_rating: 0,
+			price_rating: 0,
+			quality_rating: 0
+		};
+	}
+
+	onLocationStarClick(nextValue, prevValue, name) {
+		if (name =='location_rating') {
+			this.setState({location_rating: nextValue});
+		} else if(name =='comfort_rating') {
+			this.setState({comfort_rating: nextValue});
+		} else if(name =='price_rating') {
+			this.setState({price_rating: nextValue});
+		} else if(name =='quality_rating') {
+			this.setState({quality_rating: nextValue});
+		}
+	}
+
 	componentDidMount() {
 		/*
 		 * Single room review ratting
@@ -150,48 +190,51 @@ class ApartmentReviewForm extends React.Component {
 	}
 
 	render() {
+		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
+		let {apartment} = this.props;
+		let apartment_id = apartment.id;
+		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id};
+
 		return (
 			<div className="col-md-5">
 				<div className="row">
 					<div className="col-xs-6 mg-star-rating">
-						<div className="mg-star-rating-title">Location:</div> <div id="mg-star-position" className="starrr"></div>
-						<input type="hidden" id="mg-star-position-input"/>
+						<div className="mg-star-rating-title">Location: </div>
+						<StarRatingComponent name="location_rating" starCount={5} value={location_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 					<div className="col-xs-6 mg-star-rating">
-						<div className="mg-star-rating-title">Comfort:</div> <div id="mg-star-comfort" className="starrr"></div>
-						<input type="hidden" id="mg-star-comfort-input"/>
+						<div className="mg-star-rating-title">Comfort:</div>
+						<StarRatingComponent name="comfort_rating" starCount={5} value={comfort_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-xs-6 mg-star-rating">
-						<div className="mg-star-rating-title">Price:</div> <div id="mg-star-price" className="starrr"></div>
-						<input type="hidden" id="mg-star-price-input"/>
+						<div className="mg-star-rating-title">Price:</div>
+						<StarRatingComponent name="price_rating" starCount={5} value={price_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 					<div className="col-xs-6 mg-star-rating">
-						<div className="mg-star-rating-title">Quality:</div> <div id="mg-star-quality" className="starrr"></div>
-						<Validate validators={[ValidationHelper.isRequired]}>
-							<input type="hidden" id="mg-star-quality-input"/>
-						</Validate>
+						<div className="mg-star-rating-title">Quality:</div>
+						<StarRatingComponent name="quality_rating" starCount={5} value={quality_rating} emptyStarColor={"#d3d3d3"} onStarClick={this.onLocationStarClick.bind(this)} />
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-md-6">
 					<Validate validators={[ValidationHelper.isRequired]}>
-						<input type="text" className="input-with-validation form-control" placeholder="Your Name *"/>
+						<input ref='full_name' type="text" className="input-with-validation form-control" placeholder="Your Name *"/>
 					</Validate>
 					</div>
 					<div className="col-md-6">
 						<Validate validators={[ValidationHelper.isRequired]}>
-							<input type="text" className="input-with-validation form-control" placeholder="Your Email *"/>
+							<input ref='email' type="text" className="input-with-validation form-control" placeholder="Your Email *"/>
 						</Validate>
 					</div>
 				</div>
 				<Validate validators={[ValidationHelper.isRequired]}>
-					<textarea className="input-with-validation form-control" placeholder="Your Comment *" rows="5"></textarea>
+					<textarea ref='comment' className="input-with-validation form-control" placeholder="Your Comment *" rows="5"></textarea>
 				</Validate>
-				<input onClick={() => {onReviewApartmentClicked()}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
+				<input onClick={() => {onReviewApartmentClicked(this, ratingInfo)}} type="submit" value="Submit Review" className="btn btn-dark pull-right"/>
 			</div>
 		);
 	}
@@ -254,8 +297,12 @@ const ApartmentBody = function (props) {
 
 class ApartmentPage extends React.Component {
 
+	componentWillMount() {
+		Actions.getAuthenticatedUser();
+	}
+
 	render() {
-		const {store : {apartment}} = this.props;
+		const {store : {apartment, user}} = this.props;
 
 		return (
 			<ApartmentBody>
@@ -266,7 +313,7 @@ class ApartmentPage extends React.Component {
 
 				<ApartmentPrice pricePerDay = {apartment.price_per_day} />
 				<ApartmentMiddleSection apartment={apartment} />
-				<ApartmentReviewSection apartmentReviews={apartment.apartmentReviews} />
+				<ApartmentReviewSection user={user} apartment={apartment} apartmentReviews={apartment.apartmentReviews} />
 			</ApartmentBody>
 		);
 	}

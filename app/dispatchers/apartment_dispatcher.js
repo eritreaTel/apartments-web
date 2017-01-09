@@ -103,5 +103,32 @@ module.exports = {
                 this.releaseLock('getApartment');
             }
         }
+    },
+
+    async saveApartmentReview(data) {
+        const url = 'apartment_reviews';
+        this.setStoreVal('requestUrl', url);
+
+        if (this.acquireLock('saveApartmentReview')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
+                const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    this.setStoreVal('apartmentReviews', results);
+                }
+            } catch (error) {
+                this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot create apartment review. Please try again'
+                    }
+                });
+            }
+            this.releaseLock('saveApartmentReview');
+            return this.dispatch({type: 'prepareResponse'});
+        }
     }
 };
