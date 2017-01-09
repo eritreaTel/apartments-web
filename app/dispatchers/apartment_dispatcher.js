@@ -137,14 +137,11 @@ module.exports = {
     async getApartmentReviews({apartmentId}) {
         const url = 'apartment_reviews?apartmentId=' + apartmentId;
         this.setStoreVal('requestUrl', url);
-        console.log('url is ' + url);
 
         if (this.acquireLock('getApartmentReviews')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                 const {results, errors} = ResponseHelper.processResponseReturnMany(response);
-                console.log('results of get apartment reviews are ');
-                console.log(results);
                 if (errors.length > 0) {
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else  {
@@ -159,9 +156,7 @@ module.exports = {
                     }
                 });
             }
-            console.log('return apartment review dispatcher');
-
-
+            
             this.releaseLock('getApartmentReviews');
         }
     }

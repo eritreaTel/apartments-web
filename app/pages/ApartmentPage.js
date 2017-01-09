@@ -192,7 +192,7 @@ class ApartmentReviewForm extends React.Component {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
 		let {apartment, user, isProcessing} = this.props;
 		let apartment_id = apartment.id;
-		let user_id = null; let email = null;
+		let user_id = null; let email = undefined;
 		if (user) {
 			user_id = user.id;
 			email = user.email;
@@ -200,9 +200,10 @@ class ApartmentReviewForm extends React.Component {
 		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id, user_id};
 
 		let spinnerClassName = (isProcessing.reviewAnApartment == true) ? 'margin-left-20' : 'margin-left-20 hide';
-		let disableInput   = (isProcessing.reviewAnApartment == true) ? true : false;
-		let buttonClassname  = (isProcessing.reviewAnApartment == true) ? 'btn btn-dark pull-left disabled' : 'btn btn-dark pull-left';
-		let editStars = (isProcessing.reviewAnApartment == true) ? false : true;
+		let disableInput   		= (isProcessing.reviewAnApartment == true ) ? true : false;
+		let disableEmailInput   = (isProcessing.reviewAnApartment == true || email != undefined ) ? true : false;
+		let buttonClassname  	= (isProcessing.reviewAnApartment == true) ? 'btn btn-dark pull-left disabled' : 'btn btn-dark pull-left';
+		let editStars 			= (isProcessing.reviewAnApartment == true) ? false : true;
 
 
 
@@ -238,7 +239,7 @@ class ApartmentReviewForm extends React.Component {
 					</div>
 					<div className="col-md-6">
 						<Validate validators={[ValidationHelper.isRequired]}>
-							<input ref='email' type="text" value={email} className="input-with-validation form-control" disabled={disableInput} placeholder="Your Email *"/>
+							<input ref='email' type="text" value={email} className="input-with-validation form-control" disabled={disableEmailInput} placeholder="Your Email *"/>
 						</Validate>
 					</div>
 				</div>
