@@ -70,7 +70,7 @@ class PaymentInfo extends React.Component {
                         <div className="col-md-8">
                               <div className="mg-book-form-billing">
                                     <h2 className="mg-sec-left-title">Billing Address</h2>
-                                    <div className="row pb40">
+                                    <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>First Name</label><span className='required-input'> * </span>
@@ -88,7 +88,7 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
-                                    <div className="row pb40">
+                                    <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Address Line 1</label><span className='required-input'> * </span>
@@ -105,7 +105,7 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
-                                    <div className="row pb40">
+                                    <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>City</label><span className='required-input'> * </span>
@@ -123,7 +123,7 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
-                                    <div className="row pb40">
+                                    <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>State/Region</label><span className='required-input'> * </span>

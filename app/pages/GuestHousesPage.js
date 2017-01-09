@@ -11,6 +11,7 @@ const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
 const ApartmentHelper = require('../helpers/apartment_helper');
 const DateHelper = require('../helpers/date_helper');
+import MDSpinner from "react-md-spinner";
 
 
 const BookingStaging = function(props) {
@@ -117,7 +118,7 @@ const WithUserLoaded = withDataLoaded({
                 <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                     <SearchApartments />
                     <div className="load-spin">
-                        <SvgImage name="dark-sun"/> Loading
+                        <MDSpinner />
                     </div>
                 </div>
             </GuestHouseBody>
