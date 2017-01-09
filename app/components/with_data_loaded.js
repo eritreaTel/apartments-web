@@ -29,7 +29,7 @@ function withDataLoaded({WithData, WithoutData = null, data}) {
        const {store} = this.props;
 
       _.each(data, (item) => {
-        if (!hasItem(store, item)) {
+        if (item.alwaysLoad == true || !hasItem(store, item)) {
           item.loadDataFn(store);
         }
       });

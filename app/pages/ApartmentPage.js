@@ -317,10 +317,6 @@ class ApartmentPage extends React.Component {
 		Actions.getAuthenticatedUser();
 	}
 
-	componentWillUnmount() {
-		Actions.clearApartment();
-	}
-
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
 
@@ -354,7 +350,8 @@ const WithUserLoaded = withDataLoaded({
 	data: [
 		{
 			storeKeys: ['apartment'],
-			loadDataFn: ({view : {apartmentId}}) => Actions.getApartment({apartmentId})
+			loadDataFn: ({view : {apartmentId}}) => Actions.getApartment({apartmentId}),
+			alwaysLoad : true
 		}
 	]
 });

@@ -55,9 +55,12 @@ module.exports = {
     },
 
     bookApartmentClicked({apartmentId}) {
-        let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
-        this.setStoreVal('apartment', apartment);
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+        //From one apartment page, we already have apartment, from guest house page, we fetch the apartment
+        if (this.getStoreVal('apartment') == null) {
+            let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
+            this.setStoreVal('apartment', apartment);
+        }
     },
 
     bookBestApartmentClicked({apartmentId}) {
