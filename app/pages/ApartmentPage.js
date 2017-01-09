@@ -192,7 +192,7 @@ class ApartmentReviewForm extends React.Component {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
 		let {apartment, user, isProcessing} = this.props;
 		let apartment_id = apartment.id;
-		let user_id = null; let email = undefined;
+		let user_id = null; let email = '';
 		if (user) {
 			user_id = user.id;
 			email = user.email;
@@ -201,7 +201,7 @@ class ApartmentReviewForm extends React.Component {
 
 		let spinnerClassName = (isProcessing.reviewAnApartment == true) ? 'margin-left-20' : 'margin-left-20 hide';
 		let disableInput   		= (isProcessing.reviewAnApartment == true ) ? true : false;
-		let disableEmailInput   = (isProcessing.reviewAnApartment == true || email != undefined ) ? true : false;
+		let disableEmailInput   = (isProcessing.reviewAnApartment == true || email != '' ) ? true : false;
 		let buttonClassname  	= (isProcessing.reviewAnApartment == true) ? 'btn btn-dark pull-left disabled' : 'btn btn-dark pull-left';
 		let editStars 			= (isProcessing.reviewAnApartment == true) ? false : true;
 
