@@ -43,7 +43,7 @@ const AmenitiesAndControlButtons = function(props) {
 	return (
 		<div className="col-md-5 mg-room-fecilities">
 			<h2 className="mg-sec-left-title">Apartment Amenities</h2>
-			<Amenities amentiesToDisplay="8" amenities={props.apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
+			<Amenities amentiesToDisplay="10" amenities={props.apartment.amenities} outerDivClass="row" innerDivClass="col-sm-6" />
 			<div className="row">
 				<div className="col-md-6">
 					<Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark">Keep Searching</Anchor>
@@ -63,8 +63,7 @@ const ApartmentDescription = function(props) {
 			<div className="col-md-12">
 				<div className="mg-single-room-txt">
 					<h2 className="mg-sec-left-title">Apartment Description</h2>
-
-					{props.apartment.long_description}
+					<div dangerouslySetInnerHTML={{__html: props.apartment.long_description}}></div>
 				</div>
 			</div>
 		</div>
@@ -278,7 +277,7 @@ const WithUserLoaded = withDataLoaded({
 	<ApartmentBody >
 		<PageTitle parentClassName="mg-page-title parallax">
 			<div className='load-spin'>
-				<SvgImage name="dark-sun"/> Loading
+				<MDSpinner />
 			</div>
 		</PageTitle >
 	</ApartmentBody>
