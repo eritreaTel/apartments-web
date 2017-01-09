@@ -15,6 +15,8 @@ const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
+import MDSpinner from "react-md-spinner";
+
 const onBookNowClicked = function (apartmentId) {
 	Actions.bookApartmentClicked({apartmentId});
 	Actions.setRoute('/guest-houses');
