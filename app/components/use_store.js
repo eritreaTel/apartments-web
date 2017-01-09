@@ -29,7 +29,7 @@ module.exports = {
                         user: null,
                         apartments : [],
                         bestApartments : [],
-                        apartmentReviews : null,
+                        apartmentReviews : [],
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,

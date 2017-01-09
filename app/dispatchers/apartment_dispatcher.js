@@ -130,5 +130,38 @@ module.exports = {
             this.releaseLock('saveApartmentReview');
             return this.dispatch({type: 'prepareResponse'});
         }
+    },
+
+    async getApartmentReviews({apartmentId}) {
+        const url = 'apartment_reviews?apartmentId=' + apartmentId;
+        this.setStoreVal('requestUrl', url);
+
+        if (this.acquireLock('getApartmentReviews')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                console.log(url);
+                const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                console.log('results of get apartment reviews are ');
+                console.log(results);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else  {
+                    this.setStoreVal('apartmentReviews', results);
+                }
+            } catch (error) {
+                this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot get apartment review. Please try again'
+                    }
+                });
+            }
+            console.log('return apartment review dispatcher');
+
+
+            this.releaseLock('getApartmentReviews');
+        }
     }
+
 };

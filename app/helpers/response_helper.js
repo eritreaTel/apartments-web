@@ -21,7 +21,7 @@ const ResponseHelper = {
     },
 
     processResponseReturnMany(response) {
-        let results, errors = [] ;
+        let results = [], errors = [] ;
 
         if (response && response.data && response.data.results && response.data.results.length > 0) {
             results = response.data.results;

@@ -50,9 +50,21 @@ const onReviewApartmentClicked = function (e, ratingInfo) {
 
 const ApartmentPrice = function(props) {
 	return (
-		<div className="mg-single-room-price">
-			<div className="mg-srp-inner">
-			{ApplicationHelper.formatCurrency(props.pricePerDay)}<sup>.00</sup><span>/Night</span>
+		<div>
+			<div className="mg-single-room-price">
+				<div className="mg-srp-inner-price-per-day">
+					{ApplicationHelper.formatCurrency(props.apartment.price_per_day)}<sup>.00</sup><span>/Night</span>
+				</div>
+			</div>
+			<div className="mg-single-room-price">
+				<div className="mg-srp-inner-price-per-week">
+					{ApplicationHelper.formatCurrency(props.apartment.price_per_week)}<sup>.00</sup><span>/Week</span>
+				</div>
+			</div>
+			<div className="mg-single-room-price">
+				<div className="mg-srp-inner-price-per-month">
+					{ApplicationHelper.formatCurrency(props.apartment.price_per_month)}<sup>.00</sup><span>/Month</span>
+				</div>
 			</div>
 		</div>
 	);
@@ -89,58 +101,63 @@ const ApartmentDescription = function(props) {
 	);
 }
 
-const ApartmentReviewSection = function (props) {
-	return (
-		<div className="mg-single-room-review-sec">
-			<div className="container">
-				<div className="row">
-					<div className="col-md-12 clearfix">
-
-						<div className="mg-sm-full-rating">
-							<h2 className="mg-sec-left-title">Apartment Reviews</h2>
-						</div>
-					</div>
-				</div>
-
-				<div className="row">
-					<ApartmentReviews apartmentReviews = {props.apartmentReviews} />
-					<ApartmentReviewForm user={props.user} apartment={props.apartment}/>
-				</div>
-			</div>
-		</div>
-	);
-}
-
-const ApartmentReviews = function (props) {
-	const styledReview = props.apartmentReviews && props.apartmentReviews.map(review => {
-		return 	<div className="media" key={review.id}>
-					<div className="media-left">
-						<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
-					</div>
-					<div className="media-body">
-						<h4 className="media-heading">{review.full_name}</h4>
-						<div className="mg-media-user-rating">
-							<span className="mg-rs-icon">
-								<i className="fa fa-star"></i>
-								<i className="fa fa-star"></i>
-								<i className="fa fa-star"></i>
-								<i className="fa fa-star"></i>
-								<i className="fa fa-star-o"></i>
-							</span>
-						</div>
-						<div className="media-date">{DateHelper.formatDate(review.created_at, 'D MMM, YYYY')}</div>
-						<p>{review.comment}</p>
-					</div>
-				</div>
-		});
-
+class ApartmentReviewSection  extends React.Component {
+	render() {
 		return (
-			<div className="col-md-7">
-				<div className="mg-reviews">
-					{styledReview}
+			<div className="mg-single-room-review-sec">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-12 clearfix">
+
+							<div className="mg-sm-full-rating">
+								<h2 className="mg-sec-left-title">Apartment Reviews</h2>
+							</div>
+						</div>
+					</div>
+
+					<div className="row">
+						<ApartmentReviews apartmentReviews = {this.props.apartmentReviews} />
+						<ApartmentReviewForm user={this.props.user} apartment={this.props.apartment}/>
+					</div>
 				</div>
 			</div>
 		);
+	}
+}
+
+const ApartmentReviews = function (props) {
+	console.log('list of all reviews');
+	console.log(props.apartmentReviews);
+	let thereAreReviews = true;// props.apartmentReviews && props.apartmentReviews.length > 0 && props.apartmentReviews[0].length > 0;
+	let styledReview;
+
+	if (thereAreReviews) {
+		styledReview = props.apartmentReviews.map(review => {
+			return 	<div className="media" key={review.id}>
+						<div className="media-left">
+							<Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
+						</div>
+						<div className="media-body">
+							<h4 className="media-heading">{review.full_name}</h4>
+							<div className="mg-media-user-rating">
+								<StarRatingComponent edit={false} name="overall_rating" starCount={5} value={Math.ceil(review.average_rating)} emptyStarColor={"#d3d3d3"} />
+							</div>
+							<div className="media-date">{DateHelper.formatDate(review.created_at, 'D MMM, YYYY')}</div>
+							<p>{review.comment}</p>
+						</div>
+					</div>
+			});
+	} else {
+		styledReview = 'Please be the first one to review this apartment';
+	}
+
+	return (
+		<div className="col-md-7">
+			<div className="mg-reviews">
+				{styledReview}
+			</div>
+		</div>
+	);
 }
 
 class ApartmentReviewForm extends React.Component {
@@ -191,9 +208,14 @@ class ApartmentReviewForm extends React.Component {
 
 	render() {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
-		let {apartment} = this.props;
+		let {apartment, user} = this.props;
 		let apartment_id = apartment.id;
-		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id};
+		let user_id = null; let email = null;
+		if (user) {
+			user_id = user.id;
+			email = user.email;
+		}
+		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id, user_id};
 
 		return (
 			<div className="col-md-5">
@@ -227,7 +249,7 @@ class ApartmentReviewForm extends React.Component {
 					</div>
 					<div className="col-md-6">
 						<Validate validators={[ValidationHelper.isRequired]}>
-							<input ref='email' type="text" className="input-with-validation form-control" placeholder="Your Email *"/>
+							<input ref='email' type="text" value={email} className="input-with-validation form-control" placeholder="Your Email *"/>
 						</Validate>
 					</div>
 				</div>
@@ -298,11 +320,17 @@ const ApartmentBody = function (props) {
 class ApartmentPage extends React.Component {
 
 	componentWillMount() {
+		const {store : {apartment}} = this.props;
+		let apartmentId = apartment.id;
+		Actions.getApartmentReviews({apartmentId})
 		Actions.getAuthenticatedUser();
 	}
 
 	render() {
-		const {store : {apartment, user}} = this.props;
+		const {store : {apartment, user, apartmentReviews}} = this.props;
+
+		console.log('inside render');
+		console.log(apartmentReviews);
 
 		return (
 			<ApartmentBody>
@@ -311,9 +339,9 @@ class ApartmentPage extends React.Component {
 					<p>{apartment.short_description}</p>
 				</PageTitle>
 
-				<ApartmentPrice pricePerDay = {apartment.price_per_day} />
+				<ApartmentPrice apartment = {apartment} />
 				<ApartmentMiddleSection apartment={apartment} />
-				<ApartmentReviewSection user={user} apartment={apartment} apartmentReviews={apartment.apartmentReviews} />
+				<ApartmentReviewSection user={user} apartment={apartment} apartmentReviews={apartmentReviews} />
 			</ApartmentBody>
 		);
 	}

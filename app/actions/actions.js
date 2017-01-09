@@ -33,6 +33,11 @@ const Actions = {
         return Dispatcher.dispatch({type: 'saveApartmentReview', data});
     },
 
+    getApartmentReviews(data) {
+        Dispatcher.dispatch({type: 'getApartmentReviews', data});
+    },
+
+
     getBlogs() {
         return Dispatcher.dispatch({type: 'getBlogs'});
     },
