@@ -185,27 +185,6 @@ class ApartmentReviewForm extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		/*
-		 * Single room review ratting
-		 */
-		$('#mg-star-position').on('starrr:change', function(e, value){
-			$('#mg-star-position-input').val(value);
-		});
-
-		$('#mg-star-comfort').on('starrr:change', function(e, value){
-			$('#mg-star-comfort-input').val(value);
-		});
-
-		$('#mg-star-price').on('starrr:change', function(e, value){
-			$('#mg-star-price-input').val(value);
-		});
-
-		$('#mg-star-quality').on('starrr:change', function(e, value){
-			$('#mg-star-quality-input').val(value);
-		});
-	}
-
 	render() {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
 		let {apartment, user} = this.props;
