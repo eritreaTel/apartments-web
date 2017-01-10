@@ -11,7 +11,6 @@ const ErrorMessage 	= ReactValiation.ErrorMessage;
 const ValidateGroup = ReactValiation.ValidateGroup;
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-
 import MDSpinner from "react-md-spinner";
 
 const onNewsLetterSubscriptionClicked = function (e) {
@@ -38,18 +37,13 @@ const onNewsLetterSubscriptionClicked = function (e) {
         'is_active' : 0
     }
     const createUserPromise = Actions.createUser(info);
-    console.log("outside create user promise is");
-    console.log(createUserPromise);
 
     createUserPromise.then(response => {
-        console.log("inside user promise is");
-        console.log(response);
         if (response.status == 'fail') {
             NotificationManager.error(response.error, 'Email Subscription', 3000);
         } else {
             NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
         }
-
 
         isProcessing.newsLetterSubscription = false;
         Actions.setIsProcessing(isProcessing);

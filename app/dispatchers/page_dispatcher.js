@@ -58,6 +58,7 @@ module.exports = {
         console.log("inside personal info updated and data is: ");
         console.log(existing);
         this.mergeStoreVal('bookingStage', {personal: existing});
+        return existing;
     },
 
     searchApartmentsClicked() {

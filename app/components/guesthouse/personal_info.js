@@ -11,13 +11,27 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
 import Checkbox from 'rc-checkbox';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import MDSpinner from "react-md-spinner";
 
 const goToPaymentInfoClicked = function (e) {
     let info = getPersonalInfo(e);
-    Actions.personalInfoUpdated(info);
+    let personal = Actions.personalInfoUpdated(info);
+
+    console.log('personal');
+    console.log(personal);
 
     const loggedIn = (!!CookiesHelper.getSessionCookie());
     if (!loggedIn) {
+        if (personal.terms != true) {
+            NotificationManager.error("Please accept terms and services.", 'Booking - Personal Information', 3000);
+            return;
+        }
+        if (!personal.country || info.country == 'Select your country') {
+            NotificationManager.error("Please select your country", 'Booking - Personal Information', 3000);
+            return;
+        }
+
         Actions.createUser(info);
     }
     Actions.goToPaymentClicked();

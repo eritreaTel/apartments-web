@@ -87,7 +87,7 @@ const Actions = {
     },
 
     personalInfoUpdated(data) {
-        Dispatcher.dispatch({type: 'personalInfoUpdated', data});
+        return Dispatcher.dispatch({type: 'personalInfoUpdated', data});
     },
 
     bookApartmentClicked(data) {
