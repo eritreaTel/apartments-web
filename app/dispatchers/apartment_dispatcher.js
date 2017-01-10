@@ -18,6 +18,7 @@ module.exports = {
         let {searchInfo : {checkInDate, checkOutDate, room, bed}} = bookingStage;
         url = url + '&check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&room=' + room + '&bed=' + bed;
 
+        console.log('get apartments section' + url);
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
             if (this.acquireLock('getBestApartments')) {
@@ -54,6 +55,7 @@ module.exports = {
 
         url = url + 'check_in_date=' + checkInDate + '&check_out_date=' + checkOutDate + '&room=' + room + '&bed=' + bed + '&pageNumber=' + pageNumber;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
+            console.log('apartment url : ' + url);
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getApartments')) {
@@ -64,7 +66,7 @@ module.exports = {
                         this.dispatch({type: 'setErrorMessages', data: {errors}});
                     } else {
                         this.setStoreVal('pageNumber', pageNumber);
-                        this.concatStoreVal('apartments', results);
+                        this.setStoreVal('apartments', results);
                     }
                 } catch (error) {
                     await this.dispatch({
