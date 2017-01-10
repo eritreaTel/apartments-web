@@ -40,6 +40,7 @@
     "lodash.camelcase": "^3.0.1",
     "lodash.debounce": "^3.1.1",
     "path": "0.12.7",
+    "rc-checkbox": "^1.4.3",
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-bootstrap": "^0.30.7",

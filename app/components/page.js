@@ -16,6 +16,7 @@ const CookiesHelper = require('../helpers/cookies_helper');
 //Import third party css
 import 'react-select/dist/react-select.css';
 import 'react-notifications/lib/notifications.css';
+import 'rc-checkbox/assets/index.css';
 
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');

@@ -4,13 +4,13 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
-const Checkbox = require('../shared/checkbox');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
+import Checkbox from 'rc-checkbox';
 
 const goToPaymentInfoClicked = function (e) {
     let info = getPersonalInfo(e);
@@ -26,8 +26,11 @@ const goToPaymentInfoClicked = function (e) {
 const goBackToSearch = function (e) {
     let info = getPersonalInfo(e);
     Actions.personalInfoUpdated(info);
-
     Actions.goBackToSearch();
+}
+
+function onTermsCheckBoxChanged(e, checked) {
+    Actions.personalInfoUpdated({'terms' : e.target.checked});
 }
 
 const getPersonalInfo = function (e) {
@@ -39,7 +42,6 @@ const getPersonalInfo = function (e) {
         'email' : e.refs.email.value,
         'password' : e.refs.password.value,
         'renter_password' : e.refs.renter_password.value,
-        'terms' : e.refs.termsCmp.refs.terms.value,
         'type' : 'seeker',
         'is_active' : 1
     }
@@ -52,8 +54,8 @@ class PersonalInfo extends React.Component {
         let personal = bookingStage ? bookingStage.personal : null;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
-        let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = undefined;
-        let country = 'Select your country' ;
+        let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = '';
+        let country = 'Select your country', termsDefaultChecked = 0 ;
         let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row', disableElement = '';
         if (loggedIn) {
             first_name      = user.first_name;
@@ -61,8 +63,8 @@ class PersonalInfo extends React.Component {
             city            = user.city;
             phone_number    = user.phone_number;
             email           = user.email;
-            terms           = user.terms;
             country         = user.country;
+            termsDefaultChecked = 1;
 
             disableElement  = true;
             acceptTermsCss = 'hide clearfix mg-terms-input';
@@ -74,10 +76,10 @@ class PersonalInfo extends React.Component {
             city            = personal.city;
             phone_number    = personal.phone_number;
             email           = personal.email;
-            terms           = personal.terms;
+            termsDefaultChecked = (personal.terms == true) ? 1 : 0;
             country = personal && personal.country ? personal.country : 'Select your country';
         }
-
+        
         return (
                 <div className="row">
                     <div className="col-md-8">
@@ -160,7 +162,7 @@ class PersonalInfo extends React.Component {
 
                             <div className={acceptTermsCss}>
                                 <div className="pull-right">
-                                    <Checkbox name='terms' defaultChecked={acceptToS} checked={acceptToS} ref ='termsCmp' label=' By Sign up you are agree with our terms and condition' />
+                                    <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our terms and condition
                                 </div>
                             </div>
 
