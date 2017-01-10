@@ -18,17 +18,60 @@ const goToPaymentInfoClicked = function (e) {
     let info = getPersonalInfo(e);
     let personal = Actions.personalInfoUpdated(info);
 
-    console.log('personal');
-    console.log(personal);
-
     const loggedIn = (!!CookiesHelper.getSessionCookie());
     if (!loggedIn) {
-        if (personal.terms != true) {
-            NotificationManager.error("Please accept terms and services.", 'Booking - Personal Information', 3000);
+        if (!info.first_name) {
+            NotificationManager.error("Please enter first name", 'Booking - Personal Information', 3000);
+            e.refs.first_name.focus();
+            return;
+        }
+        if (!info.last_name) {
+            NotificationManager.error("Please enter last name", 'Booking - Personal Information', 3000);
+            e.refs.last_name.focus();
+            return;
+        }
+        if (!info.city) {
+            NotificationManager.error("Please enter city", 'Booking - Personal Information', 3000);
+            e.refs.city.focus();
             return;
         }
         if (!personal.country || info.country == 'Select your country') {
             NotificationManager.error("Please select your country", 'Booking - Personal Information', 3000);
+            return;
+        }
+        if (!info.email) {
+            NotificationManager.error("Please enter email ", 'Booking - Personal Information', 3000);
+            e.refs.email.focus();
+            return;
+        }
+
+        if (!info.phone_number) {
+            NotificationManager.error("Please enter phone number", 'Booking - Personal Information', 3000);
+            e.refs.phone_number.focus();
+            return;
+        }
+
+
+        if (!info.password) {
+            NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
+            e.refs.password.focus();
+            return;
+        }
+
+        if (!info.renter_password) {
+            NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
+            e.refs.renter_password.focus();
+            return;
+        }
+        if (info.renter_password != info.password) {
+            NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
+            e.refs.password.focus();
+            return;
+        }
+
+
+        if (personal.terms != true) {
+            NotificationManager.error("Please accept terms and services.", 'Booking - Personal Information', 3000);
             return;
         }
 
