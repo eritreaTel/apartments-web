@@ -79,7 +79,7 @@ class PersonalInfo extends React.Component {
             termsDefaultChecked = (personal.terms == true) ? 1 : 0;
             country = personal && personal.country ? personal.country : 'Select your country';
         }
-        
+
         return (
                 <div className="row">
                     <div className="col-md-8">
@@ -162,7 +162,7 @@ class PersonalInfo extends React.Component {
 
                             <div className={acceptTermsCss}>
                                 <div className="pull-right">
-                                    <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our terms and condition
+                                    <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
                                 </div>
                             </div>
 
