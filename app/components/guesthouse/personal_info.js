@@ -19,6 +19,13 @@ const goToPaymentInfoClicked = function (e) {
     let personal = Actions.personalInfoUpdated(info);
 
     const loggedIn = (!!CookiesHelper.getSessionCookie());
+
+    if (loggedIn) {
+        Actions.goToPaymentClicked();
+        return;
+    }
+
+    //If user is not loggedIn, create a user, log them in and take them to payment page.
     if (!loggedIn) {
         if (!info.first_name) {
             NotificationManager.error("Please enter first name", 'Booking - Personal Information', 3000);
@@ -69,9 +76,25 @@ const goToPaymentInfoClicked = function (e) {
             return;
         }
 
-        Actions.createUser(info);
+        const createUserPromise = Actions.createUser(personal);
+
+        createUserPromise.then(response => {
+            if (response.status == 'fail') {
+                NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
+            } else {
+                NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
+
+                let credentials = {
+                    email : info.email,
+                    password : info.password
+                }
+                console.log('authenticating user');
+                Actions.logIn(credentials);
+                Actions.goToPaymentClicked();
+            }
+        });
     }
-    Actions.goToPaymentClicked();
+
 }
 
 const goBackToSearch = function (e) {
@@ -218,7 +241,7 @@ class PersonalInfo extends React.Component {
                             </div>
 
                             <Anchor onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
-                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} bookingStage={bookingStage} />

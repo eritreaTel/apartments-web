@@ -60,7 +60,7 @@ module.exports = {
 
     async logIn(data) {
         const url = 'users/login';
-        
+        let user = undefined;
         this.setStoreVal('requestUrl', url);
         if (this.acquireLock('logIn')) {
             try {
@@ -72,11 +72,11 @@ module.exports = {
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
                     return;
                 }
-                this.setStoreVal('user', object);
+                user = object;
+                this.setStoreVal('user', user);
                 CookiesHelper.setSessionCookie(object.php_session_id, 3600);
                 CookiesHelper.addDataToCookie('userId', object.id, 3600);
                 CookiesHelper.addDataToCookie('userType', object.type, 3600);
-                this.dispatch({type: 'setRoute', data: '/my-account'});
             } catch (error) {
                 this.dispatch({
                     type: 'handleRequestError',
@@ -87,6 +87,7 @@ module.exports = {
                 });
             }
             this.releaseLock('logIn');
+            return user;
         }
     },
 

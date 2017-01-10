@@ -147,7 +147,7 @@ const Actions = {
     },
 
     logIn(data) {
-        Dispatcher.dispatch({type: 'logIn', data});
+        return Dispatcher.dispatch({type: 'logIn', data});
     },
 
     logOut() {

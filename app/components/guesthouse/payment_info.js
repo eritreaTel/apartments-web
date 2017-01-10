@@ -34,7 +34,6 @@ const getPaymentInfo = function (e) {
             'city' : e.refs.city.value,
             'state' : e.refs.state.value,
             'zip'  : e.refs.zip.value,
-            'country' : e.refs.countryCmp.refs.countryCmp.refs.country.value,
             'card_number'  : e.refs.card_number.value,
             'cvv'  : e.refs.cvv.value,
             'month' : e.refs.monthCmp.refs.month.value,
@@ -57,7 +56,6 @@ class PaymentInfo extends React.Component {
                   this.refs.zip.value             = payment.zip;
                   this.refs.city.value            = payment.city;
                   this.refs.card_number.value     = payment.card_number;
-                  this.refs.country.value         = payment.country;
                   this.refs.month.value           = payment.month;
                   this.refs.year.value            = payment.year;
             }
@@ -135,7 +133,7 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Country</label><span className='input-with-validation required-input'> * </span>
-                                                      <Country ref='countryCmp' />
+                                                      <Country />
                                                 </div>
                                           </div>
                                     </div>
@@ -175,7 +173,7 @@ class PaymentInfo extends React.Component {
                                     </div>
 
                                     <Anchor  onClick={() => {processPaymentClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
-                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-default btn-prev-tab pull-left">Back</Anchor>
+                                    <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
                         <BookingDetails apartment={apartment} bookingStage={bookingStage}/>

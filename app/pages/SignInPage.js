@@ -16,7 +16,10 @@ const authenticateUser = function (e) {
 		email : e.refs.email.value,
 		password : e.refs.password.value
 	}
-	Actions.logIn(credentials);
+	let user = Actions.logIn(credentials);
+	if (user != undefined) {
+		Actions.setRoute('/my-account')
+	}
 }
 
 class SignInBody extends React.Component {
