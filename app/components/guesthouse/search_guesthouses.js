@@ -34,7 +34,7 @@ const Room  = function (props) {
     ];
 
     return (
-        <Select value={props.value} placeholder='Room' clearable={false}  searchable={false}  options={options} onChange={onRoomChanged} />
+        <Select value={props.value} placeholder='Room' clearable={false}  searchable={true}  options={options} onChange={onRoomChanged} />
     );
 }
 
@@ -50,7 +50,7 @@ const Bed  = function (props) {
     ];
 
     return (
-        <Select value={props.value} placeholder='Bed' clearable={false}  searchable={false}  options={options} onChange={onBedChanged} />
+        <Select value={props.value} placeholder='Bed' clearable={false}  searchable={true}  options={options} onChange={onBedChanged} />
     );
 }
 
