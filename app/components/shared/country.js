@@ -1,10 +1,14 @@
 const React = require('react');
+const Actions = require('../../actions/actions');
 var Select = require('react-select');
 
+class Country  extends React.Component {
 
-class CountrySelect  extends React.Component {
+    onCountryChanged(val) {
+        Actions.personalInfoUpdated({'country' : val.value});
+    }
+
     render () {
-
         var options = [
             { value: "Select your country", label: "Select your country"},
             { value: "United States", label: "United States" },
@@ -17,7 +21,7 @@ class CountrySelect  extends React.Component {
             { value: "Spain", label:  "Spain"},
             { value: "Netherlands", label:  "Netherlands"},
             { value: "Brazil", label:  "Brazil"},
-            { value: "Select your country", label:  "────────"},
+            { value: "", label:  "────────"},
             { value: "Afghanistan", label:  "Afghanistan"},
             { value: "Aland Islands", label:  "Aland Islands"},
             { value: "Albania", label:  "Albania"},
@@ -271,32 +275,9 @@ class CountrySelect  extends React.Component {
         ];
 
         return (
-            <Select value={"Select your country"} placeholder='Room' clearable={false}  searchable={true}  options={options} />
+            <Select value={this.props.value} disabled={this.props.disabled} placeholder='Select your country' clearable={false}  searchable={true}  options={options}  onChange={this.onCountryChanged.bind()}/>
         );
     }
-}
-
-class OneCountry extends React.Component {
-    render() {
-        return (
-            <input ref='countryDisplay' disabled='disabled' type="text" className='form-control' />
-        );
-    }
-}
-
-
-class Country  extends React.Component {
-        render() {
-            const {disabled} = this.props;
-
-            let country = (disabled == 'disabled') ? <OneCountry ref='countryCmp' /> : <CountrySelect ref='countryCmp'/>
-
-            return (
-                <div>
-                    {country}
-                </div>
-            );
-        }
 }
 
 module.exports = Country;
