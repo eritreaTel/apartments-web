@@ -44,20 +44,16 @@ const goToPaymentInfoClicked = function (e) {
             e.refs.email.focus();
             return;
         }
-
         if (!info.phone_number) {
             NotificationManager.error("Please enter phone number", 'Booking - Personal Information', 3000);
             e.refs.phone_number.focus();
             return;
         }
-
-
         if (!info.password) {
             NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
             e.refs.password.focus();
             return;
         }
-
         if (!info.renter_password) {
             NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
             e.refs.renter_password.focus();
@@ -68,8 +64,6 @@ const goToPaymentInfoClicked = function (e) {
             e.refs.password.focus();
             return;
         }
-
-
         if (personal.terms != true) {
             NotificationManager.error("Please accept terms and services.", 'Booking - Personal Information', 3000);
             return;
