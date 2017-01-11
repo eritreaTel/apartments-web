@@ -29,15 +29,9 @@ const getPaymentInfo = function (e) {
       return {
             'first_name' : e.refs.first_name.value,
             'last_name'  : e.refs.last_name.value,
-            'address_line_1' : e.refs.address_line_1.value,
-            'address_line_2'  : e.refs.address_line_2.value,
-            'city' : e.refs.city.value,
-            'state' : e.refs.state.value,
             'zip'  : e.refs.zip.value,
             'card_number'  : e.refs.card_number.value,
-            'cvv'  : e.refs.cvv.value,
-            'month' : e.refs.monthCmp.refs.month.value,
-            'year' : e.refs.yearCmp.refs.year.value
+            'cvv'  : e.refs.cvv.value
       }
 }
 
@@ -49,15 +43,8 @@ class PaymentInfo extends React.Component {
             if (payment != null) {
                   this.refs.first_name.value      = payment.first_name;
                   this.refs.last_name.value       = payment.last_name;
-                  this.refs.address_line_1.value  = payment.address_line_1;
-                  this.refs.address_line_2.value  = payment.address_line_2;
-                  this.refs.city.value            = payment.city;
-                  this.refs.state.value           = payment.state;
                   this.refs.zip.value             = payment.zip;
-                  this.refs.city.value            = payment.city;
                   this.refs.card_number.value     = payment.card_number;
-                  this.refs.month.value           = payment.month;
-                  this.refs.year.value            = payment.year;
             }
       }
 
@@ -89,44 +76,9 @@ class PaymentInfo extends React.Component {
                                     <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Address Line 1</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='address_line_1' className="input-with-validation form-control"/>
-                                                      </Validate>
-                                                </div>
-                                          </div>
-
-                                          <div className="col-md-6">
-                                                <div className="mg-book-form-input">
-                                                      <label>Address Line 2</label>
-                                                      <input type="text" ref='address_line_2' className="form-control"/>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div className="row">
-                                          <div className="col-md-6">
-                                                <div className="mg-book-form-input">
-                                                      <label>City</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='city' className="input-with-validation form-control"/>
-                                                      </Validate>
-                                                </div>
-                                          </div>
-                                          <div className="col-md-6">
-                                                <div className="mg-book-form-input">
                                                       <label>Zip/Post Code</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
                                                             <input type="text" ref='zip' className="input-with-validation form-control"/>
-                                                      </Validate>
-                                                </div>
-                                          </div>
-                                    </div>
-                                    <div className="row">
-                                          <div className="col-md-6">
-                                                <div className="mg-book-form-input">
-                                                      <label>State/Region</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='state' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -137,8 +89,6 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
-
-
                                     <h2 className="mg-sec-left-title">Card Info</h2>
                                     <div className="row">
                                           <div className="col-md-6">
@@ -157,20 +107,23 @@ class PaymentInfo extends React.Component {
                                                       </Validate>
                                                 </div>
                                           </div>
-                                          <div className="col-md-12">
+                                    </div>
+
+                                    <div className="row">
+                                          <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <label>Expire</label><span className='required-input'> * </span>
-                                                      <div className="row">
-                                                            <div className="col-md-6">
-                                                                  <Month ref='monthCmp' />
-                                                            </div>
-                                                            <div className="col-md-6">
-                                                                  <Year ref='yearCmp' />
-                                                            </div>
-                                                      </div>
+                                                      <label>Expire Month</label><span className='required-input'> * </span>
+                                                      <Month />
+                                                </div>
+                                          </div>
+                                          <div className="col-md-6">
+                                                <div className="mg-book-form-input">
+                                                      <label>Expire Year</label><span className='required-input'> * </span>
+                                                      <Year />
                                                 </div>
                                           </div>
                                     </div>
+
 
                                     <Anchor  onClick={() => {processPaymentClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
                                     <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>

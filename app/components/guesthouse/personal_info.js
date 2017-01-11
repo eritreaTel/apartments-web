@@ -4,6 +4,7 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
+const FormValidator = require('../../helpers/form_validation_helper');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -27,63 +28,27 @@ const goToPaymentInfoClicked = function (e) {
 
     //If user is not loggedIn, create a user, log them in and take them to payment page.
     if (!loggedIn) {
-        if (!info.first_name) {
-            NotificationManager.error("Please enter first name", 'Booking - Personal Information', 3000);
-            e.refs.first_name.focus();
-            return;
+        let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+                              'city' : "Please enter city", 'country'    : "Please select your country",
+                              'email' : "Please enter email", 'password'   : "Please enter password",
+                              'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
+
+        let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
+        console.log('result is ' + result);
+        if (result == false) {
+            return ;
         }
-        if (!info.last_name) {
-            NotificationManager.error("Please enter last name", 'Booking - Personal Information', 3000);
-            e.refs.last_name.focus();
-            return;
-        }
-        if (!info.city) {
-            NotificationManager.error("Please enter city", 'Booking - Personal Information', 3000);
-            e.refs.city.focus();
-            return;
-        }
-        if (!personal.country || info.country == 'Select your country') {
-            NotificationManager.error("Please select your country", 'Booking - Personal Information', 3000);
-            return;
-        }
-        if (!info.email) {
-            NotificationManager.error("Please enter email ", 'Booking - Personal Information', 3000);
-            e.refs.email.focus();
-            return;
-        }
-        if (!info.phone_number) {
-            NotificationManager.error("Please enter phone number", 'Booking - Personal Information', 3000);
-            e.refs.phone_number.focus();
-            return;
-        }
-        if (!info.password) {
-            NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
-            e.refs.password.focus();
-            return;
-        }
-        if (!info.renter_password) {
-            NotificationManager.error("Please enter password ", 'Booking - Personal Information', 3000);
-            e.refs.renter_password.focus();
-            return;
-        }
-        if (info.renter_password != info.password) {
+        if (personal.renter_password != personal.password) {
             NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
             e.refs.password.focus();
             return;
         }
-        if (personal.terms != true) {
-            NotificationManager.error("Please accept terms and services.", 'Booking - Personal Information', 3000);
-            return;
-        }
 
         const createUserPromise = Actions.createUser(personal);
-
         createUserPromise.then(response => {
             if (response.status == 'fail') {
                 NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
             } else {
-                NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
-
                 let credentials = {
                     email : info.email,
                     password : info.password
@@ -208,10 +173,8 @@ class PersonalInfo extends React.Component {
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>Phone</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={phone_number} disabled={disableElement} ref='phone_number' type="tel" className="input-with-validation form-control"/>
-                                        </Validate>
+                                        <label>Phone</label>
+                                        <input value={phone_number} disabled={disableElement} ref='phone_number' type="tel" className="input-with-validation form-control"/>
                                     </div>
                                 </div>
                             </div>

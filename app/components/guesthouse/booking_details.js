@@ -11,7 +11,7 @@ class BookingDetails extends React.Component {
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
         let totalAmount = '$' + apartment.pricingInfo.total_price;
-        
+
         return(
                 <div className="col-md-4">
                     <div className="mg-cart-container">
@@ -23,7 +23,7 @@ class BookingDetails extends React.Component {
                                     <h3>{apartment.title}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Check In: &nbsp;</strong>
+                                    <strong>Check In:&nbsp;</strong>
                                     <span>{checkInDate}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">

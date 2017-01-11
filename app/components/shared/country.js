@@ -10,7 +10,7 @@ class Country  extends React.Component {
 
     render () {
         var options = [
-            { value: "Select your country", label: "Select your country"},
+            { value: "", label: "Select your country"},
             { value: "United States", label: "United States" },
             { value: "United Kingdom", label: "United Kingdom" },
             { value: "Canada", label:  "Canada"},

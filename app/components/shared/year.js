@@ -1,24 +1,25 @@
 const React = require('react');
-
+const Actions = require('../../actions/actions');
+var Select = require('react-select');
 
 class Year  extends React.Component {
 
     render() {
+        var options = [
+            { value: '', label: 'Month' },
+            { value: '2017', label: '2017' },
+            { value: '2018', label: '2018' },
+            { value: '2019', label: '2019' },
+            { value: '2020', label: '2020' },
+            { value: '2021', label: '2021' },
+            { value: '2022', label: '2022' },
+            { value: '2023', label: '2023' },
+            { value: '2024', label: '2024' },
+            { value: '2025', label: '2025' }
+        ];
+
         return(
-            <select ref='year' className="form-control">
-                <option value="">Year</option>
-                <option value="2016">2016</option>
-                <option value="2017">2017</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-            </select>
+            <Select value = "1" placeholder='Year' clearable={false}  searchable={true}  options={options} />
         );
     }
 }
