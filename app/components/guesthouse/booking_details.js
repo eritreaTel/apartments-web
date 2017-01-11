@@ -5,17 +5,13 @@ class BookingDetails extends React.Component {
 
     render() {
         let {apartment, bookingStage : {searchInfo}} = this.props;
-        let checkInDate='-', checkOutDate='-', bed = '-', room='', totalDays='', totalAmount='$249';
-        if (searchInfo) {
-            checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY') ;
-            checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY') ;
-            bed =  searchInfo.bed ;
-            room = searchInfo.room ;
-            totalDays = searchInfo.totalDays;
-            totalAmount = '$249.99';
-        }
-
-
+        let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY') ;
+        let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY') ;
+        let bed =  apartment.bed ;
+        let room = apartment.room ;
+        let totalDays = apartment.pricingInfo.days_cnt;
+        let totalAmount = '$' + apartment.pricingInfo.total_price;
+        
         return(
                 <div className="col-md-4">
                     <div className="mg-cart-container">
@@ -27,27 +23,27 @@ class BookingDetails extends React.Component {
                                     <h3>{apartment.title}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Check In:</strong>
+                                    <strong>Check In: &nbsp;</strong>
                                     <span>{checkInDate}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check Out:</strong>
-                                    <span> {checkOutDate}</span>
+                                    <span>{checkOutDate}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Room:</strong>
+                                    <strong>Room: </strong>
                                     <span>{room}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Bed:</strong>
+                                    <strong>Bed: </strong>
                                     <span>{bed}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Number of Days:</strong>
+                                    <strong>Number of Days: </strong>
                                     <span>{totalDays}</span>
                                 </div>
                                 <div className="mg-cart-total">
-                                    <strong>Total:</strong>
+                                    <strong>Total: </strong>
                                     <span>{totalAmount}</span>
                                 </div>
                             </div>
