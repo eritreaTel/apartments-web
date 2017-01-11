@@ -14,7 +14,8 @@ const ErrorMessage = ReactValiation.ErrorMessage;
 const processPaymentClicked = function (e) {
       let payment = getPaymentInfo(e);
       Actions.processPayment(payment);
-      Actions.createApartmentBooking(payment)
+
+      Actions.createApartmentBooking(payment);
       Actions.goToConfirmationClicked()
 }
 
@@ -37,19 +38,34 @@ const getPaymentInfo = function (e) {
 
 class PaymentInfo extends React.Component {
 
-      componentDidMount(){
-            const {bookingStage} =  this.props;
-            let payment = bookingStage ? bookingStage.payment : null;
-            if (payment != null) {
-                  this.refs.first_name.value      = payment.first_name;
-                  this.refs.last_name.value       = payment.last_name;
-                  this.refs.zip.value             = payment.zip;
-                  this.refs.card_number.value     = payment.card_number;
-            }
+      componentDidMount() {
+            this.refs.first_name.focus();
       }
 
       render() {
             const {apartment, bookingStage} = this.props;
+            let first_name=undefined, last_name=undefined, zip=undefined, country=undefined;
+            let card_number=undefined, month=undefined, year=undefined;
+
+            let payment = bookingStage ? bookingStage.payment : null;
+            let personal = bookingStage ? bookingStage.personal : null;
+
+            if( payment) {
+                  first_name  = payment.first_name;
+                  last_name   = payment.last_name;
+                  zip         = payment.zip;
+                  country     = payment.country;
+                  card_number = payment.card_number;
+                  month       = payment.month;
+                  year        = payment.year;
+            }
+
+            //If payment is null, initialize firstname and last name from personal information
+            if (!payment && personal) {
+                  first_name  = personal.first_name;
+                  last_name   = personal.last_name;
+            }
+
             return(
                   <div className="row">
                         <div className="col-md-8">
@@ -60,7 +76,7 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>First Name</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='first_name' className="input-with-validation form-control"/>
+                                                            <input value={first_name} type="text" ref='first_name' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -68,7 +84,7 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>Last Name</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='last_name' className="input-with-validation form-control"/>
+                                                            <input value={last_name} type="text" ref='last_name' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -78,14 +94,14 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>Zip/Post Code</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='zip' className="input-with-validation form-control"/>
+                                                            <input value={zip} type="text" ref='zip' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Country</label><span className='input-with-validation required-input'> * </span>
-                                                      <Country />
+                                                      <Country value={country} />
                                                 </div>
                                           </div>
                                     </div>
@@ -95,7 +111,7 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>Card Number</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="text" ref='card_number' className="input-with-validation form-control"/>
+                                                            <input value={card_number} type="text" ref='card_number' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -113,13 +129,13 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Month</label><span className='required-input'> * </span>
-                                                      <Month />
+                                                      <Month value={month} />
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Year</label><span className='required-input'> * </span>
-                                                      <Year />
+                                                      <Year value={year} />
                                                 </div>
                                           </div>
                                     </div>

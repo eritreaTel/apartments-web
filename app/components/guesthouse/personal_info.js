@@ -88,6 +88,10 @@ const getPersonalInfo = function (e) {
 
 class PersonalInfo extends React.Component {
 
+    componentDidMount() {
+        this.refs.first_name.focus();
+    }
+
     render() {
         const {apartment, bookingStage, acceptToS, user} = this.props;
         let personal = bookingStage ? bookingStage.personal : null;
