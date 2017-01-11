@@ -11,8 +11,9 @@ class  ReservationConfirmation extends React.Component {
 
     render() {
         let {apartment , user, bookingStage : {searchInfo, personal, confirmation}} = this.props;
-        let pricingInfo = apartment.pricingInfo;
+        let {pricingInfo, guestHouse} = apartment;
 
+        let confirmationId = 525 + '-' + confirmation.id;
         let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
         let checkOutDate = DateHelper.formatDate(pricingInfo.end_date, 'D MMM, YYYY');
         let bed          =  apartment.bed ;
@@ -20,11 +21,9 @@ class  ReservationConfirmation extends React.Component {
         let totalDays    = pricingInfo.days_cnt;
         let totalAmount  = CurrencyFormatter.format(pricingInfo.total_price, { code: 'USD' });
         let customerName = user.first_name + ' ' + user.last_name;
-        let guestHouseName = 'Pearl of Africa';
-        let guestHouseAddress = '236 Kabala Gala St, Kamapala';
-        let guestHousePhone = '+256 1 123 123 1234';
-
-        let confirmationId = 525 + '-' + confirmation.id;
+        let guestHouseName = guestHouse.name;
+        let guestHouseAddress = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
+        let guestHousePhone   = guestHouse.phone;
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
