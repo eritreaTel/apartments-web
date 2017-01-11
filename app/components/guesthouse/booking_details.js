@@ -1,5 +1,6 @@
 const React = require('react');
 const DateHelper = require('../../helpers/date_helper');
+const CurrencyFormatter = require('currency-formatter');
 
 class BookingDetails extends React.Component {
 
@@ -10,7 +11,7 @@ class BookingDetails extends React.Component {
         let bed =  apartment.bed ;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
-        let totalAmount = '$' + apartment.pricingInfo.total_price;
+        let totalAmount = CurrencyFormatter.format(apartment.pricingInfo.total_price, { code: 'USD' });
 
         return(
                 <div className="col-md-4">

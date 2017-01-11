@@ -99,7 +99,7 @@ class GuestHousesPage extends React.Component {
                             </div>
                 break;
             case 'confirmation' :
-                section =  <ReservationConfirmation apartment={apartment} bookingStage={bookingStage} />
+                section =  <ReservationConfirmation apartment={apartment} bookingStage={bookingStage} user={user} />
                 break;
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">

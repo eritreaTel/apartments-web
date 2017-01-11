@@ -1,6 +1,7 @@
 const React = require('react');
 const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
+const CurrencyFormatter = require('currency-formatter');
 
 class  ReservationConfirmation extends React.Component {
 
@@ -9,18 +10,21 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment, bookingStage : {searchInfo, personal, confirmation}} = this.props;
-        //Get all the below information from confirmation
-        let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY');
-        let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY');
-        let bed =  searchInfo.bed ;
-        let room = searchInfo.room ;
-        let totalDays = searchInfo.totalDays;
-        let totalAmount = '$249.99';
-        let customerName = personal.first_name + ' ' + personal.last_name;
+        let {apartment , user, bookingStage : {searchInfo, personal, confirmation}} = this.props;
+        let pricingInfo = apartment.pricingInfo;
+
+        let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
+        let checkOutDate = DateHelper.formatDate(pricingInfo.end_date, 'D MMM, YYYY');
+        let bed          =  apartment.bed ;
+        let room         = apartment.room ;
+        let totalDays    = pricingInfo.days_cnt;
+        let totalAmount  = CurrencyFormatter.format(pricingInfo.total_price, { code: 'USD' });
+        let customerName = user.first_name + ' ' + user.last_name;
         let guestHouseName = 'Pearl of Africa';
         let guestHouseAddress = '236 Kabala Gala St, Kamapala';
         let guestHousePhone = '+256 1 123 123 1234';
+
+        let confirmationId = 525 + '-' + confirmation.id;
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
@@ -37,12 +41,12 @@ class  ReservationConfirmation extends React.Component {
                                 <div className="col-md-6">
                                     <div className="mg-cart-room">
                                         <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
-                                        <h3>Super Delux</h3>
-                                        <p>Gueshouse uganda cares about customer satisfaction. Please write us on contact us page if you think there is a better way to server you. We thank you again for trusting us with your travel accomodation which is the most important decision you do when you decide to travel to Uganda. Please feel free to contact us at 1-877-540-9000 during your stay in Uganda. We are happy to help you</p>
+                                        <h3>{apartment.title}</h3>
+                                        <p>{apartment.medium_description}</p>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <h3 className="mg-payment-id">Your Payment ID: #105152396140</h3>
+                                    <h3 className="mg-payment-id">Your Payment ID: {confirmationId}</h3>
                                     <div className="mg-widget-cart-row">
                                         <strong>Customer Name:</strong>
                                         <span>{customerName}</span>
@@ -76,7 +80,7 @@ class  ReservationConfirmation extends React.Component {
                                         </address>
                                     </div>
                                     <div className="mg-cart-total">
-                                        <strong>Total:</strong>
+                                        <strong>Total: </strong>
                                         <span>{totalAmount}</span>
                                     </div>
                                 </div>

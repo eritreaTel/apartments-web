@@ -29,6 +29,7 @@
     "big": "^0.5.2",
     "body-parser": "1.14.1",
     "classnames": "^2.2.5",
+    "currency-formatter": "^1.0.8",
     "director": "^1.2.8",
     "express": "4.13.3",
     "file-loader": "^0.9.0",

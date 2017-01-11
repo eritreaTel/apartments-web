@@ -13,6 +13,8 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../../helpers/form_validation_helper');
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 const processPaymentClicked = function (e) {
       let payment = getPaymentInfo(e);
       let paymentPromise = Actions.paymentInfoUpdated(payment);
@@ -27,9 +29,16 @@ const processPaymentClicked = function (e) {
                   return ;
             }
 
-            Actions.processPayment(updatedPayment);
-            Actions.createApartmentBooking(updatedPayment);
-            Actions.goToConfirmationClicked()
+            //Actions.processPayment();
+
+            let bookingPromise = Actions.createApartmentBooking();
+            bookingPromise.then(response => {
+                  if (response.status == 'fail') {
+                       NotificationManager.error(response.error, 'Booking - Payment Information', 3000);
+                  } else {
+                        Actions.goToConfirmationClicked()
+                  }
+            });
       });
 }
 

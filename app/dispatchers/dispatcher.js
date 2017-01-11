@@ -1,6 +1,7 @@
 const PageDispatcher      = require('./page_dispatcher');
 const ApartmentDispatcher = require('./apartment_dispatcher');
 const BlogDispatcher      = require('./blog_dispatcher');
+const BookingDispatcher      = require('./booking_dispatcher');
 const MessageDispatcher   = require('./message_dispatcher');
 const UserDispatcher      = require('./user_dispatcher');
 const DebugHelper         = require('../helpers/debug_helper');
@@ -15,7 +16,8 @@ const Dispatcher = {
             ApartmentDispatcher,
             BlogDispatcher,
             MessageDispatcher,
-            UserDispatcher
+            UserDispatcher,
+            BookingDispatcher
         ];
 
         if (type === 'noop') {

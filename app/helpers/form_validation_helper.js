@@ -19,7 +19,6 @@ module.exports = {
         } catch (error) {
                 result = false;
         }
-        console.log('returning data dude');
         return result;
     }
 }

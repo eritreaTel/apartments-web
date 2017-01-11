@@ -138,12 +138,12 @@ const Actions = {
         Dispatcher.dispatch({type: 'saveUserSearches', data});
     },
 
-    processPayment(data) {
-        Dispatcher.dispatch({type: 'processPayment', data});
+    processPayment() {
+        Dispatcher.dispatch({type: 'processPayment'});
     },
 
-    createApartmentBooking(data) {
-        Dispatcher.dispatch({type: 'createApartmentBooking', data});
+    createApartmentBooking() {
+        return Dispatcher.dispatch({type: 'createApartmentBooking'});
     },
 
     createContactUs(data) {
