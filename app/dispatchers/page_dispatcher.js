@@ -24,40 +24,37 @@ module.exports = {
         this.router.setRoute(data);
     },
 
-    searchApartmentsUpdated({checkInDate, checkOutDate, room, bed}) {
+    async searchApartmentsUpdated(data) {
         let bookingStage = this.getStoreVal('bookingStage');
-        let data = (bookingStage.searchInfo != null) ? bookingStage.searchInfo : {};
+        let existing = (bookingStage.searchInfo != null) ? bookingStage.searchInfo : {};
 
-        if (checkInDate != null) {
-            data.checkInDate = checkInDate;
-        }
-        if (checkOutDate != null) {
-            data.checkOutDate = checkOutDate;
-        }
-        if (room != null) {
-            data.room = room;
-        }
-        if (bed != null) {
-            data.bed = bed;
-        }
-
-        console.log("inside update search apartment clicked, and data is: ");
-        console.log(data);
-        this.mergeStoreVal('bookingStage', {searchInfo: data});
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+        this.mergeStoreVal('bookingStage', {searchInfo: existing});
     },
 
-    personalInfoUpdated(data) {
+    async personalInfoUpdated(data) {
         let bookingStage = this.getStoreVal('bookingStage');
         let existing = (bookingStage.personal != null) ? bookingStage.personal : {};
 
-        _.forEach(data, function(value, key) {
-            console.log("operating for key :" + key + " and value is :" + value);
+        await _.forEach(data, function(value, key) {
             existing[key] = value;
         });
 
-        console.log("inside personal info updated and data is: ");
-        console.log(existing);
         this.mergeStoreVal('bookingStage', {personal: existing});
+        return existing;
+    },
+
+    async paymentInfoUpdated(data) {
+        let bookingStage = this.getStoreVal('bookingStage');
+        let existing = (bookingStage.payment != null) ? bookingStage.payment : {};
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('bookingStage', {payment: existing});
         return existing;
     },
 
@@ -109,11 +106,8 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },
 
-    goBackToPersonal(data) {
+    goBackToPersonal() {
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
-        if (data != null || data != undefined) {
-            this.mergeStoreVal('bookingStage', {payment: data});
-        }
     },
 
     goBackToPayment() {

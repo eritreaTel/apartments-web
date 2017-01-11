@@ -5,34 +5,47 @@ const Year  = require('../shared/year');
 const Anchor  = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
+const CookiesHelper  = require('../../helpers/cookies_helper');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
+const FormValidator = require('../../helpers/form_validation_helper');
 
 const processPaymentClicked = function (e) {
       let payment = getPaymentInfo(e);
-      Actions.processPayment(payment);
+      let paymentPromise = Actions.paymentInfoUpdated(payment);
 
-      Actions.createApartmentBooking(payment);
-      Actions.goToConfirmationClicked()
+      paymentPromise.then(updatedPayment => {
+            //Perform frontEnd validation
+            let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+                                  'zip' : "Please enter valid zip", 'country' : "Please select your country"};
+
+            let result = FormValidator.validateRequiredDatas(e, updatedPayment, requiredFields, 'Booking - Payment Information');
+            if (result == false) {
+                  return ;
+            }
+
+            Actions.processPayment(updatedPayment);
+            Actions.createApartmentBooking(updatedPayment);
+            Actions.goToConfirmationClicked()
+      });
 }
 
 const goBackToPersonal = function (e) {
       let payment = getPaymentInfo(e);
-      console.log('payment information is');
-      console.log(payment);
-      Actions.goBackToPersonal(payment);
+      payment = Actions.paymentInfoUpdated(payment);
+      Actions.goBackToPersonal();
 }
 
 const getPaymentInfo = function (e) {
       return {
             'first_name' : e.refs.first_name.value,
             'last_name'  : e.refs.last_name.value,
-            'zip'  : e.refs.zip.value,
-            'card_number'  : e.refs.card_number.value,
-            'cvv'  : e.refs.cvv.value
+            'zip'        : e.refs.zip.value,
+            'card_number': e.refs.card_number.value,
+            'cvv'        : e.refs.cvv.value
       }
 }
 
@@ -43,12 +56,12 @@ class PaymentInfo extends React.Component {
       }
 
       render() {
-            const {apartment, bookingStage} = this.props;
+            const {apartment, bookingStage, user} = this.props;
             let first_name=undefined, last_name=undefined, zip=undefined, country=undefined;
             let card_number=undefined, month=undefined, year=undefined;
 
             let payment = bookingStage ? bookingStage.payment : null;
-            let personal = bookingStage ? bookingStage.personal : null;
+            const loggedIn = (!!CookiesHelper.getSessionCookie());
 
             if( payment) {
                   first_name  = payment.first_name;
@@ -60,11 +73,9 @@ class PaymentInfo extends React.Component {
                   year        = payment.year;
             }
 
-            //If payment is null, initialize firstname and last name from personal information
-            if (!payment && personal) {
-                  first_name  = personal.first_name;
-                  last_name   = personal.last_name;
-            }
+            //Inialize first_name and last_name from loggedIn user.
+            first_name = (first_name == undefined && loggedIn) ? user.first_name : first_name;
+            last_name = (last_name == undefined && loggedIn) ? user.last_name : last_name;
 
             return(
                   <div className="row">
@@ -101,7 +112,7 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Country</label><span className='input-with-validation required-input'> * </span>
-                                                      <Country value={country} />
+                                                      <Country onChange={(val)=>{Actions.paymentInfoUpdated({'country' : val.value});}} value={country} />
                                                 </div>
                                           </div>
                                     </div>
@@ -129,13 +140,13 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Month</label><span className='required-input'> * </span>
-                                                      <Month value={month} />
+                                                      <Month value={month} onChange={(val)=>{Actions.paymentInfoUpdated({'month' : val.value});}}/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Year</label><span className='required-input'> * </span>
-                                                      <Year value={year} />
+                                                      <Year value={year} onChange={(val)=>{Actions.paymentInfoUpdated({'year' : val.value});}}/>
                                                 </div>
                                           </div>
                                     </div>

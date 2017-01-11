@@ -2,13 +2,13 @@ const React = require('react');
 const Actions = require('../../actions/actions');
 var Select = require('react-select');
 
-class Country  extends React.Component {
 
-    onCountryChanged(val) {
-        Actions.personalInfoUpdated({'country' : val.value});
-    }
+const Country = ({onChange, ...others}) => {
 
-    render () {
+        const change = (e) => {
+            onChange(e);
+        };
+
         var options = [
             { value: "", label: "Select your country"},
             { value: "United States", label: "United States" },
@@ -275,9 +275,9 @@ class Country  extends React.Component {
         ];
 
         return (
-            <Select value={this.props.value} disabled={this.props.disabled} placeholder='Select your country' clearable={false}  searchable={true}  options={options}  onChange={this.onCountryChanged.bind()}/>
+            <Select {...others}  placeholder='Select your country' clearable={false}  searchable={true}  options={options}  onChange={change}/>
         );
-    }
+
 }
 
 module.exports = Country;

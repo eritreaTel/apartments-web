@@ -90,6 +90,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'personalInfoUpdated', data});
     },
 
+    paymentInfoUpdated(data) {
+        return Dispatcher.dispatch({type: 'paymentInfoUpdated', data});
+    },
+
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },
@@ -110,8 +114,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
     },
 
-    goBackToPersonal(data) {
-        Dispatcher.dispatch({type: 'goBackToPersonal', data});
+    goBackToPersonal() {
+        Dispatcher.dispatch({type: 'goBackToPersonal'});
     },
 
     goBackToSearch() {

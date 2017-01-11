@@ -34,7 +34,6 @@ const goToPaymentInfoClicked = function (e) {
                               'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
 
         let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
-        console.log('result is ' + result);
         if (result == false) {
             return ;
         }
@@ -59,7 +58,6 @@ const goToPaymentInfoClicked = function (e) {
             }
         });
     }
-
 }
 
 const goBackToSearch = function (e) {
@@ -159,7 +157,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Country</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <Country value={country} disabled={loggedIn} ref='countryCmp' />
+                                            <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={loggedIn} />
                                         </Validate>
                                     </div>
                                 </div>
