@@ -57,12 +57,12 @@ const Bed  = function (props) {
 class SearchControls extends React.Component {
 
     onCheckInDateChanged(value, formattedValue) {
-        let updatedData =  {'checkInDate'  : value};
+        let updatedData =  {'checkInDate'  : value.substring(0, 10)};
         Actions.searchApartmentsUpdated(updatedData);
     }
 
     onCheckOutDateChanged(value, formattedValue) {
-        let updatedData =  {'checkOutDate'  : value};
+        let updatedData =  {'checkOutDate'  : value.substring(0, 10)};
         Actions.searchApartmentsUpdated(updatedData);
     }
 
