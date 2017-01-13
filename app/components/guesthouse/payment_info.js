@@ -32,7 +32,6 @@ class PaymentInfo extends React.Component {
       }
 
       getPaymentInfo() {
-            console.log('payment info is called');
             return {
                   'first_name' : this.refs.first_name.value,
                   'last_name'  : this.refs.last_name.value,
@@ -43,7 +42,6 @@ class PaymentInfo extends React.Component {
       }
 
       processPaymentClicked() {
-            console.log('I m here process payment');
             let payment = this.getPaymentInfo();
             let paymentPromise = Actions.paymentInfoUpdated(payment);
 
@@ -73,7 +71,6 @@ class PaymentInfo extends React.Component {
 
       paymentProcessingIsDone(status, response) {
             console.log("response from stripe is");
-
             console.log(status);
             console.log(response);
 
@@ -87,12 +84,11 @@ class PaymentInfo extends React.Component {
                   let bookingPromise = Actions.createApartmentBooking({stripe_token});
                         bookingPromise.then(bookingResponse => {
                               if (response.status == 'fail') {
-                              NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
-                        } else {
-                              //Actions.goToConfirmationClicked()
-                              console.log('apartment booking created successfully');
-                        }
-                  });
+                                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
+                              }     else {
+                                    Actions.goToConfirmationClicked()
+                              }
+                      });
             }
       }
 
