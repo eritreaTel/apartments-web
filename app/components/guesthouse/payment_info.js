@@ -15,70 +15,10 @@ const FormValidator = require('../../helpers/form_validation_helper');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-const paymentProcessingIsDone = function (status, response) {
-      console.log("response from stripe is");
-
-      console.log(status);
-      console.log(response);
-
-      if (response.error) {
-            NotificationManager.error(response.error.message, 'Booking - Payment Information', 3000);
-      } else {
-            var stripe_token = response.id;
-            let bookingPromise = Actions.createApartmentBooking({stripe_token});
-            bookingPromise.then(bookingResponse => {
-                  if (response.status == 'fail') {
-                        NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
-                  } else {
-                        //Actions.goToConfirmationClicked()
-                        console.log('apartment booking created successfully');
-                  }
-            });
-      }
-}
-
-const processPaymentClicked = function (e) {
-      let payment = getPaymentInfo(e);
-      let paymentPromise = Actions.paymentInfoUpdated(payment);
-
-      paymentPromise.then(paymentInfo => {
-            //Perform frontEnd validation
-            let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                                  'zip' : "Please enter valid zip", 'country' : "Please select your country",
-                                  'number' : 'Please enter card number', 'cvc' : "Please enter cvc",
-                                  'exp_month' : "Please enter expiration month", 'exp_year' : 'Please enter expiration year'};
-
-            let result = FormValidator.validateRequiredDatas(e, paymentInfo, requiredFields, 'Booking - Payment Information');
-            if (result == false) {
-                  return ;
-            }
-
-            Stripe.card.createToken({
-                  number: paymentInfo.number,
-                  cvc: paymentInfo.cvc,
-                  exp_month: paymentInfo.exp_month,
-                  exp_year: paymentInfo.exp_year,
-                  address_zip: paymentInfo.zip
-            }, paymentProcessingIsDone);
-
-
-      });
-}
-
 const goBackToPersonal = function (e) {
       let payment = getPaymentInfo(e);
       payment = Actions.paymentInfoUpdated(payment);
       Actions.goBackToPersonal();
-}
-
-const getPaymentInfo = function (e) {
-      return {
-            'first_name' : e.refs.first_name.value,
-            'last_name'  : e.refs.last_name.value,
-            'zip'        : e.refs.zip.value,
-            'number': e.refs.number.value,
-            'cvc'        : e.refs.cvc.value
-      }
 }
 
 class PaymentInfo extends React.Component {
@@ -89,6 +29,71 @@ class PaymentInfo extends React.Component {
 
       componentDidMount() {
             this.refs.first_name.focus();
+      }
+
+      getPaymentInfo() {
+            console.log('payment info is called');
+            return {
+                  'first_name' : this.refs.first_name.value,
+                  'last_name'  : this.refs.last_name.value,
+                  'zip'        : this.refs.zip.value,
+                  'number'     : this.refs.number.value,
+                  'cvc'        : this.refs.cvc.value
+            }
+      }
+
+      processPaymentClicked() {
+            console.log('I m here process payment');
+            let payment = this.getPaymentInfo();
+            let paymentPromise = Actions.paymentInfoUpdated(payment);
+
+            paymentPromise.then(paymentInfo => {
+            //Perform frontEnd validation
+                  let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+                  'zip' : "Please enter valid zip", 'country' : "Please select your country",
+                  'number' : 'Please enter card number', 'cvc' : "Please enter cvc",
+                  'exp_month' : "Please enter expiration month", 'exp_year' : 'Please enter expiration year'};
+
+            let result = FormValidator.validateRequiredDatas(this, paymentInfo, requiredFields, 'Booking - Payment Information');
+            if (result == false) {
+                  return ;
+            }
+
+            Stripe.card.createToken({
+                  number: paymentInfo.number,
+                  cvc: paymentInfo.cvc,
+                  exp_month: paymentInfo.exp_month,
+                  exp_year: paymentInfo.exp_year,
+                  address_zip: paymentInfo.zip
+            }, this.paymentProcessingIsDone.bind(this));
+
+
+            });
+      }
+
+      paymentProcessingIsDone(status, response) {
+            console.log("response from stripe is");
+
+            console.log(status);
+            console.log(response);
+
+            if (response.error) {
+                  NotificationManager.error(response.error.message, 'Booking - Payment Information', 3000);
+                  this.refs[response.error.param] && this.refs[response.error.param].focus();
+                  this.refs[response.error.param] && this.refs[response.error.param].select();
+
+            } else {
+                  var stripe_token = response.id;
+                  let bookingPromise = Actions.createApartmentBooking({stripe_token});
+                        bookingPromise.then(bookingResponse => {
+                              if (response.status == 'fail') {
+                              NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
+                        } else {
+                              //Actions.goToConfirmationClicked()
+                              console.log('apartment booking created successfully');
+                        }
+                  });
+            }
       }
 
       render() {
@@ -188,7 +193,7 @@ class PaymentInfo extends React.Component {
                                     </div>
 
 
-                                    <Anchor  onClick={() => {processPaymentClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
+                                    <Anchor  onClick={this.processPaymentClicked.bind(this)}  className="btn btn-dark-main btn-next-tab pull-right">Pay Now</Anchor>
                                     <Anchor onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
