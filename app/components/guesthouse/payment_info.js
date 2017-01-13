@@ -15,30 +15,53 @@ const FormValidator = require('../../helpers/form_validation_helper');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+const paymentProcessingIsDone = function (status, response) {
+      console.log("response from stripe is");
+
+      console.log(status);
+      console.log(response);
+
+      if (response.error) {
+            NotificationManager.error(response.error.message, 'Booking - Payment Information', 3000);
+      } else {
+            var stripe_token = response.id;
+            let bookingPromise = Actions.createApartmentBooking({stripe_token});
+            bookingPromise.then(bookingResponse => {
+                  if (response.status == 'fail') {
+                        NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
+                  } else {
+                        //Actions.goToConfirmationClicked()
+                        console.log('apartment booking created successfully');
+                  }
+            });
+      }
+}
+
 const processPaymentClicked = function (e) {
       let payment = getPaymentInfo(e);
       let paymentPromise = Actions.paymentInfoUpdated(payment);
 
-      paymentPromise.then(updatedPayment => {
+      paymentPromise.then(paymentInfo => {
             //Perform frontEnd validation
             let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                                  'zip' : "Please enter valid zip", 'country' : "Please select your country"};
+                                  'zip' : "Please enter valid zip", 'country' : "Please select your country",
+                                  'number' : 'Please enter card number', 'cvc' : "Please enter cvc",
+                                  'exp_month' : "Please enter expiration month", 'exp_year' : 'Please enter expiration year'};
 
-            let result = FormValidator.validateRequiredDatas(e, updatedPayment, requiredFields, 'Booking - Payment Information');
+            let result = FormValidator.validateRequiredDatas(e, paymentInfo, requiredFields, 'Booking - Payment Information');
             if (result == false) {
                   return ;
             }
 
-            //Actions.processPayment();
+            Stripe.card.createToken({
+                  number: paymentInfo.number,
+                  cvc: paymentInfo.cvc,
+                  exp_month: paymentInfo.exp_month,
+                  exp_year: paymentInfo.exp_year,
+                  address_zip: paymentInfo.zip
+            }, paymentProcessingIsDone);
 
-            let bookingPromise = Actions.createApartmentBooking();
-            bookingPromise.then(response => {
-                  if (response.status == 'fail') {
-                       NotificationManager.error(response.error, 'Booking - Payment Information', 3000);
-                  } else {
-                        Actions.goToConfirmationClicked()
-                  }
-            });
+
       });
 }
 
@@ -53,12 +76,16 @@ const getPaymentInfo = function (e) {
             'first_name' : e.refs.first_name.value,
             'last_name'  : e.refs.last_name.value,
             'zip'        : e.refs.zip.value,
-            'card_number': e.refs.card_number.value,
-            'cvv'        : e.refs.cvv.value
+            'number': e.refs.number.value,
+            'cvc'        : e.refs.cvc.value
       }
 }
 
 class PaymentInfo extends React.Component {
+
+      componentWillMount() {
+            Stripe.setPublishableKey('pk_test_xNk89utQrNjwzmaqOLlteVnz');
+      }
 
       componentDidMount() {
             this.refs.first_name.focus();
@@ -67,7 +94,7 @@ class PaymentInfo extends React.Component {
       render() {
             const {apartment, bookingStage, user} = this.props;
             let first_name=undefined, last_name=undefined, zip=undefined, country=undefined;
-            let card_number=undefined, month=undefined, year=undefined;
+            let number=undefined, exp_month=undefined, exp_year=undefined;
 
             let payment = bookingStage ? bookingStage.payment : null;
             const loggedIn = (!!CookiesHelper.getSessionCookie());
@@ -77,9 +104,9 @@ class PaymentInfo extends React.Component {
                   last_name   = payment.last_name;
                   zip         = payment.zip;
                   country     = payment.country;
-                  card_number = payment.card_number;
-                  month       = payment.month;
-                  year        = payment.year;
+                  number = payment.number;
+                  exp_month       = payment.exp_month;
+                  exp_year        = payment.exp_year;
             }
 
             //Inialize first_name and last_name from loggedIn user.
@@ -131,7 +158,7 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>Card Number</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input value={card_number} type="text" ref='card_number' className="input-with-validation form-control"/>
+                                                            <input value={number} type="text" ref='number' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -139,7 +166,7 @@ class PaymentInfo extends React.Component {
                                                 <div className="mg-book-form-input">
                                                       <label>CVV</label><span className='required-input'> * </span>
                                                       <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input type="password" ref='cvv' className="input-with-validation form-control"/>
+                                                            <input type="password" ref='cvc' className="input-with-validation form-control"/>
                                                       </Validate>
                                                 </div>
                                           </div>
@@ -149,13 +176,13 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Month</label><span className='required-input'> * </span>
-                                                      <Month value={month} onChange={(val)=>{Actions.paymentInfoUpdated({'month' : val.value});}}/>
+                                                      <Month value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Expire Year</label><span className='required-input'> * </span>
-                                                      <Year value={year} onChange={(val)=>{Actions.paymentInfoUpdated({'year' : val.value});}}/>
+                                                      <Year value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
                                                 </div>
                                           </div>
                                     </div>

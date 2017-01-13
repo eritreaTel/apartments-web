@@ -142,8 +142,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'processPayment'});
     },
 
-    createApartmentBooking() {
-        return Dispatcher.dispatch({type: 'createApartmentBooking'});
+    createApartmentBooking(data) {
+        return Dispatcher.dispatch({type: 'createApartmentBooking', data});
     },
 
     createContactUs(data) {

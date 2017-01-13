@@ -9,7 +9,7 @@ module.exports = {
         return true;
     },
 
-    async createApartmentBooking() {
+    async createApartmentBooking({stripe_token}) {
         const url = 'apartment_bookings';
         this.setStoreVal('requestUrl', url);
 
@@ -23,13 +23,15 @@ module.exports = {
                 let bookingData = {
                     'apartment_id'  : apartment.id,
                     'user_id'       : user.id,
+                    'stripe_token'  : stripe_token,
                     'start_date'    : pricingInfo.start_date,
                     'end_date'      : pricingInfo.end_date,
                     'price_per_day' : pricingInfo.price_per_day,
                     'price_per_week': pricingInfo.price_per_week,
                     'price_per_month': pricingInfo.price_per_month,
                     'days_cnt'       : pricingInfo.days_cnt,
-                    'total_price'    : pricingInfo.total_price
+                    'total_price'    : pricingInfo.total_price,
+                    'paid_amount'    : pricingInfo.total_price,
                 }
 
                 const response = await FetchHelper.fetchJson(url, {body: bookingData , method: 'POST'});
