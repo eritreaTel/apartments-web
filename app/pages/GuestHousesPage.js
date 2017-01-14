@@ -78,7 +78,7 @@ class GuestHousesPage extends React.Component {
 
     render() {
         const {store} = this.props;
-        const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS}} = this.props;
+        const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS, isProcessing}} = this.props;
         let section ;
         
         switch (bookingStage.activeStage) {
@@ -90,12 +90,12 @@ class GuestHousesPage extends React.Component {
                 break;
             case 'personal' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="personal-info">
-                                <PersonalInfo acceptToS={acceptToS} apartment={apartment} user={user} bookingStage={bookingStage} />
+                                <PersonalInfo acceptToS={acceptToS} apartment={apartment} user={user} bookingStage={bookingStage} isProcessing={isProcessing} />
                             </div>
                 break;
             case 'payment' :
                 section =   <div role="tabpanel" className="tab-pane in active" id="payment">
-                                <PaymentInfo apartment={apartment} bookingStage={bookingStage} user={user} />
+                                <PaymentInfo apartment={apartment} bookingStage={bookingStage} user={user} isProcessing={isProcessing} />
                             </div>
                 break;
             case 'confirmation' :

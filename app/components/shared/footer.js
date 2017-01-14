@@ -148,7 +148,7 @@ class NewsLetterSubscription extends React.Component {
                             <input tabIndex="100" ref="subscription_email" type="email" className="form-control" disabled={disableInput} placeholder="Your Email"/>
                         </Validate>
                         <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className={buttonClassname} value="Subscribe"/>
-                        <MDSpinner ref='footer_spinner' className={spinnerClassName} />
+                        <MDSpinner className={spinnerClassName} />
 
                     </div>
                 </div>
