@@ -16,48 +16,53 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
 
 const goToPaymentInfoClicked = function (e) {
-    let info = getPersonalInfo(e);
-    let personal = Actions.personalInfoUpdated(info);
 
     const loggedIn = (!!CookiesHelper.getSessionCookie());
+    let info = getPersonalInfo(e);
+    let personalPromise = Actions.personalInfoUpdated(info);
 
-    if (loggedIn) {
-        Actions.goToPaymentClicked();
-        return;
-    }
-
-    //If user is not loggedIn, create a user, log them in and take them to payment page.
-    if (!loggedIn) {
-        let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                              'city' : "Please enter city", 'country'    : "Please select your country",
-                              'email' : "Please enter email", 'password'   : "Please enter password",
-                              'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
-
-        let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
-        if (result == false) {
-            return ;
-        }
-        if (personal.renter_password != personal.password) {
-            NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
-            e.refs.password.focus();
+    personalPromise.then(personal => {
+        if (loggedIn) {
+            Actions.goToPaymentClicked();
             return;
-        }
+        } else {
+            let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+                'city' : "Please enter city", 'country'    : "Please select your country",
+                'email' : "Please enter email", 'password'   : "Please enter password",
+                'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
 
-        const createUserPromise = Actions.createUser(personal);
-        createUserPromise.then(response => {
-            if (response.status == 'fail') {
-                NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
-            } else {
-                let credentials = {
-                    email : info.email,
-                    password : info.password
-                }
-                console.log('authenticating user');
-                Actions.logIn(credentials);
-                Actions.goToPaymentClicked();
+            let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
+            if (result == false) {
+                return ;
             }
-        });
-    }
+            if (personal.renter_password != personal.password) {
+                NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
+                e.refs.password.focus();
+                return;
+            }
+
+            let isProcessing = {processingPersonalInfo: true};
+            Actions.setIsProcessing(isProcessing);
+
+            const createUserPromise = Actions.createUser(personal);
+            createUserPromise.then(response => {
+                if (response.status == 'fail') {
+                    NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
+                } else {
+                    let credentials = {
+                        email : info.email,
+                        password : info.password
+                    }
+
+                    Actions.logIn(credentials);
+                    Actions.goToPaymentClicked();
+                }
+
+                let isProcessing = {processingPersonalInfo: false};
+                Actions.setIsProcessing(isProcessing);
+            });
+        }
+    });
 }
 
 const goBackToSearch = function (e) {
@@ -91,13 +96,13 @@ class PersonalInfo extends React.Component {
     }
 
     render() {
-        const {apartment, bookingStage, acceptToS, user} = this.props;
+        const {apartment, bookingStage, acceptToS, user, isProcessing :{processingPersonalInfo}} = this.props;
         let personal = bookingStage ? bookingStage.personal : null;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = '';
         let country = 'Select your country', termsDefaultChecked = 0 ;
-        let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row', disableElement = '';
+        let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row';
         if (loggedIn) {
             first_name      = user.first_name;
             last_name       = user.last_name;
@@ -107,7 +112,6 @@ class PersonalInfo extends React.Component {
             country         = user.country;
             termsDefaultChecked = 1;
 
-            disableElement  = true;
             acceptTermsCss = 'hide clearfix mg-terms-input';
             passwordSectionClass = 'hide row';
 
@@ -121,6 +125,10 @@ class PersonalInfo extends React.Component {
             country = personal && personal.country ? personal.country : 'Select your country';
         }
 
+        let disabled  = loggedIn || processingPersonalInfo;
+        let disableButton = processingPersonalInfo;
+        let spinnerClassName = processingPersonalInfo ? 'margin-right-20' : 'hide margin-right-20';
+
         return (
                 <div className="row">
                     <div className="col-md-8">
@@ -131,7 +139,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>First Name</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={first_name} disabled={disableElement} ref='first_name' type="text" className="input-with-validation form-control"/>
+                                            <input value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
@@ -139,7 +147,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Last Name</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={last_name} disabled={disableElement} ref='last_name' type="text" className="input-with-validation form-control"/>
+                                            <input value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
@@ -149,7 +157,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>City</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={city}  disabled={disableElement} ref='city' type="text" className="input-with-validation form-control"/>
+                                            <input value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
@@ -157,7 +165,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Country</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={loggedIn} />
+                                            <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
                                         </Validate>
                                     </div>
                                 </div>
@@ -169,14 +177,16 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Email Address</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={email} disabled={disableElement} ref='email' type="email" className="input-with-validation form-control"/>
+                                            <input value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
                                         <label>Phone</label>
-                                        <input value={phone_number} disabled={disableElement} ref='phone_number' type="tel" className="input-with-validation form-control"/>
+                                        <Validate>
+                                            <input value={phone_number} disabled={disabled} ref='phone_number' type="tel" className="input-with-validation form-control"/>
+                                        </Validate>
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +195,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Password</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disableElement} ref='password' type="password" className="input-with-validation form-control"/>
+                                            <input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
@@ -193,7 +203,7 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input">
                                         <label>Re-Password</label><span className='required-input'> * </span>
                                         <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disableElement} ref='renter_password' type="password" className="input-with-validation form-control"/>
+                                            <input disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>
                                 </div>
@@ -204,9 +214,12 @@ class PersonalInfo extends React.Component {
                                     <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
                                 </div>
                             </div>
+                            <div className="pull-right">
+                                <MDSpinner className={spinnerClassName}  />
+                                <Anchor disabled={disableButton} onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
+                            </div>
+                            <Anchor disabled={disableButton} onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 
-                            <Anchor onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab pull-right">Next</Anchor>
-                            <Anchor onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} bookingStage={bookingStage} />

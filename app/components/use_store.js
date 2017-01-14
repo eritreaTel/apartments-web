@@ -57,6 +57,8 @@ module.exports = {
                         isProcessing : {
                             'newsLetterSubscription' : false,
                             'reviewAnApartment' : false,
+                            'processingPayment' : false,
+                            'processingPersonalInfo' : false
                         }
                     }
                 };

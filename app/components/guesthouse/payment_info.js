@@ -47,26 +47,27 @@ class PaymentInfo extends React.Component {
             let paymentPromise = Actions.paymentInfoUpdated(payment);
 
             paymentPromise.then(paymentInfo => {
-            //Perform frontEnd validation
+                  //Perform frontEnd validation
                   let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
                   'zip' : "Please enter valid zip", 'country' : "Please select your country",
                   'number' : 'Please enter card number', 'cvc' : "Please enter cvc",
                   'exp_month' : "Please enter expiration month", 'exp_year' : 'Please enter expiration year'};
 
-            let result = FormValidator.validateRequiredDatas(this, paymentInfo, requiredFields, 'Booking - Payment Information');
-            if (result == false) {
-                  return ;
-            }
+                  let result = FormValidator.validateRequiredDatas(this, paymentInfo, requiredFields, 'Booking - Payment Information');
+                  if (result == false) {
+                        return ;
+                  }
 
-            let isProcessing = {processingPayment: true};
-            Actions.setIsProcessing(isProcessing);
-            Stripe.card.createToken({
-                        number: paymentInfo.number,
-                        cvc: paymentInfo.cvc,
-                        exp_month: paymentInfo.exp_month,
-                        exp_year: paymentInfo.exp_year,
-                        address_zip: paymentInfo.zip
-                  }, this.paymentProcessingIsDone.bind(this));
+                  let isProcessing = {processingPayment: true};
+                  Actions.setIsProcessing(isProcessing);
+
+                  Stripe.card.createToken({
+                              number: paymentInfo.number,
+                              cvc: paymentInfo.cvc,
+                              exp_month: paymentInfo.exp_month,
+                              exp_year: paymentInfo.exp_year,
+                              address_zip: paymentInfo.zip
+                        }, this.paymentProcessingIsDone.bind(this));
             });
       }
 
@@ -119,7 +120,7 @@ class PaymentInfo extends React.Component {
             last_name = (last_name == undefined && loggedIn) ? user.last_name : last_name;
 
             //Is payment getting processed
-            let disabled  =  processingPayment ? true : false;
+            let disabled  =  processingPayment;
             let spinnerClassName   =  processingPayment ? 'margin-right-20' : 'margin-right-20 hide';
 
             return(
