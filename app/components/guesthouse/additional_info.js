@@ -15,60 +15,13 @@ import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
 
-const goToPaymentInfoClicked = function (e) {
 
-    const loggedIn = (!!CookiesHelper.getSessionCookie());
-    let info = getPersonalInfo(e);
-    let personalPromise = Actions.personalInfoUpdated(info);
-
-    personalPromise.then(personal => {
-        if (loggedIn) {
-            Actions.goToPaymentClicked();
-            return;
-        } else {
-            let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                'city' : "Please enter city", 'country'    : "Please select your country",
-                'email' : "Please enter email", 'password'   : "Please enter password",
-                'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
-
-            let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
-            if (result == false) {
-                return ;
-            }
-            if (personal.renter_password != personal.password) {
-                NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
-                e.refs.password.focus();
-                return;
-            }
-
-            let isProcessing = {processingPersonalInfo: true};
-            Actions.setIsProcessing(isProcessing);
-
-            const createUserPromise = Actions.createUser(personal);
-            createUserPromise.then(response => {
-                if (response.status == 'fail') {
-                    NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
-                } else {
-                    let credentials = {
-                        email : info.email,
-                        password : info.password
-                    }
-
-                    Actions.logIn(credentials);
-                    Actions.goToPaymentClicked();
-                }
-
-                let isProcessing = {processingPersonalInfo: false};
-                Actions.setIsProcessing(isProcessing);
-            });
-        }
-    });
+const goToPersonalInfoClicked = function (e) {
+    Actions.goToPersonalInfoClicked();
 }
 
-const goBackToAdditionalInfo = function (e) {
-    let info = getPersonalInfo(e);
-    Actions.personalInfoUpdated(info);
-    Actions.goBackToAdditional();
+const goBackToSearch = function (e) {
+    Actions.goBackToSearch();
 }
 
 function onTermsCheckBoxChanged(e, checked) {
@@ -89,42 +42,22 @@ const getPersonalInfo = function (e) {
     }
 }
 
-class PersonalInfo extends React.Component {
+class AdditionalInfo extends React.Component {
 
     componentDidMount() {
         this.refs.first_name.focus();
     }
 
     render() {
-        const {apartment, bookingStage, acceptToS, user, isProcessing :{processingPersonalInfo}} = this.props;
+        const {apartment, bookingStage, acceptToS, user} = this.props;
         let personal = bookingStage ? bookingStage.personal : null;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = '';
         let country = 'Select your country', termsDefaultChecked = 0 ;
         let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row';
-        if (loggedIn) {
-            first_name      = user.first_name;
-            last_name       = user.last_name;
-            city            = user.city;
-            phone_number    = user.phone_number;
-            email           = user.email;
-            country         = user.country;
-            termsDefaultChecked = 1;
 
-            acceptTermsCss = 'hide clearfix mg-terms-input';
-            passwordSectionClass = 'hide row';
-
-        } else if (personal) {
-            first_name      = personal.first_name;
-            last_name       = personal.last_name;
-            city            = personal.city;
-            phone_number    = personal.phone_number;
-            email           = personal.email;
-            termsDefaultChecked = (personal.terms == true) ? 1 : 0;
-            country = personal && personal.country ? personal.country : 'Select your country';
-        }
-
+        let processingPersonalInfo = false;
         let disabled  = loggedIn || processingPersonalInfo;
         let disableButton = processingPersonalInfo;
         let spinnerClassName = processingPersonalInfo ? 'margin-right-20' : 'hide margin-right-20';
@@ -133,7 +66,7 @@ class PersonalInfo extends React.Component {
                 <div className="row">
                     <div className="col-md-8">
                         <div className="mg-book-form-personal">
-                            <h2 className="mg-sec-left-title">Personal Info</h2>
+                            <h2 className="mg-sec-left-title">Air Port Pickup</h2>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
@@ -171,7 +104,7 @@ class PersonalInfo extends React.Component {
                                 </div>
                             </div>
 
-                            <h2 className="mg-sec-left-title">Account Info</h2>
+                            <h2 className="mg-sec-left-title">Tour Guide</h2>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
@@ -216,9 +149,9 @@ class PersonalInfo extends React.Component {
                             </div>
                             <div className="pull-right">
                                 <MDSpinner className={spinnerClassName}  />
-                                <Anchor disabled={disableButton} onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
+                                <Anchor disabled={disableButton} onClick={() => {goToPersonalInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
                             </div>
-                            <Anchor disabled={disableButton} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor disabled={disableButton} onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 
                         </div>
                     </div>
@@ -228,4 +161,4 @@ class PersonalInfo extends React.Component {
         }
 }
 
-module.exports = PersonalInfo;
+module.exports = AdditionalInfo;

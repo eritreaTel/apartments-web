@@ -2,21 +2,27 @@ const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
         let searching = 'active';
-        let personal,payment,confirmation;
-        if (activeStage == 'personal') {
+        let personal,payment,confirmation, additional;
+        if (activeStage == 'additional') {
+            searching = 'mg-step-done';
+            additional = 'active';
+        } else if (activeStage == 'personal') {
+            additional = 'mg-step-done';
             searching = 'mg-step-done';
             personal = 'active';
         } else if (activeStage == 'payment') {
+            additional = 'mg-step-done';
             searching = 'mg-step-done';
             personal = 'mg-step-done';
             payment='active';
         } else if (activeStage == 'confirmation') {
+            additional = 'mg-step-done';
             searching = 'mg-step-done';
             personal = 'mg-step-done';
             payment='mg-step-done';
             confirmation ='mg-step-done';
         }
-        return {searching, personal, payment, confirmation};
+        return {searching, additional, personal, payment, confirmation};
     },
 
   getCategories(blogMetadatas) {

@@ -1,5 +1,6 @@
 const React = require('react');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
+const AdditionalInfo = require('../components/guesthouse/additional_info');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
 const SearchResult   = require('../components/guesthouse/search_result');
 const PaymentInfo   = require('../components/guesthouse/payment_info');
@@ -15,21 +16,27 @@ import MDSpinner from "react-md-spinner";
 
 
 const BookingStaging = function(props) {
-    let {searching, personal, payment, confirmation} = ApartmentHelper.getReservationStatuses(props.activeStage);
+    let {searching, additional, personal, payment, confirmation} = ApartmentHelper.getReservationStatuses(props.activeStage);
 
     return(
         <ul className="nav nav-tabs" role="tablist">
             <li role="presentation" className={searching}>
                 <Anchor onClick={()=>{}} aria-controls="select-room" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">1</span><span className="mg-bs-bar"></span>Select Apartment</Anchor>
             </li>
-            <li role="presentation" className={personal}>
-                <Anchor onClick={()=>{}} aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
+
+            <li role="presentation" className={additional}>
+                <Anchor onClick={()=>{}} aria-controls="additional-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">2</span><span className="mg-bs-bar"></span>Additional Services</Anchor>
             </li>
+
+            <li role="presentation" className={personal}>
+                <Anchor onClick={()=>{}} aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
+            </li>
+
             <li role="presentation" className={payment}>
-                <Anchor onClick={()=>{}} aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Payment</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span><span className="mg-bs-bar"></span>Payment</Anchor>
             </li>
             <li role="presentation" className={confirmation}>
-                <Anchor onClick={()=>{}} aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span>Thank You</Anchor>
+                <Anchor onClick={()=>{}} aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">5</span>Thank You</Anchor>
             </li>
         </ul>
     );
@@ -86,6 +93,11 @@ class GuestHousesPage extends React.Component {
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
                                 <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                            </div>
+                break;
+            case 'additional':
+                section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
+                                <AdditionalInfo bookingStage={bookingStage} apartment={apartment} isProcessing={isProcessing} />
                             </div>
                 break;
             case 'personal' :

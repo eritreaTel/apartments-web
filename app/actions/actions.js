@@ -106,6 +106,10 @@ const Actions = {
         Dispatcher.dispatch({type: 'viewBestApartmentClicked', data});
     },
 
+    goToPersonalInfoClicked() {
+        Dispatcher.dispatch({type: 'goToPersonalInfoClicked'});
+    },
+
     goToPaymentClicked() {
         Dispatcher.dispatch({type: 'goToPaymentClicked'});
     },
@@ -120,6 +124,10 @@ const Actions = {
 
     goBackToSearch() {
         Dispatcher.dispatch({type: 'goBackToSearch'});
+    },
+
+    goBackToAdditional() {
+        Dispatcher.dispatch({type: 'goBackToAdditional'});
     },
 
     goBackToPayment() {

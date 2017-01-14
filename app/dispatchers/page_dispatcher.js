@@ -67,7 +67,7 @@ module.exports = {
     },
 
     bookApartmentClicked({apartmentId}) {
-        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
         let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
         this.setStoreVal('apartment', apartment);
     },
@@ -75,7 +75,7 @@ module.exports = {
     bookBestApartmentClicked({apartmentId}) {
         let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
         this.setStoreVal('apartment', apartment);
-        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
         let apartments = this.getStoreVal('apartments');
         let found = apartments && apartments.find(apt => apt.id == apartmentId);
@@ -90,8 +90,12 @@ module.exports = {
         this.setStoreVal('apartment', apartment);
     },
 
-    goToPaymentClicked(data) {
+    goToPaymentClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
+    },
+
+    goToPersonalInfoClicked() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
     },
 
     goToConfirmationClicked() {
@@ -100,6 +104,10 @@ module.exports = {
 
     confirmationIsDone() {
         this.mergeStoreVal('bookingStage', {activeStage: ''});
+    },
+
+    goBackToAdditional() {
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
     },
 
     goBackToSearch() {
