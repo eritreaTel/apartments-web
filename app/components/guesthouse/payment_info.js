@@ -18,7 +18,7 @@ import MDSpinner from "react-md-spinner";
 
 const goBackToPersonal = function (e) {
       let payment = getPaymentInfo(e);
-      payment = Actions.paymentInfoUpdated(payment);
+      Actions.paymentInfoUpdated(payment);
       Actions.goBackToPersonal();
 }
 
