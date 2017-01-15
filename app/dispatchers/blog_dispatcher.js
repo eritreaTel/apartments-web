@@ -19,7 +19,7 @@ module.exports = {
                         this.setStoreVal('blogs', results);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -48,7 +48,7 @@ module.exports = {
                         this.setStoreVal('blog', object);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -62,24 +62,28 @@ module.exports = {
     },
 
     async createContactUs(data) {
-        const url = 'contact-us';
+        const url = 'contact_us';
         this.setStoreVal('requestUrl', url);
         if (this.acquireLock('createContactUs')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    this.setStoreVal('contactUs', response.data.results[0]);
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    this.setStoreVal('contactUs', object);
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
-                        defaultErrorMessage: 'Can not send email. Message is sent to system admin and we will look at it shortly'
+                        defaultErrorMessage: 'There is system error. Please refresh your page and try again.'
                     }
                 });
             }
             this.releaseLock('createContactUs');
+            return this.dispatch({type: 'prepareResponse'});
         }
     },
 
@@ -99,7 +103,7 @@ module.exports = {
                         this.setStoreVal('recentNews', results);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,
@@ -129,7 +133,7 @@ module.exports = {
                         this.setStoreVal('blogMetaData', results);
                     }
                 } catch (error) {
-                    this.dispatch({
+                    await this.dispatch({
                         type: 'handleRequestError',
                         data: {
                             error,

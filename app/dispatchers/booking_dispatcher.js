@@ -43,7 +43,7 @@ module.exports = {
                 }
 
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,

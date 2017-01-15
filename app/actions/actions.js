@@ -155,7 +155,7 @@ const Actions = {
     },
 
     createContactUs(data) {
-        Dispatcher.dispatch({type: 'createContactUs', data});
+        return Dispatcher.dispatch({type: 'createContactUs', data});
     },
 
     logIn(data) {

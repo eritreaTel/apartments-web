@@ -58,7 +58,8 @@ module.exports = {
                             'newsLetterSubscription' : false,
                             'reviewAnApartment' : false,
                             'processingPayment' : false,
-                            'processingPersonalInfo' : false
+                            'processingPersonalInfo' : false,
+                            'creatingContactUs' : false
                         }
                     }
                 };

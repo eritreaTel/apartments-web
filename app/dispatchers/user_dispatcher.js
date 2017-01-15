@@ -18,7 +18,7 @@ module.exports = {
                     this.setStoreVal('user', object);
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -46,7 +46,7 @@ module.exports = {
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -78,7 +78,7 @@ module.exports = {
                 CookiesHelper.addDataToCookie('userId', object.id, 3600);
                 CookiesHelper.addDataToCookie('userType', object.type, 3600);
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -100,7 +100,7 @@ module.exports = {
             this.setStoreVal('user', null);
             //window.location.reload()
         } catch (error) {
-            this.dispatch({
+            await this.dispatch({
                 type: 'handleRequestError',
                 data: {
                     error,
@@ -129,7 +129,7 @@ module.exports = {
                 this.setStoreVal('user', user);
             }
         } catch (error) {
-            this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to get authenticated user'}});
+            await this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to get authenticated user'}});
         }
 
     },
@@ -152,7 +152,7 @@ module.exports = {
                 this.mergeStoreVal('resetPassword', {email: email, stage: 'code-sent'});
 
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -182,7 +182,7 @@ module.exports = {
                 this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
 
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
