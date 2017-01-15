@@ -44,6 +44,7 @@ module.exports = {
                         },
                         blogs : [],
                         blog : null,
+                        contactUs : null,
                         blogComments : [],
                         blogMetaData : [],
                         recentNews : [],

@@ -27,7 +27,7 @@ const BlogContent = function (props) {
 					<div className="col-md-8">
 						<BlogMainContent blog = {props.blog} />
 						<NavigationButton />
-						<BlogComments />
+						<BlogComments blogComments={props.blogComments} />
 						<FeedBackForm user={props.user} isProcessing={props.isProcessing} blog={props.blog} />
 					</div>
 				<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
@@ -68,17 +68,24 @@ const NavigationButton = function () {
 	);
 }
 
-const BlogComments = function (props) {
-	return (
-			<div className="mg-single-comments-list">
-				<h2 className="mg-sec-left-title">3 Responses</h2>
-				<SingleCommentWithFeedback />
-				<SingleComment />
-			</div>
-		);
+class BlogComments extends React.Component {
+	render() {
+		const {blogComments} = this.props;
+
+		const styledComments = blogComments.map(blogComment =>{
+			return <SingleComment blogComment={blogComment} />;
+		});
+
+		return (
+				<div className="mg-single-comments-list">
+					<h2 className="mg-sec-left-title">3 Responses</h2>
+					{styledComments}
+				</div>
+			);
+	}
 }
 
-const SingleComment = function () {
+const SingleComment = function (props) {
 	return (
 		<div className="media">
 			<div className="media-left">
@@ -86,10 +93,9 @@ const SingleComment = function () {
 			</div>
 			<div className="media-body">
 				<div className="mg-comment-body">
-					<h4 className="media-heading"><Anchor>Amanuel Yohannes</Anchor></h4>
+					<h4 className="media-heading"><Anchor>{props.blogComment.full_name}</Anchor></h4>
 					<span><Anchor>September 12, 2015 at 10:10 am</Anchor></span>
-					<p>Very nice article about uganda tourism in general and guest houses in specific.</p>
-					<Anchor className="btn btn-default btn-comment-reply">Reply</Anchor>
+					<p>{props.blogComment.comment}</p>
 				</div>
 			</div>
 		</div>
@@ -128,8 +134,8 @@ class FeedBackForm extends React.Component {
 			comment : this.refs.comment.value
 		};
 
-		let requiredFields = {'full_name' : "Please enter full name", 'email' : "Please enter email",
-			'website' : "Please enter website", 'comment' : "Please enter comment"};
+		let requiredFields = {'full_name' : "Please enter full name",
+							  'email' : "Please enter email", 'comment' : "Please enter comment"};
 
 		let result = FormValidator.validateRequiredDatas(this, info, requiredFields, 'Blog Comment');
 		if (result == false) {
@@ -211,11 +217,17 @@ const BlogBody = function (props) {
 
 class BlogPage extends React.Component {
 
+	componentWillMount() {
+		const {store : {blog}} = this.props;
+		Actions.getBlogComments({'blog_id' : blog.id});
+		Actions.getAuthenticatedUser();
+	}
+
 	render() {
-		const {store : {blog, recentNews, blogMetaData, isProcessing, user}} = this.props;
+		const {store : {blog, recentNews, blogMetaData, blogComments, isProcessing, user}} = this.props;
 		return (
 			<BlogBody>
-				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
+				<BlogContent blog={blog} blogComments={blogComments} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
 			</BlogBody>
 		);
 	}

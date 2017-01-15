@@ -61,6 +61,35 @@ module.exports = {
         }
     },
 
+    async getBlogComments({blog_id}) {
+        const url = 'blog_comments?blog_id=' + blog_id;
+        if ( url !== this.getStoreVal('requestUrl')) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getBlogComments')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    let {results, errors} = ResponseHelper.processResponseReturnMany(response);
+
+                    if (errors.length > 0) {
+                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    } else {
+                        this.setStoreVal('blogComments', results);
+                    }
+                } catch (error) {
+                    await this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch blog comments'
+                        }
+                    });
+                }
+                this.releaseLock('getBlogComments');
+            }
+        }
+    },
+
     async createContactUs(data) {
         const url = 'contact_us';
         this.setStoreVal('requestUrl', url);
@@ -93,11 +122,11 @@ module.exports = {
         if (this.acquireLock('createBlogComment')) {
             try {
                 const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
-                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                let {results, errors} = ResponseHelper.processResponseReturnMany(response);
                 if (errors.length > 0) {
                     this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
-                    this.setStoreVal('blogComment', object);
+                    this.setStoreVal('blogComments', results);
                 }
             } catch (error) {
                 await this.dispatch({
