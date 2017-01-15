@@ -10,6 +10,7 @@ const Actions = require('../actions/actions');
 const {assetPath} = require('../helpers/asset_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
 const FormValidator = require('../helpers/form_validation_helper');
+const DateHelper = require('../helpers/date_helper');
 
 const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -26,7 +27,6 @@ const BlogContent = function (props) {
 				<div className="row">
 					<div className="col-md-8">
 						<BlogMainContent blog = {props.blog} />
-						<NavigationButton />
 						<BlogComments blogComments={props.blogComments} />
 						<FeedBackForm user={props.user} isProcessing={props.isProcessing} blog={props.blog} />
 					</div>
@@ -94,7 +94,7 @@ const SingleComment = function (props) {
 			<div className="media-body">
 				<div className="mg-comment-body">
 					<h4 className="media-heading"><Anchor>{props.blogComment.full_name}</Anchor></h4>
-					<span><Anchor>September 12, 2015 at 10:10 am</Anchor></span>
+					<span>{DateHelper.formatDate(props.blogComment.created_at, 'D MMM, YYYY')} at {DateHelper.formatDate(props.blogComment.created_at, 'H:mm')}</span>
 					<p>{props.blogComment.comment}</p>
 				</div>
 			</div>
