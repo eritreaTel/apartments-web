@@ -158,6 +158,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'createContactUs', data});
     },
 
+    createBlogComment(data) {
+        return Dispatcher.dispatch({type: 'createBlogComment', data});
+    },
+
     logIn(data) {
         return Dispatcher.dispatch({type: 'logIn', data});
     },

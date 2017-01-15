@@ -59,7 +59,8 @@ module.exports = {
                             'reviewAnApartment' : false,
                             'processingPayment' : false,
                             'processingPersonalInfo' : false,
-                            'creatingContactUs' : false
+                            'creatingContactUs' : false,
+                            'creatingBlogComment' : false
                         }
                     }
                 };

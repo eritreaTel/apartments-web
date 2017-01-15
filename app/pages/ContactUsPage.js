@@ -24,7 +24,7 @@ const submitContactUsForm = function (e) {
 	let requiredFields = {'full_name' : "Please enter full name", 'email' : "Please enter email",
 		'subject' : "Please enter subject", 'message'   : "Please enter message"};
 
-	let result = FormValidator.validateRequiredDatas(e, info, requiredFields, 'Booking - Personal Information');
+	let result = FormValidator.validateRequiredDatas(e, info, requiredFields, 'Contact Us');
 	if (result == false) {
 		return ;
 	}

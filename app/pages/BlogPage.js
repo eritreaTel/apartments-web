@@ -8,17 +8,16 @@ const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const {assetPath} = require('../helpers/asset_helper');
+const CookiesHelper  = require('../helpers/cookies_helper');
+const FormValidator = require('../helpers/form_validation_helper');
 
 const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
-
-const onBlogFeedbackClicked = function () {
-	console.log('blog feedback clicked');
-}
 
 const BlogContent = function (props) {
 	return (
@@ -29,7 +28,7 @@ const BlogContent = function (props) {
 						<BlogMainContent blog = {props.blog} />
 						<NavigationButton />
 						<BlogComments />
-						<FeedBackForm />
+						<FeedBackForm user={props.user} isProcessing={props.isProcessing} blog={props.blog} />
 					</div>
 				<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
 				</div>
@@ -117,36 +116,88 @@ const SingleCommentWithFeedback = function () {
 	);
 }
 
-const FeedBackForm = function () {
-	return (
-		<div className="">
-			<h2 className="mg-sec-left-title">Leave a Reply</h2>
-			<div>
-				<label>Full Name</label><span className='required-input'> * </span>
-				<Validate validators={[ValidationHelper.isRequired]}>
-					<input type="text" className="input-with-validation form-control"/>
-				</Validate>
-			</div>
-			<div>
-				<label>Email</label><span className='required-input'> * </span>
-				<Validate validators={[ValidationHelper.isRequired]}>
-					<input type="email" className="input-with-validation form-control"/>
-				</Validate>
-			</div>
-			<div>
-				<label>Website</label>
-				<input type="text" className="form-control"/>
-			</div>
-			<div>
-				<label>Comment</label><span className='required-input'> * </span>
-				<Validate validators={[ValidationHelper.isRequired]}>
-					<textarea className="input-with-validation form-control" rows="7"></textarea>
-				</Validate>
-			</div>
+class FeedBackForm extends React.Component {
 
-			<input onClick={() => {onBlogFeedbackClicked()}} type="button" value="Post Comment" className="btn btn-dark-main"/>
-		</div>
-	);
+	onBlogFeedbackClicked() {
+		let {blog} = this.props;
+		let info = {
+			blog_id : blog.id,
+			full_name : this.refs.full_name.value,
+			email : this.refs.email.value,
+			website : this.refs.website.value,
+			comment : this.refs.comment.value
+		};
+
+		let requiredFields = {'full_name' : "Please enter full name", 'email' : "Please enter email",
+			'website' : "Please enter website", 'comment' : "Please enter comment"};
+
+		let result = FormValidator.validateRequiredDatas(this, info, requiredFields, 'Blog Comment');
+		if (result == false) {
+			return ;
+		}
+
+		let isProcessing = {creatingBlogComment: true};
+		Actions.setIsProcessing(isProcessing);
+
+		let blogCommentResponse = Actions.createBlogComment(info);
+
+		blogCommentResponse.then(response => {
+			if (response.status == 'fail') {
+				NotificationManager.error(response.error, 'Blog Comment', 3000);
+			} else {
+				NotificationManager.success('Thank you for commenting on our blog', 'Blog Comment');
+			}
+
+			let isProcessing = {creatingBlogComment: false};
+			Actions.setIsProcessing(isProcessing);
+		});
+	}
+
+	render() {
+		let {user, blog, isProcessing : {creatingBlogComment}} = this.props;
+		const loggedIn = (!!CookiesHelper.getSessionCookie());
+		let full_name = undefined, email = undefined;
+
+		if (loggedIn && user) {
+			full_name = user.first_name + ' ' + user.last_name;
+			email = user.email;
+		}
+
+		let disabled = creatingBlogComment;
+		let spinnerClassName = creatingBlogComment ? 'margin-left-20' : 'hide margin-left-20';
+
+
+		return (
+			<div className="">
+				<h2 className="mg-sec-left-title">Leave a Reply</h2>
+				<div>
+					<label>Full Name</label><span className='required-input'> * </span>
+					<Validate validators={[ValidationHelper.isRequired]}>
+						<input value={full_name} disabled={disabled} ref='full_name' type="text" className="input-with-validation form-control"/>
+					</Validate>
+				</div>
+				<div>
+					<label>Email</label><span className='required-input'> * </span>
+					<Validate validators={[ValidationHelper.isRequired]}>
+						<input value={email} disabled={disabled} ref="email" type="email" className="input-with-validation form-control"/>
+					</Validate>
+				</div>
+				<div>
+					<label>Website</label>
+					<input disabled={disabled} ref="website" type="text" className="form-control"/>
+				</div>
+				<div>
+					<label>Comment</label><span className='required-input'> * </span>
+					<Validate validators={[ValidationHelper.isRequired]}>
+						<textarea disabled={disabled} ref="comment" className="input-with-validation form-control" rows="7"></textarea>
+					</Validate>
+				</div>
+
+				<input disabled={disabled} onClick={this.onBlogFeedbackClicked.bind(this)} type="button" value="Post Comment" className="btn btn-dark-main"/>
+				<MDSpinner className={spinnerClassName} />
+			</div>
+		);
+	}
 }
 
 const BlogBody = function (props) {
@@ -161,10 +212,10 @@ const BlogBody = function (props) {
 class BlogPage extends React.Component {
 
 	render() {
-		const {store : {blog, recentNews, blogMetaData}} = this.props;
+		const {store : {blog, recentNews, blogMetaData, isProcessing, user}} = this.props;
 		return (
 			<BlogBody>
-				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} />
+				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
 			</BlogBody>
 		);
 	}

@@ -87,6 +87,32 @@ module.exports = {
         }
     },
 
+    async createBlogComment(data) {
+        const url = 'blog_comments';
+        this.setStoreVal('requestUrl', url);
+        if (this.acquireLock('createBlogComment')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    this.setStoreVal('blogComment', object);
+                }
+            } catch (error) {
+                await this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'There is system error. Please refresh your page and try again.'
+                    }
+                });
+            }
+            this.releaseLock('createBlogComment');
+            return this.dispatch({type: 'prepareResponse'});
+        }
+    },
+
     async getRecentNews() {
         const url = 'blogs?recentNews=true' ;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('recentNews').length == 0) {
