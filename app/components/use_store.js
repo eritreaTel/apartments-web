@@ -34,9 +34,10 @@ module.exports = {
                         bookingStage : {
                             activeStage : null,
                             searchInfo  : null,
+                            additional  : null,
                             personal    : null,
                             payment     : null,
-                            confirmation    : null
+                            confirmation : null
                         },
                         resetPassword: {
                             stage: null,

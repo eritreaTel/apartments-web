@@ -5,6 +5,7 @@ const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
+const CurrencyFormatter = require('currency-formatter');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -24,8 +25,16 @@ const goBackToSearch = function (e) {
     Actions.goBackToSearch();
 }
 
-function onTermsCheckBoxChanged(e, checked) {
-    Actions.personalInfoUpdated({'terms' : e.target.checked});
+function onReserveCarPickUpCheckBoxChanged(e) {
+    Actions.AdditionalServicesUpdated({'car_pickup' : e.target.checked});
+}
+
+function onReserveCarRentalsCheckBoxChanged(e) {
+    Actions.AdditionalServicesUpdated({'car_rentals' : e.target.checked});
+}
+
+function onReserveTourGuidesCheckBoxChanged(e) {
+    Actions.AdditionalServicesUpdated({'tour_guides' : e.target.checked});
 }
 
 const getPersonalInfo = function (e) {
@@ -45,114 +54,103 @@ const getPersonalInfo = function (e) {
 class AdditionalInfo extends React.Component {
 
     componentDidMount() {
-        this.refs.first_name.focus();
+        this.refs.arrival_time.focus();
     }
 
     render() {
-        const {apartment, bookingStage, acceptToS, user} = this.props;
-        let personal = bookingStage ? bookingStage.personal : null;
+        const {apartment, bookingStage, user} = this.props;
+        let additional = bookingStage && bookingStage.additional ? bookingStage.additional : {};
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
-        let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = '';
-        let country = 'Select your country', termsDefaultChecked = 0 ;
-        let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row';
+        let arrival_date = additional.arrival_date;
+        let arrival_time = additional.arrival_time;
+        let airline_name = additional.airline_name;
+        let carPickup = (additional.car_pickup == 1) ? 1 : 0 ;
+        let carRentals = (additional.car_rentals == 1) ? 1 : 0 ;
+        let tourGuides = (additional.tour_guides == 1) ? 1 : 0 ;
+
+        let airportPickUpCss = carPickup? 'row margin-left-20' : 'hide';
 
         let processingPersonalInfo = false;
         let disabled  = loggedIn || processingPersonalInfo;
         let disableButton = processingPersonalInfo;
         let spinnerClassName = processingPersonalInfo ? 'margin-right-20' : 'hide margin-right-20';
 
+        let carPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
+
         return (
                 <div className="row">
                     <div className="col-md-8">
                         <div className="mg-book-form-personal">
-                            <h2 className="mg-sec-left-title">Air Port Pickup</h2>
+                            <h2 className="mg-sec-left-title">Additional Services</h2>
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <label>First Name</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Last Name</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>City</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Country</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
-                                        </Validate>
+                                        <Checkbox defaultChecked={carPickup}  onChange={onReserveCarPickUpCheckBoxChanged}/> Do you want to book a private car ride in advance for {carPickUpFee}? Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.
                                     </div>
                                 </div>
                             </div>
 
-                            <h2 className="mg-sec-left-title">Tour Guide</h2>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Email Address</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control"/>
-                                        </Validate>
+                            <div className={airportPickUpCss}>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <div className="mg-book-form-input">
+                                            <label>Arrival Date</label><span className='required-input'> * </span>
+                                            <Validate validators={[ValidationHelper.isRequired]}>
+                                                <input value={airline_name} disabled={disabled} ref='airline_name' type="text" className="input-with-validation form-control"/>
+                                            </Validate>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-1"></div>
+                                        <div className="col-md-4">
+                                            <div className="mg-book-form-input">
+                                                <label>Airline Name</label><span className='required-input'> * </span>
+                                                <input value="Entebe International Airport" disabled={true} ref='airport_name' type="text" className="input-with-validation form-control"/>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Phone</label>
-                                        <Validate>
-                                            <input value={phone_number} disabled={disabled} ref='phone_number' type="tel" className="input-with-validation form-control"/>
-                                        </Validate>
+                                <div className="row">
+                                    <div className="col-md-4">
+                                        <div className="mg-book-form-input">
+                                            <label>Arrival Date</label><span className='required-input'> * </span>
+                                            <Validate validators={[ValidationHelper.isRequired]}>
+                                                <input value={arrival_time} disabled={disabled} ref='arrivate_time' type="text" className="input-with-validation form-control"/>
+                                            </Validate>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className={passwordSectionClass}>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Password</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Re-Password</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="col-md-1"></div>
+                                    <div className="col-md-4">
+                                        <div className="mg-book-form-input">
+                                            <label>Airline Name</label><span className='required-input'> * </span>
+                                            <Validate validators={[ValidationHelper.isRequired]}>
+                                                <input value={airline_name} disabled={disabled} ref='airline_name' type="text" className="input-with-validation form-control"/>
+                                            </Validate>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={acceptTermsCss}>
-                                <div className="pull-right">
-                                    <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="mg-book-form-input">
+                                        <Checkbox defaultChecked={tourGuides}  onChange={onReserveTourGuidesCheckBoxChanged}/> Do you want us to hook you up with local tour guide. If you click yes, we will send you separate email with list of tour guides
+                                    </div>
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="mg-book-form-input">
+                                        <Checkbox defaultChecked={carRentals}  onChange={onReserveCarRentalsCheckBoxChanged}/> Do you want us to help you rent car? If clicked yes, we will send you an email with list of car rentals in Kampala.
+                                    </div>
+                                </div>
+                            </div>
+
                             <div className="pull-right">
                                 <MDSpinner className={spinnerClassName}  />
                                 <Anchor disabled={disableButton} onClick={() => {goToPersonalInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
                             </div>
                             <Anchor disabled={disableButton} onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
-
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} bookingStage={bookingStage} />

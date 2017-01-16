@@ -94,6 +94,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'personalInfoUpdated', data});
     },
 
+    AdditionalServicesUpdated(data) {
+        return Dispatcher.dispatch({type: 'AdditionalServicesUpdated', data});
+    },
+
     paymentInfoUpdated(data) {
         return Dispatcher.dispatch({type: 'paymentInfoUpdated', data});
     },
