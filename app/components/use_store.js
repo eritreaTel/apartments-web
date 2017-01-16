@@ -61,7 +61,8 @@ module.exports = {
                             'processingPayment' : false,
                             'processingPersonalInfo' : false,
                             'creatingContactUs' : false,
-                            'creatingBlogComment' : false
+                            'creatingBlogComment' : false,
+                            'authenticatingUser' : false
                         }
                     }
                 };

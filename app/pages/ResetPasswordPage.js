@@ -2,7 +2,6 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-const ShowMessage = require('../components/ribbons/showMessage');
 
 const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -53,7 +52,6 @@ class ResetPasswordBody extends React.Component {
 		return (
 			<div className="mg-about-features">
 				<div className="container">
-					<ShowMessage errors={errors} />
 					<div className="row">
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">

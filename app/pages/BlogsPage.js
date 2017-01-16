@@ -10,11 +10,6 @@ const Actions = require('../actions/actions');
 import MDSpinner from "react-md-spinner";
 
 const BlogList = function(props) {
-	console.log('metadata');
-	console.log(props.blogMetaData);
-
-	console.log('recent news');
-	console.log(props.recentNews);
 	return (
 		<div className="mg-blog-list">
 			<div className="container">

@@ -82,12 +82,12 @@ module.exports = {
                     type: 'handleRequestError',
                     data: {
                         error,
-                        defaultErrorMessage: 'Cannot authenticate user'
+                        defaultErrorMessage: 'Cannot authenticate user. Please refersh page and try again'
                     }
                 });
             }
             this.releaseLock('logIn');
-            return user;
+            return this.dispatch({type: 'prepareResponse'});
         }
     },
 
