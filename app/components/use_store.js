@@ -62,7 +62,8 @@ module.exports = {
                             'processingPersonalInfo' : false,
                             'creatingContactUs' : false,
                             'creatingBlogComment' : false,
-                            'authenticatingUser' : false
+                            'authenticatingUser' : false,
+                            'resettingPassword' : false
                         }
                     }
                 };

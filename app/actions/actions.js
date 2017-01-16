@@ -179,7 +179,7 @@ const Actions = {
     },
 
     sendResetPasswordToken(data) {
-        Dispatcher.dispatch({type: 'sendResetPasswordToken', data});
+        return Dispatcher.dispatch({type: 'sendResetPasswordToken', data});
     },
 
     validateResetPasswordToken(data) {

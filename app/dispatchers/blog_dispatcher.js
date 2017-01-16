@@ -14,7 +14,7 @@ module.exports = {
                     let {results, errors} = ResponseHelper.processResponseReturnMany(response);
 
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('blogs', results);
                     }
@@ -43,7 +43,7 @@ module.exports = {
                     let {object, errors} = ResponseHelper.processResponseReturnOne(response);
 
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('blog', object);
                     }
@@ -72,7 +72,7 @@ module.exports = {
                     let {results, errors} = ResponseHelper.processResponseReturnMany(response);
 
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('blogComments', results);
                     }
@@ -98,7 +98,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
                     this.setStoreVal('contactUs', object);
                 }
@@ -124,7 +124,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data, method: 'POST'});
                 let {results, errors} = ResponseHelper.processResponseReturnMany(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
                     this.setStoreVal('blogComments', results);
                 }
@@ -153,7 +153,7 @@ module.exports = {
                     let {results, errors} = ResponseHelper.processResponseReturnMany(response);
 
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('recentNews', results);
                     }
@@ -183,7 +183,7 @@ module.exports = {
                     let {results, errors} = ResponseHelper.processResponseReturnMany(response);
 
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('blogMetaData', results);
                     }

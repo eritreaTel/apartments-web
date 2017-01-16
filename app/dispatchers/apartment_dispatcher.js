@@ -26,7 +26,7 @@ module.exports = {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                     const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data : {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
                         this.setStoreVal('bestApartments', results);
                     }
@@ -63,7 +63,7 @@ module.exports = {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                     const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                     if (errors.length > 0) {
-                        this.dispatch({type: 'setErrorMessages', data: {errors}});
+                        await this.dispatch({type: 'setErrorMessages', data: {errors}});
                     } else {
                         this.setStoreVal('pageNumber', pageNumber);
                         this.setStoreVal('apartments', results);
@@ -117,7 +117,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
                 const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
                     this.setStoreVal('apartmentReviews', results);
                 }
@@ -145,7 +145,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {method: 'GET'});
                 const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else  {
                     this.setStoreVal('apartmentReviews', results);
                 }

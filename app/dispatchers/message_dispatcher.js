@@ -25,7 +25,7 @@ module.exports = {
 
         errorMessages = errorMessages || [defaultErrorMessage];
 
-        this.dispatch({
+        await this.dispatch({
             type: 'setErrorMessages', data: {errors: errorMessages}
         });
     },

@@ -13,7 +13,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
                     this.setStoreVal('user', object);
                 }
@@ -43,7 +43,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: searchInfo , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 }
             } catch (error) {
                 await this.dispatch({
@@ -69,7 +69,7 @@ module.exports = {
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
                     this.releaseLock('logIn');
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     return;
                 }
                 user = object;
@@ -142,25 +142,25 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: data , method: 'POST'});
 
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+
                 if (errors.length > 0) {
                     this.releaseLock('sendResetPasswordToken');
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
-                    return;
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    let {email} = data;
+                    this.mergeStoreVal('resetPassword', {email: email, stage: 'code-sent'});
                 }
-
-                let {email} = data;
-                this.mergeStoreVal('resetPassword', {email: email, stage: 'code-sent'});
-
             } catch (error) {
                 await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
-                        defaultErrorMessage: 'Cannot send reset password code to the email. Please try again.'
+                        defaultErrorMessage: 'There is system error. Please refersh page and try again.'
                     }
                 });
             }
             this.releaseLock('sendResetPasswordToken');
+            return  this.dispatch({type: 'prepareResponse'});
         }
     },
 
@@ -175,7 +175,7 @@ module.exports = {
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
                     this.releaseLock('validateResetPasswordToken');
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     return;
                 }
 

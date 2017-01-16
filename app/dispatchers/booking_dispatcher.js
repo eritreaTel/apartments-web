@@ -37,7 +37,7 @@ module.exports = {
                 const response = await FetchHelper.fetchJson(url, {body: bookingData , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
-                    this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
                     this.mergeStoreVal('bookingStage', {confirmation: object});
                 }

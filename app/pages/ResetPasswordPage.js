@@ -7,21 +7,11 @@ const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
+const FormValidator = require('../helpers/form_validation_helper');
 
-const sendCodeToEmail = function (e) {
-	let data = {
-		email : e.refs.email.value
-	}
-	Actions.sendResetPasswordToken(data);
-}
+import MDSpinner from "react-md-spinner";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-const submitCode = function (e) {
-	let data = {
-		code : e.refs.code.value
-	};
-
-	Actions.validateResetPasswordToken(data);
-}
 
 const updatePassword = function (e) {
 	let data = {
@@ -33,11 +23,30 @@ const updatePassword = function (e) {
 	Actions.updatePassword(data);
 }
 
-const goBackToResetPasswordBody = function () {
-	Actions.goBackToResetPasswordBody();
-}
-
 class ResetPasswordBody extends React.Component {
+
+	sendCodeToEmail() {
+		let data = { email : this.refs.email.value }
+		let requiredFields = {'email' : "Please enter email address"};
+
+		let result = FormValidator.validateRequiredDatas(this, data, requiredFields, 'Reset Password');
+		if (result == false) {
+			return ;
+		}
+
+		let isProcessing = {resettingPassword: true};
+		Actions.setIsProcessing(isProcessing);
+
+		let sendResetPasswordResponse = Actions.sendResetPasswordToken(data);
+		sendResetPasswordResponse.then(response => {
+			if (response.status == 'fail') {
+				NotificationManager.error(response.error, 'Reset Password', 5000);
+			}
+
+			let isProcessing = {resettingPassword: false};
+			Actions.setIsProcessing(isProcessing);
+		});
+	}
 
 	componentDidMount() {
 		const {resetPassword : {email}} = this.props;
@@ -45,9 +54,10 @@ class ResetPasswordBody extends React.Component {
 	}
 
 	render() {
-		const {errors} = this.props;
-		console.log('inside reset password');
-		console.log(errors);
+		let {isProcessing : {resettingPassword}} = this.props;
+
+		let disabled = resettingPassword;
+		let spinnerClassName = resettingPassword ? 'margin-left-20' : 'hide margin-left-20';
 
 		return (
 			<div className="mg-about-features">
@@ -58,7 +68,7 @@ class ResetPasswordBody extends React.Component {
 							<div className="mg-book-form-input">
 								<label>Email Address</label><span className='required-input'> * </span>
 								<Validate validators={[ValidationHelper.isRequired]}>
-									<input ref='email' type="text" className="input-with-validation form-control" />
+									<input disabled={disabled} ref='email' type="text" className="input-with-validation form-control" />
 								</Validate>
 							</div>
 						</div>
@@ -69,7 +79,8 @@ class ResetPasswordBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-4">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {sendCodeToEmail(this)}} className="width-265 btn btn-primary">Send Code To Email</Anchor>
+								<Anchor disabled={disabled} onClick = {this.sendCodeToEmail.bind(this)} className="width-265 btn btn-primary">Send Code To Email</Anchor>
+								<MDSpinner className={spinnerClassName} />
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -82,12 +93,23 @@ class ResetPasswordBody extends React.Component {
 
 
 class EnterCodeBody extends React.Component {
+	goBackToResetPasswordBody() {
+		Actions.goBackToResetPasswordBody();
+	}
+
+	submitCode() {
+		let data = {
+			code : e.refs.code.value
+		};
+
+		Actions.validateResetPasswordToken(data);
+	}
+
 	render() {
 		let {errors} = this.props;
 		return (
 			<div className="mg-about-features">
 				<div className="container">
-					<ShowMessage errors={errors} />
 					<div className="row">
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
@@ -107,7 +129,7 @@ class EnterCodeBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {() => {goBackToResetPasswordBody()}} className="primary-blue">resend code</Anchor>
+									<Anchor onClick = {this.goBackToResetPasswordBody.bind(this)} className="primary-blue">resend code</Anchor>
 								</div>
 							</div>
 						</div>
@@ -118,7 +140,7 @@ class EnterCodeBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {submitCode(this)}} className="width-265 btn btn-primary">Submit Code</Anchor>
+								<Anchor onClick = {() => {this.submitCode.bind(this)}} className="width-265 btn btn-primary">Submit Code</Anchor>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -191,7 +213,7 @@ const ResetMyPasswordBody = function (props) {
 class ResetPasswordPage extends React.Component {
 
 	render() {
-		const{store: {resetPassword, errors}} = this.props;
+		const{store: {resetPassword, isProcessing}} = this.props;
 		const {email, stage} = resetPassword;
 		console.log('email is' + email);
 		console.log('stage is ' + stage);
@@ -200,13 +222,13 @@ class ResetPasswordPage extends React.Component {
 
 		switch (stage) {
 			case 'code-sent':
-				section = (email)? <EnterCodeBody errors={errors} resetPassword={resetPassword} /> : <ResetPasswordBody resetPassword={resetPassword} errors={errors}/>
+				section = (email)? <EnterCodeBody  isProcessing={isProcessing} resetPassword={resetPassword} /> : <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
 				break;
 			case 'code-validated' :
-				section = (email)?  <CreatePasswordBody errors={errors} resetPassword={resetPassword} /> : <ResetPasswordBody errors={errors} resetPassword={resetPassword} />
+				section = (email)?  <CreatePasswordBody isProcessing={isProcessing}  resetPassword={resetPassword} /> : <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
 				break;
 			default :
-				section = <ResetPasswordBody errors={errors} resetPassword={resetPassword} />
+				section = <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
 				break;
 		}
 
