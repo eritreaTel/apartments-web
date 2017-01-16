@@ -10,7 +10,7 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment , user, bookingStage : {searchInfo, personal, confirmation}} = this.props;
+        let {apartment , user, bookingStage : {additional, confirmation}} = this.props;
         let {pricingInfo, guestHouse} = apartment;
 
         let confirmationId = 525 + '-' + confirmation.id;
@@ -19,11 +19,26 @@ class  ReservationConfirmation extends React.Component {
         let bed          =  apartment.bed ;
         let room         = apartment.room ;
         let totalDays    = pricingInfo.days_cnt;
-        let totalAmount  = CurrencyFormatter.format(pricingInfo.total_price, { code: 'USD' });
         let customerName = user.first_name + ' ' + user.last_name;
         let guestHouseName = guestHouse.name;
         let guestHouseAddress = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
         let guestHousePhone   = guestHouse.phone;
+        let totalAmount = pricingInfo.total_price;
+
+        let carPickup = additional && additional.car_pickup;
+        let airlineName, arrivalDate, arrivalTime;
+        let carPickUpCss = 'mg-cart-address hide';
+        let notCarPickUpCss = 'mg-cart-address show';
+        if (carPickup) {
+            totalAmount = totalAmount + 30;
+            airlineName = additional.airline_name;
+            arrivalDate = DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY'); ;
+            arrivalTime = additional.arrival_time;
+
+            carPickUpCss = 'mg-cart-address show';
+            notCarPickUpCss = 'mg-cart-address hide';
+        }
+        totalAmount  = CurrencyFormatter.format(totalAmount, { code: 'USD' });
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
@@ -69,6 +84,17 @@ class  ReservationConfirmation extends React.Component {
                                     <div className="mg-widget-cart-row">
                                         <strong>Number of Days:</strong>
                                         <span>{totalDays}</span>
+                                    </div>
+                                    <div className={carPickUpCss}>
+                                        <strong>Airport Pick Up Details:</strong><br />
+                                        <address>
+                                            Airport Name: <strong>Entebe Internation Airport</strong><br/>
+                                            Airline: {airlineName} <br/>
+                                            Arrive On: {arrivalDate} at {arrivalTime}
+                                        </address>
+                                    </div>
+                                    <div className={notCarPickUpCss}>
+                                        <strong>Airport Pick Up Details:</strong> Not included<br/>
                                     </div>
                                     <div className="mg-cart-address">
                                         <strong>Booking Details:</strong> <br />

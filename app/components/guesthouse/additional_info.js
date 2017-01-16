@@ -6,6 +6,7 @@ const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
 const CurrencyFormatter = require('currency-formatter');
+const DatePicker = require('react-bootstrap-date-picker');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
@@ -14,28 +15,8 @@ const ErrorMessage = ReactValiation.ErrorMessage;
 
 import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import MDSpinner from "react-md-spinner";
+import TimeInput from 'react-time-input';
 
-
-const goToPersonalInfoClicked = function (e) {
-    Actions.goToPersonalInfoClicked();
-}
-
-const goBackToSearch = function (e) {
-    Actions.goBackToSearch();
-}
-
-function onReserveCarPickUpCheckBoxChanged(e) {
-    Actions.AdditionalServicesUpdated({'car_pickup' : e.target.checked});
-}
-
-function onReserveCarRentalsCheckBoxChanged(e) {
-    Actions.AdditionalServicesUpdated({'car_rentals' : e.target.checked});
-}
-
-function onReserveTourGuidesCheckBoxChanged(e) {
-    Actions.AdditionalServicesUpdated({'tour_guides' : e.target.checked});
-}
 
 const getPersonalInfo = function (e) {
     return {
@@ -52,30 +33,78 @@ const getPersonalInfo = function (e) {
 }
 
 class AdditionalInfo extends React.Component {
+    onReserveCarPickUpCheckBoxChanged(e) {
+        Actions.AdditionalServicesUpdated({'car_pickup' : e.target.checked});
+        this.refs.airline_name.focus();
+    }
+
+    onReserveCarRentalsCheckBoxChanged(e) {
+        Actions.AdditionalServicesUpdated({'car_rentals' : e.target.checked});
+    }
+
+    onReserveTourGuidesCheckBoxChanged(e) {
+        Actions.AdditionalServicesUpdated({'tour_guides' : e.target.checked});
+    }
+
+    onArrivalDateChanged(value, formattedValue) {
+        Actions.AdditionalServicesUpdated({'arrival_date' : value.substring(0, 10)});
+    }
+
+    onArrivalTimeChanged(val) {
+        Actions.AdditionalServicesUpdated({'arrival_time' : val});
+    }
+
+    goToPersonalInfoClicked() {
+        const {bookingStage : {additional}} = this.props;
+        if (additional && additional.car_pickup == true) {
+            const additionalServicesResponse = Actions.AdditionalServicesUpdated({'airline_name': this.refs.airline_name.value});
+            additionalServicesResponse.then(data => {
+                let requiredFields = {
+                    'airline_name': "Please enter airline name", 'arrival_date': "Please enter arrival date",
+                    'arrival_time': "Please arrival time"
+                };
+
+                let result = FormValidator.validateRequiredDatas(this, data, requiredFields, 'Booking - Additional Services');
+                if (result == false) {
+                    return;
+                }
+                Actions.goToPersonalInfoClicked();
+            });
+        } else {
+            Actions.goToPersonalInfoClicked();
+        }
+    }
+
+    goBackToSearch() {
+        const {bookingStage : {additional}} = this.props;
+        if (additional && additional.car_pickup == true) {
+            Actions.AdditionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
+        }
+        Actions.goBackToSearch();
+    }
 
     componentDidMount() {
-        this.refs.arrival_time.focus();
+        this.refs.airline_name.focus();
     }
 
     render() {
-        const {apartment, bookingStage, user} = this.props;
-        let additional = bookingStage && bookingStage.additional ? bookingStage.additional : {};
+        const {apartment, bookingStage , user} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
-        let arrival_date = additional.arrival_date;
-        let arrival_time = additional.arrival_time;
-        let airline_name = additional.airline_name;
-        let carPickup = (additional.car_pickup == 1) ? 1 : 0 ;
-        let carRentals = (additional.car_rentals == 1) ? 1 : 0 ;
-        let tourGuides = (additional.tour_guides == 1) ? 1 : 0 ;
+        let additional = bookingStage.additional;
+        let arrival_date = undefined, arrival_time = undefined, airline_name = undefined;
+        let carPickup = 0, carRentals = 0, tourGuides = 0;
+
+        if (additional) {
+            arrival_date = additional.arrival_date;
+            arrival_time = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
+            airline_name = additional.airline_name;
+            carPickup = (additional.car_pickup == 1) ? 1 : 0 ;
+            carRentals = (additional.car_rentals == 1) ? 1 : 0 ;
+            tourGuides = (additional.tour_guides == 1) ? 1 : 0 ;
+        }
 
         let airportPickUpCss = carPickup? 'row margin-left-20' : 'hide';
-
-        let processingPersonalInfo = false;
-        let disabled  = loggedIn || processingPersonalInfo;
-        let disableButton = processingPersonalInfo;
-        let spinnerClassName = processingPersonalInfo ? 'margin-right-20' : 'hide margin-right-20';
-
         let carPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
 
         return (
@@ -86,7 +115,7 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={carPickup}  onChange={onReserveCarPickUpCheckBoxChanged}/> Do you want to book a private car ride in advance for {carPickUpFee}? Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.
+                                        <Checkbox defaultChecked={carPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/> Do you want to book a private car ride in advance for {carPickUpFee}? Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.
                                     </div>
                                 </div>
                             </div>
@@ -95,18 +124,17 @@ class AdditionalInfo extends React.Component {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
-                                            <label>Arrival Date</label><span className='required-input'> * </span>
+                                            <label>Airline Name</label><span className='required-input'> * </span>
                                             <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={airline_name} disabled={disabled} ref='airline_name' type="text" className="input-with-validation form-control"/>
+                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control"/>
                                             </Validate>
                                         </div>
                                     </div>
-                                    <div className="col-md-1"></div>
-                                        <div className="col-md-4">
-                                            <div className="mg-book-form-input">
-                                                <label>Airline Name</label><span className='required-input'> * </span>
-                                                <input value="Entebe International Airport" disabled={true} ref='airport_name' type="text" className="input-with-validation form-control"/>
-                                            </div>
+                                    <div className="col-md-1" />
+                                    <div className="col-md-4">
+                                        <div className="mg-book-form-input">
+                                            <label>Arrive At</label><span className='required-input'> * </span>
+                                            <input value="Entebe International Airport"  ref='airport_name' type="text" className="input-with-validation form-control"/>
                                         </div>
                                     </div>
                                 </div>
@@ -114,17 +142,15 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Arrival Date</label><span className='required-input'> * </span>
-                                            <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={arrival_time} disabled={disabled} ref='arrivate_time' type="text" className="input-with-validation form-control"/>
-                                            </Validate>
+                                            <DatePicker ref="arrival_date" placeholder='Arrival Date' className="input-with-validation form-control" value={arrival_date} showClearButton = {false} onChange={this.onArrivalDateChanged} />
                                         </div>
                                     </div>
-                                    <div className="col-md-1"></div>
+                                    <div className="col-md-1"/>
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
-                                            <label>Airline Name</label><span className='required-input'> * </span>
+                                            <label>Arrival Time/(Uganda Time)</label><span className='required-input'> * </span>
                                             <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={airline_name} disabled={disabled} ref='airline_name' type="text" className="input-with-validation form-control"/>
+                                                <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
                                             </Validate>
                                         </div>
                                     </div>
@@ -134,23 +160,22 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={tourGuides}  onChange={onReserveTourGuidesCheckBoxChanged}/> Do you want us to hook you up with local tour guide. If you click yes, we will send you separate email with list of tour guides
+                                        <Checkbox defaultChecked={tourGuides}  onChange={this.onReserveTourGuidesCheckBoxChanged.bind(this)}/> Do you want us to hook you up with local tour guide. If you click yes, we will send you separate email with list of tour guides
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={carRentals}  onChange={onReserveCarRentalsCheckBoxChanged}/> Do you want us to help you rent car? If clicked yes, we will send you an email with list of car rentals in Kampala.
+                                        <Checkbox defaultChecked={carRentals}  onChange={this.onReserveCarRentalsCheckBoxChanged.bind(this)}/> Do you want us to help you rent car? If clicked yes, we will send you an email with list of car rentals in Kampala.
                                     </div>
                                 </div>
                             </div>
 
                             <div className="pull-right">
-                                <MDSpinner className={spinnerClassName}  />
-                                <Anchor disabled={disableButton} onClick={() => {goToPersonalInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
+                                <Anchor  onClick={this.goToPersonalInfoClicked.bind(this)}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
                             </div>
-                            <Anchor disabled={disableButton} onClick={() => {goBackToSearch(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor onClick={this.goBackToSearch.bind(this)} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
                     <BookingDetails apartment={apartment} bookingStage={bookingStage} />

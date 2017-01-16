@@ -5,13 +5,21 @@ const CurrencyFormatter = require('currency-formatter');
 class BookingDetails extends React.Component {
 
     render() {
-        let {apartment, bookingStage : {searchInfo}} = this.props;
-        let checkInDate  = DateHelper.formatDate(searchInfo.checkInDate, 'D MMM, YYYY') ;
-        let checkOutDate = DateHelper.formatDate(searchInfo.checkOutDate, 'D MMM, YYYY') ;
+        let {apartment, bookingStage : {additional}} = this.props;
+        let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
+        let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let bed =  apartment.bed ;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
-        let totalAmount = CurrencyFormatter.format(apartment.pricingInfo.total_price, { code: 'USD' });
+        let totalAmount = apartment.pricingInfo.total_price;
+        let carPickup = additional && additional.car_pickup;
+
+        let airPortPickUpLabel = "No. You are on your own.";
+        if (carPickup) {
+            totalAmount = totalAmount + 30;
+            airPortPickUpLabel = 'Yes. We will pick you up.';
+        }
+        totalAmount = CurrencyFormatter.format(totalAmount, { code: 'USD' });
 
         return(
                 <div className="col-md-4">
@@ -42,6 +50,10 @@ class BookingDetails extends React.Component {
                                 <div className="mg-widget-cart-row">
                                     <strong>Number of Days: </strong>
                                     <span>{totalDays}</span>
+                                </div>
+                                <div className="mg-widget-cart-row">
+                                    <strong>Airport Pickup: </strong>
+                                    <span>{airPortPickUpLabel}</span>
                                 </div>
                                 <div className="mg-cart-total">
                                     <strong>Total: </strong>
