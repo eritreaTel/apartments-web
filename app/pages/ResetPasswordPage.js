@@ -42,7 +42,6 @@ class ResetPasswordBody extends React.Component {
 			if (response.status == 'fail') {
 				NotificationManager.error(response.error, 'Reset Password', 5000);
 			}
-
 			let isProcessing = {resettingPassword: false};
 			Actions.setIsProcessing(isProcessing);
 		});
@@ -54,10 +53,10 @@ class ResetPasswordBody extends React.Component {
 	}
 
 	render() {
-		let {isProcessing : {resettingPassword}} = this.props;
+		let {isProcessing : {sendingResetPassword}} = this.props;
 
-		let disabled = resettingPassword;
-		let spinnerClassName = resettingPassword ? 'margin-left-20' : 'hide margin-left-20';
+		let disabled = sendingResetPassword;
+		let spinnerClassName = sendingResetPassword ? 'margin-left-20' : 'hide margin-left-20';
 
 		return (
 			<div className="mg-about-features">
@@ -98,15 +97,35 @@ class EnterCodeBody extends React.Component {
 	}
 
 	submitCode() {
-		let data = {
-			code : e.refs.code.value
-		};
+		let data = { code : this.refs.code.value };
+		let requiredFields = {'code' : "Please enter code"};
 
-		Actions.validateResetPasswordToken(data);
+		let result = FormValidator.validateRequiredDatas(this, data, requiredFields, 'Reset Password - Enter Code');
+		if (result == false) {
+			return ;
+		}
+
+		let isProcessing = {processingResetCode: true};
+		Actions.setIsProcessing(isProcessing);
+
+		let validateResponse = Actions.validateResetPasswordToken(data);
+		validateResponse.then(response => {
+			if (response.status == 'fail') {
+				NotificationManager.error(response.error, 'Reset Password - Enter Code', 5000);
+			}
+
+			let isProcessing = {processingResetCode: false};
+			Actions.setIsProcessing(isProcessing);
+		});
 	}
 
 	render() {
-		let {errors} = this.props;
+		let {isProcessing : {processingResetCode}} = this.props;
+
+		let disabled = processingResetCode;
+		let spinnerClassName = processingResetCode ? 'margin-left-20' : 'hide margin-left-20';
+
+
 		return (
 			<div className="mg-about-features">
 				<div className="container">
@@ -116,7 +135,7 @@ class EnterCodeBody extends React.Component {
 							<div className="mg-book-form-input">
 								<label>Enter Code</label><span className='required-input'> * </span>
 								<Validate validators={[ValidationHelper.isRequired]}>
-									<input ref='code' type="code" className="input-with-validation form-control"/>
+									<input disabled={disabled} ref='code' type="code" className="input-with-validation form-control"/>
 								</Validate>
 							</div>
 						</div>
@@ -129,7 +148,7 @@ class EnterCodeBody extends React.Component {
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
-									<Anchor onClick = {this.goBackToResetPasswordBody.bind(this)} className="primary-blue">resend code</Anchor>
+									<Anchor disabled={disabled} onClick={this.goBackToResetPasswordBody.bind(this)} className="primary-blue">resend code</Anchor>
 								</div>
 							</div>
 						</div>
@@ -140,7 +159,8 @@ class EnterCodeBody extends React.Component {
 						<div className="col-md-4"> </div>
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {this.submitCode.bind(this)}} className="width-265 btn btn-primary">Submit Code</Anchor>
+								<Anchor onClick={this.submitCode.bind(this)} className="width-265 btn btn-primary">Submit Code</Anchor>
+								<MDSpinner className={spinnerClassName} />
 							</div>
 						</div>
 						<div className="col-md-4"> </div>

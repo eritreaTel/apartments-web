@@ -183,7 +183,7 @@ const Actions = {
     },
 
     validateResetPasswordToken(data) {
-        Dispatcher.dispatch({type: 'validateResetPasswordToken', data});
+        return Dispatcher.dispatch({type: 'validateResetPasswordToken', data});
     },
 
     updatePassword(data) {

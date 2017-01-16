@@ -135,7 +135,7 @@ module.exports = {
     },
 
     async sendResetPasswordToken(data) {
-        const url = 'users/reset-password-token';
+        const url = 'users/send-reset-password-token';
         this.setStoreVal('requestUrl', url);
         if (this.acquireLock('sendResetPasswordToken')) {
             try {
@@ -176,21 +176,20 @@ module.exports = {
                 if (errors.length > 0) {
                     this.releaseLock('validateResetPasswordToken');
                     await this.dispatch({type: 'setErrorMessages', data : {errors}});
-                    return;
+                } else {
+                    this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
                 }
-
-                this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
-
             } catch (error) {
                 await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
-                        defaultErrorMessage: 'Cannot send reset password code to the email. Please try again.'
+                        defaultErrorMessage: 'There is system error. Please refersh your page and try again.'
                     }
                 });
             }
             this.releaseLock('validateResetPasswordToken');
+            return  this.dispatch({type: 'prepareResponse'});
         }
     },
 

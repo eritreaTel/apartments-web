@@ -63,7 +63,8 @@ module.exports = {
                             'creatingContactUs' : false,
                             'creatingBlogComment' : false,
                             'authenticatingUser' : false,
-                            'resettingPassword' : false
+                            'sendingResetPassword' : false,
+                            'processingResetCode' : false
                         }
                     }
                 };
