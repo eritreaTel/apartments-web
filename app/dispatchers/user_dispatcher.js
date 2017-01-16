@@ -174,10 +174,9 @@ module.exports = {
 
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
-                    this.releaseLock('validateResetPasswordToken');
                     await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 } else {
-                    this.mergeStoreVal('resetPassword', {stage: 'code-validated'});
+                    this.mergeStoreVal('resetPassword', {stage: 'code-validated', resetCode : code});
                 }
             } catch (error) {
                 await this.dispatch({
@@ -193,30 +192,27 @@ module.exports = {
         }
     },
 
-    async updatePassword({password, confirmPassword}) {
-        const url = 'users';
+    async updatePassword(data) {
+        const url = 'users/update-user-password';
         this.setStoreVal('requestUrl', url);
 
         if (this.acquireLock('updatePassword')) {
             try {
-                let {email} = this.getStoreVal('resetPassword');
+                let {email, resetCode} = this.getStoreVal('resetPassword');
+                let updatePassword = {...data, email, resetCode};
 
-                //@TODO:Amanuel - uncomment the below code and make it work
-                //const response = await FetchHelper.fetchJson(url, {body: {email, password, confirmPassword} , method: 'PUT'});
-                const response = await FetchHelper.fetchJson(url + '/9', {method: 'GET'});
+                console.log('update password data');
+                console.log(data);
+                console.log(updatePassword);
 
-                if (response.data && response.data.results && response.data.results.length > 0) {
-                    //now that they have updated the password, dispatch to logIn page using the new password
-                    this.dispatch({
-                        type: 'logIn',
-                        data: {
-                            email,
-                            password
-                        }
-                    });
+                const response = await FetchHelper.fetchJson(url, {body: updatePassword , method: 'POST'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+
+                if (errors.length > 0) {
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
                 }
             } catch (error) {
-                this.dispatch({
+                await this.dispatch({
                     type: 'handleRequestError',
                     data: {
                         error,
@@ -225,6 +221,7 @@ module.exports = {
                 });
             }
             this.releaseLock('updatePassword');
+            return  this.dispatch({type: 'prepareResponse'});
         }
     },
 

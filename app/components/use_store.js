@@ -40,7 +40,8 @@ module.exports = {
                         },
                         resetPassword: {
                             stage: null,
-                            email: null
+                            email: null,
+                            resetCode : null
                         },
                         blogs : [],
                         blog : null,
@@ -64,7 +65,8 @@ module.exports = {
                             'creatingBlogComment' : false,
                             'authenticatingUser' : false,
                             'sendingResetPassword' : false,
-                            'processingResetCode' : false
+                            'processingResetCode' : false,
+                            'updatingPassword' : false
                         }
                     }
                 };

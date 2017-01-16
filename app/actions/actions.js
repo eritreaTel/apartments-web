@@ -187,7 +187,7 @@ const Actions = {
     },
 
     updatePassword(data) {
-        Dispatcher.dispatch({type: 'updatePassword', data});
+        return Dispatcher.dispatch({type: 'updatePassword', data});
     },
 
     goBackToResetPasswordBody(data) {

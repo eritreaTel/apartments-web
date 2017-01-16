@@ -12,17 +12,6 @@ const FormValidator = require('../helpers/form_validation_helper');
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-
-const updatePassword = function (e) {
-	let data = {
-		'password' : e.refs.password.value,
-		'confirmPassword' : e.refs.confirm_password.value
-	};
-	console.log('update password');
-	console.log(data);
-	Actions.updatePassword(data);
-}
-
 class ResetPasswordBody extends React.Component {
 
 	sendCodeToEmail() {
@@ -171,8 +160,57 @@ class EnterCodeBody extends React.Component {
 	}
 }
 
-class CreatePasswordBody extends React.Component {
+class UpdatePasswordBody extends React.Component {
+
+	updatePassword() {
+
+		let {resetPassword : {email}} = this.props;
+		let data = { 'password' : this.refs.password.value, 'confirm_password' : this.refs.confirm_password.value };
+		let requiredFields = {'password' : "Please enter password", "confirm_password": " Please enter confirm password"};
+
+		let result = FormValidator.validateRequiredDatas(this, data, requiredFields, 'Reset Password - Update Password');
+		if (result == false) {
+			return ;
+		}
+
+		if (data.confirm_password != data.password) {
+			NotificationManager.error("Please enter matching password.", 'Reset Password - Update Password', 3000);
+			this.refs.password.focus();
+			return;
+		}
+
+		let isProcessing = {updatingPassword: true};
+		Actions.setIsProcessing(isProcessing);
+
+		let updatePasswordResponse = Actions.updatePassword(data);
+		updatePasswordResponse.then(response => {
+			let isProcessing = {updatingPassword: false};
+
+			if (response.status == 'fail') {
+				NotificationManager.error(response.error, 'Reset Password - Update Password', 5000);
+				Actions.setIsProcessing(isProcessing);
+			} else {
+				let credentials = { email : email, password : data.password}
+
+				let logInResponse = Actions.logIn(credentials);
+				logInResponse.then(response => {
+					Actions.setIsProcessing(isProcessing);
+					if (response.status == 'fail') {
+						NotificationManager.error(response.error, 'Reset Password - Update Password', 5000);
+					} else {
+						Actions.setRoute('/my-account');
+					}
+				});
+			}
+		});
+
+	}
+
 	render() {
+		let {isProcessing : {updatingPassword}} = this.props;
+		let disabled = updatingPassword;
+		let spinnerClassName = updatingPassword ? 'margin-left-20' : 'hide margin-left-20';
+
 		return (
 			<div className="mg-about-features">
 				<div className="container">
@@ -182,7 +220,7 @@ class CreatePasswordBody extends React.Component {
 							<div className="mg-book-form-input">
 								<label>Password</label><span className='required-input'> * </span>
 								<Validate validators={[ValidationHelper.isRequired]}>
-									<input ref='password' type="password" className="input-with-validation form-control"/>
+									<input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
 								</Validate>
 							</div>
 						</div>
@@ -195,7 +233,7 @@ class CreatePasswordBody extends React.Component {
 							<div className="mg-book-form-input">
 								<label>Confirm Password</label><span className='required-input'> * </span>
 								<Validate validators={[ValidationHelper.isRequired]}>
-									<input ref='confirm_password' type="password" className="input-with-validation form-control"/>
+									<input disabled={disabled} ref='confirm_password' type="password" className="input-with-validation form-control"/>
 								</Validate>
 							</div>
 						</div>
@@ -204,12 +242,13 @@ class CreatePasswordBody extends React.Component {
 
 					<div className="row">
 						<div className="col-md-4"> </div>
-						<div className="col-md-3">
+						<div className="col-md-4">
 							<div className="mg-book-form-input">
-								<Anchor onClick = {() => {updatePassword(this)}} className="width-265 btn btn-primary">Update Password</Anchor>
+								<Anchor disabled={disabled} onClick = {this.updatePassword.bind(this)} className="width-265 btn btn-primary">Update Password</Anchor>
+								<MDSpinner className={spinnerClassName} />
 							</div>
 						</div>
-						<div className="col-md-4"> </div>
+						<div className="col-md-3"> </div>
 					</div>
 				</div>
 			</div>
@@ -242,10 +281,10 @@ class ResetPasswordPage extends React.Component {
 
 		switch (stage) {
 			case 'code-sent':
-				section = (email)? <EnterCodeBody  isProcessing={isProcessing} resetPassword={resetPassword} /> : <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
+				section = <EnterCodeBody  isProcessing={isProcessing} resetPassword={resetPassword} />
 				break;
 			case 'code-validated' :
-				section = (email)?  <CreatePasswordBody isProcessing={isProcessing}  resetPassword={resetPassword} /> : <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
+				section = <UpdatePasswordBody isProcessing={isProcessing}  resetPassword={resetPassword} />
 				break;
 			default :
 				section = <ResetPasswordBody isProcessing={isProcessing} resetPassword={resetPassword} />
