@@ -152,7 +152,6 @@ class AboutUsPage extends React.Component {
 				<AboutUgandaGuestHouse />
 				<Testomonials  testimonials = {this.props.testimonials} />
 				<OurStaff teamMembers = {this.props.teamMembers} />
-				<OurClients partners={this.props.partners} />
 			</div>
 		);
 	}

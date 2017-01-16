@@ -35,7 +35,7 @@ const Articles = function (props) {
 						<p>{blog.medium_description}</p>
 					</div>
 					<footer className="clearfix">
-						<Anchor className="mg-read-more">Continue Reading
+						<Anchor onClick={()=>{Actions.setRoute('/blog/' + blog.id)}} className="mg-read-more">Continue Reading
 							<i className="fa fa-long-arrow-right"></i>
 						</Anchor>
 					</footer>
