@@ -15,10 +15,10 @@ class BookingDetails extends React.Component {
         let bed =  apartment.bed ;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
-        let carPickup = additional && additional.car_pickup;
+        let airportPickup = additional && additional.airport_pickup;
 
         let airPortPickUpLabel = "No. You are on your own.";
-        if (carPickup) {
+        if (airportPickup) {
             airPortPickUpLabel = 'Yes. We will pick you up.';
         }
 

@@ -4,8 +4,8 @@ const PricingHelper = {
 
     getTotalPrice(apartment, additional) {
         let totalAmount = apartment.pricingInfo.total_price;
-        let carPickup = additional && additional.car_pickup;
-        if (carPickup) {
+        let airportPickup = additional && additional.airport_pickup;
+        if (airportPickup) {
             totalAmount = totalAmount + 30;
         }
         return totalAmount;
@@ -13,8 +13,8 @@ const PricingHelper = {
 
     getMinimumPrice(apartment, additional) {
         let totalAmount = apartment.pricingInfo.total_price;
-        let carPickup = additional && additional.car_pickup;
-        if (carPickup) {
+        let airportPickup = additional && additional.airport_pickup;
+        if (airportPickup) {
             totalAmount = totalAmount + 30;
         }
 

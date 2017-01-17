@@ -27,17 +27,17 @@ class  ReservationConfirmation extends React.Component {
         let guestHouseAddress = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
         let guestHousePhone   = guestHouse.phone;
 
-        let carPickup = additional && additional.car_pickup;
+        let airportPickup = additional && additional.airport_pickup;
         let airlineName, arrivalDate, arrivalTime;
-        let carPickUpCss = 'mg-cart-address hide';
-        let notCarPickUpCss = 'mg-cart-address show';
-        if (carPickup) {
+        let airportPickUpCss = 'mg-cart-address hide';
+        let notAirportPickUpCss = 'mg-cart-address show';
+        if (airportPickup) {
             airlineName = additional.airline_name;
             arrivalDate = DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY'); ;
             arrivalTime = additional.arrival_time;
 
-            carPickUpCss = 'mg-cart-address show';
-            notCarPickUpCss = 'mg-cart-address hide';
+            airportPickUpCss = 'mg-cart-address show';
+            notAirportPickUpCss = 'mg-cart-address hide';
         }
         let totalAmount  = CurrencyFormatter.format(PricingHelper.getTotalPrice(apartment, additional), { code: 'USD' });
 
@@ -86,7 +86,7 @@ class  ReservationConfirmation extends React.Component {
                                         <strong>Number of Days:</strong>
                                         <span>{totalDays}</span>
                                     </div>
-                                    <div className={carPickUpCss}>
+                                    <div className={airportPickUpCss}>
                                         <strong>Airport Pickup: </strong><br />
                                         <address>
                                             <strong>Airport Name: </strong>Entebe Internation Airport<br/>
@@ -94,7 +94,7 @@ class  ReservationConfirmation extends React.Component {
                                             <strong>Arrive On: </strong>{arrivalDate} at {arrivalTime}
                                         </address>
                                     </div>
-                                    <div className={notCarPickUpCss}>
+                                    <div className={notAirportPickUpCss}>
                                         <strong>Airport PickUp:</strong> <span className="margin-left-10">Not Included</span><br/>
                                     </div>
                                     <div className="mg-cart-address">

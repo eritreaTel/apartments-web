@@ -162,6 +162,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'createApartmentBooking', data});
     },
 
+    createAirportPickup() {
+        Dispatcher.dispatch({type: 'createAirportPickup', data});
+    },
+
     createContactUs(data) {
         return Dispatcher.dispatch({type: 'createContactUs', data});
     },

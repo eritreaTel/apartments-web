@@ -34,7 +34,7 @@ const getPersonalInfo = function (e) {
 
 class AdditionalInfo extends React.Component {
     onReserveCarPickUpCheckBoxChanged(e) {
-        Actions.AdditionalServicesUpdated({'car_pickup' : e.target.checked});
+        Actions.AdditionalServicesUpdated({'airport_pickup' : e.target.checked});
         this.refs.airline_name.focus();
     }
 
@@ -56,7 +56,7 @@ class AdditionalInfo extends React.Component {
 
     goToPersonalInfoClicked() {
         const {bookingStage : {additional}} = this.props;
-        if (additional && additional.car_pickup == true) {
+        if (additional && additional.airport_pickup == true) {
             const additionalServicesResponse = Actions.AdditionalServicesUpdated({'airline_name': this.refs.airline_name.value});
             additionalServicesResponse.then(data => {
                 let requiredFields = {
@@ -77,7 +77,7 @@ class AdditionalInfo extends React.Component {
 
     goBackToSearch() {
         const {bookingStage : {additional}} = this.props;
-        if (additional && additional.car_pickup == true) {
+        if (additional && additional.airport_pickup == true) {
             Actions.AdditionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
         }
         Actions.goBackToSearch();
@@ -93,19 +93,19 @@ class AdditionalInfo extends React.Component {
 
         let additional = bookingStage.additional;
         let arrival_date = undefined, arrival_time = undefined, airline_name = undefined;
-        let carPickup = 0, carRentals = 0, tourGuides = 0;
+        let airportPickup = 0, carRentals = 0, tourGuides = 0;
 
         if (additional) {
             arrival_date = additional.arrival_date;
             arrival_time = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
             airline_name = additional.airline_name;
-            carPickup = (additional.car_pickup == 1) ? 1 : 0 ;
+            airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
             carRentals = (additional.car_rentals == 1) ? 1 : 0 ;
             tourGuides = (additional.tour_guides == 1) ? 1 : 0 ;
         }
 
-        let airportPickUpCss = carPickup? 'row margin-left-20' : 'hide';
-        let carPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
+        let airportPickUpCss = airportPickup? 'row margin-left-20' : 'hide';
+        let airportPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
 
         return (
                 <div className="row">
@@ -115,7 +115,7 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox ref='car_pickup_option' defaultChecked={carPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to book a private car ride in advance for <strong>{carPickUpFee}? </strong> Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.</div>
+                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to book a private car ride in advance for <strong>{airportPickUpFee}? </strong> Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.</div>
                                     </div>
                                 </div>
                             </div>
