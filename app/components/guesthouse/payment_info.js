@@ -158,6 +158,12 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
+
+                                    <h2 className="mg-sec-left-title">Payment Details</h2>
+                                    <div className="row">
+                                          Pay in full
+                                    </div>
+
                                     <h2 className="mg-sec-left-title">Card Info</h2>
                                     <div className="row">
                                           <div className="col-md-6">
@@ -192,6 +198,7 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
+
 
                                     <div className="pull-right">
                                         <MDSpinner className={spinnerClassName}  />
