@@ -72,19 +72,18 @@ class PaymentInfo extends React.Component {
       }
 
       paymentProcessingIsDone(status, response) {
-            console.log("response from stripe is");
-            console.log(status);
-            console.log(response);
+            let isProcessing = {processingPayment: false};
 
             if (response.error) {
                   NotificationManager.error(response.error.message, 'Booking - Payment Information', 3000);
                   this.refs[response.error.param] && this.refs[response.error.param].focus();
                   this.refs[response.error.param] && this.refs[response.error.param].select();
-
+                  Actions.setIsProcessing(isProcessing);
             } else {
                   var stripe_token = response.id;
                   let bookingPromise = Actions.createApartmentBooking({stripe_token});
                         bookingPromise.then(bookingResponse => {
+                              Actions.setIsProcessing(isProcessing);
                               if (response.status == 'fail') {
                                     NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
                               }     else {
@@ -92,9 +91,6 @@ class PaymentInfo extends React.Component {
                               }
                       });
             }
-
-            let isProcessing = {processingPayment: false};
-            Actions.setIsProcessing(isProcessing);
       }
 
       render() {

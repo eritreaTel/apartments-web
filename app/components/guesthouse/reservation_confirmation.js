@@ -86,22 +86,22 @@ class  ReservationConfirmation extends React.Component {
                                         <span>{totalDays}</span>
                                     </div>
                                     <div className={carPickUpCss}>
-                                        <strong>Airport Pick Up Details:</strong><br />
+                                        <strong>Airport Pickup: </strong><br />
                                         <address>
-                                            Airport Name: <strong>Entebe Internation Airport</strong><br/>
-                                            Airline: {airlineName} <br/>
-                                            Arrive On: {arrivalDate} at {arrivalTime}
+                                            <strong>Airport Name: </strong>Entebe Internation Airport<br/>
+                                            <strong>Airline Name: </strong>{airlineName} <br/>
+                                            <strong>Arrive On: </strong>{arrivalDate} at {arrivalTime}
                                         </address>
                                     </div>
                                     <div className={notCarPickUpCss}>
-                                        <strong>Airport Pick Up Details:</strong> Not included<br/>
+                                        <strong>Airport PickUp:</strong> <span className="margin-left-10">Not Included</span><br/>
                                     </div>
                                     <div className="mg-cart-address">
                                         <strong>Booking Details:</strong> <br />
                                         <address>
-                                            Name: <strong>{guestHouseName}</strong><br/>
-                                            Address: {guestHouseAddress}, Uganda <br/>
-                                            Tel : {guestHousePhone}
+                                            <strong>Guest House Name: </strong>{guestHouseName}<br/>
+                                            <strong>Address: </strong>{guestHouseAddress}, Uganda <br/>
+                                            <strong>Tel : </strong>{guestHousePhone}
                                         </address>
                                     </div>
                                     <div className="mg-cart-total">
