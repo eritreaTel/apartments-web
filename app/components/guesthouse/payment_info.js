@@ -6,21 +6,19 @@ const Anchor  = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
+const PricingHelper  = require('../../helpers/pricing_helper');
 
 const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../../helpers/form_validation_helper');
+const CurrencyFormatter = require('currency-formatter');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
 
-const goBackToPersonal = function (e) {
-      let payment = getPaymentInfo(e);
-      Actions.paymentInfoUpdated(payment);
-      Actions.goBackToPersonal();
-}
+import CurrencyInput from 'react-currency-input';
 
 class PaymentInfo extends React.Component {
 
@@ -29,7 +27,12 @@ class PaymentInfo extends React.Component {
       }
 
       componentDidMount() {
+          window.scrollTo(0, 20);
             this.refs.first_name.focus();
+      }
+
+      handlePaymentAmountChanged(value) {
+          Actions.paymentInfoUpdated({'payment_amount' : value});
       }
 
       getPaymentInfo() {
@@ -42,7 +45,15 @@ class PaymentInfo extends React.Component {
             }
       }
 
+    goBackToPersonal() {
+        let payment = this.getPaymentInfo();
+        Actions.paymentInfoUpdated(payment);
+        Actions.goBackToPersonal();
+    }
+
       processPaymentClicked() {
+            const {apartment, bookingStage : {additional}} = this.props;
+
             let payment = this.getPaymentInfo();
             let paymentPromise = Actions.paymentInfoUpdated(payment);
 
@@ -56,6 +67,12 @@ class PaymentInfo extends React.Component {
                   let result = FormValidator.validateRequiredDatas(this, paymentInfo, requiredFields, 'Booking - Payment Information');
                   if (result == false) {
                         return ;
+                  }
+
+                  let paymentAmountValidationResult = PricingHelper.paymentAmountIsValid(paymentInfo.payment_amount, apartment, additional);
+                  if (paymentAmountValidationResult != "valid") {
+                      NotificationManager.error(paymentAmountValidationResult, 'Booking - Payment Information', 3000);
+                      return;
                   }
 
                   let isProcessing = {processingPayment: true};
@@ -99,7 +116,9 @@ class PaymentInfo extends React.Component {
             let number=undefined, exp_month=undefined, exp_year=undefined;
 
             let payment = bookingStage ? bookingStage.payment : null;
+            let additional = bookingStage ? bookingStage.additional : null;
             const loggedIn = (!!CookiesHelper.getSessionCookie());
+            let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
 
             if( payment) {
                   first_name  = payment.first_name;
@@ -109,6 +128,7 @@ class PaymentInfo extends React.Component {
                   number = payment.number;
                   exp_month       = payment.exp_month;
                   exp_year        = payment.exp_year;
+                  payment_amount = payment.payment_amount ? payment.payment_amount : payment_amount;
             }
 
             //Inialize first_name and last_name from loggedIn user.
@@ -119,11 +139,14 @@ class PaymentInfo extends React.Component {
             let disabled  =  processingPayment;
             let spinnerClassName   =  processingPayment ? 'margin-right-20' : 'margin-right-20 hide';
 
+            let minimum_payment_amount = PricingHelper.getMinimumPrice(apartment, additional);
+            let minimum_payment_amount_caption = CurrencyFormatter.format(minimum_payment_amount, { code: 'USD' });
+
             return(
                   <div className="row">
                         <div className="col-md-8">
                               <div className="mg-book-form-billing">
-                                    <h2 className="mg-sec-left-title">Billing Address</h2>
+                                    <h2 className="mg-sec-left-title">Billing Information</h2>
                                     <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
@@ -158,13 +181,21 @@ class PaymentInfo extends React.Component {
                                                 </div>
                                           </div>
                                     </div>
-
-                                    <h2 className="mg-sec-left-title">Payment Details</h2>
                                     <div className="row">
-                                          Pay in full
+                                          <div className="col-md-12">
+                                                <label className="margin-bottom-10">Payment Amount (USD)</label><span className='required-input display-inline'> * </span> <span className="display-inline"> Note: The minimum amount you have to pay is 15% of total price = {minimum_payment_amount_caption} </span>
+                                          </div>
+                                    </div>
+                                    <div className="row">
+                                          <div className="col-md-6">
+                                                <div className="mg-book-form-input">
+                                                      <CurrencyInput className = "display-block" value={payment_amount * 100} onChange={this.handlePaymentAmountChanged.bind(this)}/>
+                                                </div>
+                                          </div>
+                                          <div className="col-md-6"></div>
                                     </div>
 
-                                    <h2 className="mg-sec-left-title">Card Info</h2>
+                                    <h2 className="mg-sec-left-title">Card Details</h2>
                                     <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
@@ -200,11 +231,11 @@ class PaymentInfo extends React.Component {
                                     </div>
 
 
-                                    <div className="pull-right">
+                                    <div className="pull-right margin-top-10">
                                         <MDSpinner className={spinnerClassName}  />
                                         <Anchor  disabled={disabled} onClick={this.processPaymentClicked.bind(this)}  className="btn btn-dark-main btn-next-tab ">Pay Now</Anchor>
                                     </div>
-                                    <Anchor disabled={disabled} onClick={() => {goBackToPersonal(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                                    <Anchor disabled={disabled} onClick={this.goBackToPersonal.bind(this)} className="margin-top-10 btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
                         <BookingDetails apartment={apartment} bookingStage={bookingStage}/>

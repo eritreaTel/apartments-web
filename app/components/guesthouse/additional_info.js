@@ -84,7 +84,7 @@ class AdditionalInfo extends React.Component {
     }
 
     componentDidMount() {
-        this.refs.airline_name.focus();
+        window.scrollTo(0, 20);
     }
 
     render() {
@@ -115,7 +115,7 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={carPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to book a private car ride in advance for <strong>{carPickUpFee}? </strong> Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.</div>
+                                        <Checkbox ref='car_pickup_option' defaultChecked={carPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to book a private car ride in advance for <strong>{carPickUpFee}? </strong> Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.</div>
                                     </div>
                                 </div>
                             </div>

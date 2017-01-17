@@ -92,6 +92,7 @@ const getPersonalInfo = function (e) {
 class PersonalInfo extends React.Component {
 
     componentDidMount() {
+        window.scrollTo(0, 20);
         this.refs.first_name.focus();
     }
 

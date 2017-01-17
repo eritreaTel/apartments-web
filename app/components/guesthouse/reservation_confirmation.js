@@ -1,12 +1,13 @@
 const React = require('react');
 const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
+const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
 
 class  ReservationConfirmation extends React.Component {
 
     componentDidMount(){
-        //Actions.confirmationIsDone();
+        window.scrollTo(0, 20);
     }
 
     render() {
@@ -23,14 +24,12 @@ class  ReservationConfirmation extends React.Component {
         let guestHouseName = guestHouse.name;
         let guestHouseAddress = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
         let guestHousePhone   = guestHouse.phone;
-        let totalAmount = pricingInfo.total_price;
 
         let carPickup = additional && additional.car_pickup;
         let airlineName, arrivalDate, arrivalTime;
         let carPickUpCss = 'mg-cart-address hide';
         let notCarPickUpCss = 'mg-cart-address show';
         if (carPickup) {
-            totalAmount = totalAmount + 30;
             airlineName = additional.airline_name;
             arrivalDate = DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY'); ;
             arrivalTime = additional.arrival_time;
@@ -38,7 +37,7 @@ class  ReservationConfirmation extends React.Component {
             carPickUpCss = 'mg-cart-address show';
             notCarPickUpCss = 'mg-cart-address hide';
         }
-        totalAmount  = CurrencyFormatter.format(totalAmount, { code: 'USD' });
+        let totalAmount  = CurrencyFormatter.format(PricingHelper.getTotalPrice(apartment, additional), { code: 'USD' });
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">

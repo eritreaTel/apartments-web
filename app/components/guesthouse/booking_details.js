@@ -1,5 +1,6 @@
 const React = require('react');
 const DateHelper = require('../../helpers/date_helper');
+const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
 
 class BookingDetails extends React.Component {
@@ -11,15 +12,13 @@ class BookingDetails extends React.Component {
         let bed =  apartment.bed ;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
-        let totalAmount = apartment.pricingInfo.total_price;
         let carPickup = additional && additional.car_pickup;
 
         let airPortPickUpLabel = "No. You are on your own.";
         if (carPickup) {
-            totalAmount = totalAmount + 30;
             airPortPickUpLabel = 'Yes. We will pick you up.';
         }
-        totalAmount = CurrencyFormatter.format(totalAmount, { code: 'USD' });
+        let totalAmount = CurrencyFormatter.format(PricingHelper.getTotalPrice(apartment, additional), { code: 'USD' });
 
         return(
                 <div className="col-md-4">
