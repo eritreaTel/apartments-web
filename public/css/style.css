@@ -3078,15 +3078,15 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .mg-cart-total {
-  padding: 50px 0 10px;
-  font-size: 25px;
-  line-height: 35px;
+  padding: 10px 0 10px;
+  font-size: 22px;
+  line-height: 30px;
   font-family: "Playfair Display", serif;
   color: #fff;
-  font-weight: 400;
+  font-weight: 300;
 }
 .mg-cart-total strong {
-  font-weight: 400;
+  font-weight: 300;
 }
 .mg-cart-address {
   padding: 20px 0 0;
@@ -4457,6 +4457,14 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 
 .margin-top-10 {
   margin-top: 10px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
 }
 
 .terms-of-use {

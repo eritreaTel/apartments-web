@@ -22,13 +22,19 @@ import CurrencyInput from 'react-currency-input';
 
 class PaymentInfo extends React.Component {
 
-      componentWillMount() {
+      componentDidMount() {
             Stripe.setPublishableKey('pk_test_xNk89utQrNjwzmaqOLlteVnz');
+            window.scrollTo(0, 20);
+            this.refs.first_name.focus();
       }
 
-      componentDidMount() {
-          window.scrollTo(0, 20);
-            this.refs.first_name.focus();
+      componentWillMount() {
+           const {apartment, bookingStage : {payment, additional}} = this.props;
+           let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
+
+           if (payment == null || (payment && payment.payment_amount == undefined)) {
+               Actions.paymentInfoUpdated({'payment_amount' : payment_amount});
+           }
       }
 
       handlePaymentAmountChanged(value) {
@@ -113,12 +119,11 @@ class PaymentInfo extends React.Component {
       render() {
             const {apartment, bookingStage, user, isProcessing :{processingPayment}} = this.props;
             let first_name=undefined, last_name=undefined, zip=undefined, country=undefined;
-            let number=undefined, exp_month=undefined, exp_year=undefined;
+            let number=undefined, exp_month=undefined, exp_year=undefined, payment_amount = undefined;
 
             let payment = bookingStage ? bookingStage.payment : null;
             let additional = bookingStage ? bookingStage.additional : null;
             const loggedIn = (!!CookiesHelper.getSessionCookie());
-            let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
 
             if( payment) {
                   first_name  = payment.first_name;
@@ -189,7 +194,7 @@ class PaymentInfo extends React.Component {
                                     <div className="row">
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
-                                                      <CurrencyInput className = "display-block" value={payment_amount * 100} onChange={this.handlePaymentAmountChanged.bind(this)}/>
+                                                      <CurrencyInput ref='payment_amount' className = "display-block" value={payment_amount * 100} onChange={this.handlePaymentAmountChanged.bind(this)}/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6"></div>

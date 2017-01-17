@@ -2,11 +2,14 @@ const React = require('react');
 const DateHelper = require('../../helpers/date_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
+const TotalPayment = require('./total_payment');
 
 class BookingDetails extends React.Component {
 
     render() {
-        let {apartment, bookingStage : {additional}} = this.props;
+        let {apartment, bookingStage } = this.props;
+        let additional = bookingStage.additional;
+        let payment    = bookingStage.payment;
         let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let bed =  apartment.bed ;
@@ -18,7 +21,7 @@ class BookingDetails extends React.Component {
         if (carPickup) {
             airPortPickUpLabel = 'Yes. We will pick you up.';
         }
-        let totalAmount = CurrencyFormatter.format(PricingHelper.getTotalPrice(apartment, additional), { code: 'USD' });
+
 
         return(
                 <div className="col-md-4">
@@ -54,10 +57,8 @@ class BookingDetails extends React.Component {
                                     <strong>Airport Pickup: </strong>
                                     <span>{airPortPickUpLabel}</span>
                                 </div>
-                                <div className="mg-cart-total">
-                                    <strong>Total: </strong>
-                                    <span>{totalAmount}</span>
-                                </div>
+
+                                <TotalPayment apartment={apartment} bookingStage={bookingStage} />
                             </div>
                         </aside>
                     </div>

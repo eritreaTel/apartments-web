@@ -3,6 +3,7 @@ const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
+const TotalPayment = require('./total_payment');
 
 class  ReservationConfirmation extends React.Component {
 
@@ -11,8 +12,9 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment , user, bookingStage : {additional, confirmation}} = this.props;
+        let {apartment , user, bookingStage} = this.props;
         let {pricingInfo, guestHouse} = apartment;
+        let {additional, confirmation} = bookingStage;
 
         let confirmationId = 525 + '-' + confirmation.id;
         let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
@@ -103,10 +105,8 @@ class  ReservationConfirmation extends React.Component {
                                             <strong>Tel : </strong>{guestHousePhone}
                                         </address>
                                     </div>
-                                    <div className="mg-cart-total">
-                                        <strong>Total: </strong>
-                                        <span>{totalAmount}</span>
-                                    </div>
+
+                                    <TotalPayment apartment={apartment} bookingStage={bookingStage} />
                                 </div>
                             </div>
                         </div>
