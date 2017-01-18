@@ -31,7 +31,7 @@ module.exports = {
         }
     },
 
-    async saveUserSearches({checkInDate, checkOutDate, room, bed}) {
+    async saveUserSearches({checkInDate, checkOutDate, room, adult}) {
         const url = 'user_searches';
         this.setStoreVal('requestUrl', url);
         let user = this.getStoreVal('user');
@@ -39,7 +39,7 @@ module.exports = {
 
         if (this.acquireLock('saveUserSearches')) {
             try {
-                let searchInfo = {'check_in_date' : checkInDate, 'check_out_date' : checkOutDate, 'room' : room, 'bed' : bed, 'user_id' : userId };
+                let searchInfo = {'check_in_date' : checkInDate, 'check_out_date' : checkOutDate, 'room' : room, "adult" : adult, 'user_id' : userId };
                 const response = await FetchHelper.fetchJson(url, {body: searchInfo , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {

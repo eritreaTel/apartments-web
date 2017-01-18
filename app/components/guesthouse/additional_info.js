@@ -14,22 +14,16 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 
 import Checkbox from 'rc-checkbox';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
 import TimeInput from 'react-time-input';
 
+import { SingleDatePicker } from 'react-dates';
 
-const getPersonalInfo = function (e) {
-    return {
-        'first_name' : e.refs.first_name.value,
-        'last_name'  : e.refs.last_name.value,
-        'city'  : e.refs.city.value,
-        'phone_number' : e.refs.phone_number.value,
-        'email' : e.refs.email.value,
-        'password' : e.refs.password.value,
-        'renter_password' : e.refs.renter_password.value,
-        'type' : 'seeker',
-        'is_active' : 1
-    }
+function onArrivalDateChanged(date) {
+    Actions.AdditionalServicesUpdated({'arrival_date' : date});
+}
+
+function onArrivalDateFocused(focused) {
+    Actions.AdditionalServicesUpdated({'arrival_date_focused' : focused});
 }
 
 class AdditionalInfo extends React.Component {
@@ -48,10 +42,6 @@ class AdditionalInfo extends React.Component {
 
     onReserveTourGuidesCheckBoxChanged(e) {
         Actions.AdditionalServicesUpdated({'tour_guides' : e.target.checked});
-    }
-
-    onArrivalDateChanged(value, formattedValue) {
-        Actions.AdditionalServicesUpdated({'arrival_date' : value.substring(0, 10)});
     }
 
     onArrivalTimeChanged(val) {
@@ -90,14 +80,16 @@ class AdditionalInfo extends React.Component {
         const {apartment, bookingStage , user} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
-        let additional = bookingStage.additional;
-        let arrival_date = undefined, arrival_time = undefined, airline_name = undefined;
-        let airportPickup = 0, carRentals = 0, tourGuides = 0;
+        let {additional, searchInfo} = bookingStage;
+        let arrival_time = undefined, airline_name = undefined;
+        let airportPickup = 0, carRentals = 0, tourGuides = 0, arrivalDateFocused = false;
+        let arrival_date = searchInfo.checkInDate
 
         if (additional) {
-            arrival_date  = additional.arrival_date;
+            arrival_date  = additional.arrival_date ? additional.arrival_date : arrival_date;
             airline_name  = additional.airline_name;
-            arrival_time  = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
+            arrival_time  = additional.arrival_time;
+            arrivalDateFocused = (additional.arrival_date_focused == 1) ? true : false;
             
             airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
             carRentals    = (additional.car_rentals == 1) ? 1 : 0 ;
@@ -124,17 +116,17 @@ class AdditionalInfo extends React.Component {
                                 <div className="row">
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
-                                            <label>Airline Name</label><span className='required-input'> * </span>
-                                            <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
-                                            </Validate>
+                                            <label>Arrive At:</label>
+                                            <span className="display-block"><strong>Entebe International Airport</strong></span>
                                         </div>
                                     </div>
                                     <div className="col-md-1" />
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
-                                            <label>Arrive At</label><span className='required-input'> * </span>
-                                            <input disabled={true} value="Entebe International Airport"  ref='airport_name' type="text" className="input-with-validation form-control"/>
+                                            <label>Airline Name</label><span className='required-input'> * </span>
+                                            <Validate validators={[ValidationHelper.isRequired]}>
+                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
+                                            </Validate>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +134,9 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Arrival Date</label><span className='required-input'> * </span>
-                                            <DatePicker ref="arrival_date" placeholder='Arrival Date' className="input-with-validation form-control" value={arrival_date} showClearButton = {false} onChange={this.onArrivalDateChanged} />
+                                            <div className="background-light-grey">
+                                                <SingleDatePicker className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="col-md-1"/>

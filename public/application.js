@@ -65375,7 +65375,7 @@
 	      "best_photo": "images/room-1.png",
 	      "total_count": 15,
 	      "free_count": 10,
-	      "bed": 1,
+	      "adult": 1,
 	      "bath": 1,
 	      "price_per_day": 40,
 	      "price_per_week": 180,
@@ -65398,7 +65398,7 @@
 	      "best_photo": "images/room-2.png",
 	      "total_count": 25,
 	      "free_count": 5,
-	      "bed": 1,
+	      "adult": 1,
 	      "bath": 1,
 	      "price_per_day": 50,
 	      "price_per_week": 200,
@@ -65421,7 +65421,7 @@
 	      "best_photo": "images/room-3.png",
 	      "total_count": 5,
 	      "free_count": 3,
-	      "bed": 1,
+	      "adult": 1,
 	      "bath": 1,
 	      "price_per_day": 30,
 	      "price_per_week": 150,
@@ -69808,7 +69808,7 @@
 	            "best_photo": "images/room-1.png",
 	            "total_count": 15,
 	            "free_count": 10,
-	            "bed": 1,
+	            "adult": 1,
 	            "bath": 1,
 	            "price_per_day": 40,
 	            "price_per_week": 180,
@@ -69828,7 +69828,7 @@
 	                "id": 1,
 	                "name": "2 King Beds",
 	                "value": true,
-	                "icon_name": "fp-ht-bed"
+	                "icon_name": "fp-ht-adult"
 	            }, {
 	                "id": 2,
 	                "name": "Breakfast",
@@ -69863,7 +69863,7 @@
 	            "best_photo": "images/room-2.png",
 	            "total_count": 25,
 	            "free_count": 5,
-	            "bed": 1,
+	            "adult": 1,
 	            "bath": 1,
 	            "price_per_day": 50,
 	            "price_per_week": 200,
@@ -69883,7 +69883,7 @@
 	                "id": 1,
 	                "name": "2 King Beds",
 	                "value": true,
-	                "icon_name": "fp-ht-bed"
+	                "icon_name": "fp-ht-adult"
 	            }, {
 	                "id": 2,
 	                "name": "Breakfast",
@@ -69918,7 +69918,7 @@
 	            "best_photo": "images/room-3.png",
 	            "total_count": 5,
 	            "free_count": 3,
-	            "bed": 1,
+	            "adult": 1,
 	            "bath": 1,
 	            "price_per_day": 30,
 	            "price_per_week": 150,
@@ -69938,7 +69938,7 @@
 	                "id": 1,
 	                "name": "2 King Beds",
 	                "value": true,
-	                "icon_name": "fp-ht-bed"
+	                "icon_name": "fp-ht-adult"
 	            }, {
 	                "id": 2,
 	                "name": "Breakfast",
@@ -70427,7 +70427,7 @@
 											React.createElement(
 												'li',
 												null,
-												React.createElement('i', { className: 'fp-ht-bed' }),
+												React.createElement('i', { className: 'fp-ht-adult' }),
 												' 2 King Beds'
 											),
 											React.createElement(
@@ -70500,7 +70500,7 @@
 				"best_photo": "images/room-1.png",
 				"total_count": 15,
 				"free_count": 10,
-				"bed": 1,
+				"adult": 1,
 				"bath": 1,
 				"price_per_day": 40,
 				"price_per_week": 180,
@@ -70520,7 +70520,7 @@
 					"id": 1,
 					"name": "2 King Beds",
 					"value": true,
-					"icon_name": "fp-ht-bed"
+					"icon_name": "fp-ht-adult"
 				}, {
 					"id": 2,
 					"name": "Breakfast",

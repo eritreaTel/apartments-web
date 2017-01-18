@@ -14,6 +14,7 @@ module.exports = {
         const url = 'apartment_bookings';
         this.setStoreVal('requestUrl', url);
 
+        console.log("in here");
         if (this.acquireLock('createApartmentBooking')) {
             try {
 
@@ -21,7 +22,7 @@ module.exports = {
                 let bookingStage = this.getStoreVal('bookingStage');
                 let user = this.getStoreVal('user');
                 let pricingInfo = apartment.pricingInfo;
-                let {additional, payment} = bookingStage;
+                let {additional, payment, searchInfo} = bookingStage;
                 let totalAmount = PricingHelper.getTotalPrice(apartment, additional);
 
                 let carRental = (additional.car_rentals == 1) ? 1 : 0 ;
@@ -30,6 +31,8 @@ module.exports = {
 
                 let bookingData = {
                     'apartment_id'   : apartment.id,
+                    'room'           : searchInfo.room,
+                    'adult'          : searchInfo.adult,
                     'user_id'        : user.id,
                     'stripe_token'   : stripe_token,
                     'start_date'     : pricingInfo.start_date,
@@ -45,6 +48,7 @@ module.exports = {
                     'car_rental'     : carRental
                 };
 
+                console.log(bookingData);
                 const response = await FetchHelper.fetchJson(url, {body: bookingData , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
@@ -85,7 +89,7 @@ module.exports = {
                         'user_id': user.id,
                         'apartment_id': apartment.id,
                         'apartment_booking_id': confirmation.id,
-                        'arrival_time': additional.arrival_date + ' ' + additional.arrival_time,
+                        'arrival_time': additional.arrival_date.format("YYYY-MM-DD") + ' ' + additional.arrival_time,
                         'airline_name': additional.airline_name,
                         'airport': 'Entebe'
                     }

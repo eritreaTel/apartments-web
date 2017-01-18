@@ -15,10 +15,10 @@ module.exports = {
     async getBestApartments() {
         let url = 'available_apartments?best_apartments=1';
         let bookingStage = this.getStoreVal('bookingStage');
-        let {searchInfo : {checkInDate, checkOutDate, room, bed}} = bookingStage;
+        let {searchInfo : {checkInDate, checkOutDate, room, adult}} = bookingStage;
         let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
-        url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&bed=' + bed;
+        url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult;
 
         console.log('get apartments section' + url);
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
@@ -50,7 +50,7 @@ module.exports = {
 
         let url = 'available_apartments?';
         let bookingStage = this.getStoreVal('bookingStage');
-        let {searchInfo : {checkInDate, checkOutDate, room, bed, pageNumber}} = bookingStage;
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, pageNumber}} = bookingStage;
         let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
 
@@ -58,7 +58,7 @@ module.exports = {
             pageNumber = 1;
         }
 
-        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&bed=' + bed + '&pageNumber=' + pageNumber;
+        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&pageNumber=' + pageNumber;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
             console.log('apartment url : ' + url);
             this.setStoreVal('requestUrl', url);

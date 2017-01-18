@@ -5,9 +5,19 @@ const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 import { SingleDatePicker } from 'react-dates';
 
 const onSearchApartmentsClicked = function (searchInfo) {
+    //Make sure checkout date is greater than checkIn date
+    let {checkInDate, checkOutDate} = searchInfo;
+    let validDate = checkOutDate.isAfter(checkInDate, 'day');
+    if (!validDate) {
+        NotificationManager.error('Please provide valid CheckOut date', 'Booking - Search GuestHouses', 3000);
+        return ;
+    }
+
     Actions.searchApartmentsClicked();
     Actions.saveUserSearches(searchInfo);
     Actions.getApartments();
@@ -17,6 +27,10 @@ const onSearchApartmentsClicked = function (searchInfo) {
 function onRoomChanged(val) {
     let updatedData =  {'room'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
+}
+
+function isDayBlocked(date, checkInDate) {
+    return date.isAfter(checkInDate, 'day');
 }
 
 function onCheckInDateChanged(date) {
@@ -35,8 +49,8 @@ function onCheckOutDateFocused(focused) {
     Actions.searchApartmentsUpdated({'checkOutFocused'  : focused});
 }
 
-function onBedChanged(val) {
-    let updatedData =  {'bed'  : val.value};
+function onAdultsChanged(val) {
+    let updatedData =  {'adult'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
 }
 
@@ -56,19 +70,23 @@ const Room  = function (props) {
     );
 }
 
-const Bed  = function (props) {
+const Adults  = function (props) {
     var options = [
-        { value: '', label: 'Bed' },
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-        { value: '4', label: '4' },
-        { value: '5', label: '5' },
-        { value: '>6', label: '>6' }
+        { value: '',   label: 'Adults' },
+        { value: '1',  label: '1' },
+        { value: '2',  label: '2' },
+        { value: '3',  label: '3' },
+        { value: '4',  label: '4' },
+        { value: '5',  label: '5' },
+        { value: '6',  label: '6' },
+        { value: '7',  label: '7' },
+        { value: '8',  label: '8' },
+        { value: '9',  label: '9' },
+        { value: '10', label: '10' }
     ];
 
     return (
-        <Select value={props.value} placeholder='Bed' clearable={false}  searchable={true}  options={options} onChange={onBedChanged} />
+        <Select value={props.value} placeholder='Adults' clearable={false}  searchable={true}  options={options} onChange={onAdultsChanged} />
     );
 }
 
@@ -83,7 +101,7 @@ class SearchControls extends React.Component {
     }
 
     render() {
-        let checkInDate, checkOutDate, room, bed, checkInFocused = false, checkOutFocused = false;
+        let checkInDate, checkOutDate, room, adult, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
 
         if (searchInfo != null) {
@@ -92,7 +110,7 @@ class SearchControls extends React.Component {
             checkInDate     = searchInfo.checkInDate;
             checkOutDate    = searchInfo.checkOutDate;
             room            = searchInfo.room;
-            bed             = searchInfo.bed;
+            adult             = searchInfo.adult;
         }
 
         return (
@@ -116,7 +134,7 @@ class SearchControls extends React.Component {
                             <Room id='room' value={room}/>
                         </div>
                         <div className="col-xs-6">
-                            <Bed id='bed' value={bed} />
+                            <Adults id='adults' value={adult} />
                         </div>
                     </div>
                 </div>

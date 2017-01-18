@@ -15,8 +15,8 @@ const MyReservations = function () {
 								<th>Phone #</th>
 								<th>CheckIn</th>
 								<th>CheckOut</th>
-								<th>Bed</th>
-								<th>Bath</th>
+								<th>Room</th>
+								<th>Adults</th>
 								<th>Amount Paid</th>
 								<th>Status </th>
 								<th>Confirmation # </th>
@@ -56,8 +56,8 @@ const MySearchs = function () {
 								<th>Guesthouse Name</th>
 								<th>CheckIn</th>
 								<th>CheckOut</th>
-								<th>Bed</th>
-								<th>Bath</th>
+								<th>Room</th>
+								<th>Adult</th>
 								<th>Actions </th>
 							</tr>
 						</thead>

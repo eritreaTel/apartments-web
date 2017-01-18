@@ -14,12 +14,12 @@ class  ReservationConfirmation extends React.Component {
     render() {
         let {apartment , user, bookingStage} = this.props;
         let {pricingInfo, guestHouse} = apartment;
-        let {additional, confirmation} = bookingStage;
+        let {additional, confirmation, searchInfo} = bookingStage;
 
         let confirmationId = 525 + '-' + confirmation.id;
         let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
         let checkOutDate = DateHelper.formatDate(pricingInfo.end_date, 'D MMM, YYYY');
-        let bed          =  apartment.bed ;
+        let adult        = searchInfo.adult ;
         let room         = apartment.room ;
         let totalDays    = pricingInfo.days_cnt;
         let customerName = user.first_name + ' ' + user.last_name;
@@ -79,8 +79,8 @@ class  ReservationConfirmation extends React.Component {
                                         <span>{room}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
-                                        <strong>Bed:</strong>
-                                        <span>{bed}</span>
+                                        <strong>Adult:</strong>
+                                        <span>{adult}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Number of Days:</strong>
