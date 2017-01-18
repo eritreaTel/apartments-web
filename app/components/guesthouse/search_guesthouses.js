@@ -5,6 +5,8 @@ const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
 
+import { SingleDatePicker } from 'react-dates';
+
 const onSearchApartmentsClicked = function (searchInfo) {
     Actions.searchApartmentsClicked();
     Actions.saveUserSearches(searchInfo);
@@ -15,6 +17,22 @@ const onSearchApartmentsClicked = function (searchInfo) {
 function onRoomChanged(val) {
     let updatedData =  {'room'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
+}
+
+function onCheckInDateChanged(date) {
+    Actions.searchApartmentsUpdated({'checkInDate'  : date});
+}
+
+function onCheckInDateFocused(focused) {
+    Actions.searchApartmentsUpdated({'checkInFocused'  : focused});
+}
+
+function onCheckOutDateChanged(date) {
+    Actions.searchApartmentsUpdated({'checkOutDate'  : date});
+}
+
+function onCheckOutDateFocused(focused) {
+    Actions.searchApartmentsUpdated({'checkOutFocused'  : focused});
 }
 
 function onBedChanged(val) {
@@ -56,16 +74,6 @@ const Bed  = function (props) {
 
 class SearchControls extends React.Component {
 
-    onCheckInDateChanged(value, formattedValue) {
-        let updatedData =  {'checkInDate'  : value.substring(0, 10)};
-        Actions.searchApartmentsUpdated(updatedData);
-    }
-
-    onCheckOutDateChanged(value, formattedValue) {
-        let updatedData =  {'checkOutDate'  : value.substring(0, 10)};
-        Actions.searchApartmentsUpdated(updatedData);
-    }
-
     componentWillMount() {
         const {searchInfo} = this.props;
     }
@@ -75,10 +83,12 @@ class SearchControls extends React.Component {
     }
 
     render() {
-        let checkInDate, checkOutDate, room, bed;
+        let checkInDate, checkOutDate, room, bed, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
 
         if (searchInfo != null) {
+            checkInFocused  = searchInfo.checkInFocused ? true : false;
+            checkOutFocused = searchInfo.checkOutFocused ? true : false;
             checkInDate     = searchInfo.checkInDate;
             checkOutDate    = searchInfo.checkOutDate;
             room            = searchInfo.room;
@@ -89,13 +99,14 @@ class SearchControls extends React.Component {
             <div className="row">
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <DatePicker ref="checkInDate" placeholder='Check In' value={checkInDate} showClearButton = {false} onChange={this.onCheckInDateChanged} />
+                        <SingleDatePicker placeholder="CheckIn Date" date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
+
                     </div>
                 </div>
 
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <DatePicker ref="checkOutDate" placeholder='Check Out' value={checkOutDate} showClearButton = {false} onChange={this.onCheckOutDateChanged} />
+                        <SingleDatePicker placeholder="Check Out" date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
                     </div>
                 </div>
 

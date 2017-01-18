@@ -1,16 +1,12 @@
 const Moment = require('moment');
 const DateHelper = {
 
-    getDaysTotalBetweenDates(checkInDate, checkOutDate) {
-        return 12;
-    },
-
     getOneWeeksFromNow() {
-        return Moment().add(7, 'days').format("YYYY-MM-DD");
+        return Moment().add(7, 'days');
     },
 
     getThreeWeeksFromNow() {
-        return Moment().add(21, 'days').format("YYYY-MM-DD");
+        return Moment().add(21, 'days');
     },
 
     formatDate(inputDate, format){
