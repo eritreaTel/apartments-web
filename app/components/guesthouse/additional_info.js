@@ -38,6 +38,10 @@ class AdditionalInfo extends React.Component {
         this.refs.airline_name.focus();
     }
 
+    onAirlineNameChanged() {
+        Actions.AdditionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
+    }
+
     onReserveCarRentalsCheckBoxChanged(e) {
         Actions.AdditionalServicesUpdated({'car_rentals' : e.target.checked});
     }
@@ -57,22 +61,17 @@ class AdditionalInfo extends React.Component {
     goToPersonalInfoClicked() {
         const {bookingStage : {additional}} = this.props;
         if (additional && additional.airport_pickup == true) {
-            const additionalServicesResponse = Actions.AdditionalServicesUpdated({'airline_name': this.refs.airline_name.value});
-            additionalServicesResponse.then(data => {
-                let requiredFields = {
-                    'airline_name': "Please enter airline name", 'arrival_date': "Please enter arrival date",
-                    'arrival_time': "Please arrival time"
-                };
+            let requiredFields = {
+                'airline_name': "Please enter airline name", 'arrival_date': "Please enter arrival date",
+                'arrival_time': "Please arrival time"
+            };
 
-                let result = FormValidator.validateRequiredDatas(this, data, requiredFields, 'Booking - Additional Services');
-                if (result == false) {
-                    return;
-                }
-                Actions.goToPersonalInfoClicked();
-            });
-        } else {
-            Actions.goToPersonalInfoClicked();
+            let result = FormValidator.validateRequiredDatas(this, additional, requiredFields, 'Booking - Additional Services');
+            if (result == false) {
+                return;
+            }
         }
+        Actions.goToPersonalInfoClicked();
     }
 
     goBackToSearch() {
@@ -96,9 +95,9 @@ class AdditionalInfo extends React.Component {
         let airportPickup = 0, carRentals = 0, tourGuides = 0;
 
         if (additional) {
-            arrival_date  = additional.arrival_date ? additional.arrival_date : undefined;
+            arrival_date  = additional.arrival_date;
+            airline_name  = additional.airline_name;
             arrival_time  = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
-            airline_name  = additional.airline_name ? additional.airline_name : undefined;
             
             airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
             carRentals    = (additional.car_rentals == 1) ? 1 : 0 ;
@@ -127,7 +126,7 @@ class AdditionalInfo extends React.Component {
                                         <div className="mg-book-form-input">
                                             <label>Airline Name</label><span className='required-input'> * </span>
                                             <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control"/>
+                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
                                             </Validate>
                                         </div>
                                     </div>

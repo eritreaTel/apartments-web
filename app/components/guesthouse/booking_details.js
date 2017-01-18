@@ -8,8 +8,7 @@ class BookingDetails extends React.Component {
 
     render() {
         let {apartment, bookingStage } = this.props;
-        let additional = bookingStage.additional;
-        let payment    = bookingStage.payment;
+        let {additional,payment} = bookingStage;
         let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let bed =  apartment.bed ;
@@ -19,7 +18,7 @@ class BookingDetails extends React.Component {
 
         let airPortPickUpLabel = "No. You are on your own.";
         if (airportPickup) {
-            airPortPickUpLabel = 'Yes. We will pick you up.';
+            airPortPickUpLabel = 'On ' + DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY') + ' at ' + additional.arrival_time;
         }
 
 

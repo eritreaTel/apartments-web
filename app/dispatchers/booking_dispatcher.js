@@ -79,7 +79,7 @@ module.exports = {
                 let {additional, payment, confirmation} = bookingStage;
 
                 let airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
-                
+
                 if (airportPickup == 1) {
                     let airportPickupData = {
                         'user_id': user.id,
