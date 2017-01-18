@@ -110,8 +110,15 @@ class SignInBody extends React.Component {
 									<MDSpinner className={spinnerClassName} />
 								</div>
 							</div>
-							<div className="col-md-3"> </div>
+							<div className="col-md-4"> </div>
 						</div>
+
+						<div className="row">
+							<div className="col-md-4"> </div>
+							<div className="col-md-4"> Don't have an account <Anchor> Sign Up </Anchor></div>
+							<div className="col-md-4"> </div>
+						</div>
+
 					</div>
 				</ValidateGroup>
 			</div>

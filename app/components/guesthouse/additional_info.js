@@ -96,12 +96,13 @@ class AdditionalInfo extends React.Component {
         let airportPickup = 0, carRentals = 0, tourGuides = 0;
 
         if (additional) {
-            arrival_date = additional.arrival_date;
-            arrival_time = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
-            airline_name = additional.airline_name;
+            arrival_date  = additional.arrival_date ? additional.arrival_date : undefined;
+            arrival_time  = (additional.arrival_time != undefined) ? additional.arrival_time : '18:30';
+            airline_name  = additional.airline_name ? additional.airline_name : undefined;
+            
             airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
-            carRentals = (additional.car_rentals == 1) ? 1 : 0 ;
-            tourGuides = (additional.tour_guides == 1) ? 1 : 0 ;
+            carRentals    = (additional.car_rentals == 1) ? 1 : 0 ;
+            tourGuides    = (additional.tour_guides == 1) ? 1 : 0 ;
         }
 
         let airportPickUpCss = airportPickup? 'row margin-left-20' : 'hide';
