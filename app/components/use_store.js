@@ -44,6 +44,10 @@ module.exports = {
                             email: null,
                             resetCode : null
                         },
+                        userServices : {
+                            activeSignInSection: 'signIn',
+                            signUpData : null
+                        },
                         blogs : [],
                         blog : null,
                         contactUs : null,
@@ -67,7 +71,8 @@ module.exports = {
                             'authenticatingUser' : false,
                             'sendingResetPassword' : false,
                             'processingResetCode' : false,
-                            'updatingPassword' : false
+                            'updatingPassword' : false,
+                            'creatingUser' : false
                         }
                     }
                 };

@@ -102,6 +102,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'paymentInfoUpdated', data});
     },
 
+    signUpInfoUpdated(data) {
+        return Dispatcher.dispatch({type: 'signUpInfoUpdated', data});
+    },
+
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },
@@ -124,6 +128,14 @@ const Actions = {
 
     goToConfirmationClicked() {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
+    },
+
+    goToSignUp() {
+        Dispatcher.dispatch({type: 'goToSignUp'});
+    },
+
+    goToSignInPage() {
+        Dispatcher.dispatch({type: 'goToSignInPage'});
     },
 
     goBackToPersonal() {

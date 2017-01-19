@@ -27,8 +27,7 @@ const goToPaymentInfoClicked = function (e) {
             return;
         } else {
             let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                'city' : "Please enter city", 'country'    : "Please select your country",
-                'email' : "Please enter email", 'password'   : "Please enter password",
+                'country'    : "Please select your country", 'email' : "Please enter email", 'password'   : "Please enter password",
                 'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
 
             let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
@@ -156,8 +155,8 @@ class PersonalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input">
-                                        <label>City</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
+                                        <label>City</label>
+                                        <Validate>
                                             <input value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
                                         </Validate>
                                     </div>

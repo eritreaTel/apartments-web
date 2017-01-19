@@ -47,7 +47,7 @@ class HeaderBar extends React.Component {
                                 {loggedIn == true ?  <li  className={ page == 'my-account' ? 'active' : ''}><Anchor onClick={() => {Actions.setRoute('/my-account')}}>My Account</Anchor> </li> : '' }
 
                                 {loggedIn == true ?  <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{logOut()()}}>Log Out</Anchor> </li> :
-                                                     <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>
+                                                     <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.goToSignInPage(); Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>
                                 }
 
                             </ul>

@@ -70,6 +70,18 @@ module.exports = {
         return existing;
     },
 
+    async signUpInfoUpdated(data) {
+        let userServices = this.getStoreVal('userServices');
+        let existing = (userServices.signUpData != null) ? userServices.signUpData : {};
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('userServices', {signUpData: existing});
+        return existing;
+    },
+
     searchApartmentsClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },
@@ -112,6 +124,14 @@ module.exports = {
 
     goToConfirmationClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'confirmation'});
+    },
+
+    goToSignUp() {
+        this.mergeStoreVal('userServices', {activeSignInSection: 'signUp'});
+    },
+
+    goToSignInPage() {
+        this.mergeStoreVal('userServices', {activeSignInSection: 'signIn'});
     },
 
     confirmationIsDone() {
