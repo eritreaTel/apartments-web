@@ -75,11 +75,11 @@ class  ReservationConfirmation extends React.Component {
                                         <span>{checkOutDate}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
-                                        <strong>Room:</strong>
+                                        <strong>Room/s:</strong>
                                         <span>{room}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
-                                        <strong>Adult:</strong>
+                                        <strong>Adult/s:</strong>
                                         <span>{adult}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
@@ -106,7 +106,7 @@ class  ReservationConfirmation extends React.Component {
                                         </address>
                                     </div>
 
-                                    <TotalPayment apartment={apartment} bookingStage={bookingStage} />
+                                    <TotalPayment currentPayCaption="Paid Amount" apartment={apartment} bookingStage={bookingStage} />
                                 </div>
                             </div>
                         </div>

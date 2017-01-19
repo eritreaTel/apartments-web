@@ -8,10 +8,10 @@ class BookingDetails extends React.Component {
 
     render() {
         let {apartment, bookingStage } = this.props;
-        let {additional,payment} = bookingStage;
+        let {additional,payment, searchInfo} = bookingStage;
         let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
         let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
-        let adult =  apartment.adult ;
+        let adult        = searchInfo.adult;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;
         let airportPickup = additional && additional.airport_pickup;
@@ -41,11 +41,11 @@ class BookingDetails extends React.Component {
                                     <span>{checkOutDate}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Room: </strong>
+                                    <strong>Room/s: </strong>
                                     <span>{room}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
-                                    <strong>Adults: </strong>
+                                    <strong>Adult/s: </strong>
                                     <span>{adult}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
@@ -57,7 +57,7 @@ class BookingDetails extends React.Component {
                                     <span>{airPortPickUpLabel}</span>
                                 </div>
 
-                                <TotalPayment apartment={apartment} bookingStage={bookingStage} />
+                                <TotalPayment currentPayCaption="Paying Now" apartment={apartment} bookingStage={bookingStage} />
                             </div>
                         </aside>
                     </div>

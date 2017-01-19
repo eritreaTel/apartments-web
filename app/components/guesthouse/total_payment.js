@@ -7,7 +7,7 @@ const CurrencyFormatter = require('currency-formatter');
 class  TotalPayment extends React.Component {
 
     render() {
-        let {apartment, bookingStage : {additional, payment}} = this.props;
+        let {apartment, bookingStage : {additional, payment}, currentPayCaption} = this.props;
 
         let totalAmount, partialPay, currentPayment = 0, remainingAmount = 0, partialPayCss='mg-cart-total hide';
         totalAmount = PricingHelper.getTotalPrice(apartment, additional);
@@ -28,17 +28,18 @@ class  TotalPayment extends React.Component {
         return (
             <div className="margin-top-30">
                 <div className="mg-cart-total">
-                    <strong>Total: </strong>
+                    <strong>Total Amount: </strong>
                     <span>{totalAmount}</span>
                 </div>
                 <div className={partialPayCss}>
-                    <strong>Remaining : </strong>
-                    <span>{remainingAmount}</span>
-                </div>
-                <div className={partialPayCss}>
-                    <strong>Current Payment: </strong>
+                    <strong>{currentPayCaption}: </strong>
                     <span>{currentPayment}</span>
                 </div>
+
+        <div className={partialPayCss}>
+            <strong>Remaining: </strong>
+        <span>{remainingAmount}</span>
+        </div>
             </div>
         );
     }

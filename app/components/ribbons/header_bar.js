@@ -22,6 +22,15 @@ class HeaderBar extends React.Component {
         const {store : {view : {page}}, user} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
+        let myAccount = <li  className={ page == 'my-account' ? 'active dropdown' : 'dropdown'}>
+                            <Anchor onClick={() => {Actions.setRoute('/my-account')}} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MyAccount <span className="caret"></span></Anchor>
+                                <ul className="dropdown-menu">
+                                    <li><Anchor onClick={() => {logOut()}}>Log Out</Anchor></li>
+                                </ul>
+                        </li>;
+
+        let signIn = <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>;
+        let content = loggedIn ? myAccount : signIn;
 
         return (
             <Header className = 'header transp sticky'>
@@ -44,12 +53,7 @@ class HeaderBar extends React.Component {
                                 <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
                                 <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/blogs')}}>Blog</Anchor> </li>
                                 <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
-                                {loggedIn == true ?  <li  className={ page == 'my-account' ? 'active' : ''}><Anchor onClick={() => {Actions.setRoute('/my-account')}}>My Account</Anchor> </li> : '' }
-
-                                {loggedIn == true ?  <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{logOut()()}}>Log Out</Anchor> </li> :
-                                                     <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.goToSignInPage(); Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>
-                                }
-
+                                {content}
                             </ul>
                         </div>
                     </div>

@@ -7,6 +7,7 @@ const Employee = require('../components/myaccount/employee');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
+const Anchor = require('../components/shared/anchor');
 
 const MyAccountBody = function(props) {
     return (
@@ -44,6 +45,11 @@ class MyAccountPage extends React.Component {
             <div>
             <PageTitle parentClassName="mg-page-title-space parallax"/>
             <MyAccountBody>
+
+                <div>
+                        <Anchor onClick={()=>{logOut()()}}>Log Out</Anchor>
+                </div>
+
                 {dashboard}
             </MyAccountBody>
             </div>
