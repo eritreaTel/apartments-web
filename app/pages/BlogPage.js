@@ -16,6 +16,7 @@ const ValidationHelper = require('../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
+const Constants = require('../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
@@ -149,9 +150,9 @@ class FeedBackForm extends React.Component {
 
 		blogCommentResponse.then(response => {
 			if (response.status == 'fail') {
-				NotificationManager.error(response.error, 'Blog Comment', 3000);
+				NotificationManager.error(response.error, 'Blog Comment', Constants.ERROR_DISPLAY_TIME);
 			} else {
-				NotificationManager.success('Thank you for commenting on our blog', 'Blog Comment');
+				NotificationManager.success('Thank you for commenting on our blog', 'Blog Comment', Constants.SUCCESS_DISPLAY_TIME);
 			}
 
 			let isProcessing = {creatingBlogComment: false};

@@ -4,6 +4,7 @@ var Select = require('react-select');
 const Actions = require('../../actions/actions');
 const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
+const Constants = require('../../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -14,7 +15,7 @@ const onSearchApartmentsClicked = function (searchInfo) {
     let {checkInDate, checkOutDate} = searchInfo;
     let validDate = checkOutDate.isAfter(checkInDate, 'day');
     if (!validDate) {
-        NotificationManager.error('Please provide valid CheckOut date', 'Booking - Search GuestHouses', 3000);
+        NotificationManager.error('Please provide valid CheckOut date', 'Booking - Search GuestHouses', Constants.ERROR_DISPLAY_TIME);
         return ;
     }
 

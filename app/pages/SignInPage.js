@@ -9,6 +9,7 @@ const Validate     	= ReactValiation.Validate;
 const ErrorMessage 	= ReactValiation.ErrorMessage;
 const ValidateGroup = ReactValiation.ValidateGroup;
 const Country = require('../components/shared/country');
+const Constants = require('../helpers/constants');
 
 const FormValidator = require('../helpers/form_validation_helper');
 
@@ -38,7 +39,7 @@ const authenticateUser = function (e) {
 		Actions.setIsProcessing(isProcessing);
 
 		if (response.status == 'fail') {
-			NotificationManager.error(response.error, 'Log In', 5000);
+			NotificationManager.error(response.error, 'Log In', Constants.ERROR_DISPLAY_TIME);
 		} else {
 			Actions.setRoute('/my-account');
 		}
@@ -167,7 +168,7 @@ class SignUpBody extends React.Component {
 		const createUserPromise = Actions.createUser(userInfo);
 		createUserPromise.then(response => {
 			if (response.status == 'fail') {
-				NotificationManager.error(response.error, 'Sign Up', 3000);
+				NotificationManager.error(response.error, 'Sign Up', Constants.ERROR_DISPLAY_TIME);
 			} else {
 				let credentials = {
 					email    : userInfo.email,

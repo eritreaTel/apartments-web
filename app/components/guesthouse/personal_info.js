@@ -10,6 +10,7 @@ const ValidationHelper = require('../../helpers/validation_helper');
 const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
+const Constants = require('../../helpers/constants');
 
 import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -35,7 +36,7 @@ const goToPaymentInfoClicked = function (e) {
                 return ;
             }
             if (personal.renter_password != personal.password) {
-                NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', 3000);
+                NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
                 e.refs.password.focus();
                 return;
             }
@@ -46,7 +47,7 @@ const goToPaymentInfoClicked = function (e) {
             const createUserPromise = Actions.createUser(personal);
             createUserPromise.then(response => {
                 if (response.status == 'fail') {
-                    NotificationManager.error(response.error, 'Booking - Personal Information', 3000);
+                    NotificationManager.error(response.error, 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
                 } else {
                     let credentials = {
                         email : info.email,

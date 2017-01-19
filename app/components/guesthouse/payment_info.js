@@ -14,6 +14,7 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../../helpers/form_validation_helper');
 const CurrencyFormatter = require('currency-formatter');
+const Constants = require('../../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
@@ -77,7 +78,7 @@ class PaymentInfo extends React.Component {
 
                   let paymentAmountValidationResult = PricingHelper.paymentAmountIsValid(paymentInfo.payment_amount, apartment, additional);
                   if (paymentAmountValidationResult != "valid") {
-                      NotificationManager.error(paymentAmountValidationResult, 'Booking - Payment Information', 3000);
+                      NotificationManager.error(paymentAmountValidationResult, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
                       return;
                   }
 
@@ -98,7 +99,7 @@ class PaymentInfo extends React.Component {
             let isProcessing = {processingPayment: false};
 
             if (response.error) {
-                  NotificationManager.error(response.error.message, 'Booking - Payment Information', 3000);
+                  NotificationManager.error(response.error.message, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
                   this.refs[response.error.param] && this.refs[response.error.param].focus();
                   this.refs[response.error.param] && this.refs[response.error.param].select();
                   Actions.setIsProcessing(isProcessing);
@@ -108,7 +109,7 @@ class PaymentInfo extends React.Component {
                         bookingPromise.then(bookingResponse => {
                               Actions.setIsProcessing(isProcessing);
                               if (response.status == 'fail') {
-                                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', 3000);
+                                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
                               }     else {
                                     Actions.goToConfirmationClicked()
                               }

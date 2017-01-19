@@ -8,6 +8,7 @@ const ReactValiation = require('react-validate');
 const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../helpers/form_validation_helper');
+const Constants = require('../helpers/constants');
 
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -29,7 +30,7 @@ class ResetPasswordBody extends React.Component {
 		let sendResetPasswordResponse = Actions.sendResetPasswordToken(data);
 		sendResetPasswordResponse.then(response => {
 			if (response.status == 'fail') {
-				NotificationManager.error(response.error, 'Reset Password', 5000);
+				NotificationManager.error(response.error, 'Reset Password', Constants.ERROR_DISPLAY_TIME);
 			}
 			let isProcessing = {resettingPassword: false};
 			Actions.setIsProcessing(isProcessing);
@@ -100,7 +101,7 @@ class EnterCodeBody extends React.Component {
 		let validateResponse = Actions.validateResetPasswordToken(data);
 		validateResponse.then(response => {
 			if (response.status == 'fail') {
-				NotificationManager.error(response.error, 'Reset Password - Enter Code', 5000);
+				NotificationManager.error(response.error, 'Reset Password - Enter Code', Constants.ERROR_DISPLAY_TIME);
 			}
 
 			let isProcessing = {processingResetCode: false};
@@ -174,7 +175,7 @@ class UpdatePasswordBody extends React.Component {
 		}
 
 		if (data.confirm_password != data.password) {
-			NotificationManager.error("Please enter matching password.", 'Reset Password - Update Password', 3000);
+			NotificationManager.error("Please enter matching password.", 'Reset Password - Update Password', Constants.ERROR_DISPLAY_TIME);
 			this.refs.password.focus();
 			return;
 		}
@@ -187,7 +188,7 @@ class UpdatePasswordBody extends React.Component {
 			let isProcessing = {updatingPassword: false};
 
 			if (response.status == 'fail') {
-				NotificationManager.error(response.error, 'Reset Password - Update Password', 5000);
+				NotificationManager.error(response.error, 'Reset Password - Update Password', Constants.ERROR_DISPLAY_TIME);
 				Actions.setIsProcessing(isProcessing);
 			} else {
 				let credentials = { email : email, password : data.password}
@@ -196,7 +197,7 @@ class UpdatePasswordBody extends React.Component {
 				logInResponse.then(response => {
 					Actions.setIsProcessing(isProcessing);
 					if (response.status == 'fail') {
-						NotificationManager.error(response.error, 'Reset Password - Update Password', 5000);
+						NotificationManager.error(response.error, 'Reset Password - Update Password', Constants.ERROR_DISPLAY_TIME);
 					} else {
 						Actions.setRoute('/my-account');
 					}

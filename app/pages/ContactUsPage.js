@@ -8,6 +8,7 @@ const Validate     = ReactValiation.Validate;
 const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../helpers/form_validation_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
+const Constants = require('../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
@@ -37,9 +38,9 @@ const submitContactUsForm = function (e) {
 
 	contactUsResponse.then(response => {
 		if (response.status == 'fail') {
-			NotificationManager.error(response.error, 'Contact Us', 3000);
+			NotificationManager.error(response.error, 'Contact Us', Constants.ERROR_DISPLAY_TIME);
 		} else {
-			NotificationManager.success('Thank you for contacting us. We will get back to you in less than 24 hours.', 'Contact Us');
+			NotificationManager.success('Thank you for contacting us. We will get back to you in less than 24 hours.', 'Contact Us', Constants.SUCCESS_DISPLAY_TIME);
 		}
 
 		let isProcessing = {creatingContactUs: false};

@@ -18,6 +18,7 @@ const ErrorMessage = ReactValiation.ErrorMessage;
 import MDSpinner from "react-md-spinner";
 import ReactDOM from 'react-dom';
 import StarRatingComponent from 'react-star-rating-component';
+const Constants = require('../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -44,9 +45,9 @@ const onReviewApartmentClicked = function (e, ratingInfo) {
 
 	createApartmentReviewsPromise.then(response => {
 		if (response.status == 'fail') {
-			NotificationManager.error(response.error, 'Apartment Review', 3000);
+			NotificationManager.error(response.error, 'Apartment Review', Constants.ERROR_DISPLAY_TIME);
 		} else {
-			NotificationManager.success('Thank you for your review.', 'Apartment Review');
+			NotificationManager.success('Thank you for your review.', 'Apartment Review', Constants.SUCCESS_DISPLAY_TIME);
 		}
 
 		isProcessing.reviewAnApartment = false;

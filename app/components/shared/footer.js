@@ -9,6 +9,7 @@ const ReactValiation = require('react-validate');
 const Validate     	= ReactValiation.Validate;
 const ErrorMessage 	= ReactValiation.ErrorMessage;
 const ValidateGroup = ReactValiation.ValidateGroup;
+const Constants = require('../../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
@@ -16,7 +17,8 @@ import MDSpinner from "react-md-spinner";
 const onNewsLetterSubscriptionClicked = function (e) {
     let email = e.refs.subscription_email.value;
     if (email == '' || email == null || email == undefined) {
-        NotificationManager.error('Please provide email address.', 'Email Subscription', 3000);
+        e.refs.subscription_email.focus();
+        NotificationManager.error('Please provide email address.', 'Email Subscription', Constants.ERROR_DISPLAY_TIME);
         return;
     }
 
@@ -40,9 +42,10 @@ const onNewsLetterSubscriptionClicked = function (e) {
 
     createUserPromise.then(response => {
         if (response.status == 'fail') {
-            NotificationManager.error(response.error, 'Email Subscription', 3000);
+            e.refs.subscription_email.focus();
+            NotificationManager.error(response.error, 'Email Subscription', Constants.ERROR_DISPLAY_TIME);
         } else {
-            NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription');
+            NotificationManager.success('You have successfully subscribed to our email.', 'Email Subscription', Constants.SUCCESS_DISPLAY_TIME);
         }
 
         isProcessing.newsLetterSubscription = false;
