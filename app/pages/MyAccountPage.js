@@ -43,15 +43,13 @@ class MyAccountPage extends React.Component {
         }
         return (
             <div>
-            <PageTitle parentClassName="mg-page-title-space parallax"/>
-            <MyAccountBody>
-
-                <div>
-                        <Anchor onClick={()=>{logOut()()}}>Log Out</Anchor>
-                </div>
-
-                {dashboard}
-            </MyAccountBody>
+                <PageTitle parentClassName="mg-my-account-page-title-space parallax"/>
+                <MyAccountBody>
+                    <div className="margin-bottom-30">
+                        <h4> Hello {user.first_name}, it's nice to see you </h4>
+                    </div>
+                    {dashboard}
+                </MyAccountBody>
             </div>
         );
 	}

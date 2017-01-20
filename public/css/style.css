@@ -4435,8 +4435,8 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   margin-left: 6px;
 }
 
-.margin-left-190 {
-  margin-left: 190px;
+.margin-left- {
+  margin-left: 10px;
 }
 
 .fontsize-16 {
@@ -4453,6 +4453,10 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 
 .margin-bottom-20 {
   margin-bottom: 20px;
+}
+
+.margin-bottom-30 {
+  margin-bottom: 30px;
 }
 
 .margin-bottom-10 {
@@ -4510,3 +4514,10 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   padding: 30px 0 70px;
 }
 
+.mg-my-account-page-title-space{
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-image: url(../images/page-title.png);
+  color: #fff;
+  text-align: center;
+}
