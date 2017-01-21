@@ -9,6 +9,9 @@ const Country = require('../shared/country');
 const Anchor = require('../shared/anchor');
 const Checkbox = require('rc-checkbox');
 const Actions = require('../../actions/actions');
+const FormValidator = require('../../helpers/form_validation_helper');
+import MDSpinner from "react-md-spinner";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const BookingSection = function (props) {
 	return(
@@ -33,16 +36,60 @@ class EditProfileSection extends React.Component{
 	getValueFromStoreOrDb(value, userStore, userDb) {
 		let returnVal = userDb[value]
 		if (userStore && userStore[value]) {
-			console.log('here');
-			console.log(userStore[value]);
 			returnVal = userStore[value];
 		}
-		console.log('retrun value is ' + returnVal);
+
 		return returnVal;
 	}
 
+	componentDidMount() {
+		const {user} = this.props;
+
+		let userInfo = {
+			'first_name' : user.first_name,
+			'last_name' : user.last_name,
+			'city' : user.city,
+			'country' : user.country,
+			'phone_number' : user.phone_number,
+			'will_reset_password' : false
+		};
+		Actions.userInfoUpdated(userInfo);
+		this.refs.first_name.focus();
+	}
+
+	updateUserClicked() {
+		const {userServices} = this.props;
+		let updateUserInfo = userServices.updateUserInfo;
+
+		let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+							  'country'    : "Please select your country" };
+
+		if (updateUserInfo.will_reset_password == true) {
+			requiredFields = {...requiredFields, 'password' : 'Please enter password'};
+		}
+
+		let result = FormValidator.validateRequiredDatas(this, updateUserInfo, requiredFields, 'Update User Information');
+		if (result == false) {
+			return ;
+		}
+
+		let isProcessing = {updatingUser: true};
+		Actions.setIsProcessing(isProcessing);
+
+		const updateUserPromise = Actions.updateUser(updateUserInfo);
+			updateUserPromise.then(response => {
+				if (response.status == 'fail') {
+					NotificationManager.error(response.error, 'Update User Information', Constants.ERROR_DISPLAY_TIME);
+				} else {
+					NotificationManager.success('You have successfully updated your profile.', 'Update User Information', Constants.SUCCESS_DISPLAY_TIME);
+				}
+				isProcessing = {updatingUser: false};
+				Actions.setIsProcessing(isProcessing);
+		});
+	}
+
 	render() {
-		const {user, userServices} = this.props;
+		const {user, userServices, isProcessing : {updatingUser}} = this.props;
 		let updateUserInfo = userServices.updateUserInfo;
 
 		let first_name = this.getValueFromStoreOrDb('first_name', updateUserInfo, user);
@@ -52,8 +99,9 @@ class EditProfileSection extends React.Component{
 		let phone_number = this.getValueFromStoreOrDb('phone_number', updateUserInfo, user);
 		let will_reset_password = this.getValueFromStoreOrDb('will_reset_password', updateUserInfo, user);
 		let showPasswordCss = will_reset_password == true ? 'row show' : 'row hide';
-		
-		let disabled = false;
+
+		let spinnerClassName = (updatingUser == true) ? 'show' : 'hide';
+		let disabled = updatingUser;
 
 		return (
 			<div role="tabpanel" className="tab-pane fade" id="messages3">
@@ -136,9 +184,8 @@ class EditProfileSection extends React.Component{
 						<div className="row">
 							<div className="col-md-1"> </div>
 							<div className="col-md-5">
-								<div className="pull-left">
-									<Anchor disabled={disabled} onClick={() => {}}  className="btn btn-dark-main btn-next-tab">Save Changes</Anchor>
-								</div>
+								<Anchor disabled={disabled} onClick={this.updateUserClicked.bind(this)}  className="btn btn-dark-main btn-next-tab">Save Changes</Anchor>
+								<MDSpinner className={spinnerClassName}  />
 							</div>
 							<div className="col-md-6">
 						</div>
@@ -161,7 +208,7 @@ const TravelGuides = function () {
 
 class Seeker extends React.Component {
 	render() {
-			const {user, userServices} = this.props;
+			const {user, userServices ,isProcessing} = this.props;
 			return (
 				<div className="mg-tab-left-nav">
 					<ul className="nav nav-tabs nav-justified" role="tablist">
@@ -182,7 +229,7 @@ class Seeker extends React.Component {
 					<div className="tab-content">
 						<BookingSection />
 						<DealsSection />
-						<EditProfileSection user={user} userServices={userServices} />
+						<EditProfileSection user={user} userServices={userServices} isProcessing={isProcessing} />
 						<TravelGuides />
 					</div>
 				</div>

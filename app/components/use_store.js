@@ -73,7 +73,8 @@ module.exports = {
                             'sendingResetPassword' : false,
                             'processingResetCode' : false,
                             'updatingPassword' : false,
-                            'creatingUser' : false
+                            'creatingUser' : false,
+                            'updatingUser' : false
                         }
                     }
                 };

@@ -99,7 +99,6 @@ const Actions = {
     },
 
     userInfoUpdated(data) {
-        console.log(data);
         return Dispatcher.dispatch({type: 'UserInfoUpdated', data});
     },
 
@@ -165,6 +164,10 @@ const Actions = {
 
     createUser(data) {
         return Dispatcher.dispatch({type: 'createUser', data});
+    },
+
+    updateUser(data) {
+        return Dispatcher.dispatch({type: 'updateUser', data});
     },
 
     saveUserSearches(data) {

@@ -31,6 +31,34 @@ module.exports = {
         }
     },
 
+    async updateUser(data) {
+        let user = this.getStoreVal('user');
+        const url = 'users/' + user.id;
+        this.setStoreVal('requestUrl', url);
+
+        if (this.acquireLock('updateUser')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data , method: 'PUT'});
+                const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                if (errors.length > 0) {
+                    await this.dispatch({type: 'setErrorMessages', data : {errors}});
+                } else {
+                    this.setStoreVal('user', object);
+                }
+            } catch (error) {
+                await this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot update user. Please try again'
+                    }
+                });
+            }
+            this.releaseLock('updateUser');
+            return this.dispatch({type: 'prepareResponse'});
+        }
+    },
+
     async saveUserSearches({checkInDate, checkOutDate, room, adult}) {
         const url = 'user_searches';
         this.setStoreVal('requestUrl', url);
