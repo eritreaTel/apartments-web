@@ -25,6 +25,9 @@ class HeaderBar extends React.Component {
         let myAccount = <li  className={ page == 'my-account' ? 'active dropdown' : 'dropdown'}>
                             <Anchor onClick={() => {Actions.setRoute('/my-account')}} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span className="caret"></span></Anchor>
                                 <ul className="dropdown-menu">
+                                    <li><Anchor onClick={() => {}}>Bookings</Anchor></li>
+                                    <li><Anchor onClick={() => {}}>Deals</Anchor></li>
+                                    <li><Anchor onClick={() => {}}>Travel Guides</Anchor></li>
                                     <li><Anchor onClick={() => {logOut()}}>Log Out</Anchor></li>
                                 </ul>
                         </li>;

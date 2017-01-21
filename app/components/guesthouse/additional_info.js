@@ -19,33 +19,33 @@ import TimeInput from 'react-time-input';
 import { SingleDatePicker } from 'react-dates';
 
 function onArrivalDateChanged(date) {
-    Actions.AdditionalServicesUpdated({'arrival_date' : date});
+    Actions.additionalServicesUpdated({'arrival_date' : date});
 }
 
 function onArrivalDateFocused(focused) {
-    Actions.AdditionalServicesUpdated({'arrival_date_focused' : focused});
+    Actions.additionalServicesUpdated({'arrival_date_focused' : focused});
 }
 
 class AdditionalInfo extends React.Component {
     onReserveCarPickUpCheckBoxChanged(e) {
-        Actions.AdditionalServicesUpdated({'airport_pickup' : e.target.checked});
+        Actions.additionalServicesUpdated({'airport_pickup' : e.target.checked});
         this.refs.airline_name.focus();
     }
 
     onAirlineNameChanged() {
-        Actions.AdditionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
+        Actions.additionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
     }
 
     onReserveCarRentalsCheckBoxChanged(e) {
-        Actions.AdditionalServicesUpdated({'car_rentals' : e.target.checked});
+        Actions.additionalServicesUpdated({'car_rentals' : e.target.checked});
     }
 
     onReserveTourGuidesCheckBoxChanged(e) {
-        Actions.AdditionalServicesUpdated({'tour_guides' : e.target.checked});
+        Actions.additionalServicesUpdated({'tour_guides' : e.target.checked});
     }
 
     onArrivalTimeChanged(val) {
-        Actions.AdditionalServicesUpdated({'arrival_time' : val});
+        Actions.additionalServicesUpdated({'arrival_time' : val});
     }
 
     goToPersonalInfoClicked() {
@@ -67,7 +67,7 @@ class AdditionalInfo extends React.Component {
     goBackToSearch() {
         const {bookingStage : {additional}} = this.props;
         if (additional && additional.airport_pickup == true) {
-            Actions.AdditionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
+            Actions.additionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
         }
         Actions.goBackToSearch();
     }

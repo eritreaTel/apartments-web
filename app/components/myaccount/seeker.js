@@ -46,98 +46,102 @@ class EditProfileSection extends React.Component{
 		let updateUserInfo = userServices.updateUserInfo;
 
 		let first_name = this.getValueFromStoreOrDb('first_name', updateUserInfo, user);
-		let last_name = user.last_name;
-		let city = user.city;
-		let country = user.country;
-		let phone_number = user.phone_number;
+		let last_name = this.getValueFromStoreOrDb('last_name', updateUserInfo, user);
+		let city = this.getValueFromStoreOrDb('city', updateUserInfo, user);
+		let country = this.getValueFromStoreOrDb('country', updateUserInfo, user);
+		let phone_number = this.getValueFromStoreOrDb('phone_number', updateUserInfo, user);
+		let will_reset_password = this.getValueFromStoreOrDb('will_reset_password', updateUserInfo, user);
+		let showPasswordCss = will_reset_password == true ? 'row show' : 'row hide';
+		
 		let disabled = false;
-		let airportPickup = false;
 
 		return (
 			<div role="tabpanel" className="tab-pane fade" id="messages3">
-				<div className="mg-book-form-myaccount">
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>First Name</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input  placeholder="first name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'first_name': this.refs.first_name.value})}} />
-								</Validate>
+				<div className="row">
+					<div className="col-md-12">
+						<div className="row">
+							<div className="col-md-1"> </div>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>First Name</label><span className='required-input'> * </span>
+									<Validate validators={[ValidationHelper.isRequired]}>
+										<input  placeholder="first name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'first_name': this.refs.first_name.value})}}/>
+									</Validate>
+								</div>
 							</div>
-						</div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>Last Name</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input placeholder="last name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control"/>
-								</Validate>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>Last Name</label><span className='required-input'> * </span>
+									<Validate validators={[ValidationHelper.isRequired]}>
+										<input placeholder="last name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'last_name': this.refs.last_name.value})}}/>
+									</Validate>
+								</div>
 							</div>
+							<div className="col-md-1"> </div>
 						</div>
-						<div className="col-md-1"> </div>
-					</div>
 
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>City</label>
-								<Validate>
-									<input value={city} placeholder="city"  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
-								</Validate>
+						<div className="row">
+							<div className="col-md-1"> </div>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>City</label>
+									<Validate>
+										<input value={city} placeholder="city"  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'city': this.refs.city.value})}}/>
+									</Validate>
+								</div>
 							</div>
-						</div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>Country</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
-								</Validate>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>Country</label><span className='required-input'> * </span>
+									<Validate validators={[ValidationHelper.isRequired]}>
+										<Country onChange={(val)=>{Actions.userInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
+									</Validate>
+								</div>
 							</div>
+							<div className="col-md-1"> </div>
 						</div>
-						<div className="col-md-1"> </div>
-					</div>
 
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>Phone Number</label>
-								<input placeholder="phone number" value={phone_number} disabled={disabled} ref='phone_number' type="text" className="input-with-validation form-control"/>
+						<div className="row">
+							<div className="col-md-1"> </div>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>Phone Number</label>
+									<input placeholder="phone number" value={phone_number} disabled={disabled} ref='phone_number' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'phone_number': this.refs.phone_number.value})}}/>
+								</div>
+							</div>
+							<div className="col-md-5"> </div>
+							<div className="col-md-1"> </div>
+						</div>
+
+						<div className="row">
+							<div className="col-md-1"> </div>
+							<div className="col-md-11 margin-bottom-40">
+								<Checkbox  defaultChecked={will_reset_password}  onChange={(val)=>{Actions.userInfoUpdated({'will_reset_password': val.target.checked})}}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to reset your password?</div>
 							</div>
 						</div>
-						<div className="col-md-5"> </div>
-						<div className="col-md-1"> </div>
-					</div>
 
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-11 margin-bottom-40">
-							<Checkbox  defaultChecked={airportPickup}  onChange={this.onResetPasswordChecked.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to reset your password?</div>
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-5">
-							<div className="mg-book-form-input">
-								<label>Password</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
-								</Validate>
+						<div className={showPasswordCss}>
+							<div className="col-md-1"> </div>
+							<div className="col-md-5">
+								<div className="mg-book-form-input">
+									<label>Password</label><span className='required-input'> * </span>
+									<Validate validators={[ValidationHelper.isRequired]}>
+										<input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'password': this.refs.phone_number.value})}}/>
+									</Validate>
+								</div>
 							</div>
+							<div className="col-md-6"> </div>
 						</div>
-						<div className="col-md-6"> </div>
-					</div>
 
-					<div className="row">
-						<div className="col-md-1"> </div>
-						<div className="col-md-5">
-							<div className="pull-left">
-								<Anchor disabled={disabled} onClick={() => {}}  className="btn btn-dark-main btn-next-tab">Save Changes</Anchor>
+						<div className="row">
+							<div className="col-md-1"> </div>
+							<div className="col-md-5">
+								<div className="pull-left">
+									<Anchor disabled={disabled} onClick={() => {}}  className="btn btn-dark-main btn-next-tab">Save Changes</Anchor>
+								</div>
 							</div>
+							<div className="col-md-6">
 						</div>
-						<div className="col-md-6">
 					</div>
 				</div>
 			</div>

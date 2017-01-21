@@ -46,7 +46,7 @@ module.exports = {
         return existing;
     },
 
-    async AdditionalServicesUpdated(data) {
+    async additionalServicesUpdated(data) {
         let bookingStage = this.getStoreVal('bookingStage');
         let existing = (bookingStage.additional != null) ? bookingStage.additional : {};
 
@@ -79,6 +79,18 @@ module.exports = {
         });
 
         this.mergeStoreVal('userServices', {signUpData: existing});
+        return existing;
+    },
+
+    async UserInfoUpdated(data) {
+        let userServices = this.getStoreVal('userServices');
+        let existing = (userServices.updateUserInfo != null) ? userServices.updateUserInfo : {};
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('userServices', {updateUserInfo: existing});
         return existing;
     },
 

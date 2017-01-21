@@ -46,7 +46,8 @@ module.exports = {
                         },
                         userServices : {
                             activeSignInSection: 'signIn',
-                            signUpData : null
+                            signUpData : null,
+                            updateUserInfo : null
                         },
                         blogs : [],
                         blog : null,

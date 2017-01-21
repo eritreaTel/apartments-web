@@ -94,8 +94,13 @@ const Actions = {
         return Dispatcher.dispatch({type: 'personalInfoUpdated', data});
     },
 
-    AdditionalServicesUpdated(data) {
-        return Dispatcher.dispatch({type: 'AdditionalServicesUpdated', data});
+    additionalServicesUpdated(data) {
+        return Dispatcher.dispatch({type: 'additionalServicesUpdated', data});
+    },
+
+    userInfoUpdated(data) {
+        console.log(data);
+        return Dispatcher.dispatch({type: 'UserInfoUpdated', data});
     },
 
     paymentInfoUpdated(data) {
