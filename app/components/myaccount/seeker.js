@@ -1,5 +1,15 @@
 const React = require('react');
 
+const ValidationHelper = require('../../helpers/validation_helper');
+const ReactValiation = require('react-validate');
+const Validate     = ReactValiation.Validate;
+const ErrorMessage = ReactValiation.ErrorMessage;
+const Constants = require('../../helpers/constants');
+const Country = require('../shared/country');
+const Anchor = require('../shared/anchor');
+const Checkbox = require('rc-checkbox');
+const Actions = require('../../actions/actions');
+
 const BookingSection = function (props) {
 	return(
 		<div role="tabpanel" className="tab-pane fade in active" id="home3">
@@ -18,18 +28,136 @@ const DealsSection = function () {
 	)
 }
 
-const EditProfileSection = function () {
+class EditProfileSection extends React.Component{
+
+	getValueFromStoreOrDb(value, userStore, userDb) {
+		let returnVal = userDb[value]
+		if (userStore && userStore[value]) {
+			console.log('here');
+			console.log(userStore[value]);
+			returnVal = userStore[value];
+		}
+		console.log('retrun value is ' + returnVal);
+		return returnVal;
+	}
+
+	render() {
+		const {user, userServices} = this.props;
+		let updateUserInfo = userServices.updateUserInfo;
+
+		let first_name = this.getValueFromStoreOrDb('first_name', updateUserInfo, user);
+		let last_name = user.last_name;
+		let city = user.city;
+		let country = user.country;
+		let phone_number = user.phone_number;
+		let disabled = false;
+		let airportPickup = false;
+
+		return (
+			<div role="tabpanel" className="tab-pane fade" id="messages3">
+				<div className="mg-book-form-myaccount">
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>First Name</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input  placeholder="first name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'first_name': this.refs.first_name.value})}} />
+								</Validate>
+							</div>
+						</div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>Last Name</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input placeholder="last name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control"/>
+								</Validate>
+							</div>
+						</div>
+						<div className="col-md-1"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>City</label>
+								<Validate>
+									<input value={city} placeholder="city"  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
+								</Validate>
+							</div>
+						</div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>Country</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
+								</Validate>
+							</div>
+						</div>
+						<div className="col-md-1"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>Phone Number</label>
+								<input placeholder="phone number" value={phone_number} disabled={disabled} ref='phone_number' type="text" className="input-with-validation form-control"/>
+							</div>
+						</div>
+						<div className="col-md-5"> </div>
+						<div className="col-md-1"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-11 margin-bottom-40">
+							<Checkbox  defaultChecked={airportPickup}  onChange={this.onResetPasswordChecked.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to reset your password?</div>
+						</div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-5">
+							<div className="mg-book-form-input">
+								<label>Password</label><span className='required-input'> * </span>
+								<Validate validators={[ValidationHelper.isRequired]}>
+									<input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
+								</Validate>
+							</div>
+						</div>
+						<div className="col-md-6"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-1"> </div>
+						<div className="col-md-5">
+							<div className="pull-left">
+								<Anchor disabled={disabled} onClick={() => {}}  className="btn btn-dark-main btn-next-tab">Save Changes</Anchor>
+							</div>
+						</div>
+						<div className="col-md-6">
+					</div>
+				</div>
+			</div>
+		</div>
+		);
+	}
+}
+
+const TravelGuides = function () {
 	return (
-		<div role="tabpanel" className="tab-pane fade" id="messages3">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Isdem memoriter poenis succumbere nondum disserunt, consistat sinit pedalis fructu appellant tractavissent fames. Disciplinis virtus docendi res melius mandamus pacem afranius oratoribus. Fames divelli eventurum, detractis desistunt magnis fortasse alii approbantibus, tantalo conducunt disputatum pertineant detractis verentur clarorum ceteris epicuri.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inimicus explicari doctrinis conficiuntur eitam intuemur omnibus cui. Efficerent choro temperantia artibus tranquillitatem gravissimo. Servire magistra concursio meminit explentur facta, vivendi verbum utamur vituperatum vitiis. Alienae singulos. Terrore utuntur constituant, lineam sapientiam velim m sensu concordia repetitis nacti. Summam nomine ante voluptatem gaudere reiciendis, ita aequi tueri cepisse platonem, unde antiquis certamen sensum inanes, inprobis habendus crudeli, disciplina volunt certa polyaeno variis solemus. Ruant servare elaboraret cadere faciendi tempus, ortum accusantium partis.</p>
+		<div role="tabpanel" className="tab-pane fade" id="settings3">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perpaulum, contentam eximiae leniter efflorescere, quia mollitia, loco ficta habeat ii persecuti assidua ceterorum albucius, caret perpetuam artes sive philosopho aperiam corpore, insequitur pluribus delicata indoctum minuit res efficeret assecutus affert iuste, proficiscuntur.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nominavi domesticarum maioribus malivoli motus contereret satis dedocere. Aptior probo calere saperet eosdem amatoriis morbos corpora una, debilitatem ignota dicunt hae lectorem statuerunt, graeci animadvertat multis declinationem divitias tuum responsum velim scipio. Delectus tria convincere tradit satis, errorem addidisti facultas, oblivione arare in curiosi libris deserere, eodem sustulisti ipsos voluptaria veniam cohaerescent, perspicuum, diesque unam suscipere naturae, virtus nasci pauca dubitat graecam voluit intellegimus improborum aiunt ponit. Docere habeatur utilitas, dicturum silano.</p>
 		</div>
 	);
 }
 
-
 class Seeker extends React.Component {
 	render() {
+			const {user, userServices} = this.props;
 			return (
 				<div className="mg-tab-left-nav">
 					<ul className="nav nav-tabs nav-justified" role="tablist">
@@ -50,11 +178,8 @@ class Seeker extends React.Component {
 					<div className="tab-content">
 						<BookingSection />
 						<DealsSection />
-						<EditProfileSection />
-						<div role="tabpanel" className="tab-pane fade" id="settings3">
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perpaulum, contentam eximiae leniter efflorescere, quia mollitia, loco ficta habeat ii persecuti assidua ceterorum albucius, caret perpetuam artes sive philosopho aperiam corpore, insequitur pluribus delicata indoctum minuit res efficeret assecutus affert iuste, proficiscuntur.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nominavi domesticarum maioribus malivoli motus contereret satis dedocere. Aptior probo calere saperet eosdem amatoriis morbos corpora una, debilitatem ignota dicunt hae lectorem statuerunt, graeci animadvertat multis declinationem divitias tuum responsum velim scipio. Delectus tria convincere tradit satis, errorem addidisti facultas, oblivione arare in curiosi libris deserere, eodem sustulisti ipsos voluptaria veniam cohaerescent, perspicuum, diesque unam suscipere naturae, virtus nasci pauca dubitat graecam voluit intellegimus improborum aiunt ponit. Docere habeatur utilitas, dicturum silano.</p>
-						</div>
+						<EditProfileSection user={user} userServices={userServices} />
+						<TravelGuides />
 					</div>
 				</div>
 			);
