@@ -189,7 +189,7 @@ class PaymentInfo extends React.Component {
                                     </div>
                                     <div className="row">
                                           <div className="col-md-12">
-                                                <label className="margin-bottom-10">Payment Amount (USD)</label><span className='required-input display-inline'> * </span> <span className="display-inline"> Note: The minimum amount you have to pay is 15% of total price = {minimum_payment_amount_caption} </span>
+                                                <label className="margin-bottom-10">Payment Amount (USD)</label><span className='required-input display-inline'> * </span> <span className="display-inline"> Note: Deposit of 15% (minimum_payment_amount_caption), is required to confirm your reservation.</span>
                                           </div>
                                     </div>
                                     <div className="row">

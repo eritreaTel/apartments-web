@@ -142,7 +142,7 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-1"/>
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
-                                            <label>Arrival Time/(24 hour format)</label><span className='required-input'> * </span>
+                                            <label>Arrival Time/24-hour clock</label><span className='required-input'> * </span>
                                             <Validate validators={[ValidationHelper.isRequired]}>
                                                 <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
                                             </Validate>

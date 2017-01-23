@@ -36,7 +36,7 @@ const BookingStaging = function(props) {
                 <Anchor className="inactiveLink" aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span><span className="mg-bs-bar"></span>Payment</Anchor>
             </li>
             <li role="presentation" className={confirmation}>
-                <Anchor className="inactiveLink" aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">5</span>Thank You</Anchor>
+                <Anchor className="inactiveLink" aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">5</span>Confirmation</Anchor>
             </li>
         </ul>
     );
