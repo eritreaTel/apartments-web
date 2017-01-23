@@ -82,7 +82,7 @@ module.exports = {
         return existing;
     },
 
-    async UserInfoUpdated(data) {
+    async userInfoUpdated(data) {
         let userServices = this.getStoreVal('userServices');
         let existing = (userServices.updateUserInfo != null) ? userServices.updateUserInfo : {};
 

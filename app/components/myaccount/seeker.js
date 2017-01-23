@@ -1,9 +1,4 @@
 const React = require('react');
-
-const ValidationHelper = require('../../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
 const Constants = require('../../helpers/constants');
 const Country = require('../shared/country');
 const Anchor = require('../shared/anchor');
@@ -42,7 +37,7 @@ class EditProfileSection extends React.Component{
 		return returnVal;
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		const {user} = this.props;
 
 		let userInfo = {
@@ -54,6 +49,10 @@ class EditProfileSection extends React.Component{
 			'will_reset_password' : false
 		};
 		Actions.userInfoUpdated(userInfo);
+
+	}
+
+	componentDidMount() {
 		this.refs.first_name.focus();
 	}
 
@@ -90,15 +89,21 @@ class EditProfileSection extends React.Component{
 
 	render() {
 		const {user, userServices, isProcessing : {updatingUser}} = this.props;
-		let updateUserInfo = userServices.updateUserInfo;
+		let updateUserInfo = userServices.updateUserInfo ? userServices.updateUserInfo : {};
 
-		let first_name = this.getValueFromStoreOrDb('first_name', updateUserInfo, user);
-		let last_name = this.getValueFromStoreOrDb('last_name', updateUserInfo, user);
-		let city = this.getValueFromStoreOrDb('city', updateUserInfo, user);
-		let country = this.getValueFromStoreOrDb('country', updateUserInfo, user);
-		let phone_number = this.getValueFromStoreOrDb('phone_number', updateUserInfo, user);
-		let will_reset_password = this.getValueFromStoreOrDb('will_reset_password', updateUserInfo, user);
-		let showPasswordCss = will_reset_password == true ? 'row show' : 'row hide';
+		console.log('in render');
+		console.log(updateUserInfo);
+
+		let first_name          = updateUserInfo.first_name;
+
+		console.log('first_name is ' + first_name);
+
+		let last_name           = updateUserInfo.last_name;
+		let city                = updateUserInfo.city;
+		let country             = updateUserInfo.country;
+		let phone_number        = updateUserInfo.phone_number;
+		let will_reset_password = updateUserInfo && updateUserInfo.will_reset_password ? updateUserInfo.will_reset_password : false;
+		let showPasswordCss     = will_reset_password == true ? 'row show' : 'row hide';
 
 		let spinnerClassName = (updatingUser == true) ? 'show' : 'hide';
 		let disabled = updatingUser;
@@ -112,17 +117,13 @@ class EditProfileSection extends React.Component{
 							<div className="col-md-5">
 								<div className="mg-book-form-input">
 									<label>First Name</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<input  placeholder="first name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'first_name': this.refs.first_name.value})}}/>
-									</Validate>
+									<input  placeholder="first name" value={first_name} disabled={disabled} ref="first_name"type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'first_name': this.refs.first_name.value})}}/>
 								</div>
 							</div>
 							<div className="col-md-5">
 								<div className="mg-book-form-input">
 									<label>Last Name</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<input placeholder="last name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'last_name': this.refs.last_name.value})}}/>
-									</Validate>
+									<input placeholder="last name" value={last_name} disabled={disabled} ref="last_name" type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'last_name': this.refs.last_name.value})}}/>
 								</div>
 							</div>
 							<div className="col-md-1"> </div>
@@ -133,17 +134,13 @@ class EditProfileSection extends React.Component{
 							<div className="col-md-5">
 								<div className="mg-book-form-input">
 									<label>City</label>
-									<Validate>
-										<input value={city} placeholder="city"  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'city': this.refs.city.value})}}/>
-									</Validate>
+									<input value={city} placeholder="city"  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'city': this.refs.city.value})}}/>
 								</div>
 							</div>
 							<div className="col-md-5">
 								<div className="mg-book-form-input">
 									<label>Country</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<Country onChange={(val)=>{Actions.userInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
-									</Validate>
+									<Country onChange={(val)=>{Actions.userInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
 								</div>
 							</div>
 							<div className="col-md-1"> </div>
@@ -173,9 +170,7 @@ class EditProfileSection extends React.Component{
 							<div className="col-md-5">
 								<div className="mg-book-form-input">
 									<label>Password</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'password': this.refs.phone_number.value})}}/>
-									</Validate>
+									<input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={()=>{Actions.userInfoUpdated({'password': this.refs.password.value})}}/>
 								</div>
 							</div>
 							<div className="col-md-6"> </div>

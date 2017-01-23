@@ -9,6 +9,8 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
 
+import MDSpinner from "react-md-spinner";
+
 const MyAccountBody = function(props) {
     return (
         <div className="mg-about-features">
@@ -58,11 +60,14 @@ class MyAccountPage extends React.Component {
 const WithUserLoaded = withDataLoaded({
 		WithData: MyAccountPage,
 		WithoutData: () => (
-			<MyAccountBody >
-                <div className="load-spin">
-                    <SvgImage name="dark-sun"/> Loading
-                </div>
-			</MyAccountBody>
+		    <div>
+                <PageTitle parentClassName="mg-my-account-page-title-space parallax"/>
+		        <MyAccountBody >
+                    <div className="load-spin">
+                        <MDSpinner />
+                    </div>
+			    </MyAccountBody>
+            </div>
 		),
 		data: [
 			{

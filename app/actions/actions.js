@@ -99,7 +99,7 @@ const Actions = {
     },
 
     userInfoUpdated(data) {
-        return Dispatcher.dispatch({type: 'UserInfoUpdated', data});
+        return Dispatcher.dispatch({type: 'userInfoUpdated', data});
     },
 
     paymentInfoUpdated(data) {
