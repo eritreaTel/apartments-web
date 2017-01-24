@@ -11,11 +11,6 @@ const {assetPath} = require('../helpers/asset_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
 const FormValidator = require('../helpers/form_validation_helper');
 const DateHelper = require('../helpers/date_helper');
-
-const ValidationHelper = require('../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
 const Constants = require('../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -179,15 +174,11 @@ class FeedBackForm extends React.Component {
 				<h2 className="mg-sec-left-title">Leave a Reply</h2>
 				<div>
 					<label>Full Name</label><span className='required-input'> * </span>
-					<Validate validators={[ValidationHelper.isRequired]}>
-						<input value={full_name} disabled={disabled} ref='full_name' type="text" className="input-with-validation form-control"/>
-					</Validate>
+					<input value={full_name} disabled={disabled} ref='full_name' type="text" className="input-with-validation form-control"/>
 				</div>
 				<div>
 					<label>Email</label><span className='required-input'> * </span>
-					<Validate validators={[ValidationHelper.isRequired]}>
-						<input value={email} disabled={disabled} ref="email" type="email" className="input-with-validation form-control"/>
-					</Validate>
+					<input value={email} disabled={disabled} ref="email" type="email" className="input-with-validation form-control"/>
 				</div>
 				<div>
 					<label>Website</label>
@@ -195,9 +186,7 @@ class FeedBackForm extends React.Component {
 				</div>
 				<div>
 					<label>Comment</label><span className='required-input'> * </span>
-					<Validate validators={[ValidationHelper.isRequired]}>
-						<textarea disabled={disabled} ref="comment" className="input-with-validation form-control" rows="7"></textarea>
-					</Validate>
+					<textarea disabled={disabled} ref="comment" className="input-with-validation form-control" rows="7"></textarea>
 				</div>
 
 				<input disabled={disabled} onClick={this.onBlogFeedbackClicked.bind(this)} type="button" value="Post Comment" className="btn btn-dark-main"/>

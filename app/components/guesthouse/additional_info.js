@@ -7,12 +7,6 @@ const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
 const CurrencyFormatter = require('currency-formatter');
 const DatePicker = require('react-bootstrap-date-picker');
-
-const ValidationHelper = require('../../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
-
 import Checkbox from 'rc-checkbox';
 import TimeInput from 'react-time-input';
 
@@ -132,9 +126,7 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Airline Name</label><span className='required-input'> * </span>
-                                            <Validate validators={[ValidationHelper.isRequired]}>
-                                                <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
-                                            </Validate>
+                                            <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
                                         </div>
                                     </div>
                                 </div>
@@ -151,9 +143,7 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Arrival Time/24-hour clock</label><span className='required-input'> * </span>
-                                            <Validate validators={[ValidationHelper.isRequired]}>
-                                                <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
-                                            </Validate>
+                                            <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
                                         </div>
                                     </div>
                                 </div>

@@ -28,8 +28,8 @@ module.exports = {
                     store: {
                         user: null,
                         apartments : null,
-                        bestApartments : [],
-                        apartmentReviews : [],
+                        bestApartments : null,
+                        apartmentReviews : null,
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,
@@ -37,9 +37,12 @@ module.exports = {
                             additional  : {},
                             personal    : {},
                             payment     : {
-                                'payFull' : true,
-                                'payLater' : false,
-                                'payPartial' : false
+                                'payFull'    : true,
+                                'payLater'   : false,
+                                'payPartial' : false,
+                                'number'     : '',
+                                'exp_month'  : '',
+                                'exp_year'   : ''
                             },
                             confirmation : {}
                         },
@@ -56,12 +59,12 @@ module.exports = {
                                 'activeLink' : 'editProfile'
                             }
                         },
-                        blogs : [],
+                        blogs : null,
                         blog : null,
                         contactUs : null,
-                        blogComments : [],
-                        blogMetaData : [],
-                        recentNews : [],
+                        blogComments : null,
+                        blogMetaData : null,
+                        recentNews : null,
                         errors: [],
                         lastEvent: null,
                         locks: {},

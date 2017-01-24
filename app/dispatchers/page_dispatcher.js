@@ -126,6 +126,7 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
         let apartments = this.getStoreVal('apartments');
+        apartments = (apartments != null) ? apartments : [];
         let found = apartments && apartments.find(apt => apt.id == apartmentId);
         if (found == null) {
             apartments.push(apartment);

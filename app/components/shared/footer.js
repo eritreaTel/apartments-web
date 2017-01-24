@@ -3,12 +3,6 @@ const Header = require('../shared/header');
 const Anchor = require('../shared/anchor');
 const {assetPath} = require('../../helpers/asset_helper');
 const Actions = require('../../actions/actions');
-
-const ValidationHelper = require('../../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     	= ReactValiation.Validate;
-const ErrorMessage 	= ReactValiation.ErrorMessage;
-const ValidateGroup = ReactValiation.ValidateGroup;
 const Constants = require('../../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -141,21 +135,19 @@ class NewsLetterSubscription extends React.Component {
         let buttonClassname  = (isProcessing.newsLetterSubscription == true) ? 'btn btn-main disabled' : 'btn btn-main';
 
         return (
-            <ValidateGroup>
-                <NotificationContainer/>
-                <div className="col-md-3 col-sm-6">
-                    <div className="widget">
-                        <h2 className="mg-widget-title">Newsletter</h2>
-                        <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
-                        <Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
+                <div>
+                    <NotificationContainer/>
+                    <div className="col-md-3 col-sm-6">
+                        <div className="widget">
+                            <h2 className="mg-widget-title">Newsletter</h2>
+                            <p>Keep informed about Uganda and get latest news. We will give you tourism information</p>
                             <input tabIndex="100" ref="subscription_email" type="email" className="form-control" disabled={disableInput} placeholder="Your Email"/>
-                        </Validate>
-                        <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className={buttonClassname} value="Subscribe"/>
-                        <MDSpinner className={spinnerClassName} />
+                            <input onClick={() => {onNewsLetterSubscriptionClicked(this)}} ref="subscription_button" type="button" className={buttonClassname} value="Subscribe"/>
+                            <MDSpinner className={spinnerClassName} />
 
+                        </div>
                     </div>
                 </div>
-            </ValidateGroup>
         );
     }
 }

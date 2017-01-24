@@ -2,12 +2,6 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-
-const ValidationHelper = require('../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     	= ReactValiation.Validate;
-const ErrorMessage 	= ReactValiation.ErrorMessage;
-const ValidateGroup = ReactValiation.ValidateGroup;
 const Country = require('../components/shared/country');
 const Constants = require('../helpers/constants');
 
@@ -71,62 +65,56 @@ class SignInBody extends React.Component {
 
 		return (
 			<div className="mg-about-features">
-				<ValidateGroup>
-					<div className="container">
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4">
-								<div className="mg-book-form-input">
-									<label>Email Address</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-										<input disabled={disabled} tabIndex="1" ref='email' type="text" className="width-300 input-with-validation form-control" />
-									</Validate>
-								</div>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4">
+							<div className="mg-book-form-input">
+								<label>Email Address</label><span className='required-input'> * </span>
+								<input disabled={disabled} tabIndex="1" ref='email' type="text" className="width-300 input-with-validation form-control" />
 							</div>
-							<div className="col-md-4"> </div>
 						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4">
-								<div className="mg-book-form-input">
-									<label>Password</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<input disabled={disabled} tabIndex="2"  ref='password' onKeyPress = {this.handleKeyPress} type="password" className="width-300 input-with-validation form-control"/>
-									</Validate>
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row margin-bottom-20">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4">
-								<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="margin-left-190 primary-blue">forgot password</Anchor>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4">
-								<div className="mg-book-form-input">
-									<button  disabled={disabled}tabIndex="4" type="submit" onClick = {() => {authenticateUser(this)}} className="h4 width-300 btn btn-primary">Sign In</button>
-									<MDSpinner className={spinnerClassName} />
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4 h4"> Don't have an account <Anchor className="primary-blue" onClick = {this.goToSignUp.bind(this)}> Sign Up </Anchor></div>
-							<div className="col-md-4"> </div>
-						</div>
-
+						<div className="col-md-4"> </div>
 					</div>
-				</ValidateGroup>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4">
+							<div className="mg-book-form-input">
+								<label>Password</label><span className='required-input'> * </span>
+								<input disabled={disabled} tabIndex="2"  ref='password' onKeyPress = {this.handleKeyPress} type="password" className="width-300 input-with-validation form-control"/>
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row margin-bottom-20">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4">
+							<Anchor tabIndex="3" onClick = {() => {Actions.setRoute('/reset-password')}} className="margin-left-190 primary-blue">forgot password</Anchor>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4">
+							<div className="mg-book-form-input">
+								<button  disabled={disabled}tabIndex="4" type="submit" onClick = {() => {authenticateUser(this)}} className="h4 width-300 btn btn-primary">Sign In</button>
+								<MDSpinner className={spinnerClassName} />
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4 h4"> Don't have an account <Anchor className="primary-blue" onClick = {this.goToSignUp.bind(this)}> Sign Up </Anchor></div>
+						<div className="col-md-4"> </div>
+					</div>
+
+				</div>
 			</div>
 		);
 	}

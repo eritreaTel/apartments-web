@@ -5,6 +5,8 @@ const Amenities = require('./amenties');
 const Actions = require('../../actions/actions');
 const ActionWithLoading = require('../shared/action_with_loading');
 const {assetPath} = require('../../helpers/asset_helper');
+const CurrencyFormatter = require('currency-formatter');
+const PricingHelper = require('../../helpers/pricing_helper');
 
 
 const onBookNowClicked = function (apartmentId) {
@@ -16,6 +18,10 @@ class ApartmentAvailable extends React.Component {
 
     render() {
         const {apartment } = this.props;
+        let totalApartmentPrice  = PricingHelper.getTotalPrice(apartment, null);
+        let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
+        let totalPriceDecimalPart = parseFloat(totalApartmentPrice % 1).toFixed(2).toString().substr(1, 3); // Take .00 instead of 0.00
+
 
         return (
             <div className="mg-avl-room">
@@ -24,7 +30,7 @@ class ApartmentAvailable extends React.Component {
                         <Anchor><img src = {assetPath(apartment.best_photo)} alt="" className="img-responsive"/></Anchor>
                     </div>
                     <div className="col-sm-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}>{apartment.title}</Anchor> <span>{ApplicationHelper.formatCurrency(apartment.price_per_day)}<sup>.99</sup>/Night</span></h3>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}>{apartment.title}</Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/Total</span></h3>
                         <p>{apartment.medium_description}</p>
                         <Amenities amentiesToDisplay="6" amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 

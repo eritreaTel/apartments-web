@@ -2,11 +2,6 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
-
-const ValidationHelper = require('../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../helpers/form_validation_helper');
 const Constants = require('../helpers/constants');
 
@@ -56,9 +51,7 @@ class ResetPasswordBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Email Address</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input disabled={disabled} ref='email' type="text" className="input-with-validation form-control" />
-								</Validate>
+								<input disabled={disabled} ref='email' type="text" className="input-with-validation form-control" />
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -124,9 +117,7 @@ class EnterCodeBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Enter Code</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input disabled={disabled} ref='code' type="code" className="input-with-validation form-control"/>
-								</Validate>
+								<input disabled={disabled} ref='code' type="code" className="input-with-validation form-control"/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -220,9 +211,7 @@ class UpdatePasswordBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Password</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
-								</Validate>
+								<input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>
@@ -233,9 +222,7 @@ class UpdatePasswordBody extends React.Component {
 						<div className="col-md-3">
 							<div className="mg-book-form-input">
 								<label>Confirm Password</label><span className='required-input'> * </span>
-								<Validate validators={[ValidationHelper.isRequired]}>
-									<input disabled={disabled} ref='confirm_password' type="password" className="input-with-validation form-control"/>
-								</Validate>
+								<input disabled={disabled} ref='confirm_password' type="password" className="input-with-validation form-control"/>
 							</div>
 						</div>
 						<div className="col-md-4"> </div>

@@ -1,11 +1,6 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 const Actions = require('../actions/actions');
-
-const ValidationHelper = require('../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../helpers/form_validation_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
 const Constants = require('../helpers/constants');
@@ -51,17 +46,33 @@ const submitContactUsForm = function (e) {
 
 class ContactUsForm extends React.Component {
 
+	componentWillMount() {
+		Actions.getAuthenticatedUser();
+	}
+
+	componentDidMount() {
+		const loggedIn = (!!CookiesHelper.getSessionCookie());
+		if (loggedIn) {
+			this.refs.subject.focus();
+		} else {
+			this.refs.full_name.focus();
+		}
+	}
+
 	render() {
 		let {user, isProcessing : {creatingContactUs}} = this.props;
 		const loggedIn = (!!CookiesHelper.getSessionCookie());
 		let full_name = undefined, email = undefined;
+		let disabled = creatingContactUs;
+		let disabledExistingFields = creatingContactUs;
 
 		if (loggedIn && user) {
 			full_name = user.first_name + ' ' + user.last_name;
 			email = user.email;
+			disabledExistingFields = true;
 		}
 
-		let disabled = creatingContactUs;
+
 		let spinnerClassName = creatingContactUs ? 'margin-right-20' : 'hide margin-right-20';
 
 		return (
@@ -71,27 +82,19 @@ class ContactUsForm extends React.Component {
 						<h2 className="mg-sec-left-title">Send an E-mail</h2>
 						<div className="mg-contact-form-input">
 							<label htmlFor="full-name">Full Name</label><span className='required-input'> * </span>
-							<Validate validators={[ValidationHelper.isRequired]}>
-								<input disabled={disabled} value={full_name} ref='full_name' type="text" className="input-with-validation form-control" />
-							</Validate>
+							<input disabled={disabledExistingFields} value={full_name} ref='full_name' type="text" className="input-with-validation form-control" />
 						</div>
 						<div className="mg-contact-form-input">
 							<label htmlFor="email">E-mail</label><span className='required-input'> * </span>
-							<Validate validators={[ValidationHelper.isRequired]}>
-								<input disabled={disabled} value={email} type="text" className="input-with-validation form-control" ref="email"/>
-							</Validate>
+							<input disabled={disabledExistingFields} value={email} type="text" className="input-with-validation form-control" ref="email"/>
 						</div>
 						<div className="mg-contact-form-input">
 							<label htmlFor="subject">Subject</label><span className='required-input'> * </span>
-							<Validate validators={[ValidationHelper.isRequired]}>
-								<input disabled={disabled} type="text" className="input-with-validation form-control" ref="subject"/>
-							</Validate>
+							<input disabled={disabled} type="text" className="input-with-validation form-control" ref="subject"/>
 						</div>
 						<div className="mg-contact-form-input">
 							<label htmlFor="subject">Message</label><span className='required-input'> * </span>
-							<Validate validators={[ValidationHelper.isRequired]}>
-								<textarea disabled={disabled} className="input-with-validation form-control" ref="message" rows="5"></textarea>
-							</Validate>
+							<textarea disabled={disabled} className="input-with-validation form-control" ref="message" rows="5"></textarea>
 						</div>
 						<div className="pull-right">
 							<MDSpinner className={spinnerClassName} />

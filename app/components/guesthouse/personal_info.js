@@ -133,21 +133,21 @@ class PersonalInfo extends React.Component {
         let isProcessing = {processingPayment: false};
 
         if (response.error) {
+            Actions.setIsProcessing(isProcessing);
             NotificationManager.error(response.error.message, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
             this.refs[response.error.param] && this.refs[response.error.param].focus();
             this.refs[response.error.param] && this.refs[response.error.param].select();
-            Actions.setIsProcessing(isProcessing);
         } else {
             var stripe_token = response.id;
             let bookingPromise = Actions.createApartmentBooking({stripe_token});
             bookingPromise.then(bookingResponse => {
                 Actions.setIsProcessing(isProcessing);
-            if (response.status == 'fail') {
-                NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
-            }     else {
-                Actions.goToConfirmationClicked()
-            }
-        });
+                if (response.status == 'fail') {
+                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
+                }     else {
+                    Actions.goToConfirmationClicked()
+                }
+            });
         }
     }
 
@@ -228,15 +228,15 @@ class PersonalInfo extends React.Component {
 
                             <div className="row">
                                 <div className="col-md-3">
-                                    <input type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
+                                    <input disabled={disabled} type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
                                 </div>
                                 <div className="col-md-3">
                                     <div className="mg-book-form-input">
-                                        <input type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later.
+                                        <input disabled={disabled} type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later.
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <input type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm your reservation.
+                                    <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm your reservation.
                                 </div>
                             </div>
                             <div className="row">

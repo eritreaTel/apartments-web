@@ -18,10 +18,10 @@ class HeaderBar extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let myAccount = <li  className={ page == 'my-account' ? 'active dropdown' : 'dropdown'}>
-                            <Anchor onClick={() => {Actions.setRoute('/my-account')}} className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span className="caret"></span></Anchor>
+                            <Anchor className="dropdown-toggle" onClick={() => {}} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span className="caret"></span></Anchor>
                                 <ul className="dropdown-menu">
-                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'booking'})}}>Bookings</Anchor></li>
-                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'})}}>Edit Profile</Anchor></li>
+                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'booking'}); Actions.setRoute('/my-account');}}>Bookings</Anchor></li>
+                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'}); Actions.setRoute('/my-account');}}>Edit Profile</Anchor></li>
                                     <li><Anchor onClick={() => {logOut()}}>Log Out</Anchor></li>
                                 </ul>
                         </li>;

@@ -9,11 +9,7 @@ const withDataLoaded = require('../components/with_data_loaded')
 const {assetPath} = require('../helpers/asset_helper');
 const GalleryHelper=  require('../helpers/gallery_helper');
 const DateHelper = require('../helpers/date_helper');
-
-const ValidationHelper = require('../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
+const CookiesHelper  = require('../helpers/cookies_helper');
 
 import MDSpinner from "react-md-spinner";
 import ReactDOM from 'react-dom';
@@ -177,6 +173,10 @@ class ApartmentReviewForm extends React.Component {
 		};
 	}
 
+	componentWillMount() {
+		Actions.getAuthenticatedUser();
+	}
+
 	onLocationStarClick(nextValue, prevValue, name) {
 		if (name =='location_rating') {
 			this.setState({location_rating: nextValue});
@@ -190,19 +190,22 @@ class ApartmentReviewForm extends React.Component {
 	}
 
 	render() {
+		const loggedIn = (!!CookiesHelper.getSessionCookie());
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
 		let {apartment, user, isProcessing} = this.props;
 		let apartment_id = apartment.id;
-		let user_id = null; let email = undefined;
-		if (user) {
+		let user_id = null, email = undefined, full_name = undefined;
+		if (loggedIn && user) {
 			user_id = user.id;
 			email = user.email;
+			full_name = user.first_name + ' ' + user.last_name;
+
 		}
 		let ratingInfo = {location_rating, comfort_rating, price_rating, quality_rating, apartment_id, user_id};
 
 		let spinnerClassName = (isProcessing.reviewAnApartment == true) ? 'margin-left-20' : 'margin-left-20 hide';
 		let disableInput   		= (isProcessing.reviewAnApartment == true ) ? true : false;
-		let disableEmailInput   = (isProcessing.reviewAnApartment == true || email != undefined ) ? true : false;
+		let disableExistingInput = isProcessing.reviewAnApartment == true || loggedIn;
 		let buttonClassname  	= (isProcessing.reviewAnApartment == true) ? 'btn btn-dark pull-left disabled' : 'btn btn-dark pull-left';
 		let editStars 			= (isProcessing.reviewAnApartment == true) ? false : true;
 
@@ -234,19 +237,15 @@ class ApartmentReviewForm extends React.Component {
 
 				<div className="row">
 					<div className="col-md-6">
-					<Validate validators={[ValidationHelper.isRequired]}>
-						<input ref='full_name' type="text" className="input-with-validation form-control" disabled={disableInput} placeholder="Your Name *"/>
-					</Validate>
+						<input ref='full_name' value={full_name} type="text" className="input-with-validation form-control" disabled={disableExistingInput} placeholder="Your Name *"/>
 					</div>
 					<div className="col-md-6">
-						<Validate validators={[ValidationHelper.isRequired]}>
-							<input ref='email' type="text" value={email} className="input-with-validation form-control" disabled={disableEmailInput} placeholder="Your Email *"/>
-						</Validate>
+						<input ref='email' type="text" value={email} className="input-with-validation form-control" disabled={disableExistingInput} placeholder="Your Email *"/>
 					</div>
 				</div>
-				<Validate validators={[ValidationHelper.isRequired]}>
-					<textarea ref='comment' className="input-with-validation form-control" disabled={disableInput} placeholder="Your Comment *" rows="5"></textarea>
-				</Validate>
+
+				<textarea ref='comment' className="input-with-validation form-control" disabled={disableInput} placeholder="Your Comment *" rows="5"></textarea>
+
 				<input onClick={() => {onReviewApartmentClicked(this, ratingInfo)}} type="submit" value="Submit Review" className={buttonClassname}/>
 				<MDSpinner ref='footer_spinner' className={spinnerClassName} />
 			</div>
@@ -314,7 +313,6 @@ class ApartmentPage extends React.Component {
 	componentWillMount() {
 		const {store : {apartment}} = this.props;
 		let apartmentId = apartment.id;
-		Actions.getApartmentReviews({apartmentId})
 		Actions.getAuthenticatedUser();
 	}
 
@@ -353,6 +351,12 @@ const WithUserLoaded = withDataLoaded({
 			storeKeys: ['apartment'],
 			loadDataFn: ({view : {apartmentId}}) => Actions.getApartment({apartmentId}),
 			alwaysLoad : true
+		},
+		{
+			storeKeys: ['apartmentReviews'],
+			loadDataFn: ({view : {apartmentId}}) => Actions.getApartmentReviews({apartmentId}),
+			alwaysLoad : true,
+			checkDataFn: ({apartmentReviews}) => apartmentReviews != null
 		}
 	]
 });

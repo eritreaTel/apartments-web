@@ -8,10 +8,6 @@ const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
 const PricingHelper  = require('../../helpers/pricing_helper');
 
-const ValidationHelper = require('../../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
 const FormValidator = require('../../helpers/form_validation_helper');
 const CurrencyFormatter = require('currency-formatter');
 const Constants = require('../../helpers/constants');
@@ -157,17 +153,13 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>First Name</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input disabled={disabled} value={first_name} type="text" ref='first_name' className="input-with-validation form-control"/>
-                                                      </Validate>
+                                                      <input disabled={disabled} value={first_name} type="text" ref='first_name' className="input-with-validation form-control"/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Last Name</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input disabled={disabled} value={last_name} type="text" ref='last_name' className="input-with-validation form-control"/>
-                                                      </Validate>
+                                                      <input disabled={disabled} value={last_name} type="text" ref='last_name' className="input-with-validation form-control"/>
                                                 </div>
                                           </div>
                                     </div>
@@ -175,9 +167,7 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Zip/Post Code</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input disabled={disabled} value={zip} type="text" ref='zip' className="input-with-validation form-control"/>
-                                                      </Validate>
+                                                      <input disabled={disabled} value={zip} type="text" ref='zip' className="input-with-validation form-control"/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
@@ -206,17 +196,13 @@ class PaymentInfo extends React.Component {
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>Card Number</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control"/>
-                                                      </Validate>
+                                                      <input disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control"/>
                                                 </div>
                                           </div>
                                           <div className="col-md-6">
                                                 <div className="mg-book-form-input">
                                                       <label>CVV</label><span className='required-input'> * </span>
-                                                      <Validate validators={[ValidationHelper.isRequired]}>
-                                                            <input disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control"/>
-                                                      </Validate>
+                                                      <input disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control"/>
                                                 </div>
                                           </div>
                                     </div>
