@@ -94,6 +94,18 @@ module.exports = {
         return existing;
     },
 
+    async seekerUserInfoUpdated(data){
+        let userServices = this.getStoreVal('userServices');
+        let existing = userServices.seekerUser;
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('userServices', {seekerUser: existing});
+        return existing;
+    },
+
     searchApartmentsClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'search'});
     },

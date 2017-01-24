@@ -9,21 +9,13 @@ import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const BookingSection = function (props) {
+	let className = props.activeLink == 'booking' ? "tab-pane fade in active" : "tab-pane fade";
 	return(
-		<div role="tabpanel" className="tab-pane fade in active" id="home3">
+		<div role="tabpanel" className={className} id="home3">
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deteriora bonis attingere optimus libero iam naturae graecam. Ceterorum vult ita populo augeri doceat probaretur ullo existimo incorruptis, reperietur assidua excepturi manum consule delectari, eumque sapientia arbitraretur muniti, contenta perveniri perinde satisfacit, ferri, contemnere parum seditione id, depravare futuros.</p>
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Privavisse percurri eximiae liberiusque audiam ipsius certae difficilius angore, numquid familiaritatem pedalis inflammat, gloriae sentiri triarius stoicos efficit poterimus, reformidans dubitemus, torquatum gratia calere legerint quos distinguique. Amici difficilem philosophis recta vero reliquerunt nostrum geometrica, discordia, iustius reformidans legendum crudeli, ornamenta hoc hominem unam aiebat metu. Correcta. Huius elaboraret optabilem legendam admodum, meminit sententia chremes, ille, utraque philosophorum morati disputari ferentur videantur sola quin primus ut, quale retinere memoriter susceperant. Earum errorem.</p>
 		</div>
 	);
-}
-
-const DealsSection = function () {
-	return (
-		<div role="tabpanel" className="tab-pane fade" id="profile3">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proprius, oblivione commodi. Utriusque invenire, re beatae videro amicorum rationis inhumanus metuamus reliquisti epularum tempus. Pertinaces atque inveniri quorum efficeret statua audivi, dolere opus soluta concordia placuit metuque veritatis stultorum ita.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nascuntur eligendi morbis fuisse accusantibus. Dissentientium vera quadam delectu illa, comit hostem illas complectitur coniunctione poetis degendae caeco antiquis, vos, persecuti idem verbum nimis, veserim approbantibus acuti variis malo. Tantalo fecerit gessisse docti eiusdem gloriatur loqueretur igitur, subtilius. Huc. Pugnare exaudita inprobitatem comprehenderit cernimus inertissimae solitudo caeco sibi timiditatem, praeterierunt forte variari persequeretur tranquilli tite provincias inducitur, iustioribus viderer praebeat, huic molestiam intellegimus sitne populo, satisfacit expetendis principes noctesque emolumento regione, approbantibus.</p>
-		</div>
-	)
 }
 
 class EditProfileSection extends React.Component{
@@ -88,16 +80,10 @@ class EditProfileSection extends React.Component{
 	}
 
 	render() {
-		const {user, userServices, isProcessing : {updatingUser}} = this.props;
+		const {user, userServices, isProcessing : {updatingUser}, activeLink} = this.props;
 		let updateUserInfo = userServices.updateUserInfo ? userServices.updateUserInfo : {};
 
-		console.log('in render');
-		console.log(updateUserInfo);
-
 		let first_name          = updateUserInfo.first_name;
-
-		console.log('first_name is ' + first_name);
-
 		let last_name           = updateUserInfo.last_name;
 		let city                = updateUserInfo.city;
 		let country             = updateUserInfo.country;
@@ -106,10 +92,11 @@ class EditProfileSection extends React.Component{
 		let showPasswordCss     = will_reset_password == true ? 'row show' : 'row hide';
 
 		let spinnerClassName = (updatingUser == true) ? 'show' : 'hide';
-		let disabled = updatingUser;
+		let className = activeLink == 'editProfile' ? "tab-pane fade in active" : "tab-pane fade";
+		let disabled  = updatingUser;
 
 		return (
-			<div role="tabpanel" className="tab-pane fade" id="messages3">
+			<div role="tabpanel" className={className} id="messages3">
 				<div className="row">
 					<div className="col-md-12">
 						<div className="row">
@@ -204,28 +191,21 @@ const TravelGuides = function () {
 class Seeker extends React.Component {
 	render() {
 			const {user, userServices ,isProcessing} = this.props;
+			let activeLink = userServices.seekerUser.activeLink;
 			return (
 				<div className="mg-tab-left-nav">
 					<ul className="nav nav-tabs nav-justified" role="tablist">
-						<li role="presentation" className="active">
+						<li role="presentation" className={activeLink == 'booking'? 'active' : ''}>
 							<a href="#home3" aria-controls="home3" role="tab" data-toggle="tab"><i className="fa fa-home"></i> Bookings</a>
 						</li>
-						<li role="presentation">
-							<a href="#profile3" aria-controls="profile3" role="tab" data-toggle="tab"><i className="fa fa-user"></i> Deals</a>
-						</li>
-						<li role="presentation">
+						<li role="presentation" className={activeLink == 'editProfile'? 'active' : ''}>
 							<a href="#messages3" aria-controls="messages3" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Edit Profile</a>
-						</li>
-						<li role="presentation">
-							<a href="#settings3" aria-controls="settings3" role="tab" data-toggle="tab"><i className="fa fa-cogs"></i> Travel Guides</a>
 						</li>
 					</ul>
 
 					<div className="tab-content">
-						<BookingSection />
-						<DealsSection />
-						<EditProfileSection user={user} userServices={userServices} isProcessing={isProcessing} />
-						<TravelGuides />
+						<BookingSection activeLink={activeLink} />
+						<EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
 					</div>
 				</div>
 			);
