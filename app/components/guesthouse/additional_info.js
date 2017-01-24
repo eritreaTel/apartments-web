@@ -27,6 +27,14 @@ function onArrivalDateFocused(focused) {
 }
 
 class AdditionalInfo extends React.Component {
+
+    componentWillMount() {
+        const {bookingStage : {searchInfo, additional}} = this.props;
+        if (additional.arrival_date == undefined) {
+            Actions.additionalServicesUpdated({'arrival_date': searchInfo.checkInDate});
+        }
+    }
+
     onReserveCarPickUpCheckBoxChanged(e) {
         Actions.additionalServicesUpdated({'airport_pickup' : e.target.checked});
         this.refs.airline_name.focus();
@@ -83,7 +91,7 @@ class AdditionalInfo extends React.Component {
         let {additional, searchInfo} = bookingStage;
         let arrival_time = undefined, airline_name = undefined;
         let airportPickup = 0, carRentals = 0, tourGuides = 0, arrivalDateFocused = false;
-        let arrival_date = searchInfo.checkInDate
+        let arrival_date = searchInfo.checkInDate;
 
         if (additional) {
             arrival_date  = additional.arrival_date ? additional.arrival_date : arrival_date;

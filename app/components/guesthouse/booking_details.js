@@ -18,7 +18,10 @@ class BookingDetails extends React.Component {
 
         let airPortPickUpLabel = "No. You are on your own.";
         if (airportPickup) {
-            airPortPickUpLabel = 'On ' + DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY') + ' at ' + additional.arrival_time;
+            airPortPickUpLabel = 'On ' + DateHelper.formatDate(additional.arrival_date, 'D MMM, YYYY') ;
+            if (additional.arrival_time) {
+                airPortPickUpLabel  = airPortPickUpLabel + ' at ' + additional.arrival_time;
+            }
         }
 
 

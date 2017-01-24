@@ -126,10 +126,6 @@ const Actions = {
         Dispatcher.dispatch({type: 'goToPersonalInfoClicked'});
     },
 
-    goToPaymentClicked() {
-        Dispatcher.dispatch({type: 'goToPaymentClicked'});
-    },
-
     goToConfirmationClicked() {
         Dispatcher.dispatch({type: 'goToConfirmationClicked'});
     },

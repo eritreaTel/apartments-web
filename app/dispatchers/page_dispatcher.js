@@ -126,10 +126,6 @@ module.exports = {
         this.setStoreVal('apartment', apartment);
     },
 
-    goToPaymentClicked() {
-        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
-    },
-
     goToPersonalInfoClicked() {
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
     },
@@ -160,10 +156,6 @@ module.exports = {
 
     goBackToPersonal() {
         this.mergeStoreVal('bookingStage', {activeStage: 'personal'});
-    },
-
-    goBackToPayment() {
-        this.mergeStoreVal('bookingStage', {activeStage: 'payment'});
     },
 
     setIsProcessing(data) {
