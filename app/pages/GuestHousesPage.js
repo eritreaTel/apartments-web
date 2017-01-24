@@ -149,7 +149,8 @@ const WithUserLoaded = withDataLoaded({
                         Actions.persistSearchInfo(searchInfo);
                     }
                     Actions.getApartments(searchInfo);
-                }
+                },
+                checkDataFn: ({apartments}) => apartments != null
             }
         ]
 });

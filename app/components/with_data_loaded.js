@@ -4,7 +4,7 @@ const _ = require('lodash');
 function withDataLoaded({WithData, WithoutData = null, data}) {
   function storeHasKeys(store, storeKeys) {
     return storeKeys.every((key) => {
-      return Array.isArray(store[key]) ? store[key].length > 0 : !!store[key];
+      return Array.isArray(store[key]) ? store[key] != null : !!store[key];
     });
   }
 

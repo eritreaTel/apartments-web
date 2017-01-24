@@ -59,7 +59,7 @@ module.exports = {
         }
 
         url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&pageNumber=' + pageNumber;
-        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments').length == 0 ) {
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments') == null ) {
             console.log('apartment url : ' + url);
             this.setStoreVal('requestUrl', url);
 
