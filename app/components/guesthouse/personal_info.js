@@ -100,14 +100,14 @@ class PersonalInfo extends React.Component {
         if (loggedIn) {
             this.makeStripePayment(payment);
         } else {
-            const createUserPromise = Actions.createUser(personal);
+            const createUserPromise = Actions.createUser({... personal, type :'seeker', 'is_active' : 1});
             createUserPromise.then(response => {
                 if (response.status == 'fail') {
                     NotificationManager.error(response.error, 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
                 } else {
                     let credentials = {
-                        email : info.email,
-                        password : info.password
+                        email : personal.email,
+                        password : personal.password
                     }
 
                     Actions.logIn(credentials);
