@@ -81,20 +81,16 @@ class ContactUsForm extends React.Component {
 					<div className="col-md-5">
 						<h2 className="mg-sec-left-title">Send an E-mail</h2>
 						<div className="mg-contact-form-input">
-							<label htmlFor="full-name">Full Name</label><span className='required-input'> * </span>
-							<input disabled={disabledExistingFields} value={full_name} ref='full_name' type="text" className="input-with-validation form-control" />
+							<input placeholder="Full Name" disabled={disabledExistingFields} value={full_name} ref='full_name' type="text" className="input-with-validation form-control" />
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="email">E-mail</label><span className='required-input'> * </span>
-							<input disabled={disabledExistingFields} value={email} type="text" className="input-with-validation form-control" ref="email"/>
+							<input placeholder="E-mail" disabled={disabledExistingFields} value={email} type="text" className="input-with-validation form-control" ref="email"/>
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="subject">Subject</label><span className='required-input'> * </span>
-							<input disabled={disabled} type="text" className="input-with-validation form-control" ref="subject"/>
+							<input placeholder="Subject" disabled={disabled} type="text" className="input-with-validation form-control" ref="subject"/>
 						</div>
 						<div className="mg-contact-form-input">
-							<label htmlFor="subject">Message</label><span className='required-input'> * </span>
-							<textarea disabled={disabled} className="input-with-validation form-control" ref="message" rows="5"></textarea>
+							<textarea placeholder="Message" disabled={disabled} className="input-with-validation form-control" ref="message" rows="5"></textarea>
 						</div>
 						<div className="pull-right">
 							<MDSpinner className={spinnerClassName} />
