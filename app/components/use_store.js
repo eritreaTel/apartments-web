@@ -34,10 +34,14 @@ module.exports = {
                         bookingStage : {
                             activeStage : null,
                             searchInfo  : null,
-                            additional  : null,
-                            personal    : null,
-                            payment     : null,
-                            confirmation : null
+                            additional  : {},
+                            personal    : {},
+                            payment     : {
+                                'payFull' : true,
+                                'payLater' : false,
+                                'payPartial' : false
+                            },
+                            confirmation : {}
                         },
                         resetPassword: {
                             stage: null,
@@ -66,7 +70,6 @@ module.exports = {
                             'newsLetterSubscription' : false,
                             'reviewAnApartment' : false,
                             'processingPayment' : false,
-                            'processingPersonalInfo' : false,
                             'creatingContactUs' : false,
                             'creatingBlogComment' : false,
                             'authenticatingUser' : false,

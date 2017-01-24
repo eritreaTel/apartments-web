@@ -10,19 +10,13 @@ const ApartmentHelper = {
             additional = 'mg-step-done';
             searching = 'mg-step-done';
             personal = 'active';
-        } else if (activeStage == 'payment') {
-            additional = 'mg-step-done';
-            searching = 'mg-step-done';
-            personal = 'mg-step-done';
-            payment='active';
         } else if (activeStage == 'confirmation') {
             additional = 'mg-step-done';
             searching = 'mg-step-done';
             personal = 'mg-step-done';
-            payment='mg-step-done';
             confirmation ='mg-step-done';
         }
-        return {searching, additional, personal, payment, confirmation};
+        return {searching, additional, personal, confirmation};
     },
 
   getCategories(blogMetadatas) {

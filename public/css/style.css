@@ -2961,7 +2961,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   background-color: #f2f2f2;
 }
 .mg-booking-form .nav-tabs > li {
-  width: 20%;
+  width: 25%;
   text-align: center;
 }
 .mg-booking-form .nav-tabs > li > a {
@@ -4524,4 +4524,8 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   background-image: url(../images/page-title.png);
   color: #fff;
   text-align: center;
+}
+
+.mg-book-form-input-payment {
+  min-height: 70px;
 }

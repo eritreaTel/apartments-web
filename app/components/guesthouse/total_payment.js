@@ -11,7 +11,7 @@ class  TotalPayment extends React.Component {
 
         let totalAmount, partialPay, currentPayment = 0, remainingAmount = 0, partialPayCss='mg-cart-total hide';
         totalAmount = PricingHelper.getTotalPrice(apartment, additional);
-        partialPay = (payment && payment.payment_amount && payment.payment_amount != totalAmount ) ? true : false;
+        partialPay = (payment && payment.payment_amount != undefined && payment.payment_amount != totalAmount ) ? true : false;
 
         if (partialPay) {
             currentPayment  = PricingHelper.getCurrentPayment(totalAmount, payment.payment_amount);
@@ -27,19 +27,19 @@ class  TotalPayment extends React.Component {
 
         return (
             <div className="margin-top-30">
-                <div className="mg-cart-total">
-                    <strong>Total Amount: </strong>
-                    <span>{totalAmount}</span>
-                </div>
                 <div className={partialPayCss}>
                     <strong>{currentPayCaption}: </strong>
                     <span>{currentPayment}</span>
                 </div>
-
-        <div className={partialPayCss}>
-            <strong>Remaining: </strong>
-        <span>{remainingAmount}</span>
-        </div>
+                <div className={partialPayCss}>
+                    <strong>Remaining: </strong>
+                    <span>{remainingAmount}</span>
+                </div>
+                <div className="mg-widget-cart-row"> </div>
+                <div className="mg-cart-total">
+                    <strong>Total Amount: </strong>
+                    <span>{totalAmount}</span>
+                </div>
             </div>
         );
     }

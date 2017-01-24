@@ -16,7 +16,7 @@ import MDSpinner from "react-md-spinner";
 
 
 const BookingStaging = function(props) {
-    let {searching, additional, personal, payment, confirmation} = ApartmentHelper.getReservationStatuses(props.activeStage);
+    let {searching, additional, personal, confirmation} = ApartmentHelper.getReservationStatuses(props.activeStage);
 
     return(
         <ul className="nav nav-tabs" role="tablist">
@@ -29,12 +29,9 @@ const BookingStaging = function(props) {
             </li>
 
             <li role="presentation" className={personal}>
-                <Anchor className="inactiveLink" aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Personal Info</Anchor>
+                <Anchor className="inactiveLink" aria-controls="personal-info" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">3</span><span className="mg-bs-bar"></span>Make Reservation</Anchor>
             </li>
 
-            <li role="presentation" className={payment}>
-                <Anchor className="inactiveLink" aria-controls="payment" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">4</span><span className="mg-bs-bar"></span>Payment</Anchor>
-            </li>
             <li role="presentation" className={confirmation}>
                 <Anchor className="inactiveLink" aria-controls="thank-you" role="tab" data-toggle="tab"><span className="mg-bs-tab-num">5</span>Confirmation</Anchor>
             </li>

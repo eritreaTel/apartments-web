@@ -5,45 +5,101 @@ const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
-
-const ValidationHelper = require('../../helpers/validation_helper');
-const ReactValiation = require('react-validate');
-const Validate     = ReactValiation.Validate;
-const ErrorMessage = ReactValiation.ErrorMessage;
+const PricingHelper  = require('../../helpers/pricing_helper');
 const Constants = require('../../helpers/constants');
+const Month = require('../shared/month');
+const Year  = require('../shared/year');
+const CurrencyFormatter = require('currency-formatter');
 
 import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
+import CurrencyInput from 'react-currency-input';
 
-const goToPaymentInfoClicked = function (e) {
 
-    const loggedIn = (!!CookiesHelper.getSessionCookie());
-    let info = getPersonalInfo(e);
-    let personalPromise = Actions.personalInfoUpdated(info);
+const goBackToAdditionalInfo = function (e) {
+    Actions.goBackToAdditional();
+}
 
-    personalPromise.then(personal => {
+function onTermsCheckBoxChanged(e, checked) {
+    Actions.personalInfoUpdated({'terms' : e.target.checked});
+}
+
+class PersonalInfo extends React.Component {
+
+    componentDidMount() {
+        Stripe.setPublishableKey('pk_test_xNk89utQrNjwzmaqOLlteVnz');
+        window.scrollTo(0, 20);
+        this.refs.first_name.focus();
+    }
+
+    componentWillMount() {
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        const {user, apartment, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
+
+        if (payment == null || (payment && payment.payment_amount == undefined)) {
+            Actions.paymentInfoUpdated({'payment_amount' : payment_amount});
+        }
+
         if (loggedIn) {
-            Actions.goToPaymentClicked();
+            let personal = {
+                'first_name'  : user.first_name,
+                'last_name'   : user.last_name,
+                'city'        : user.city,
+                'phone_number': user.phone_number,
+                'email'       : user.email,
+                'country'     : user.country,
+                'terms'       : loggedIn
+            };
+            Actions.personalInfoUpdated(personal);
+        }
+    }
+
+    onPayLater(e) {
+        Actions.paymentInfoUpdated({'payLater' : e.target.checked, 'payFull' : false, 'payPartial' : false, 'payment_amount' : 0});
+    }
+
+    onPayFull(e) {
+        const {apartment, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
+        Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : e.target.checked, 'payPartial' : false, 'payment_amount' : payment_amount});
+    }
+
+    onPayPartial(e) {
+        const {apartment, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getMinimumPrice(apartment, additional);
+        Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : false, 'payPartial' : e.target.checked, 'payment_amount' : payment_amount});
+    }
+
+    processPayment() {
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        const {bookingStage: {personal, payment}} = this.props;
+        let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+            'country'   : "Please select your country", "terms"     : "Please accept terms and services",
+            'number'   : 'Please enter card number', 'cvc' : "Please enter cvc", 'exp_month' : "Please enter expiration month",
+            'exp_year' : 'Please enter expiration year'};
+
+        if (!loggedIn) {
+            requiredFields = {...requiredFields, 'password' :"Please enter password",'renter_password':"Please enter password",'email': "Please enter email"};
+        }
+
+        let result = FormValidator.validateRequiredDatas(this, {...personal, ...payment} , requiredFields, 'Booking - Personal Information');
+        if (result == false) {
+            return ;
+        }
+        if (!loggedIn && personal.renter_password != personal.password) {
+            NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
+            e.refs.password.focus();
             return;
+        }
+
+        let isProcessing = {processingPayment: true};
+        Actions.setIsProcessing(isProcessing);
+
+        if (loggedIn) {
+            this.makeStripePayment(payment);
         } else {
-            let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-                'country'    : "Please select your country", 'email' : "Please enter email", 'password'   : "Please enter password",
-                'renter_password' : "Please enter password", "terms" : "Please accept terms and services"};
-
-            let result = FormValidator.validateRequiredDatas(e, personal, requiredFields, 'Booking - Personal Information');
-            if (result == false) {
-                return ;
-            }
-            if (personal.renter_password != personal.password) {
-                NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
-                e.refs.password.focus();
-                return;
-            }
-
-            let isProcessing = {processingPersonalInfo: true};
-            Actions.setIsProcessing(isProcessing);
-
             const createUserPromise = Actions.createUser(personal);
             createUserPromise.then(response => {
                 if (response.status == 'fail') {
@@ -55,80 +111,61 @@ const goToPaymentInfoClicked = function (e) {
                     }
 
                     Actions.logIn(credentials);
-                    Actions.goToPaymentClicked();
+                    this.makeStripePayment(payment);
                 }
 
-                let isProcessing = {processingPersonalInfo: false};
+                let isProcessing = {processingPayment: false};
                 Actions.setIsProcessing(isProcessing);
             });
         }
-    });
-}
-
-const goBackToAdditionalInfo = function (e) {
-    let info = getPersonalInfo(e);
-    Actions.personalInfoUpdated(info);
-    Actions.goBackToAdditional();
-}
-
-function onTermsCheckBoxChanged(e, checked) {
-    Actions.personalInfoUpdated({'terms' : e.target.checked});
-}
-
-const getPersonalInfo = function (e) {
-    return {
-        'first_name' : e.refs.first_name.value,
-        'last_name'  : e.refs.last_name.value,
-        'city'  : e.refs.city.value,
-        'phone_number' : e.refs.phone_number.value,
-        'email' : e.refs.email.value,
-        'password' : e.refs.password.value,
-        'renter_password' : e.refs.renter_password.value,
-        'type' : 'seeker',
-        'is_active' : 1
     }
-}
 
-class PersonalInfo extends React.Component {
+    makeStripePayment(payment) {
+        Stripe.card.createToken({
+            number: payment.number,
+            cvc: payment.cvc,
+            exp_month: payment.exp_month,
+            exp_year: payment.exp_year
+        }, this.paymentProcessingIsDone.bind(this));
+    }
 
-    componentDidMount() {
-        window.scrollTo(0, 20);
-        this.refs.first_name.focus();
+    paymentProcessingIsDone(status, response) {
+        let isProcessing = {processingPayment: false};
+
+        if (response.error) {
+            NotificationManager.error(response.error.message, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
+            this.refs[response.error.param] && this.refs[response.error.param].focus();
+            this.refs[response.error.param] && this.refs[response.error.param].select();
+            Actions.setIsProcessing(isProcessing);
+        } else {
+            var stripe_token = response.id;
+            let bookingPromise = Actions.createApartmentBooking({stripe_token});
+            bookingPromise.then(bookingResponse => {
+                Actions.setIsProcessing(isProcessing);
+            if (response.status == 'fail') {
+                NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
+            }     else {
+                Actions.goToConfirmationClicked()
+            }
+        });
+        }
     }
 
     render() {
-        const {apartment, bookingStage, acceptToS, user, isProcessing :{processingPersonalInfo}} = this.props;
-        let personal = bookingStage ? bookingStage.personal : null;
+        const {apartment, bookingStage, acceptToS, user, isProcessing :{processingPayment}} = this.props;
+        let {personal, payment, additional} = bookingStage;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
-        let first_name = undefined, last_name = undefined, city = undefined , phone_number = undefined, email = undefined, terms = '';
-        let country = 'Select your country', termsDefaultChecked = 0 ;
-        let acceptTermsCss = 'clearfix mg-terms-input', passwordSectionClass ='row';
-        if (loggedIn) {
-            first_name      = user.first_name;
-            last_name       = user.last_name;
-            city            = user.city;
-            phone_number    = user.phone_number;
-            email           = user.email;
-            country         = user.country;
-            termsDefaultChecked = 1;
+        let {payLater, payFull, payPartial, number, exp_month, exp_year} = payment;
+        let {first_name,last_name, city, phone_number, email, terms}  = personal;
+        let country = personal && personal.country ? personal.country : 'Select your country';
 
-            acceptTermsCss = 'hide clearfix mg-terms-input';
-            passwordSectionClass = 'hide row';
+        let disabled  = processingPayment;
+        let spinnerClassName = processingPayment ? 'margin-right-20' : 'hide margin-right-20';
+        let acctounInfoClass = loggedIn ? 'hide' : 'show';
+        let acceptTermsCss = loggedIn? 'hide' : 'clearfix mg-terms-input';
 
-        } else if (personal) {
-            first_name      = personal.first_name;
-            last_name       = personal.last_name;
-            city            = personal.city;
-            phone_number    = personal.phone_number;
-            email           = personal.email;
-            termsDefaultChecked = (personal.terms == true) ? 1 : 0;
-            country = personal && personal.country ? personal.country : 'Select your country';
-        }
-
-        let disabled  = loggedIn || processingPersonalInfo;
-        let disableButton = processingPersonalInfo;
-        let spinnerClassName = processingPersonalInfo ? 'margin-right-20' : 'hide margin-right-20';
+        let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartment, additional), { code: 'USD' });
 
         return (
                 <div className="row">
@@ -137,89 +174,108 @@ class PersonalInfo extends React.Component {
                             <h2 className="mg-sec-left-title">Personal Info</h2>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>First Name</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <input placeholder="First Name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'first_name' : this.refs.first_name.value})}}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Last Name</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <input placeholder="Last Name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'last_name' : this.refs.last_name.value})}}/>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>City</label>
-                                        <Validate>
-                                            <input value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <input placeholder="City" value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'city' : this.refs.city.value})}} />
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Country</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <Country onChange={(val)=>{Actions.personalInfoUpdated({'country' : val.value})}} value={country} disabled={disabled} />
                                     </div>
                                 </div>
                             </div>
 
-                            <h2 className="mg-sec-left-title">Account Info</h2>
+                            <div className={acctounInfoClass}>
+                                <h2 className="mg-sec-left-title">Account Info</h2>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <input placeholder="Email" value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'email' : this.refs.email.value})}}/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <input placeholder="Phone Number" value={phone_number} disabled={disabled} ref='phone_number' type="tel" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'phone_number' : this.refs.phone_number.value})}}/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'password' : this.refs.password.value})}}/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <input placeholder="Re-enter password" disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'renter_password' : this.refs.renter_password.value})}}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 className="mg-sec-left-title">Card Details</h2>
+
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <input type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
+                                </div>
+                                <div className="col-md-3">
+                                    <div className="mg-book-form-input">
+                                        <input type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later.
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <input type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm your reservation.
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Email Address</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <input placeholder="Card Number" disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'number' : this.refs.number.value})}}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Phone</label>
-                                        <Validate>
-                                            <input value={phone_number} disabled={disabled} ref='phone_number' type="tel" className="input-with-validation form-control"/>
-                                        </Validate>
+                                    <div className="mg-book-form-input-payment">
+                                        <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <Month disabled={disabled} value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
+                                    </div>
+                                </div>
+                                <div className="col-md-6">
+                                    <div className="mg-book-form-input-payment">
+                                        <Year disabled={disabled} value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
                                     </div>
                                 </div>
                             </div>
-                            <div className={passwordSectionClass}>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Password</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disabled} ref='password' type="password" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input">
-                                        <label>Re-Password</label><span className='required-input'> * </span>
-                                        <Validate validators={[ValidationHelper.isRequired]}>
-                                            <input disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control"/>
-                                        </Validate>
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div className={acceptTermsCss}>
                                 <div className="pull-right">
-                                    <Checkbox defaultChecked={termsDefaultChecked}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
+                                    <Checkbox defaultChecked={terms}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
                                 </div>
                             </div>
                             <div className="pull-right">
                                 <MDSpinner className={spinnerClassName}  />
-                                <Anchor disabled={disableButton} onClick={() => {goToPaymentInfoClicked(this)}}  className="btn btn-dark-main btn-next-tab">Next</Anchor>
+                                <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Next</Anchor>
                             </div>
-                            <Anchor disabled={disableButton} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                            <Anchor disabled={disabled} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 
                         </div>
                     </div>
