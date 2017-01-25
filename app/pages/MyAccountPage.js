@@ -26,12 +26,19 @@ const MyAccountBody = function(props) {
 
 class MyAccountPage extends React.Component {
 
+    componentWillMount() {
+        const {store : {user}} = this.props;
+        if(user.type == 'seeker') {
+            Actions.getApartmentBookings({'userId' : user.id});
+        }
+    }
+
 	render() {
-        const {store : {user, userServices, isProcessing}} = this.props;
+        const {store : {user, userServices, isProcessing, apartmentBookings}} = this.props;
         let  dashboard;
         switch (user.type) {
             case 'seeker':
-                dashboard =   <Seeker user = {user} userServices={userServices} isProcessing={isProcessing}/>;
+                dashboard =   <Seeker apartmentBookings={apartmentBookings} user = {user} userServices={userServices} isProcessing={isProcessing}/>;
                 break;
             case 'admin':
                 dashboard =   <Admin user = {user} />;

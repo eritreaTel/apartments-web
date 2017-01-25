@@ -47,7 +47,6 @@ module.exports = {
     },
 
     async getApartments() {
-
         let url = 'available_apartments?';
         let bookingStage = this.getStoreVal('bookingStage');
         let {searchInfo : {checkInDate, checkOutDate, room, adult, pageNumber}} = bookingStage;

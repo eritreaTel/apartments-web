@@ -30,6 +30,7 @@ module.exports = {
                         apartments : null,
                         bestApartments : null,
                         apartmentReviews : null,
+                        apartmentBookings : null,
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,
@@ -56,7 +57,7 @@ module.exports = {
                             signUpData : null,
                             updateUserInfo : null,
                             seekerUser : {
-                                'activeLink' : 'editProfile'
+                                'activeLink' : 'booking'
                             }
                         },
                         blogs : null,

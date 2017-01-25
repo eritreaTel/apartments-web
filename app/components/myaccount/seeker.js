@@ -8,13 +8,82 @@ const FormValidator = require('../../helpers/form_validation_helper');
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
+
 const BookingSection = function (props) {
-	let className = props.activeLink == 'booking' ? "tab-pane fade in active" : "tab-pane fade";
-	return(
-		<div role="tabpanel" className={className} id="home3">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deteriora bonis attingere optimus libero iam naturae graecam. Ceterorum vult ita populo augeri doceat probaretur ullo existimo incorruptis, reperietur assidua excepturi manum consule delectari, eumque sapientia arbitraretur muniti, contenta perveniri perinde satisfacit, ferri, contemnere parum seditione id, depravare futuros.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Privavisse percurri eximiae liberiusque audiam ipsius certae difficilius angore, numquid familiaritatem pedalis inflammat, gloriae sentiri triarius stoicos efficit poterimus, reformidans dubitemus, torquatum gratia calere legerint quos distinguique. Amici difficilem philosophis recta vero reliquerunt nostrum geometrica, discordia, iustius reformidans legendum crudeli, ornamenta hoc hominem unam aiebat metu. Correcta. Huius elaboraret optabilem legendam admodum, meminit sententia chremes, ille, utraque philosophorum morati disputari ferentur videantur sola quin primus ut, quale retinere memoriter susceperant. Earum errorem.</p>
-		</div>
+    let {apartmentBookings} = props;
+
+    let contnet;
+    if (apartmentBookings && apartmentBookings.length > 0) {
+        contnet = <OneBooking />
+    } else {
+        contnet=<div className="row">
+                    <div className="col-md-1"/>
+                        <div className="col-md-10">
+                            <div className="alert alert-info" role="alert">
+                                <i className="fa fa-info-circle"></i>
+                                <strong> You do not have any booking with us. If you think you do, feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</strong>
+                            </div>
+                        </div>
+                    <div className="col-md-1"/>
+                </div>
+    }
+
+
+    let className = props.activeLink == 'booking' ? "tab-pane fade in active" : "tab-pane fade";
+    return(
+        <div role="tabpanel" className={className} id="home3">
+            {content}
+        </div>
+    );
+
+}
+
+const OneBooking = function (props) {
+    return(
+			<div className="seeker-bookings-container">
+				<div className ="row">
+					<div className="col-md-3">
+						<img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
+					</div>
+
+					<div className="col-md-5">
+						<span className="gh-name" >Rafee Hotel</span>
+						<span className="booking-number">Booking number: <b>1988334135</b> </span>
+						<span className="total-price-label">Paid Amount: <label className="display-inline total-price-amount">$409.00</label></span>
+						<span className="total-price-label">Remaining Amount: <label className="display-inline total-price-amount">$90.00</label></span>
+					</div>
+
+					<div className="col-md-2">
+						<span className="check-in-caption">CHECK-IN</span>
+						<span className="check-in-day-number">1</span>
+						<span className="check-in-month-year" >DEC 2016</span>
+						<span className="check-in-day-name">Thursday</span>
+					</div>
+					<div className="col-md-2">
+						<span className="check-in-caption">CHECK-Out</span>
+						<span className="check-in-day-number">1</span>
+						<span className="check-in-month-year" >DEC 2016</span>
+						<span className="check-in-day-name">Thursday</span>
+					</div>
+				</div>
+				<div className="row">
+                    <div className="footer-seeker-booking">
+                        <div className="col-md-12">
+                            <div className="row">
+                                <div className="col-md-8">
+                                    <div className="guest-house-address">
+                                        GeustHouse Address :
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <span><Anchor onClick={() => {Actions.setRoute('/contact-us')}} className="btn btn-primary">Talk to Us</Anchor></span>
+                                    <span><Anchor onClick={() => {Actions.setRoute('/guest-houses')}}  className="btn btn-primary" >Book again</Anchor></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
 	);
 }
 
@@ -179,19 +248,10 @@ class EditProfileSection extends React.Component{
 	}
 }
 
-const TravelGuides = function () {
-	return (
-		<div role="tabpanel" className="tab-pane fade" id="settings3">
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perpaulum, contentam eximiae leniter efflorescere, quia mollitia, loco ficta habeat ii persecuti assidua ceterorum albucius, caret perpetuam artes sive philosopho aperiam corpore, insequitur pluribus delicata indoctum minuit res efficeret assecutus affert iuste, proficiscuntur.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nominavi domesticarum maioribus malivoli motus contereret satis dedocere. Aptior probo calere saperet eosdem amatoriis morbos corpora una, debilitatem ignota dicunt hae lectorem statuerunt, graeci animadvertat multis declinationem divitias tuum responsum velim scipio. Delectus tria convincere tradit satis, errorem addidisti facultas, oblivione arare in curiosi libris deserere, eodem sustulisti ipsos voluptaria veniam cohaerescent, perspicuum, diesque unam suscipere naturae, virtus nasci pauca dubitat graecam voluit intellegimus improborum aiunt ponit. Docere habeatur utilitas, dicturum silano.</p>
-		</div>
-	);
-}
-
 class Seeker extends React.Component {
 	render() {
-			const {user, userServices ,isProcessing} = this.props;
-			let activeLink = userServices.seekerUser.activeLink;
+			const {user, userServices ,isProcessing, apartmentBookings} = this.props;
+            let activeLink = userServices.seekerUser.activeLink;
 			return (
 				<div className="mg-tab-left-nav">
 					<ul className="nav nav-tabs nav-justified" role="tablist">
@@ -204,7 +264,7 @@ class Seeker extends React.Component {
 					</ul>
 
 					<div className="tab-content">
-						<BookingSection activeLink={activeLink} />
+						<BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
 						<EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
 					</div>
 				</div>

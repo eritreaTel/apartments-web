@@ -107,5 +107,35 @@ module.exports = {
 
             this.releaseLock('createAirportPickup');
         }
+    },
+
+    async getApartmentBookings({userId}) {
+        let url = 'apartment_bookings?user_id=' + userId;
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartmentBookings') == null ) {
+            console.log('apartment booking url : ' + url);
+
+            this.setStoreVal('requestUrl', url);
+            if (this.acquireLock('getApartmentBookings')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                    if (errors.length > 0) {
+                        await this.dispatch({type: 'setErrorMessages', data: {errors}});
+                    } else {
+                        this.setStoreVal('apartmentBookings', results);
+                    }
+                } catch (error) {
+                    await this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch apartment bookings'
+                        }
+                    });
+                }
+                this.releaseLock('getApartmentBookings');
+            }
+        }
     }
+
 };

@@ -41,6 +41,9 @@ const Actions = {
         Dispatcher.dispatch({type: 'getApartmentReviews', data});
     },
 
+    getApartmentBookings(data) {
+        Dispatcher.dispatch({type: 'getApartmentBookings', data});
+    },
 
     getBlogs() {
         return Dispatcher.dispatch({type: 'getBlogs'});
