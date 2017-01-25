@@ -67,14 +67,22 @@ const NavigationButton = function () {
 class BlogComments extends React.Component {
 	render() {
 		const {blogComments} = this.props;
+		let commentCount, styledComments;
+		if (blogComments && blogComments.length > 0) {
+			styledComments = blogComments && blogComments.map(blogComment =>{
+								return <SingleComment key={blogComment.id} blogComment={blogComment} />;
+							 });
+			commentCount = blogComments.length;
+		} else {
+			commentCount = 'No';
+			styledComments = <span> Be the first one to write comment about this article </span>
+		}
 
-		const styledComments = blogComments.map(blogComment =>{
-			return <SingleComment blogComment={blogComment} />;
-		});
+
 
 		return (
 				<div className="mg-single-comments-list">
-					<h2 className="mg-sec-left-title">3 Responses</h2>
+					<h2 className="mg-sec-left-title">{commentCount} Comments</h2>
 					{styledComments}
 				</div>
 			);
@@ -155,6 +163,15 @@ class FeedBackForm extends React.Component {
 		});
 	}
 
+	componentDidMount() {
+		const loggedIn = (!!CookiesHelper.getSessionCookie());
+		if (loggedIn) {
+			this.refs.website.focus();
+		} else {
+			this.refs.full_name.focus();
+		}
+	}
+
 	render() {
 		let {user, blog, isProcessing : {creatingBlogComment}} = this.props;
 		const loggedIn = (!!CookiesHelper.getSessionCookie());
@@ -166,6 +183,7 @@ class FeedBackForm extends React.Component {
 		}
 
 		let disabled = creatingBlogComment;
+		let disabledKnownInput = disabled || loggedIn;
 		let spinnerClassName = creatingBlogComment ? 'margin-left-20' : 'hide margin-left-20';
 
 
@@ -173,20 +191,16 @@ class FeedBackForm extends React.Component {
 			<div className="">
 				<h2 className="mg-sec-left-title">Leave a Reply</h2>
 				<div>
-					<label>Full Name</label><span className='required-input'> * </span>
-					<input value={full_name} disabled={disabled} ref='full_name' type="text" className="input-with-validation form-control"/>
+					<input placeholder="Full Name" value={full_name} disabled={disabledKnownInput} ref='full_name' type="text" className="mg-blog-form-input form-control"/>
 				</div>
 				<div>
-					<label>Email</label><span className='required-input'> * </span>
-					<input value={email} disabled={disabled} ref="email" type="email" className="input-with-validation form-control"/>
+					<input placeholder="Email" value={email} disabled={disabledKnownInput} ref="email" type="email" className="mg-blog-form-input form-control"/>
 				</div>
 				<div>
-					<label>Website</label>
-					<input disabled={disabled} ref="website" type="text" className="form-control"/>
+					<input placeholder="Website" disabled={disabled} ref="website" type="text" className="mg-blog-form-input form-control"/>
 				</div>
 				<div>
-					<label>Comment</label><span className='required-input'> * </span>
-					<textarea disabled={disabled} ref="comment" className="input-with-validation form-control" rows="7"></textarea>
+					<textarea placeholder="Comment" disabled={disabled} ref="comment" className="mg-blog-form-input form-control" rows="7"></textarea>
 				</div>
 
 				<input disabled={disabled} onClick={this.onBlogFeedbackClicked.bind(this)} type="button" value="Post Comment" className="btn btn-dark-main"/>
