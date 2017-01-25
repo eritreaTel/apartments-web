@@ -294,12 +294,18 @@ const SeekerBody = function (props) {
 
 
 class Seeker extends React.Component {
+    componentWillMount() {
+        const {user} = this.props;
+        if(user.type == 'seeker') {
+            Actions.getApartmentBookings({'userId' : user.id});
+        }
+    }
+
     render() {
         const {user, userServices ,isProcessing, apartmentBookings} = this.props;
         let activeLink = userServices.seekerUser.activeLink;
 
         let seekerData;
-
         if (apartmentBookings == null) {
             seekerData = <SeekerBody userServices = {userServices}>
                             <div className="load-spin">
