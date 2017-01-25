@@ -19,7 +19,7 @@ const BookingSection = function (props) {
     let content;
     if (apartmentBookings && apartmentBookings.length > 0) {
         content = apartmentBookings.map(apartmentBooking => {
-                return <OneBooking apartmentBooking={apartmentBooking}/>
+                return <OneBooking key={apartmentBooking.id} apartmentBooking={apartmentBooking}/>
         });
 
     } else {
@@ -297,31 +297,26 @@ class Seeker extends React.Component {
     render() {
         const {user, userServices ,isProcessing, apartmentBookings} = this.props;
         let activeLink = userServices.seekerUser.activeLink;
+
+        let seekerData;
+
+        if (apartmentBookings == null) {
+            seekerData = <SeekerBody userServices = {userServices}>
+                            <div className="load-spin">
+                                <MDSpinner />
+                            </div>
+                        </SeekerBody>
+        } else {
+            seekerData = <SeekerBody userServices = {userServices}>
+                            <BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
+                            <EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
+                          </SeekerBody>
+        }
+
         return (
-            <SeekerBody userServices = {userServices}>
-                <BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
-                <EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
-            </SeekerBody>
+            <div> {seekerData} </div>
         );
     }
 }
-
-const WithUserLoaded = withDataLoaded({
-        WithData: Seeker,
-        WithoutData: () => (
-            <SeekerBody>
-                <div className="load-spin">
-                    <MDSpinner />
-                </div>
-            </SeekerBody>
-        ),
-        data: [
-            {
-                storeKeys: ['apartmentBookings'],
-                loadDataFn: ({user}) => Actions.getApartmentBookings({'userId' : user.id})
-            }
-        ]
-});
-
 
 module.exports = Seeker;
