@@ -273,7 +273,7 @@ class PersonalInfo extends React.Component {
                             </div>
                             <div className="pull-right">
                                 <MDSpinner className={spinnerClassName}  />
-                                <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Next</Anchor>
+                                <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
                             </div>
                             <Anchor disabled={disabled} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 

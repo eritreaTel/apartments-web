@@ -137,6 +137,14 @@ module.exports = {
     viewBestApartmentClicked({apartmentId}) {
         let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
         this.setStoreVal('apartment', apartment);
+
+        let apartments = this.getStoreVal('apartments');
+        apartments = (apartments != null) ? apartments : [];
+        let found = apartments && apartments.find(apt => apt.id == apartmentId);
+        if (found == null) {
+            apartments.push(apartment);
+            this.setStoreVal('apartments', apartments);
+        }
     },
 
     goToPersonalInfoClicked() {

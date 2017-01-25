@@ -18,16 +18,15 @@ const ApartmentHelper = {
         }
         return {searching, additional, personal, confirmation};
     },
-
-  getCategories(blogMetadatas) {
-    const categories = [];
-    blogMetadatas.forEach(function(metaData) {
-      if (metaData.type == 'category') {
-        categories.push(metaData);
-      }
-    });
-    return categories;
-  }
+    getCategories(blogMetadatas) {
+        const categories = [];
+        blogMetadatas.forEach(function(metaData) {
+            if (metaData.type == 'category') {
+                categories.push(metaData);
+            }
+        });
+        return categories;
+    }
 };
 
 module.exports = ApartmentHelper;
