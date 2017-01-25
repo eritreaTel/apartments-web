@@ -4,6 +4,7 @@ const Country = require('../shared/country');
 const Anchor = require('../shared/anchor');
 const Checkbox = require('rc-checkbox');
 const Actions = require('../../actions/actions');
+const withDataLoaded = require('../../components/with_data_loaded');
 const FormValidator = require('../../helpers/form_validation_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
 const DateHelper = require('../../helpers/date_helper');
@@ -270,28 +271,57 @@ class EditProfileSection extends React.Component{
 	}
 }
 
-class Seeker extends React.Component {
-	render() {
-			const {user, userServices ,isProcessing, apartmentBookings} = this.props;
-            let activeLink = userServices.seekerUser.activeLink;
-			return (
-				<div className="mg-tab-left-nav">
-					<ul className="nav nav-tabs nav-justified" role="tablist">
-						<li role="presentation" className={activeLink == 'booking'? 'active' : ''}>
-							<a href="#home3" aria-controls="home3" role="tab" data-toggle="tab"><i className="fa fa-home"></i> Bookings</a>
-						</li>
-						<li role="presentation" className={activeLink == 'editProfile'? 'active' : ''}>
-							<a href="#messages3" aria-controls="messages3" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Edit Profile</a>
-						</li>
-					</ul>
+const SeekerBody = function (props) {
+    let userServices = props.userServices;
+    let activeLink = userServices.seekerUser.activeLink;
 
-					<div className="tab-content">
-						<BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
-						<EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
-					</div>
-				</div>
-			);
-	}
-};
+    return (
+        <div className="mg-tab-left-nav">
+            <ul className="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" className={activeLink == 'booking'? 'active' : ''}>
+                    <a href="#home3" aria-controls="home3" role="tab" data-toggle="tab"><i className="fa fa-home"></i> Bookings</a>
+                </li>
+                <li role="presentation" className={activeLink == 'editProfile'? 'active' : ''}>
+                    <a href="#messages3" aria-controls="messages3" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Edit Profile</a>
+                </li>
+            </ul>
+            <div className="tab-content">
+                {props.children}
+            </div>
+        </div>
+    )
+}
+
+
+class Seeker extends React.Component {
+    render() {
+        const {user, userServices ,isProcessing, apartmentBookings} = this.props;
+        let activeLink = userServices.seekerUser.activeLink;
+        return (
+            <SeekerBody userServices = {userServices}>
+                <BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
+                <EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
+            </SeekerBody>
+        );
+    }
+}
+
+const WithUserLoaded = withDataLoaded({
+        WithData: Seeker,
+        WithoutData: () => (
+            <SeekerBody>
+                <div className="load-spin">
+                    <MDSpinner />
+                </div>
+            </SeekerBody>
+        ),
+        data: [
+            {
+                storeKeys: ['apartmentBookings'],
+                loadDataFn: ({user}) => Actions.getApartmentBookings({'userId' : user.id})
+            }
+        ]
+});
+
 
 module.exports = Seeker;
