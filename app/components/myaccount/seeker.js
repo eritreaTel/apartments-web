@@ -5,6 +5,8 @@ const Anchor = require('../shared/anchor');
 const Checkbox = require('rc-checkbox');
 const Actions = require('../../actions/actions');
 const FormValidator = require('../../helpers/form_validation_helper');
+const PricingHelper = require('../../helpers/pricing_helper');
+const CurrencyFormatter = require('currency-formatter');
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -12,11 +14,14 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 const BookingSection = function (props) {
     let {apartmentBookings} = props;
 
-    let contnet;
+    let content;
     if (apartmentBookings && apartmentBookings.length > 0) {
-        contnet = <OneBooking />
+        content = apartmentBookings.map(apartmentBooking => {
+                return <OneBooking apartmentBooking={apartmentBooking}/>
+        });
+
     } else {
-        contnet=<div className="row">
+        content=<div className="row">
                     <div className="col-md-1"/>
                         <div className="col-md-10">
                             <div className="alert alert-info" role="alert">
@@ -39,6 +44,12 @@ const BookingSection = function (props) {
 }
 
 const OneBooking = function (props) {
+    let apartmentBooking = props.apartmentBooking;
+    let confirmationNumber =  PricingHelper.getReservationConfirmationNumber(apartmentBooking.id)
+    let paidAmount = CurrencyFormatter.format(apartmentBooking.paid_amount, { code: 'USD' });
+    let remainingAmount = CurrencyFormatter.format(apartmentBooking.total_price - apartmentBooking.paid_amount, { code: 'USD' });
+
+
     return(
 			<div className="seeker-bookings-container">
 				<div className ="row">
@@ -48,9 +59,9 @@ const OneBooking = function (props) {
 
 					<div className="col-md-5">
 						<span className="gh-name" >Rafee Hotel</span>
-						<span className="booking-number">Booking number: <b>1988334135</b> </span>
-						<span className="total-price-label">Paid Amount: <label className="display-inline total-price-amount">$409.00</label></span>
-						<span className="total-price-label">Remaining Amount: <label className="display-inline total-price-amount">$90.00</label></span>
+						<span className="booking-number">Booking number: <b>{confirmationNumber}</b> </span>
+						<span className="total-price-label">Paid Amount: <label className="display-inline total-price-amount">{paidAmount}</label></span>
+						<span className="total-price-label">Remaining Amount: <label className="display-inline total-price-amount">{remainingAmount}</label></span>
 					</div>
 
 					<div className="col-md-2">

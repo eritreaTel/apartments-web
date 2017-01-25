@@ -16,7 +16,7 @@ class  ReservationConfirmation extends React.Component {
         let {pricingInfo, guestHouse} = apartment;
         let {additional, confirmation, searchInfo} = bookingStage;
 
-        let confirmationId = 525 + '-' + confirmation.id;
+        let confirmationId = PricingHelper.getReservationConfirmationNumber(confirmation.id);
         let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
         let checkOutDate = DateHelper.formatDate(pricingInfo.end_date, 'D MMM, YYYY');
         let adult        = searchInfo.adult ;

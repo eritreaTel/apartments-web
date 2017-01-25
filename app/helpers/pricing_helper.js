@@ -47,6 +47,10 @@ const PricingHelper = {
             return "Payment amount should be less than " + CurrencyFormatter.format(totalAmount, { code: 'USD' });
         }
         return "valid";
+    },
+
+    getReservationConfirmationNumber(apartmentBookingId) {
+        return 525 + '-' + apartmentBookingId;
     }
 
 
