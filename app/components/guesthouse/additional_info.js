@@ -109,7 +109,7 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want to book a private car ride in advance for <strong>{airportPickUpFee}? </strong> Airport is 42 kilometers/26 miles away from kampala. Make sure to have someone to pick you up.</div>
+                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Private car pick from the airport for <strong>{airportPickUpFee}? </strong> Note: Airport is 42 kilometers/26 miles away from kampala.</div>
                                     </div>
                                 </div>
                             </div>
@@ -152,14 +152,14 @@ class AdditionalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={tourGuides}  onChange={this.onReserveTourGuidesCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want us to hook you up with local tour guide. If you click yes, we will send you separate email with list of tour guides</div>
+                                        <Checkbox defaultChecked={tourGuides}  onChange={this.onReserveTourGuidesCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Get connected with local tour guide? If you click yes, we will send you separate email with detailed information.</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-12">
                                     <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={carRentals}  onChange={this.onReserveCarRentalsCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Do you want us to help you rent car? If clicked yes, we will send you an email with list of car rentals in Kampala.</div>
+                                        <Checkbox defaultChecked={carRentals}  onChange={this.onReserveCarRentalsCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Rent a car? If clicked yes, we will send you an email with detailed information.</div>
                                     </div>
                                 </div>
                             </div>
