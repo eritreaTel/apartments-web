@@ -33,7 +33,7 @@ const NewsHeading = function (props) {
     const contents = props.recentNews.map(singleNews => {
             return  <li key={singleNews.id}>
                         <div className="mg-recnt-post">
-                            <div className="mg-rp-date">{ DateHelper.formatDate(singleNews.created_at,'D')} <div className="mg-rp-month">{ DateHelper.formatDate(singleNews.created_at, 'MMMM')}</div></div>
+                            <div className="mg-rp-date">{ DateHelper.getDay(singleNews.created_at)} <div className="mg-rp-month">{ DateHelper.formatDate(singleNews.created_at, 'MMMM')}</div></div>
                             <h3><Anchor onClick={()=>{Actions.setRoute('/blog/' + singleNews.id)}} >{singleNews.title}</Anchor></h3>
                             <p>{singleNews.short_description}...</p>
                         </div>

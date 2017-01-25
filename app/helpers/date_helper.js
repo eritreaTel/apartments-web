@@ -11,7 +11,20 @@ const DateHelper = {
 
     formatDate(inputDate, format){
         return Moment(inputDate).format(format);
+    },
+
+    getDay(inputDate) {
+        return this.formatDate(inputDate,'D')
+    },
+
+    getMonthNameAndYear(inputDate) {
+        return this.formatDate(inputDate,'MMMM YYYY')
+    },
+
+    getDayName(inputDate) {
+        return this.formatDate(inputDate,'dddd')
     }
+
 };
 
 module.exports = DateHelper;

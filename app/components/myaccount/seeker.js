@@ -6,6 +6,7 @@ const Checkbox = require('rc-checkbox');
 const Actions = require('../../actions/actions');
 const FormValidator = require('../../helpers/form_validation_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
+const DateHelper = require('../../helpers/date_helper');
 const CurrencyFormatter = require('currency-formatter');
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -48,6 +49,15 @@ const OneBooking = function (props) {
     let confirmationNumber =  PricingHelper.getReservationConfirmationNumber(apartmentBooking.id)
     let paidAmount = CurrencyFormatter.format(apartmentBooking.paid_amount, { code: 'USD' });
     let remainingAmount = CurrencyFormatter.format(apartmentBooking.total_price - apartmentBooking.paid_amount, { code: 'USD' });
+    let guestHouse = apartmentBooking.guestHouse;
+
+    let checkInDay = DateHelper.getDay(apartmentBooking.start_date);
+    let checkInMonthNameYear = DateHelper.getMonthNameAndYear(apartmentBooking.start_date);
+    let checkInDayName = DateHelper.getDayName(apartmentBooking.start_date);
+
+    let checkOutDay = DateHelper.getDay(apartmentBooking.end_date);
+    let checkOutMonthNameYear = DateHelper.getMonthNameAndYear(apartmentBooking.end_date);
+    let checkOutDayName = DateHelper.getDayName(apartmentBooking.end_date);
 
 
     return(
@@ -58,7 +68,7 @@ const OneBooking = function (props) {
 					</div>
 
 					<div className="col-md-5">
-						<span className="gh-name" >Rafee Hotel</span>
+						<span className="gh-name" >{guestHouse.name}</span>
 						<span className="booking-number">Booking number: <b>{confirmationNumber}</b> </span>
 						<span className="total-price-label">Paid Amount: <label className="display-inline total-price-amount">{paidAmount}</label></span>
 						<span className="total-price-label">Remaining Amount: <label className="display-inline total-price-amount">{remainingAmount}</label></span>
@@ -66,15 +76,15 @@ const OneBooking = function (props) {
 
 					<div className="col-md-2">
 						<span className="check-in-caption">CHECK-IN</span>
-						<span className="check-in-day-number">1</span>
-						<span className="check-in-month-year" >DEC 2016</span>
-						<span className="check-in-day-name">Thursday</span>
+						<span className="check-in-day-number">{checkInDay}</span>
+						<span className="check-in-month-year" >{checkInMonthNameYear}</span>
+						<span className="check-in-day-name">{checkInDayName}</span>
 					</div>
 					<div className="col-md-2">
 						<span className="check-in-caption">CHECK-Out</span>
-						<span className="check-in-day-number">1</span>
-						<span className="check-in-month-year" >DEC 2016</span>
-						<span className="check-in-day-name">Thursday</span>
+						<span className="check-in-day-number">{checkOutDay}</span>
+						<span className="check-in-month-year" >{checkOutMonthNameYear}</span>
+						<span className="check-in-day-name">{checkOutDayName}</span>
 					</div>
 				</div>
 				<div className="row">
@@ -83,7 +93,8 @@ const OneBooking = function (props) {
                             <div className="row">
                                 <div className="col-md-8">
                                     <div className="guest-house-address">
-                                        GeustHouse Address :
+                                        Address : {guestHouse.street_address}  - {guestHouse.neighborhood}, {guestHouse.city}, {guestHouse.country} <br/>
+                                        Telephone : {guestHouse.phone}
                                     </div>
                                 </div>
                                 <div className="col-md-4">
