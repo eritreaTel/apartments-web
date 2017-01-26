@@ -30,14 +30,14 @@ class BlogHeader extends React.Component {
         if (blogComments && blogComments.length > 0 ) {
             blogCommentSection = <span><Anchor > {blogComments.length} Comments</Anchor></span>
         }
-        
+
         return (
             <header>
                 <h2 className="mg-post-title">
                     <Anchor onClick={()=>{Actions.setRoute('/blog/' + blog.id)}}> {blog.title}</Anchor>
                 </h2>
                 <div className="mg-post-meta">
-                    <span><Anchor>{ DateHelper.formatDate(blog.created_at, 'D MMM, YYYY')}</Anchor></span>
+                    <span>{ DateHelper.formatDate(blog.created_at, 'D MMM, YYYY')}</span>
                     <span>by UgandaBooking team</span>
                     {blogCommentSection}
                 </div>

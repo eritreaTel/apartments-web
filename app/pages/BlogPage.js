@@ -163,15 +163,6 @@ class FeedBackForm extends React.Component {
 		});
 	}
 
-	componentDidMount() {
-		const loggedIn = (!!CookiesHelper.getSessionCookie());
-		if (loggedIn) {
-			this.refs.website.focus();
-		} else {
-			this.refs.full_name.focus();
-		}
-	}
-
 	render() {
 		let {user, blog, isProcessing : {creatingBlogComment}} = this.props;
 		const loggedIn = (!!CookiesHelper.getSessionCookie());
@@ -220,7 +211,6 @@ const BlogBody = function (props) {
 }
 
 class BlogPage extends React.Component {
-
 	componentWillMount() {
 		const {store : {blog}} = this.props;
 		Actions.getBlogComments({'blog_id' : blog.id});
@@ -229,6 +219,7 @@ class BlogPage extends React.Component {
 
 	render() {
 		const {store : {blog, recentNews, blogMetaData, blogComments, isProcessing, user}} = this.props;
+
 		return (
 			<BlogBody>
 				<BlogContent blog={blog} blogComments={blogComments} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
@@ -250,7 +241,8 @@ const WithUserLoaded = withDataLoaded({
 	data: [
 		{
 			storeKeys: ['blog'],
-			loadDataFn: ({view : {blogId}}) => Actions.getBlog({blogId})
+			loadDataFn: ({view : {blogId}}) => Actions.getBlog({blogId}),
+			alwaysLoad : true
 		},
 		{
 			storeKeys: ['blogMetaData'],

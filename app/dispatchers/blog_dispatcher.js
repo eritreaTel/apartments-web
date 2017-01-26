@@ -143,7 +143,7 @@ module.exports = {
     },
 
     async getRecentNews() {
-        const url = 'blogs?recentNews=true' ;
+        const url = 'blogs?recent_post=true' ;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('recentNews').length == 0) {
             this.setStoreVal('requestUrl', url);
 
