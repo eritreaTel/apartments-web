@@ -66,11 +66,7 @@ class NewsGalleries extends React.Component {
         });
 
         const styledFullLi = galleries.map(item =>{
-            return <li key={item.id}><img src={assetPath(item.full_image)} alt={item.caption}/></li>;
-        });
-
-        const styledThumbLi = galleries.map(item =>{
-                return <li key={item.id*2}><img src={assetPath(item.thumbnail_image)} alt={item.caption}/></li>;
+            return <li key={item.id}><img width="670px" height ="350px" src={assetPath(item.full_image)} alt={item.caption}/></li>;
         });
 
         return (
@@ -78,9 +74,6 @@ class NewsGalleries extends React.Component {
                 <div className="mg-gallery-container">
                     <ul className="mg-gallery" id="mg-gallery">
                         {styledFullLi}
-                    </ul>
-                    <ul className="mg-gallery-thumb" id="mg-gallery-thumb">
-                        {styledThumbLi}
                     </ul>
                 </div>
             </div>

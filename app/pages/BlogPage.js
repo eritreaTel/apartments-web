@@ -22,7 +22,7 @@ const BlogContent = function (props) {
 			<div className="container">
 				<div className="row">
 					<div className="col-md-8">
-						<BlogMainContent blog = {props.blog} />
+						<BlogMainContent blog = {props.blog} blogComments={props.blogComments}/>
 						<BlogComments blogComments={props.blogComments} />
 						<FeedBackForm user={props.user} isProcessing={props.isProcessing} blog={props.blog} />
 					</div>
@@ -39,7 +39,7 @@ const BlogMainContent = function (props) {
 	return (
 		<main>
 			<article className="mg-post">
-				<BlogHeader blog={props.blog} />
+				<BlogHeader blog={props.blog} blogComments={props.blogComments}/>
 
 				<div dangerouslySetInnerHTML={{__html: content}}></div>
 

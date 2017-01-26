@@ -6,7 +6,7 @@ const DateHelper = require('../../helpers/date_helper');
 
 const BlogImage = function (props) {
     const styledImgs = props.blog.galleries && props.blog.galleries.map(blogImage => {
-        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
+        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img height="350px" width="770px" src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
     });
 
     return styledImgs ? <div className="margin-bottom-20 mg-post-images-slider"> {styledImgs}</div> : <div/>;
@@ -25,8 +25,12 @@ class BlogHeader extends React.Component {
     }
 
     render() {
-        const {blog} = this.props;
-
+        const {blog, blogComments} = this.props;
+        let blogCommentSection = '' ;
+        if (blogComments && blogComments.length > 0 ) {
+            blogCommentSection = <span><Anchor > {blogComments.length} Comments</Anchor></span>
+        }
+        
         return (
             <header>
                 <h2 className="mg-post-title">
@@ -34,8 +38,8 @@ class BlogHeader extends React.Component {
                 </h2>
                 <div className="mg-post-meta">
                     <span><Anchor>{ DateHelper.formatDate(blog.created_at, 'D MMM, YYYY')}</Anchor></span>
-                    <span>by <Anchor>{blog.created_by}</Anchor></span>
-                    <span><Anchor > {blog.comments_cnt} Comments</Anchor></span>
+                    <span>by UgandaBooking team</span>
+                    {blogCommentSection}
                 </div>
 
                 <BlogImage blog = {blog} />
