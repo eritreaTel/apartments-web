@@ -4,16 +4,10 @@ const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 const DateHelper = require('../../helpers/date_helper')
 const GalleryHelper = require('../../helpers/gallery_helper');
+const Carousel = require('react-responsive-carousel').Carousel;
 
 class BlogImage extends React.Component {
-    componentDidMount() {
-        console.log('BlogImage::componentDidMount');
-    }
 
-    componentDidUpdate() {
-        console.log('BlogImage::componentDidUpdate');
-        GalleryHelper.reRenderBlogPhotos();
-    }
 
     render() {
         let {blog} = this.props;
