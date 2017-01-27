@@ -2,30 +2,41 @@ const React = require('react');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
-const DateHelper = require('../../helpers/date_helper');
+const DateHelper = require('../../helpers/date_helper')
+const GalleryHelper = require('../../helpers/gallery_helper');
 
-const BlogImage = function (props) {
-    const styledImgs = props.blog.galleries && props.blog.galleries.map(blogImage => {
-        return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + props.blog.id)}}> <img height="350px" width="770px" src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
-    });
+class BlogImage extends React.Component {
+    componentDidMount() {
+        console.log('BlogImage::componentDidMount');
+    }
 
-    return styledImgs ? <div className="margin-bottom-20 mg-post-images-slider"> {styledImgs}</div> : <div/>;
+    componentDidUpdate() {
+        console.log('BlogImage::componentDidUpdate');
+        GalleryHelper.reRenderBlogPhotos();
+    }
+
+    render() {
+        let {blog} = this.props;
+        let {galleries} = blog;
+        let styledImgs = <div />;
+        if (galleries && galleries.length > 0) {
+            styledImgs = galleries.map(blogImage => {
+                            return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + blog.id)}}> <img height="350px" width="770px" src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
+                        });
+        }
+        return (
+            <div className="margin-bottom-20 mg-post-images-slider">
+                {styledImgs}
+            </div>
+        );
+    }
 }
 
 class BlogHeader extends React.Component {
 
-    componentDidMount() {
-        $(".mg-post-images-slider").owlCarousel({
-            singleItem : true,
-            navigation : true,
-            pagination: false,
-            navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-
-        });
-    }
-
     render() {
-        const {blog, blogComments} = this.props;
+        const {blog} = this.props;
+        let {blogComments} = blog;
         let blogCommentSection = '' ;
         if (blogComments && blogComments.length > 0 ) {
             blogCommentSection = <span><Anchor > {blogComments.length} Comments</Anchor></span>

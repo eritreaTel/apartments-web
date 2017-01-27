@@ -6,7 +6,7 @@ const DateHelper = require('../../helpers/date_helper');
 
 
 const RecentPost = function (props) {
-    const styledLi = props.news.map(singleNews => {
+    const styledLi = props.news && props.news.map(singleNews => {
         return  <li key={singleNews.id}>
                     <div className="mg-recnt-post">
                         <div className="mg-rp-date"> {DateHelper.formatDate(singleNews.created_at, 'D')} <div className="mg-rp-month"> {DateHelper.formatDate(singleNews.created_at, 'MMMM')} </div></div>

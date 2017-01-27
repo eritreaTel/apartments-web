@@ -16,57 +16,59 @@ const Constants = require('../helpers/constants');
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
 
-const BlogContent = function (props) {
-	return (
-		<div className="mg-blog-list">
-			<div className="container">
-				<div className="row">
-					<div className="col-md-8">
-						<BlogMainContent blog = {props.blog} blogComments={props.blogComments}/>
-						<BlogComments blogComments={props.blogComments} />
-						<FeedBackForm user={props.user} isProcessing={props.isProcessing} blog={props.blog} />
+class BlogContent extends React.Component {
+	componentWillMount() {
+		Actions.getBlogMetaData();
+		Actions.getRecentNews()
+	}
+
+	render() {
+		console.log("inside of BlogContent 1");
+		const {blog, user, isProcessing, recentNews, blogMetaData} = this.props;
+		console.log("inside of BlogContent 2");
+		return (
+			<div className="mg-blog-list">
+				<div className="container">
+					<div className="row">
+						<div className="col-md-8">
+							<BlogMainContent blog ={blog}/>
+							<BlogComments blog={blog} />
+							<FeedBackForm user={user} isProcessing={isProcessing} blog={blog} />
+						</div>
+						<RightSection blogMetaData={blogMetaData} recentNews={recentNews}/>
 					</div>
-				<RightSection blogMetaData={props.blogMetaData} recentNews={props.recentNews}/>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 }
 
-const BlogMainContent = function (props) {
+class BlogMainContent extends React.Component {
 
-	let content = props.blog.content;
-	return (
-		<main>
-			<article className="mg-post">
-				<BlogHeader blog={props.blog} blogComments={props.blogComments}/>
+	render() {
+		const {blog} = this.props;
+		const {blogComments, tags, content} = blog;
 
-				<div dangerouslySetInnerHTML={{__html: content}}></div>
+		return (
+			<main>
+				<article className="mg-post">
+					<BlogHeader blog={blog} blogComments={blogComments}/>
 
-				<footer className="clearfix">
-					<BlogTags tags={props.blog.tags} parentClassName="mg-single-post-tags tagcloud" />
-				</footer>
-			</article>
-		</main>
-	);
-}
+					<div dangerouslySetInnerHTML={{__html: content}}></div>
 
-const NavigationButton = function () {
-	return (
-		<div className="clearfix mg-post-nav">
-			<div className="pull-left">
-				<Anchor><i className="fa fa-angle-left"></i> Read previous article</Anchor>
-			</div>
-			<div className="pull-right">
-				<Anchor>Read next article <i className="fa fa-angle-right"></i></Anchor>
-			</div>
-		</div>
-	);
+					<footer className="clearfix">
+						<BlogTags tags={tags} parentClassName="mg-single-post-tags tagcloud" />
+					</footer>
+				</article>
+			</main>
+		);
+	}
 }
 
 class BlogComments extends React.Component {
 	render() {
-		const {blogComments} = this.props;
+		const {blog: {blogComments}} = this.props;
+		console.log('inside BlogComments');
 		let commentCount, styledComments;
 		if (blogComments && blogComments.length > 0) {
 			styledComments = blogComments && blogComments.map(blogComment =>{
@@ -177,6 +179,7 @@ class FeedBackForm extends React.Component {
 		let disabledKnownInput = disabled || loggedIn;
 		let spinnerClassName = creatingBlogComment ? 'margin-left-20' : 'hide margin-left-20';
 
+		console.log('inside FeedBackForm');
 
 		return (
 			<div className="">
@@ -201,28 +204,46 @@ class FeedBackForm extends React.Component {
 	}
 }
 
-const BlogBody = function (props) {
-	return (
-		<div>
-			{<PageTitle parentClassName="mg-page-title-space parallax"/>}
-			{props.children}
-		</div>
-	);
+class BlogBody extends React.Component {
+	render() {
+		return (
+			<div>
+				{<PageTitle parentClassName="mg-page-title-space parallax"/>}
+				{this.props.children}
+			</div>
+		);
+	}
 }
 
 class BlogPage extends React.Component {
 	componentWillMount() {
 		const {store : {blog}} = this.props;
-		Actions.getBlogComments({'blog_id' : blog.id});
 		Actions.getAuthenticatedUser();
+		console.log('componentWillMount');
 	}
 
-	render() {
-		const {store : {blog, recentNews, blogMetaData, blogComments, isProcessing, user}} = this.props;
+	componentDidMount() {
+		const {store : {view : {blogId}}} = this.props;
+		Actions.getBlog({blogId});
+	}
 
+	shouldComponentUpdate() {
+		return true;
+	}
+
+	componentWillUpdate() {
+		const {store : {view : {blogId}}} = this.props;
+		Actions.getBlog({blogId});
+	}
+
+
+	render() {
+		const {store : {blog, recentNews, blogMetaData, isProcessing, user}} = this.props;
+		console.log('blog is');
+		console.log(blog);
 		return (
 			<BlogBody>
-				<BlogContent blog={blog} blogComments={blogComments} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
+				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
 			</BlogBody>
 		);
 	}

@@ -39,15 +39,21 @@ module.exports = {
 
             if (this.acquireLock('getBlog')) {
                 try {
+                    console.log("1");
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    console.log("2");
                     let {object, errors} = ResponseHelper.processResponseReturnOne(response);
-
+                    console.log("3");
                     if (errors.length > 0) {
                         await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
+                        console.log("4");
                         this.setStoreVal('blog', object);
+                        console.log("5");
                     }
                 } catch (error) {
+                    console.log(error);
+                    this.releaseLock('getBlog');
                     await this.dispatch({
                         type: 'handleRequestError',
                         data: {
@@ -57,35 +63,6 @@ module.exports = {
                     });
                 }
                 this.releaseLock('getBlog');
-            }
-        }
-    },
-
-    async getBlogComments({blog_id}) {
-        const url = 'blog_comments?blog_id=' + blog_id;
-        if ( url !== this.getStoreVal('requestUrl')) {
-            this.setStoreVal('requestUrl', url);
-
-            if (this.acquireLock('getBlogComments')) {
-                try {
-                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                    let {results, errors} = ResponseHelper.processResponseReturnMany(response);
-
-                    if (errors.length > 0) {
-                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
-                    } else {
-                        this.setStoreVal('blogComments', results);
-                    }
-                } catch (error) {
-                    await this.dispatch({
-                        type: 'handleRequestError',
-                        data: {
-                            error,
-                            defaultErrorMessage: 'Cannot fetch blog comments'
-                        }
-                    });
-                }
-                this.releaseLock('getBlogComments');
             }
         }
     },

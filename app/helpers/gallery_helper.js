@@ -79,6 +79,7 @@ const GalleryHelper = {
     },
 
     reRenderBlogPhotos() {
+        console.log($(".mg-post-images-slider"));
         $(".mg-post-images-slider").owlCarousel({
             singleItem : true,
             navigation : true,

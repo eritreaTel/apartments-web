@@ -53,10 +53,6 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBlog', data});
     },
 
-    getBlogComments(data) {
-        return Dispatcher.dispatch({type: 'getBlogComments', data});
-    },
-
     getRecentNews() {
         return Dispatcher.dispatch({type: 'getRecentNews'});
     },
