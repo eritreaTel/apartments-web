@@ -4,10 +4,25 @@ const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 const DateHelper = require('../../helpers/date_helper')
 const GalleryHelper = require('../../helpers/gallery_helper');
-const Carousel = require('react-responsive-carousel').Carousel;
+const Slider = require('react-slick');
+
+class PrevArrow extends React.Component {
+    render() {
+        return (
+            <i class="fa fa-long-arrow-left"></i>
+        )
+    }
+}
+
+class NextArrow extends React.Component {
+   render() {
+        return (
+            <i class="fa fa-long-arrow-right"></i>
+        )
+   }
+}
 
 class BlogImage extends React.Component {
-
 
     render() {
         let {blog} = this.props;
@@ -15,12 +30,28 @@ class BlogImage extends React.Component {
         let styledImgs = <div />;
         if (galleries && galleries.length > 0) {
             styledImgs = galleries.map(blogImage => {
-                            return <Anchor key={blogImage.id} onClick={()=>{Actions.setRoute('/blog/' + blog.id)}}> <img height="350px" width="770px" src={assetPath(blogImage.full_image)} alt="" className="img-responsive"/> </Anchor>
+                            return <img key={blogImage.id} height="350px" width="770px" src={assetPath(blogImage.full_image)} />
                         });
         }
+
+        let sliderProps = {
+            arrows    : true,
+            nextArrow : <NextArrow />,
+            prevArrow : <PrevArrow />,
+            autoplay  : true,
+            autoplaySpeed : 10000,
+            dots : true,
+            slidesToShow : 1,
+            slidesToScroll : 1,
+            infinite : false
+        }
+
         return (
-            <div className="margin-bottom-20 mg-post-images-slider">
-                {styledImgs}
+            <div className="margin-bottom-20">
+                <Slider {...sliderProps}>
+                    {styledImgs}
+                </Slider>
+
             </div>
         );
     }

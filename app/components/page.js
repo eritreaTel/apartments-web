@@ -19,7 +19,6 @@ import 'react-notifications/lib/notifications.css';
 import 'rc-checkbox/assets/index.css';
 import 'react-dates/lib/css/_datepicker.css';
 
-
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
 const DebugHelper = require('../helpers/debug_helper');

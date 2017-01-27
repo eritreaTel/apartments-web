@@ -23,9 +23,7 @@ class BlogContent extends React.Component {
 	}
 
 	render() {
-		console.log("inside of BlogContent 1");
 		const {blog, user, isProcessing, recentNews, blogMetaData} = this.props;
-		console.log("inside of BlogContent 2");
 		return (
 			<div className="mg-blog-list">
 				<div className="container">
@@ -68,7 +66,6 @@ class BlogMainContent extends React.Component {
 class BlogComments extends React.Component {
 	render() {
 		const {blog: {blogComments}} = this.props;
-		console.log('inside BlogComments');
 		let commentCount, styledComments;
 		if (blogComments && blogComments.length > 0) {
 			styledComments = blogComments && blogComments.map(blogComment =>{
@@ -179,8 +176,6 @@ class FeedBackForm extends React.Component {
 		let disabledKnownInput = disabled || loggedIn;
 		let spinnerClassName = creatingBlogComment ? 'margin-left-20' : 'hide margin-left-20';
 
-		console.log('inside FeedBackForm');
-
 		return (
 			<div className="">
 				<h2 className="mg-sec-left-title">Leave a Reply</h2>
@@ -219,7 +214,6 @@ class BlogPage extends React.Component {
 	componentWillMount() {
 		const {store : {blog}} = this.props;
 		Actions.getAuthenticatedUser();
-		console.log('componentWillMount');
 	}
 
 	componentDidMount() {
@@ -239,8 +233,6 @@ class BlogPage extends React.Component {
 
 	render() {
 		const {store : {blog, recentNews, blogMetaData, isProcessing, user}} = this.props;
-		console.log('blog is');
-		console.log(blog);
 		return (
 			<BlogBody>
 				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />

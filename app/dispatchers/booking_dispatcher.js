@@ -14,7 +14,6 @@ module.exports = {
         const url = 'apartment_bookings';
         this.setStoreVal('requestUrl', url);
 
-        console.log("in here");
         if (this.acquireLock('createApartmentBooking')) {
             try {
 
@@ -48,7 +47,6 @@ module.exports = {
                     'car_rental'     : carRental
                 };
 
-                console.log(bookingData);
                 const response = await FetchHelper.fetchJson(url, {body: bookingData , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
@@ -112,7 +110,6 @@ module.exports = {
     async getApartmentBookings({userId}) {
         let url = 'apartment_bookings?user_id=' + userId;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartmentBookings') == null ) {
-            console.log('apartment booking url : ' + url);
 
             this.setStoreVal('requestUrl', url);
             if (this.acquireLock('getApartmentBookings')) {

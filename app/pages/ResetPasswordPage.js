@@ -262,8 +262,6 @@ class ResetPasswordPage extends React.Component {
 	render() {
 		const{store: {resetPassword, isProcessing}} = this.props;
 		const {email, stage} = resetPassword;
-		console.log('email is' + email);
-		console.log('stage is ' + stage);
 
 		let section ;
 

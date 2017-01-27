@@ -229,10 +229,6 @@ module.exports = {
                 let {email, resetCode} = this.getStoreVal('resetPassword');
                 let updatePassword = {...data, email, resetCode};
 
-                console.log('update password data');
-                console.log(data);
-                console.log(updatePassword);
-
                 const response = await FetchHelper.fetchJson(url, {body: updatePassword , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
 

@@ -39,20 +39,14 @@ module.exports = {
 
             if (this.acquireLock('getBlog')) {
                 try {
-                    console.log("1");
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                    console.log("2");
                     let {object, errors} = ResponseHelper.processResponseReturnOne(response);
-                    console.log("3");
                     if (errors.length > 0) {
                         await this.dispatch({type: 'setErrorMessages', data : {errors}});
                     } else {
-                        console.log("4");
                         this.setStoreVal('blog', object);
-                        console.log("5");
                     }
                 } catch (error) {
-                    console.log(error);
                     this.releaseLock('getBlog');
                     await this.dispatch({
                         type: 'handleRequestError',
