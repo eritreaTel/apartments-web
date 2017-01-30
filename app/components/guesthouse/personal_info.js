@@ -104,18 +104,11 @@ class PersonalInfo extends React.Component {
             createUserPromise.then(response => {
                 if (response.status == 'fail') {
                     NotificationManager.error(response.error, 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
+                    let isProcessing = {processingPayment: false};
+                    Actions.setIsProcessing(isProcessing);
                 } else {
-                    let credentials = {
-                        email : personal.email,
-                        password : personal.password
-                    }
-
-                    Actions.logIn(credentials);
                     this.makeStripePayment(payment);
                 }
-
-                let isProcessing = {processingPayment: false};
-                Actions.setIsProcessing(isProcessing);
             });
         }
     }
@@ -131,6 +124,13 @@ class PersonalInfo extends React.Component {
 
     paymentProcessingIsDone(status, response) {
         let isProcessing = {processingPayment: false};
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        const {bookingStage: {personal}} = this.props;
+
+        if (!loggedIn) {
+            let credentials = {email : personal.email, password : personal.password}
+            Actions.logIn(credentials);
+        }
 
         if (response.error) {
             Actions.setIsProcessing(isProcessing);
@@ -144,7 +144,7 @@ class PersonalInfo extends React.Component {
                 Actions.setIsProcessing(isProcessing);
                 if (response.status == 'fail') {
                     NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
-                }     else {
+                } else {
                     Actions.goToConfirmationClicked()
                 }
             });
