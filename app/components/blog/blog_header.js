@@ -7,6 +7,22 @@ const GalleryHelper = require('../../helpers/gallery_helper');
 const Slider = require('react-slick');
 
 
+class NextButton extends React.Component {
+    render() {
+        return (
+            <button {...this.props}>{this.children}</button>
+        );
+    }
+}
+
+class PrevButton extends React.Component {
+    render() {
+        return (
+            <button {...this.props}>{this.children}</button>
+        );
+    }
+}
+
 class BlogImage extends React.Component {
 
     render() {
@@ -21,12 +37,11 @@ class BlogImage extends React.Component {
 
         let sliderProps = {
             arrows    : true,
-            autoplay  : true,
-            autoplaySpeed : 6000,
+            autoplay  : false,
             dots : true,
             slidesToShow : 1,
             slidesToScroll : 1,
-            infinite : false
+            infinite : true
         }
 
         return (
