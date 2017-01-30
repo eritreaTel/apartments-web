@@ -9,7 +9,7 @@ module.exports = {
         url = (tags == undefined)? url : url + '?tags=' + tags;
         url = (category == undefined)? url : url + '?category=' + category;
 
-        if ( url !== this.getStoreVal('requestUrl') || this.getStoreValue('blogs').length ==0 ) {
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('blogs').length ==0 ) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getBlogs')) {
