@@ -182,79 +182,68 @@ class SignUpBody extends React.Component {
 
 		return (
 			<div className="mg-signup-features">
-				<ValidateGroup>
-					<div className="container">
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-3">
-								<div className="mg-book-form-input">
-									<label>Full Name</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-										<input disabled={disabled} tabIndex="1" ref='full_name' type="text" className="input-with-validation form-control" />
-									</Validate>
-								</div>
+				<div className="container">
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-3">
+							<div className="mg-book-form-input">
+								<label>Full Name</label><span className='required-input'> * </span>
+								<input disabled={disabled} tabIndex="1" ref='full_name' type="text" className="input-with-validation form-control" />
 							</div>
-							<div className="col-md-4"> </div>
 						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-3">
-								<div className="mg-book-form-input">
-									<label>Country</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-									<Country tabIndex="2" onChange={(val)=>{Actions.signUpInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
-
-									</Validate>
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-3">
-								<div className="mg-book-form-input">
-									<label>Email</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired, ValidationHelper.isEmail]}>
-										<input disabled={disabled} tabIndex="3" ref='email' type="text" className="input-with-validation form-control" />
-									</Validate>
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-3">
-								<div className="mg-book-form-input">
-									<label>Password</label><span className='required-input'> * </span>
-									<Validate validators={[ValidationHelper.isRequired]}>
-										<input disabled={disabled} tabIndex="4"  ref='password' onKeyPress = {this.handleKeyPress} type="password" className="input-with-validation form-control"/>
-									</Validate>
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4">
-								<div className="mg-book-form-input">
-									<button  disabled={disabled}tabIndex="5" type="submit" onClick = {this.createUser.bind(this)} className="h4 width-265 btn btn-primary">Sign Up</button>
-									<MDSpinner className={spinnerClassName} />
-								</div>
-							</div>
-							<div className="col-md-4"> </div>
-						</div>
-
-						<div className="row">
-							<div className="col-md-4"> </div>
-							<div className="col-md-4"> </div>
-							<div className="col-md-4"> </div>
-						</div>
+						<div className="col-md-4"> </div>
 					</div>
-				</ValidateGroup>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-3">
+							<div className="mg-book-form-input">
+								<label>Country</label><span className='required-input'> * </span>
+								<Country tabIndex="2" onChange={(val)=>{Actions.signUpInfoUpdated({'country' : val.value});}} value={country} disabled={disabled} />
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-3">
+							<div className="mg-book-form-input">
+								<label>Email</label><span className='required-input'> * </span>
+								<input disabled={disabled} tabIndex="3" ref='email' type="text" className="input-with-validation form-control" />
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-3">
+							<div className="mg-book-form-input">
+								<label>Password</label><span className='required-input'> * </span>
+								<input disabled={disabled} tabIndex="4"  ref='password' onKeyPress = {this.handleKeyPress} type="password" className="input-with-validation form-control"/>
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4">
+							<div className="mg-book-form-input">
+								<button  disabled={disabled}tabIndex="5" type="submit" onClick = {this.createUser.bind(this)} className="h4 width-265 btn btn-primary">Sign Up</button>
+								<MDSpinner className={spinnerClassName} />
+							</div>
+						</div>
+						<div className="col-md-4"> </div>
+					</div>
+
+					<div className="row">
+						<div className="col-md-4"> </div>
+						<div className="col-md-4"> </div>
+						<div className="col-md-4"> </div>
+					</div>
+				</div>
 			</div>
 		);
 	}
