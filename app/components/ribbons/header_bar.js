@@ -5,13 +5,18 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const CookiesHelper = require('../../helpers/cookies_helper');
 
-const logOut = function () {
-    Actions.logOut();
-    window.location.reload()
-    Actions.setRoute('/index');
-}
-
 class HeaderBar extends React.Component {
+
+    logOut(){
+        Actions.logOut();
+        window.location.reload()
+        Actions.setRoute('/index');
+    }
+
+    onBlogsMenuClicked() {
+        Actions.getBlogs({});
+        Actions.setRoute('/blogs');
+    }
 
     render() {
         const {store : {view : {page}}, user} = this.props;
@@ -22,7 +27,7 @@ class HeaderBar extends React.Component {
                                 <ul className="dropdown-menu">
                                     <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'booking'}); Actions.setRoute('/my-account');}}>Bookings</Anchor></li>
                                     <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'}); Actions.setRoute('/my-account');}}>Edit Profile</Anchor></li>
-                                    <li><Anchor onClick={() => {logOut()}}>Log Out</Anchor></li>
+                                    <li><Anchor onClick={this.logOut.bind(this)}>Log Out</Anchor></li>
                                 </ul>
                         </li>;
 
@@ -48,8 +53,8 @@ class HeaderBar extends React.Component {
                                 <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/index')}}>Home</Anchor> </li>
                                 <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/guest-houses')}}>Guest Houses</Anchor> </li>
                                 <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
-                                <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/blogs')}}>Blog</Anchor> </li>
-                                <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
+                                <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsMenuClicked.bind(this)}>Blog</Anchor> </li>
+                                <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={()=>{ Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
                                 {content}
                             </ul>
                         </div>
