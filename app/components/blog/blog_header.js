@@ -3,7 +3,6 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 const DateHelper = require('../../helpers/date_helper')
-const GalleryHelper = require('../../helpers/gallery_helper');
 const Slider = require('react-slick');
 
 

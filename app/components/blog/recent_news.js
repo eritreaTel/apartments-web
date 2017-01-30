@@ -5,6 +5,8 @@ const Actions = require('../../actions/actions');
 const GalleryHelper = require('../../helpers/gallery_helper');
 const DateHelper = require('../../helpers/date_helper');
 const withDataLoaded = require('../with_data_loaded');
+const Slider = require('react-slick');
+
 import MDSpinner from "react-md-spinner";
 
 
@@ -52,11 +54,17 @@ const NewsHeading = function (props) {
 
 class NewsGalleries extends React.Component {
 
-    componentDidMount(){
-        GalleryHelper.reRenderGalleries();
-    }
 
     render() {
+        let sliderProps = {
+            arrows    : true,
+            autoplay  : false,
+            dots : true,
+            slidesToShow : 1,
+            slidesToScroll : 1,
+            infinite : true
+        }
+
         const {recentNews} = this.props;
         let galleries = [];
         _.each(recentNews, (oneNew) => {
@@ -65,16 +73,16 @@ class NewsGalleries extends React.Component {
             });
         });
 
-        const styledFullLi = galleries.map(item =>{
-            return <li key={item.id}><img width="670px" height ="350px" src={assetPath(item.full_image)} alt={item.caption}/></li>;
-        });
+        const styledGalleries = galleries.map(item =>{
+                                return <img key={item.id} width="670px" height ="350px" src={assetPath(item.full_image)} alt={item.caption}/>
+                             });
 
         return (
             <div className="col-md-7">
                 <div className="mg-gallery-container">
-                    <ul className="mg-gallery" id="mg-gallery">
-                        {styledFullLi}
-                    </ul>
+                    <Slider {...sliderProps}>
+                        {styledGalleries}
+                    </Slider>
                 </div>
             </div>
         );

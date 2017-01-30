@@ -7,9 +7,9 @@ const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const withDataLoaded = require('../components/with_data_loaded')
 const {assetPath} = require('../helpers/asset_helper');
-const GalleryHelper=  require('../helpers/gallery_helper');
 const DateHelper = require('../helpers/date_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
+const Slider = require('react-slick');
 
 import MDSpinner from "react-md-spinner";
 import ReactDOM from 'react-dom';
@@ -255,33 +255,31 @@ class ApartmentReviewForm extends React.Component {
 
 class ApartmentGalleries extends React.Component {
 
-	componentDidMount() {
-		GalleryHelper.reRenderGalleries();
-	}
+	render() {
+		let sliderProps = {
+			arrows    : true,
+			autoplay  : false,
+			dots : true,
+			slidesToShow : 1,
+			slidesToScroll : 1,
+			infinite : true
+		}
 
-	render(){
 		const {galleries} = this.props;
-		const styledFullLi = galleries && galleries.map(gallery => {
-			return 	<li key={gallery.id}><img src={assetPath(gallery.full)} alt={gallery.caption}/></li>;
-		});
-
-		const styledThumbLi = galleries && galleries.map(gallery => {
-			return 	<li key={gallery.id * 2}><img src={assetPath(gallery.thumb)} alt={gallery.caption}/></li>;
+		const styledImages = galleries && galleries.map(gallery => {
+			return 	<img key={gallery.id} src={assetPath(gallery.full)} alt={gallery.caption}/>;
 		});
 
 		return (
 			<div className="col-md-7">
 				<div className="mg-gallery-container">
-					<ul className="mg-gallery" id="mg-gallery">
-						{styledFullLi}
-					</ul>
-
-					<ul className="mg-gallery-thumb" id="mg-gallery-thumb">
-						{styledThumbLi}
-					</ul>
+					<Slider {...sliderProps}>
+						{styledImages}
+					</Slider>
 				</div>
 			</div>
-		);}
+		)
+	}
 
 }
 

@@ -58,6 +58,7 @@
     "react-test-utils": "0.0.1",
     "react-time-input": "0.0.13",
     "react-validation": "^2.10.9",
+    "slick-carousel": "^1.6.0",
     "superagent": "^3.3.1",
     "svg-inline-loader": "^0.7.1",
     "svg-inline-react": "^1.0.2",

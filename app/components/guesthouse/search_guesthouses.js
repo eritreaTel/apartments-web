@@ -2,7 +2,6 @@ const React = require('react');
 const DatePicker = require('react-bootstrap-date-picker');
 var Select = require('react-select');
 const Actions = require('../../actions/actions');
-const SearchDateHelper = require('../../helpers/search_date_helper');
 const DateHelper = require('../../helpers/date_helper');
 const Constants = require('../../helpers/constants');
 
@@ -95,10 +94,6 @@ class SearchControls extends React.Component {
 
     componentWillMount() {
         const {searchInfo} = this.props;
-    }
-
-    componentDidMount() {
-        SearchDateHelper.initializeDatePickers();
     }
 
     render() {

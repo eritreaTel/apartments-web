@@ -20,15 +20,12 @@ import 'rc-checkbox/assets/index.css';
 import 'react-dates/lib/css/_datepicker.css';
 import '../../public/css/bootstrap.min.css';
 import '../../public/css/font-awesome.min.css';
-import '../../public/css/owl.carousel.css';
-import '../../public/css/owl.theme.css';
-import '../../public/css/owl.transitions.css';
 import '../../public/css/cs-select.css';
 import '../../public/css/bootstrap-datepicker3.min.css';
 import '../../public/css/freepik.hotels.css';
 import '../../public/css/style.css';
-
-
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 const HeaderBar = require('./ribbons/header_bar');
@@ -103,6 +100,8 @@ class Page extends React.Component {
         );
     }
 }
+
+
 
 Page.propTypes = {
     store: types.object.isRequired
