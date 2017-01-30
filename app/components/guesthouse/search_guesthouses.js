@@ -99,6 +99,7 @@ class SearchControls extends React.Component {
     render() {
         let checkInDate, checkOutDate, room, adult, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
+        let displayFormat = "DD-MM-YYYY";
 
         if (searchInfo != null) {
             checkInFocused  = searchInfo.checkInFocused ? true : false;
@@ -113,18 +114,18 @@ class SearchControls extends React.Component {
             <div className="row">
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <SingleDatePicker placeholder="CheckIn Date" date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
+                        <SingleDatePicker placeholder="CheckIn Date" displayFormat={displayFormat} date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
 
                     </div>
                 </div>
 
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <SingleDatePicker placeholder="Check Out" date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
+                        <SingleDatePicker placeholder="Check Out" displayFormat={displayFormat} date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
                     </div>
                 </div>
 
-                <div className="col-md-3">
+                <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="row">
                         <div className="col-xs-6">
                             <Room id='room' value={room}/>
@@ -134,7 +135,7 @@ class SearchControls extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 col-sm-6 col-xs-6">
                         <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block">Check Now</button>
                 </div>
             </div>

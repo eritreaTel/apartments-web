@@ -134,9 +134,7 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Arrival Date</label><span className='required-input'> * </span>
-                                            <div className="background-light-grey">
-                                                <SingleDatePicker className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
-                                            </div>
+                                            <SingleDatePicker className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
                                         </div>
                                     </div>
                                     <div className="col-md-1"/>
