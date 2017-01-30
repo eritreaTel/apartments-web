@@ -11,6 +11,14 @@ module.exports = {
       // please note that the entire loaders array must be replaced
       loaders: [
         {
+          test: /\.css$/,
+          loader: "style-loader!css-loader"
+        },
+        {
+          test: /\.(ttf|eot|svg|woff(2)?)(\S+)?$/,
+          loader: 'file-loader?publicPath=/&name=fonts/[name].[ext]'
+        },
+        {
             test: /config\.js$/,
             loader: path.join(__dirname, 'config_loader')
         },
