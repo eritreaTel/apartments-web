@@ -6,21 +6,6 @@ const DateHelper = require('../../helpers/date_helper')
 const GalleryHelper = require('../../helpers/gallery_helper');
 const Slider = require('react-slick');
 
-class PrevArrow extends React.Component {
-    render() {
-        return (
-            <i class="fa fa-long-arrow-left"></i>
-        )
-    }
-}
-
-class NextArrow extends React.Component {
-   render() {
-        return (
-            <i class="fa fa-long-arrow-right"></i>
-        )
-   }
-}
 
 class BlogImage extends React.Component {
 
@@ -36,10 +21,8 @@ class BlogImage extends React.Component {
 
         let sliderProps = {
             arrows    : true,
-            nextArrow : <NextArrow />,
-            prevArrow : <PrevArrow />,
             autoplay  : true,
-            autoplaySpeed : 10000,
+            autoplaySpeed : 6000,
             dots : true,
             slidesToShow : 1,
             slidesToScroll : 1,
@@ -64,7 +47,7 @@ class BlogHeader extends React.Component {
         let {blogComments} = blog;
         let blogCommentSection = '' ;
         if (blogComments && blogComments.length > 0 ) {
-            blogCommentSection = <span><Anchor > {blogComments.length} Comments</Anchor></span>
+            blogCommentSection = <span>{blogComments.length} Comments</span>
         }
 
         return (

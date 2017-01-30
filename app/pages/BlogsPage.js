@@ -83,7 +83,7 @@ const WithUserLoaded = withDataLoaded({
 	data: [
 		{
 			storeKeys: ['blogs'],
-			loadDataFn: () => Actions.getBlogs()
+			loadDataFn: () => Actions.getBlogs({})
 		},
 		{
 			storeKeys: ['blogMetaData'],

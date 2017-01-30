@@ -5,6 +5,11 @@ const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
 
 
+const onBlogCategoryClicked = function (category) {
+    Actions.getBlogs({'category' : category})
+    Actions.setRoute('/blogs');
+}
+
 const RecentPost = function (props) {
     const styledLi = props.news && props.news.map(singleNews => {
         return  <li key={singleNews.id}>
@@ -22,7 +27,7 @@ const RecentPost = function (props) {
 const Categories = function (props) {
     const styledLi =  props.blogMetaData && props.blogMetaData.map(metaData => {
             if (metaData.type == 'category') {
-                return <li key={metaData.id}><Anchor>{metaData.value}</Anchor></li>;
+                return <li key={metaData.id}><Anchor onClick={()=>{onBlogCategoryClicked(metaData.value)}} >{metaData.value}</Anchor></li>;
             }
     });
 

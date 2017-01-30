@@ -3,8 +3,12 @@ const ResponseHelper = require('../helpers/response_helper');
 
 
 module.exports = {
-    async getBlogs() {
-        const url = 'blogs';
+    async getBlogs({tags, category}) {
+        let url = 'blogs';
+
+        url = (tags == undefined)? url : url + '?tags=' + tags;
+        url = (category == undefined)? url : url + '?category=' + category;
+
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreValue('blogs').length ==0 ) {
             this.setStoreVal('requestUrl', url);
 
