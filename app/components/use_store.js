@@ -12,6 +12,7 @@ module.exports = {
                 const routes = require('../../config/routes');
                 const router = new (require('director').Router)(routes);
 
+
                 Dispatcher.updateStore = function (callback) {
                     this.setState({store: callback(this.state.store)});
                     DebugHelper.trackStore(this.state.store);
