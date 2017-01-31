@@ -8,7 +8,7 @@ const app = express();
 const pathToPublic = path.join(__dirname, 'public');
 //const DATA_FILE = pathToPublic.join(__dirname, 'data.json');
 
-app.set('port', (process.env.PORT || 4000));
+app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
 app.use('/', express.static(pathToPublic));
