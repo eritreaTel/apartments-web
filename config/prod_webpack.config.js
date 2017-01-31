@@ -2,6 +2,7 @@ const path = require('path');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 module.exports = {
+    devtool : 'cheap-module-source-map',
     bail: false,
     entry: {
       application: './app/components/application.js'
@@ -48,8 +49,10 @@ module.exports = {
     plugins: [
         new DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify("prod")
+                'NODE_ENV': JSON.stringify("production")
             }
-        })
+        }),
+        new NoErrorsPlugin(),
+        new UglifyJsPlugin({compress: {warnings: false}})
     ]
 };
