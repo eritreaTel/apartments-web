@@ -14,7 +14,7 @@ class HeaderBar extends React.Component {
         Actions.setRoute('/index');
     }
 
-    onBlogsMenuClicked() {
+    onBlogsClicked() {
         AnHelper.logEvent(AnHelper.CATEGORY_BLOGS_PAGE, AnHelper.ACTION_CLICKED);
         Actions.getBlogs({});
         Actions.setRoute('/blogs');
