@@ -1,5 +1,6 @@
 const React = require('react');
 const ReactGA = require('react-ga');
+ReactGA.initialize('UA-91184275-1 ');
 
 module.exports = {
     CATEGORY_HOME_PAGE      : 'index',
@@ -22,7 +23,6 @@ module.exports = {
     ACTION_CLICKED : 'clicked',
 
     logEvent(category, action) {
-        ReactGA.initialize('UA-91184275-1 ');
         ReactGA.event({
             category,
             action
