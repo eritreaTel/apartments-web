@@ -4,6 +4,7 @@ const {assetPath} = require('../../helpers/asset_helper');
 const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 const CookiesHelper = require('../../helpers/cookies_helper');
+const AnHelper = require('../../helpers/analytics_helper');
 
 class HeaderBar extends React.Component {
 
@@ -14,6 +15,7 @@ class HeaderBar extends React.Component {
     }
 
     onBlogsMenuClicked() {
+        AnHelper.logEvent(AnHelper.CATEGORY_BLOGS_PAGE, AnHelper.ACTION_CLICKED);
         Actions.getBlogs({});
         Actions.setRoute('/blogs');
     }
