@@ -20,6 +20,41 @@ class HeaderBar extends React.Component {
         Actions.setRoute('/blogs');
     }
 
+    onHomeClicked() {
+        AnHelper.logEvent(AnHelper.CATEGORY_HOME_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.setRoute('/index');
+    }
+
+    onGuestHousesClicked() {
+        AnHelper.logEvent(AnHelper.CATEGORY_GUESTHOUSE_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.setRoute('/guest-houses');
+    }
+
+    onAboutUsClicked(){
+        AnHelper.logEvent(AnHelper.CATEGORY_ABOUT_US_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.setRoute('/about-us');
+    }
+
+    onContactUsClicked(){
+        AnHelper.logEvent(AnHelper.CATEGORY_CONTACT_US_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.setRoute('/contact-us');
+    }
+
+    onBookingsClicked() {
+        console.log('booking clicked');
+        AnHelper.logEvent(AnHelper.CATEGORY_SEEKER_ACCOUNT_BOOKING_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.seekerUserInfoUpdated({'activeLink' : 'booking'});
+        Actions.setRoute('/my-account');
+
+    }
+
+    onEdiProfileClicked() {
+        console.log('profile clicked');
+        AnHelper.logEvent(AnHelper.CATEGORY_SEEKER_ACCOUNT_PROFILE_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'});
+        Actions.setRoute('/my-account');
+    }
+
     render() {
         const {store : {view : {page}}, user} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
@@ -27,8 +62,8 @@ class HeaderBar extends React.Component {
         let myAccount = <li  className={ page == 'my-account' ? 'active dropdown' : 'dropdown'}>
                             <Anchor className="dropdown-toggle" onClick={() => {}} data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span className="caret"></span></Anchor>
                                 <ul className="dropdown-menu">
-                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'booking'}); Actions.setRoute('/my-account');}}>Bookings</Anchor></li>
-                                    <li><Anchor onClick={() => {Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'}); Actions.setRoute('/my-account');}}>Edit Profile</Anchor></li>
+                                    <li><Anchor onClick={this.onBookingsClicked.bind(this)}>Bookings</Anchor></li>
+                                    <li><Anchor onClick={this.onEdiProfileClicked.bind(this)}>Edit Profile</Anchor></li>
                                     <li><Anchor onClick={this.logOut.bind(this)}>Log Out</Anchor></li>
                                 </ul>
                         </li>;
@@ -52,11 +87,11 @@ class HeaderBar extends React.Component {
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
-                                <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/index')}}>Home</Anchor> </li>
-                                <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/guest-houses')}}>Guest Houses</Anchor> </li>
-                                <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/about-us')}}>About Us</Anchor> </li>
-                                <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsMenuClicked.bind(this)}>Blog</Anchor> </li>
-                                <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={()=>{ Actions.setRoute('/contact-us')}}>Contact Us</Anchor> </li>
+                                <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={this.onHomeClicked.bind(this)}>Home</Anchor> </li>
+                                <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onGuestHousesClicked.bind(this)}>Guest Houses</Anchor> </li>
+                                <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
+                                <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsClicked.bind(this)}>Blog</Anchor> </li>
+                                <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={this.onContactUsClicked.bind(this)}>Contact Us</Anchor> </li>
                                 {content}
                             </ul>
                         </div>
