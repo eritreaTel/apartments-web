@@ -55,6 +55,19 @@ module.exports = {
             }
         }),
         new NoErrorsPlugin(),
-        new UglifyJsPlugin({compress: {warnings: false}})
+        new UglifyJsPlugin({
+            comments: false,
+            compress: {
+                unused: true,
+                dead_code: true,
+                warnings: false,
+                drop_debugger: true,
+                conditionals: true,
+                evaluate: true,
+                drop_console: true,
+                sequences: true,
+                booleans: true
+            }
+        })
     ]
 };
