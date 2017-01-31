@@ -1,5 +1,7 @@
 const path = require('path');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin');
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
     devtool : 'cheap-module-source-map',
