@@ -8,6 +8,12 @@ const app = express();
 const pathToPublic = path.join(__dirname, 'public');
 //const DATA_FILE = pathToPublic.join(__dirname, 'data.json');
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
@@ -31,11 +37,6 @@ app.use('/privacy-policy', express.static(pathToPublic));
 app.use(bodyParser.urlencoded({extended: true}));
 */
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
-});
 
 // universal routing and rendering
 app.get('/', (req, res) => {
