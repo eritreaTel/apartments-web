@@ -2,6 +2,8 @@ const path = require('path');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 
 module.exports = {
     devtool : 'cheap-module-source-map',
@@ -68,6 +70,13 @@ module.exports = {
                 sequences: true,
                 booleans: true
             }
+        }),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0.8
         })
     ]
 };

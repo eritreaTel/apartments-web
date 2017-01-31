@@ -31,6 +31,11 @@ app.use('/privacy-policy', express.static(pathToPublic));
 app.use(bodyParser.urlencoded({extended: true}));
 */
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 
 // universal routing and rendering
 app.get('/', (req, res) => {
