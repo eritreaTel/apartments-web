@@ -42,7 +42,6 @@ class HeaderBar extends React.Component {
     }
 
     onBookingsClicked() {
-        console.log('booking clicked');
         AnHelper.logEvent(AnHelper.CATEGORY_SEEKER_ACCOUNT_BOOKING_PAGE, AnHelper.ACTION_CLICKED);
         Actions.seekerUserInfoUpdated({'activeLink' : 'booking'});
         Actions.setRoute('/my-account');
@@ -50,10 +49,15 @@ class HeaderBar extends React.Component {
     }
 
     onEdiProfileClicked() {
-        console.log('profile clicked');
         AnHelper.logEvent(AnHelper.CATEGORY_SEEKER_ACCOUNT_PROFILE_PAGE, AnHelper.ACTION_CLICKED);
         Actions.seekerUserInfoUpdated({'activeLink' : 'editProfile'});
         Actions.setRoute('/my-account');
+    }
+
+    onSignInClicked(){
+        AnHelper.logEvent(AnHelper.CATEGORY_SIGN_IN_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.setRoute('/sign-in')
+        Actions.goToSignInPage();
     }
 
     render() {
@@ -69,7 +73,7 @@ class HeaderBar extends React.Component {
                                 </ul>
                         </li>;
 
-        let signIn = <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={()=>{Actions.setRoute('/sign-in')}}>Sign In</Anchor> </li>;
+        let signIn = <li  className={ page == 'sign-in' ? 'active' : ''}><Anchor onClick={this.onSignInClicked.bind(this)}>Sign In</Anchor> </li>;
         let content = loggedIn ? myAccount : signIn;
 
         return (
