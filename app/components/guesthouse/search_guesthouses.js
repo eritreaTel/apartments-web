@@ -8,6 +8,42 @@ const Constants = require('../../helpers/constants');
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import { SingleDatePicker } from 'react-dates';
+var onClickOutside = require('react-onclickoutside');
+
+class CheckInDate extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <SingleDatePicker {...this.props} />
+    }
+
+    handleClickOutside() {
+        const {focused} = this.props;
+        if (focused) {
+            Actions.searchApartmentsUpdated({'checkInFocused'  : false});
+        }
+    }
+}
+
+class CheckOutDate extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <SingleDatePicker {...this.props} />
+    }
+
+    handleClickOutside() {
+        const {focused} = this.props;
+        if (focused) {
+            Actions.searchApartmentsUpdated({'checkOutFocused': false});
+        }
+    }
+}
+
 
 const onSearchApartmentsClicked = function (searchInfo) {
     //Make sure checkout date is greater than checkIn date
@@ -101,6 +137,9 @@ class SearchControls extends React.Component {
         let {searchInfo} = this.props;
         let displayFormat = "DD-MM-YYYY";
 
+        var CheckInDateInstance = onClickOutside(CheckInDate);
+        var CheckOutDateInstance = onClickOutside(CheckOutDate);
+
         if (searchInfo != null) {
             checkInFocused  = searchInfo.checkInFocused ? true : false;
             checkOutFocused = searchInfo.checkOutFocused ? true : false;
@@ -114,14 +153,14 @@ class SearchControls extends React.Component {
             <div className="row">
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <SingleDatePicker placeholder="CheckIn Date" displayFormat={displayFormat} date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
+                        <CheckInDateInstance  placeholder="CheckIn Date" displayFormat={displayFormat} date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
 
                     </div>
                 </div>
 
                 <div className="col-md-3 col-sm-6 col-xs-6">
                     <div className="input-group date">
-                        <SingleDatePicker placeholder="Check Out" displayFormat={displayFormat} date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
+                        <CheckOutDateInstance  placeholder="Check Out" displayFormat={displayFormat} date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
                     </div>
                 </div>
 

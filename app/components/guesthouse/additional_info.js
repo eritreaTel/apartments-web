@@ -7,10 +7,28 @@ const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
 const CurrencyFormatter = require('currency-formatter');
 const DatePicker = require('react-bootstrap-date-picker');
+var onClickOutside = require('react-onclickoutside');
 import Checkbox from 'rc-checkbox';
 import TimeInput from 'react-time-input';
 
 import { SingleDatePicker } from 'react-dates';
+
+class ArrivalDate extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <SingleDatePicker {...this.props} />
+    }
+
+    handleClickOutside() {
+        const {focused} = this.props;
+        if (focused) {
+            Actions.additionalServicesUpdated({'arrival_date_focused' : false});
+        }
+    }
+}
 
 function onArrivalDateChanged(date) {
     Actions.additionalServicesUpdated({'arrival_date' : date});
@@ -87,6 +105,8 @@ class AdditionalInfo extends React.Component {
         let airportPickup = 0, carRentals = 0, tourGuides = 0, arrivalDateFocused = false;
         let arrival_date = searchInfo.checkInDate;
 
+        let ArrivalDateInstance = onClickOutside(ArrivalDate);
+
         if (additional) {
             arrival_date  = additional.arrival_date ? additional.arrival_date : arrival_date;
             airline_name  = additional.airline_name;
@@ -134,7 +154,7 @@ class AdditionalInfo extends React.Component {
                                     <div className="col-md-4">
                                         <div className="mg-book-form-input">
                                             <label>Arrival Date</label><span className='required-input'> * </span>
-                                            <SingleDatePicker className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
+                                            <ArrivalDateInstance className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
                                         </div>
                                     </div>
                                     <div className="col-md-1"/>
