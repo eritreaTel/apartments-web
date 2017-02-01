@@ -33,7 +33,7 @@ class HomePage extends React.Component {
 					<SearchApartment searchInfo={searchInfo} parentClassName="mt80"  wrapInContainer="mg-book-now container" />
 				</div>
 				<BestApartmentsSection store={store} />
-				
+
 				<RecentNews store={store}/>
 			</div>
 		);

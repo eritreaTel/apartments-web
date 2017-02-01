@@ -22,8 +22,8 @@ const Section = function(props) {
 const TitleSection  = function() {
         return (
             <div className="mg-sec-title">
-                <h2>Our Best Guest Houses</h2>
-                <p>These best guest houses are chosen by our customers</p>
+                <h2>Recommended Guest Houses</h2>
+                <p>These guest houses are chosen by our customers</p>
             </div>
         );
 }
