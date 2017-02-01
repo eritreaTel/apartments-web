@@ -10,6 +10,7 @@ const Constants = require('../../helpers/constants');
 const Month = require('../shared/month');
 const Year  = require('../shared/year');
 const CurrencyFormatter = require('currency-formatter');
+const {stripKey} = require('../../../config/config');
 
 import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -28,7 +29,7 @@ function onTermsCheckBoxChanged(e, checked) {
 class PersonalInfo extends React.Component {
 
     componentDidMount() {
-        Stripe.setPublishableKey('pk_test_xNk89utQrNjwzmaqOLlteVnz');
+        Stripe.setPublishableKey(stripKey);
         window.scrollTo(0, 20);
         this.refs.first_name.focus();
     }
