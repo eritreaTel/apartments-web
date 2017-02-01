@@ -8,13 +8,11 @@ import MDSpinner from "react-md-spinner";
 
 const Section = function(props) {
     return (
-        <div className="mg-best-rooms">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12">
-                        <TitleSection />
-                        {props.children}
-                    </div>
+        <div className="container mg-best-rooms">
+            <div className="row">
+                <div className="col-md-12">
+                    <TitleSection />
+                    {props.children}
                 </div>
             </div>
         </div>

@@ -15,8 +15,8 @@ class AboutUs extends React.Component {
 
     render() {
         return (
-            <div className="mg-about parallax">
-                <div className="container">
+            <div className="parallax">
+                <div className="mg-about container">
                     <div className="row">
                         {this.renderTitle()}
 

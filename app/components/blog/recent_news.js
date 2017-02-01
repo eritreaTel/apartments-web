@@ -12,20 +12,18 @@ import MDSpinner from "react-md-spinner";
 
 const NewsBody = function (props) {
     return (
-        <div className="mg-news-gallery">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-5">
-                        <h2 className="mg-sec-left-title">Recent News</h2>
-                    </div>
-                    <div className="col-md-7">
-                        <h2 className="mg-sec-left-title">Our Gallery</h2>
-                    </div>
+        <div className="mg-news-gallery container">
+            <div className="row">
+                <div className="col-md-5">
+                    <h2 className="mg-sec-left-title">Recent News</h2>
                 </div>
+                <div className="col-md-7">
+                    <h2 className="mg-sec-left-title">Our Gallery</h2>
+                </div>
+            </div>
 
-                <div className="row">
-                    {props.children}
-                </div>
+            <div className="row">
+                {props.children}
             </div>
         </div>
     );

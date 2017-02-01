@@ -6,6 +6,7 @@ const AboutUs = require('../components/shared/about_us');
 const RecentNews = require('../components/blog/recent_news');
 const Actions = require('../actions/actions');
 const DateHelper = require('../helpers/date_helper');
+const PageTitle = require('../components/shared/pageTitle');
 
 class HomePage extends React.Component {
 
@@ -27,10 +28,12 @@ class HomePage extends React.Component {
 		const {bookingStage :{searchInfo}} = store;
 		return (
 			<div>
-				<Carousel/>
-				<SearchApartment searchInfo={searchInfo} parentClassName="mg-book-now"  wrapInContainer="container" />
+				<PageTitle parentClassName="mg-page-title-space parallax"/>
+				<div className="mg-saerch-room">
+					<SearchApartment searchInfo={searchInfo} parentClassName="mt80"  wrapInContainer="mg-book-now container" />
+				</div>
 				<BestApartmentsSection store={store} />
-				<AboutUs/>
+				
 				<RecentNews store={store}/>
 			</div>
 		);
