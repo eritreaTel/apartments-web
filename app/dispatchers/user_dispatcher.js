@@ -98,13 +98,13 @@ module.exports = {
                 if (errors.length > 0) {
                     this.releaseLock('logIn');
                     await this.dispatch({type: 'setErrorMessages', data : {errors}});
-                    return;
+                } else {
+                    user = object;
+                    this.setStoreVal('user', user);
+                    CookiesHelper.setSessionCookie(object.php_session_id, 3600);
+                    CookiesHelper.addDataToCookie('userId', object.id, 3600);
+                    CookiesHelper.addDataToCookie('userType', object.type, 3600);
                 }
-                user = object;
-                this.setStoreVal('user', user);
-                CookiesHelper.setSessionCookie(object.php_session_id, 3600);
-                CookiesHelper.addDataToCookie('userId', object.id, 3600);
-                CookiesHelper.addDataToCookie('userType', object.type, 3600);
             } catch (error) {
                 await this.dispatch({
                     type: 'handleRequestError',
@@ -152,9 +152,9 @@ module.exports = {
             let url = 'users/' + userId;
             const response = await FetchHelper.fetchJson(url, {method: 'GET'});
 
-            if (response.data && response.data.results && response.data.results.length > 0) {
-                user = response.data.results[0];
-                this.setStoreVal('user', user);
+            const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+            if (errors.length == 0) {
+                this.setStoreVal('user', object);
             }
         } catch (error) {
             await this.dispatch({type: 'handleRequestError', data: {error, defaultErrorMessage: 'Failed to get authenticated user'}});

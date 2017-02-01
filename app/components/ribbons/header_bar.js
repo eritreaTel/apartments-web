@@ -9,6 +9,7 @@ const AnHelper = require('../../helpers/analytics_helper');
 class HeaderBar extends React.Component {
 
     logOut(){
+        AnHelper.logEvent(AnHelper.CATEGORY_SIGN_OUT_PAGE, AnHelper.ACTION_CLICKED);
         Actions.logOut();
         window.location.reload()
         Actions.setRoute('/index');

@@ -6,5 +6,6 @@
   "loginHost": "http://35.162.253.99",
   "toolsHost": "http://ugandabooking.com",
   "clientErrorLoggingEnabled": false,
-  "cookieDomain": ".ugandabooking.com"
+  "cookieDomain": ".ugandabooking.com",
+  "stripKey" : "pk_live_mVOvWEWpnZ4oZdqE0G05829E"
 }

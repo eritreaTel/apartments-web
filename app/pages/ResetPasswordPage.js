@@ -19,15 +19,16 @@ class ResetPasswordBody extends React.Component {
 			return ;
 		}
 
-		let isProcessing = {resettingPassword: true};
+		let isProcessing = {sendingResetPassword: true};
 		Actions.setIsProcessing(isProcessing);
 
 		let sendResetPasswordResponse = Actions.sendResetPasswordToken(data);
 		sendResetPasswordResponse.then(response => {
 			if (response.status == 'fail') {
 				NotificationManager.error(response.error, 'Reset Password', Constants.ERROR_DISPLAY_TIME);
+				this.refs.email.focus();
 			}
-			let isProcessing = {resettingPassword: false};
+			let isProcessing = {sendingResetPassword: false};
 			Actions.setIsProcessing(isProcessing);
 		});
 	}
@@ -35,6 +36,7 @@ class ResetPasswordBody extends React.Component {
 	componentDidMount() {
 		const {resetPassword : {email}} = this.props;
 		this.refs.email.value = email
+		this.refs.email.focus();
 	}
 
 	render() {
@@ -95,11 +97,16 @@ class EnterCodeBody extends React.Component {
 		validateResponse.then(response => {
 			if (response.status == 'fail') {
 				NotificationManager.error(response.error, 'Reset Password - Enter Code', Constants.ERROR_DISPLAY_TIME);
+				this.refs.code.focus();
 			}
 
 			let isProcessing = {processingResetCode: false};
 			Actions.setIsProcessing(isProcessing);
 		});
+	}
+
+	componentDidMount() {
+		this.refs.code.focus();
 	}
 
 	render() {
@@ -125,7 +132,7 @@ class EnterCodeBody extends React.Component {
 
 					<div className="row margin-bottom-20">
 						<div className="col-md-4"> </div>
-						<div className="col-md-3">
+						<div className="col-md-4">
 							<div className="row">
 								<div className="col-md-7"> </div>
 								<div className="col-md-5 ">
@@ -138,7 +145,7 @@ class EnterCodeBody extends React.Component {
 
 					<div className="row">
 						<div className="col-md-4"> </div>
-						<div className="col-md-3">
+						<div className="col-md-4">
 							<div className="mg-book-form-input">
 								<Anchor onClick={this.submitCode.bind(this)} className="width-265 btn btn-primary">Submit Code</Anchor>
 								<MDSpinner className={spinnerClassName} />
@@ -189,6 +196,7 @@ class UpdatePasswordBody extends React.Component {
 					Actions.setIsProcessing(isProcessing);
 					if (response.status == 'fail') {
 						NotificationManager.error(response.error, 'Reset Password - Update Password', Constants.ERROR_DISPLAY_TIME);
+						this.refs.password.focus();
 					} else {
 						Actions.setRoute('/my-account');
 					}
@@ -196,6 +204,10 @@ class UpdatePasswordBody extends React.Component {
 			}
 		});
 
+	}
+
+	componentDidMount() {
+		this.refs.password.focus();
 	}
 
 	render() {
