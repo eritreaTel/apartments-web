@@ -272,11 +272,9 @@ class ApartmentGalleries extends React.Component {
 
 		return (
 			<div className="col-md-7">
-				<div className="mg-gallery-container">
-					<Slider {...sliderProps}>
-						{styledImages}
-					</Slider>
-				</div>
+				<Slider {...sliderProps}>
+					{styledImages}
+				</Slider>
 			</div>
 		)
 	}

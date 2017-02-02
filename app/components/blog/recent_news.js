@@ -77,11 +77,9 @@ class NewsGalleries extends React.Component {
 
         return (
             <div className="col-md-7">
-                <div className="mg-gallery-container">
-                    <Slider {...sliderProps}>
-                        {styledGalleries}
-                    </Slider>
-                </div>
+                <Slider {...sliderProps}>
+                    {styledGalleries}
+                </Slider>
             </div>
         );
     }

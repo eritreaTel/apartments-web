@@ -4645,3 +4645,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   left: 37% !important;
   width: 450px !important;
 }
+
+.slick-slide {
+  height: auto !important;
+}
