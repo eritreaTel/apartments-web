@@ -151,8 +151,10 @@ class SignUpBody extends React.Component {
 
 		const createUserPromise = Actions.createUser(userInfo);
 		createUserPromise.then(response => {
+			let isProcessing = {creatingUser: false};
 			if (response.status == 'fail') {
 				NotificationManager.error(response.error, 'Sign Up', Constants.ERROR_DISPLAY_TIME);
+				Actions.setIsProcessing(isProcessing);
 			} else {
 				let credentials = {
 					email    : userInfo.email,
@@ -160,10 +162,9 @@ class SignUpBody extends React.Component {
 				}
 
 				Actions.logIn(credentials);
+				Actions.setRoute('/my-account');
+				Actions.setIsProcessing(isProcessing);
 			}
-
-			let isProcessing = {creatingUser: false};
-			Actions.setIsProcessing(isProcessing);
 		});
 	}
 
