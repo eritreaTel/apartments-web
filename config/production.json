@@ -3,7 +3,7 @@
   "bucketInfo" : "ugandabooking-assets/prod/system",
   "hotModule": false,
   "isLocal": false,
-  "loginHost": "http://35.162.253.99",
+  "loginHost": "https://api.ugandabooking.com",
   "toolsHost": "http://ugandabooking.com",
   "clientErrorLoggingEnabled": false,
   "cookieDomain": ".ugandabooking.com",
