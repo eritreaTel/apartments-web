@@ -11,11 +11,11 @@ app.set('view engine', 'html');
 
 //Reroute http to https
 app.all('*', function(req, res, next) {
-  if (req.get('x-forwarded-proto') != "https") {
+  if(req.secure){
+    next();
+  } else {
     res.set('x-forwarded-proto', 'https');
     res.redirect('https://' + req.get('host') + req.url);
-  } else {
-    next();
   }
 });
 
