@@ -3,12 +3,14 @@ const express = require('express');
 const fs = require('fs');
 */
 const path = require('path');
-
 const app = express();
+const pathToPublic = path.join(__dirname, 'public');
 
+app.set('port', (process.env.PORT || 8080));
+app.set('view engine', 'html');
 
 //Reroute http to https
-app.get('*', function(req, res, next) {
+app.all('*', function(req, res, next) {
   if (req.get('x-forwarded-proto') != "https") {
     res.set('x-forwarded-proto', 'https');
     res.redirect('https://' + req.get('host') + req.url);
@@ -17,19 +19,12 @@ app.get('*', function(req, res, next) {
   }
 });
 
-
-
-const pathToPublic = path.join(__dirname, 'public');
-//const DATA_FILE = pathToPublic.join(__dirname, 'data.json');
-
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
   res.set('Content-Encoding', 'gzip');
   next();
 });
 
-app.set('port', (process.env.PORT || 8080));
-app.set('view engine', 'html');
 
 app.use('/', express.static(pathToPublic));
 app.use('/index', express.static(pathToPublic));
