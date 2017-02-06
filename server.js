@@ -12,10 +12,10 @@ app.set('view engine', 'html');
 
 
 app.use(function(req, res, next) {
-  if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
-    res.redirect('https://' + req.get('Host') + req.url);
-  }
-  else
+  let url = req.get('Host') + req.url;
+  if((!req.secure) && url != 'www.ugandabooking.com/contact-us' && (req.get('X-Forwarded-Proto') !== 'https')) {
+    res.redirect('https://' + url);
+  } else
     next();
 });
 
