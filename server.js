@@ -5,16 +5,18 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 const pathToPublic = path.join(__dirname, 'public');
-var httpsRedirect = require('express-https-redirect');
 
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
-//If heartbeat, render hearbeat without redirection
-app.get('/', (req, res) => {
-  return res.render('hearbeat');
-});
 
+app.use(function(req, res, next) {
+  if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https') && req.originalUrl != 'hearbeat') {
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else
+    next();
+});
 
 
 app.get('*.js', function (req, res, next) {
@@ -47,7 +49,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // universal routing and rendering
 app.get('/', (req, res) => {
-  return res.render('index');
+  if (req.originalUrl == 'hearbeat') {
+    return res.render('hearbeat');
+  } else {
+    return res.render('index');
+
+  }
 });
 
 app.listen(app.get('port'), () => {
