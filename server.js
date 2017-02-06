@@ -5,16 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 const pathToPublic = path.join(__dirname, 'public');
+var httpsRedirect = require('express-https-redirect');
 
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
-app.set('forceSSLOptions', {
-  enable301Redirects: true,
-  trustXFPHeader: false,
-  httpsPort: 443,
-  sslRequiredMessage: 'SSL Required.'
-});
+app.use('/', httpsRedirect());
 
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
