@@ -10,7 +10,15 @@ var httpsRedirect = require('express-https-redirect');
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
-app.use('/', httpsRedirect());
+
+app.use(function(req, res, next) {
+  if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https')) {
+    res.redirect('https://' + req.get('Host') + req.url);
+  }
+  else
+    next();
+});
+
 
 app.get('*.js', function (req, res, next) {
   req.url = req.url + '.gz';
