@@ -10,14 +10,11 @@ var httpsRedirect = require('express-https-redirect');
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
-
-app.use(function(req, res, next) {
-  let url = req.get('Host') + req.url;
-  if((!req.secure) && url != 'www.ugandabooking.com/contact-us' && (req.get('X-Forwarded-Proto') !== 'https')) {
-    res.redirect('https://' + url);
-  } else
-    next();
+//If heartbeat, render hearbeat without redirection
+app.get('/', (req, res) => {
+  return res.render('hearbeat');
 });
+
 
 
 app.get('*.js', function (req, res, next) {
