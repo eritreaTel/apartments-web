@@ -5,6 +5,20 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
+
+
+//Reroute http to https
+app.get('*', function(req, res, next) {
+  if (req.get('x-forwarded-proto') != "https") {
+    res.set('x-forwarded-proto', 'https');
+    res.redirect('https://' + req.get('host') + req.url);
+  } else {
+    next();
+  }
+});
+
+
+
 const pathToPublic = path.join(__dirname, 'public');
 //const DATA_FILE = pathToPublic.join(__dirname, 'data.json');
 
