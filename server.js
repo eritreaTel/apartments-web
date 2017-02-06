@@ -9,14 +9,11 @@ const pathToPublic = path.join(__dirname, 'public');
 app.set('port', (process.env.PORT || 8080));
 app.set('view engine', 'html');
 
-//Reroute http to https
-app.all('*', function(req, res, next) {
-  if(req.secure){
-    next();
-  } else {
-    res.set('x-forwarded-proto', 'https');
-    res.redirect('https://' + req.get('host') + req.url);
-  }
+app.set('forceSSLOptions', {
+  enable301Redirects: true,
+  trustXFPHeader: false,
+  httpsPort: 443,
+  sslRequiredMessage: 'SSL Required.'
 });
 
 app.get('*.js', function (req, res, next) {
