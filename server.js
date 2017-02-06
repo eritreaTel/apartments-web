@@ -11,7 +11,7 @@ app.set('view engine', 'html');
 
 
 app.use(function(req, res, next) {
-  if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https') && req.originalUrl != 'heartbeat.html') {
+  if((!req.secure) && (req.get('X-Forwarded-Proto') !== 'https') && req.originalUrl != '/heartbeat.html') {
     res.redirect('https://' + req.get('Host') + req.url);
   }
   else
@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // universal routing and rendering
 app.get('/', (req, res) => {
-  if (req.originalUrl == 'heartbeat.html') {
+  if (req.originalUrl == '/heartbeat.html') {
     return res.render('heartbeat');
   } else {
     return res.render('index');
