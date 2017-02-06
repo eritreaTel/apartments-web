@@ -4,7 +4,6 @@
   "hotModule": false,
   "isLocal": false,
   "loginHost": "https://api.ugandabooking.com",
-  "toolsHost": "http://ugandabooking.com",
   "clientErrorLoggingEnabled": false,
   "cookieDomain": ".ugandabooking.com",
   "stripKey" : "pk_live_mVOvWEWpnZ4oZdqE0G05829E"
