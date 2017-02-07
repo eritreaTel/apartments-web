@@ -101,7 +101,7 @@ class ContactUsForm extends React.Component {
 
 					<div className="col-md-7">
 						<h2 className="mg-sec-left-title">Office Address</h2>
-						<p>Thank you for contacing us. We take customer feedback seriously and our customer support team will get back to you as soon as possible. We thrive to give the best customer expierence exeperience and you feedback means a lot to us. Thank you again.</p>
+						<p>Thank you for contacing us. We take customer feedback seriously and our customer support team will get back to you as soon as possible. We thrive to give the best customer exeperience and you feedback means a lot to us. Thank you again.</p>
 						<ul className="mg-contact-info">
 							<li><i className="fa fa-map-marker"></i> Level 13, 2 Elizabeth St, Kampala, Uganda</li>
 							<li><i className="fa fa-phone"></i> +000-123-456-789 (Sale)</li>

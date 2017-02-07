@@ -2,58 +2,68 @@ const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
 
 
-const AboutUgandaGuestHouse = function (props) {
+const AboutUgandaGuestHouse = function () {
 	return (
 		<div className="mg-about-features">
 			<div className="container">
 				<div className="row">
-					<div className="col-md-6">
-						<div className="mg-about-us-txt">
-							<div className="mg-sec-title">
-								<h2>About Uganda GuestHouses</h2>
-								<p>Find great apartments, literally home away from home</p>
-							</div>
-							<p>GuestHouses Uganda top mission is to give visibility to many great guest houses in Uganda to the outside world. By doing so, we will promote tourism in Uganda by making  it easy to reserve guest house in Uganda. One of the first things a tourist does when traveling to a country is finding accommodation. We want to make this process as pleasant as possible while making sure the tourist gets the best deal on the market. We want tourists to get the best out of their stay. Guesthouses are less boring than hotel and it has home feeling. TODO-Amanuel, make this good.</p>
+					<div className="col-md-1"></div>
+					<div className="col-md-10">
+						<div className="mg-sec-title">
+							<h2>Our Mission</h2>
+							<p>Find great apartments, literally home away from home</p>
 						</div>
+						<p>The place you call home is important and we at Apartment List understand that. Searching for an apartment to call home is hard and it’s an incredibly big decision. The majority of your time is spent at home and it’s your largest monthly expense. We get that.</p>
+						<p>Our mission is simple, we want you to be able to find a great home and we want that process to be simple and delightful. In one word, we want your experience and apartment search to be extraordinary.</p>
 					</div>
-					<div className="col-md-6">
-						<div className="video-responsive">
-							<iframe src="https://player.vimeo.com/video/134008155" width="500" height="281" frameBorder="0"  allowFullScreen></iframe>
-						</div>
-					</div>
+					<div className="col-md-1"></div>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-class Testomonials extends React.Component{
-	render() {
-		const styledTestomonials = this.props.testimonials.map(testimonial => {
-			return 	<blockquote key={testimonial.id}>
-						<p>{testimonial.body}</p>
-						<footer>{testimonial.full_name}, {testimonial.title}</footer>
-					</blockquote>
-		});
 
-		return (
-			<div className="mg-about-testimonial parallax">
+const WeAreDifferent = function () {
+	return (
+		<div className="mg-about-features">
+			<div className="container">
+				<div className="row">
+					<div className="col-md-1"></div>
+					<div className="col-md-10">
+						<div className="mg-sec-title">
+							<h2>We Are Different</h2>
+						</div>
+						<p>The experience we provide you is different than any other rental experience out there. It starts from our own experiences - both positive and negative - with finding the perfect home. From the start we get to know you, asking the important questions about YOUR search and what matters most to YOU.</p>
+						<p>Once we know what you care about, we build a personalized set of recommendations that match both exactly what you asked for and show you the best other options that maybe you hadn’t thought to consider. Our goal, do all the hard work for you and make finding your great next home easy.</p>
+						<p>And once you’ve found that home, you can count on the pricing, photos and extra amenities to be accurate and verified. Every one of our featured listings was researched and curated by an Apartment List team member and most importantly the pricing and availability is checked multiple times per day, coming directly from property itself.</p>
+						<p>We’ve worked really hard so your experience booking guest house with UgandaBooking will be extraordinary.</p>
+					</div>
+					<div className="col-md-1"></div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+const HowWeGotStarted  = function () {
+	return (
+			<div className="mg-about-features">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-1"></div>
+						<div className="col-md-10">
 							<div className="mg-sec-title">
-								<h2>Testimonials</h2>
-								<p>Here is some valuable word from our clients</p>
+								<h2>How We Got Started</h2>
 							</div>
-							<div className="mg-testimonial-slider" id="mg-testimonial-slider">
-								{styledTestomonials}
-							</div>
+							<p>Our founder Amanuel Yohannes  have had miserable, horrible, no good, very bad guest house booking experiences in Uganda. Amanuel was introduced to the “bait and switch” by NYC brokers when trying to rent his first apartment out of college and Chris moved 5 times in 5 different cities over the course of 6 years. What became clear to them over this time was how broken the rental search process was. So in September of 2011, they set out to build an experience that would take the pain out of moving and make finding their next home easy.</p>
+
 						</div>
+						<div className="col-md-1"></div>
 					</div>
 				</div>
 			</div>
-		)
-	}
+	);
 }
 
 
@@ -85,7 +95,6 @@ const OurStaff = function (props) {
 						<div className="col-md-12">
 							<div className="mg-sec-title">
 								<h2>Our Staff</h2>
-								<p>The below is list of our executive staff </p>
 							</div>
 						</div>
 					</div>
@@ -97,38 +106,6 @@ const OurStaff = function (props) {
 	);
 }
 
-class OurClients extends React.Component {
-
-	componentDidMount() {
-		$("#mg-part-logos-full").owlCarousel({
-			items : 5,
-			navigation : true,
-			pagination: false,
-			navigationText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-
-		});
-	}
-
-	render() {
-		const styledLis = this.props.partners.map(apt => {
-			return  <li key={apt.id}><img src={apt.full} alt={apt.caption}/></li>
-		});
-
-		return (
-			<div className="mg-about-clients">
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<ul className="mg-part-logos-full" id="mg-part-logos-full">
-								{styledLis}
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
 
 
 
@@ -139,7 +116,8 @@ class AboutUsPage extends React.Component {
 			<div>
 				{<PageTitle parentClassName="mg-page-title-space parallax"/>}
 				<AboutUgandaGuestHouse />
-				<Testomonials  testimonials = {this.props.testimonials} />
+				<WeAreDifferent />
+				<HowWeGotStarted />
 				<OurStaff teamMembers = {this.props.teamMembers} />
 			</div>
 		);
@@ -151,10 +129,10 @@ function getDefaultProps() {
 		teamMembers : [
 			{
 				"id" : 1,
- 				full_name: "Amanuel Yohannes",
+ 				full_name: "Emanuel Johannes",
 				title: "Chief Executive Officer, CEO",
-				photo : "images/member1.png",
-				fb_link : "#",
+				photo : "images/team-member/amanuel_yohannes.jpg",
+				fb_link : "https://www.facebook.com/amanuelcp",
 				tw_link : "#",
 				ld_link : "#"
 			},
@@ -184,78 +162,6 @@ function getDefaultProps() {
 				fb_link : "#",
 				tw_link : "#",
 				ld_link : "#"
-			}
-		],
-		partners: [
-			{
-				"id" : 1,
-				"full" : "images/part-logo-5.png",
-				"caption" : "Partner Logo 5"
-			},
-			{
-				"id" : 2,
-				"full" : "images/part-logo-6.png",
-				"caption" : "Partner Logo 6"
-			},
-			{
-				"id" : 3,
-				"full" : "images/part-logo-7.png",
-				"caption" : "Partner Logo 7"
-			},
-			{
-				"id" : 4,
-				"full" : "images/part-logo-8.png",
-				"caption" : "Partner Logo 8"
-			},
-			{
-				"id" : 5,
-				"full" : "images/part-logo-9.png",
-				"caption" : "Partner Logo 9"
-			},
-			{
-				"id" : 6,
-				"full" : "images/part-logo-5.png",
-				"caption" : "Partner Logo 5"
-			},
-			{
-				"id" : 7,
-				"full" : "images/part-logo-6.png",
-				"caption" : "Partner Logo 6"
-			},
-			{
-				"id" : 8,
-				"full" : "images/part-logo-7.png",
-				"caption" : "Partner Logo 7"
-			},
-			{
-				"id" : 9,
-				"full" : "images/part-logo-8.png",
-				"caption" : "Partner Logo 8"
-			},
-			{
-				"id" : 10,
-				"full" : "images/part-logo-9.png",
-				"caption" : "Partner Logo 9"
-			}
-		],
-		testimonials : [
-			{
-				"id"        : 1,
-				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
-				"full_name" : "Ruth Tekle",
-				"title" 	: "Arch Software Solutions, CEO"
-			},
-			{
-				"id"        : 2,
-				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
-				"full_name" : "Asmerom Haile",
-				"title" 	: "BlueSoft, CEO"
-			},
-			{
-				"id"        : 3,
-				"body" 		: "The best company on the word, do your self a favour and use their services. The best company on the word, do your self a favour and use their services. The best company on ...",
-				"full_name" : "Habtom Beraki",
-				"title" 	: "BlueGold, CEO"
 			}
 		]
 	};
