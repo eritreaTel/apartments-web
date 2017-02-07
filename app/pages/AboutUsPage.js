@@ -1,5 +1,6 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
+const {assetPath} = require('../helpers/asset_helper');
 
 
 const AboutUgandaGuestHouse = function () {
@@ -72,7 +73,7 @@ const OurStaff = function (props) {
 			return  <div className="col-md-3 col-sm-6" key={member.id}>
 						<div className="mg-team-member">
 							<figure>
-								<img src={member.photo} alt="" className="img-responsive"/>
+								<img src={assetPath(member.photo)} alt="" className="img-responsive"/>
 							</figure>
 							<div className="mg-team-member-overlayer"></div>
 							<div className="mg-team-info">
@@ -129,9 +130,9 @@ function getDefaultProps() {
 		teamMembers : [
 			{
 				"id" : 1,
- 				full_name: "Emanuel Johannes",
+ 				full_name: "Amanuel Yohannes",
 				title: "Chief Executive Officer, CEO",
-				photo : "images/team-member/amanuel_yohannes.jpg",
+				photo : "images/team-members/amanuel_yohannes.jpg",
 				fb_link : "https://www.facebook.com/amanuelcp",
 				tw_link : "#",
 				ld_link : "#"
