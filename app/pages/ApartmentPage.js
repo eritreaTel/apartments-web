@@ -194,7 +194,7 @@ class ApartmentReviewForm extends React.Component {
 		const {location_rating, comfort_rating, price_rating, quality_rating } = this.state;
 		let {apartment, user, isProcessing} = this.props;
 		let apartment_id = apartment.id;
-		let user_id = null, email = undefined, full_name = undefined;
+		let user_id = null, email = '', full_name = '';
 		if (loggedIn && user) {
 			user_id = user.id;
 			email = user.email;

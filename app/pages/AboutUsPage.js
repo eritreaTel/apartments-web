@@ -12,7 +12,6 @@ const AboutUgandaGuestHouse = function () {
 					<div className="col-md-10">
 						<div className="mg-sec-title">
 							<h2>Our Mission</h2>
-							<p>Find great apartments, literally home away from home</p>
 						</div>
 						<p>The place you call home is important and we at Apartment List understand that. Searching for an apartment to call home is hard and it’s an incredibly big decision. The majority of your time is spent at home and it’s your largest monthly expense. We get that.</p>
 						<p>Our mission is simple, we want you to be able to find a great home and we want that process to be simple and delightful. In one word, we want your experience and apartment search to be extraordinary.</p>
@@ -93,11 +92,14 @@ const OurStaff = function (props) {
 			<div className="mg-team pb70">
 				<div className="container">
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-1"/>
+						<div className="col-md-10">
 							<div className="mg-sec-title">
 								<h2>Our Staff</h2>
+								<p> List of our executive stuff </p>
 							</div>
 						</div>
+						<div className="col-md-1"/>
 					</div>
 					<div className="row">
 						{styledTeams}
