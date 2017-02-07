@@ -101,7 +101,7 @@ class AdditionalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let {additional, searchInfo} = bookingStage;
-        let arrival_time = undefined, airline_name = undefined;
+        let arrival_time = '', airline_name = '';
         let airportPickup = 0, carRentals = 0, tourGuides = 0, arrivalDateFocused = false;
         let arrival_date = searchInfo.checkInDate;
 
@@ -109,8 +109,8 @@ class AdditionalInfo extends React.Component {
 
         if (additional) {
             arrival_date  = additional.arrival_date ? additional.arrival_date : arrival_date;
-            airline_name  = additional.airline_name;
-            arrival_time  = additional.arrival_time;
+            airline_name  = additional.airline_name ? additional.airline_name : '';
+            arrival_time  = additional.arrival_time ? additional.arrival_time : '';
             arrivalDateFocused = (additional.arrival_date_focused == 1) ? true : false;
             
             airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
