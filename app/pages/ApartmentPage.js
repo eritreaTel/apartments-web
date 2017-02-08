@@ -267,7 +267,7 @@ class ApartmentGalleries extends React.Component {
 
 		const {galleries} = this.props;
 		const styledImages = galleries && galleries.map(gallery => {
-			return 	<img key={gallery.id} src={assetPath(gallery.full)} alt={gallery.caption}/>;
+			return 	<img key={gallery.id} src={assetPath(gallery.full_image)} alt={gallery.caption}/>;
 		});
 
 		return (

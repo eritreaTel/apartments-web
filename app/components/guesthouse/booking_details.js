@@ -3,6 +3,7 @@ const DateHelper = require('../../helpers/date_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
 const TotalPayment = require('./total_payment');
+const {assetPath} = require('../../helpers/asset_helper');
 
 class BookingDetails extends React.Component {
 
@@ -32,7 +33,7 @@ class BookingDetails extends React.Component {
                             <h2 className="mg-widget-title">Booking Details</h2>
                             <div className="mg-widget-cart">
                                 <div className="mg-cart-room">
-                                    <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
+                                    <img src={assetPath("images/room-1.png")} alt="Delux Room" className="img-responsive"/>
                                     <h3>{apartment.title}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
