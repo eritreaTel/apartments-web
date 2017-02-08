@@ -237,7 +237,7 @@ class PersonalInfo extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-md-6">
-                                    <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm your reservation.
+                                    <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm reservation.
                                 </div>
                             </div>
                             <div className="row">

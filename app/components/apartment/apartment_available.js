@@ -27,7 +27,7 @@ class ApartmentAvailable extends React.Component {
             <div className="mg-avl-room">
                 <div className="row">
                     <div className="col-sm-5">
-                        <Anchor><img src = {assetPath(apartment.best_photo)} alt="" className="img-responsive"/></Anchor>
+                        <img src = {assetPath(apartment.best_photo)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-sm-7">
                         <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}>{apartment.title}</Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/Total</span></h3>

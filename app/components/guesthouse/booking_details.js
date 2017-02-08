@@ -33,7 +33,7 @@ class BookingDetails extends React.Component {
                             <h2 className="mg-widget-title">Booking Details</h2>
                             <div className="mg-widget-cart">
                                 <div className="mg-cart-room">
-                                    <img src={assetPath("images/room-1.png")} alt="Delux Room" className="img-responsive"/>
+                                    <img src={assetPath(apartment.best_photo)} alt="Delux Room" className="img-responsive"/>
                                     <h3>{apartment.title}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
