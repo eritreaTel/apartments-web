@@ -12,9 +12,9 @@ const AboutUgandaGuestHouse = function () {
 					<div className="col-md-10">
 						<div className="mg-sec-title">
 							<h2>Our Mission</h2>
+							<p>Find you the greatest apartments ever, your home away from home experience</p>
 						</div>
-						<p>The place you call home is important and we at Apartment List understand that. Searching for an apartment to call home is hard and it’s an incredibly big decision. The majority of your time is spent at home and it’s your largest monthly expense. We get that.</p>
-						<p>Our mission is simple, we want you to be able to find a great home and we want that process to be simple and delightful. In one word, we want your experience and apartment search to be extraordinary.</p>
+						<p>Uganda offers lots and lots of apartments and guest houses to choose from. And what’s more, most of these apartments lack Internet visibility. You would need to actually be there to book one or find a broker to do it for you. And this can be an unbelievably overwhelming and tiresome experience, but thats where we came in. Our mission, to put in simple words, is to do the heavy work for you. We will go through these hundreds of guest houses, their availability, their ranking, the feedback of customers that have actually being there and we will offer you the best choice, for the best price. All you need to do is just click, not leaving the comforts of your own home and trust us, we will provide you the best apartment that fits you. </p>
 					</div>
 					<div className="col-md-1"></div>
 				</div>
@@ -34,10 +34,9 @@ const WeAreDifferent = function () {
 						<div className="mg-sec-title">
 							<h2>We Are Different</h2>
 						</div>
-						<p>The experience we provide you is different than any other rental experience out there. It starts from our own experiences - both positive and negative - with finding the perfect home. From the start we get to know you, asking the important questions about YOUR search and what matters most to YOU.</p>
-						<p>Once we know what you care about, we build a personalized set of recommendations that match both exactly what you asked for and show you the best other options that maybe you hadn’t thought to consider. Our goal, do all the hard work for you and make finding your great next home easy.</p>
-						<p>And once you’ve found that home, you can count on the pricing, photos and extra amenities to be accurate and verified. Every one of our featured listings was researched and curated by an Apartment List team member and most importantly the pricing and availability is checked multiple times per day, coming directly from property itself.</p>
-						<p>We’ve worked really hard so your experience booking guest house with UgandaBooking will be extraordinary.</p>
+						<p>How are we different? It is simple. We have a small yet exclusive business, we offer our clients all the attention they need. We believe in being selective and are determined to make our clients very happy. We have offices both in San Francisco, USA, the technology hub of the world and Kampala, Uganda, the center of all the information you need. This enables us to use the brand-new and latest technologies, to implement our first hand knowledge of the apartments, resulting in the most reliable and latest information ever.</p>
+						<p>Apartment booking is not the only service we provide. Having an office in Uganda enables us to have a one to one relationship with the key players, this in turn allows us to provide you with additional services including airport pickups, connecting with the right car rentals and tour guides.</p>
+						<p>Seeing is believing, so come and see us. We aim to please and you will be definitely pleased. </p>
 					</div>
 					<div className="col-md-1"></div>
 				</div>
@@ -56,8 +55,7 @@ const HowWeGotStarted  = function () {
 							<div className="mg-sec-title">
 								<h2>How We Got Started</h2>
 							</div>
-							<p>Our founder Amanuel Yohannes  have had miserable, horrible, no good, very bad guest house booking experiences in Uganda. Amanuel was introduced to the “bait and switch” by NYC brokers when trying to rent his first apartment out of college and Chris moved 5 times in 5 different cities over the course of 6 years. What became clear to them over this time was how broken the rental search process was. So in September of 2011, they set out to build an experience that would take the pain out of moving and make finding their next home easy.</p>
-
+							<p>The reason behind the starting of all this is very simple and clear. A personal experience of our founders, an experience we are trying to protect you from. Most apartments in Uganda don’t have Internet visibility. And for someone coming to Uganda for the first time, they have to first come to Uganda, then start the process. They usually have to hassle a lot to find the apartments they like for the best deal they can get, changing from one apartment to another, struggling with reliable car rentals and airport pickup services. This made us think it could all have been easy, and that’s what we did. We made it easy.</p>
 						</div>
 						<div className="col-md-1"></div>
 					</div>
