@@ -110,7 +110,7 @@ class RecentNews extends React.Component {
         const {store: {recentNews, isProcessing}} = this.props;
 
         return (
-            <NewsBody recentNews = {recentNews} isProcessing={isProcessing}>
+            <NewsBody isProcessing={isProcessing}>
                 <NewsHeading recentNews = {recentNews} />
                 <NewsGalleries recentNews={recentNews} />
             </NewsBody>
