@@ -80,6 +80,10 @@ class GuestHousesPage extends React.Component {
         Actions.getAuthenticatedUser();
     }
 
+    componentDidMount() {
+        window.scrollTo(0, 20);
+    }
+
     render() {
         const {store} = this.props;
         const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS, isProcessing}} = this.props;

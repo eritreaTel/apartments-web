@@ -312,6 +312,10 @@ class ApartmentPage extends React.Component {
 		Actions.getAuthenticatedUser();
 	}
 
+	componentDidMount(){
+		window.scrollTo(0, 20);
+	}
+
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
 		let guestHouseName = apartment.guestHouse.name;
@@ -355,6 +359,25 @@ const WithUserLoaded = withDataLoaded({
 			loadDataFn: ({view : {apartmentId}}) => Actions.getApartmentReviews({apartmentId}),
 			alwaysLoad : true,
 			checkDataFn: ({apartmentReviews}) => apartmentReviews != null
+		},
+		{
+			storeKeys: ['apartments'],
+			loadDataFn: (store) => {
+				let searchInfo;
+				let {bookingStage} = store;
+				searchInfo = bookingStage.searchInfo;
+				if (searchInfo == null) {
+					searchInfo = {
+						'checkInDate'   : DateHelper.getOneWeeksFromNow(),
+						'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
+						'room' : 1,
+						"adult" : 1
+					};
+					Actions.persistSearchInfo(searchInfo);
+				}
+				Actions.getApartments(searchInfo);
+			},
+			checkDataFn: ({apartments}) => apartments != null
 		}
 	]
 });
