@@ -6,16 +6,36 @@ const DateHelper = require('../../helpers/date_helper');
 
 
 const onBlogCategoryClicked = function (category) {
-    Actions.getBlogs({'category' : category})
-    Actions.setRoute('/blogs');
+    let isProcessing = {searchingBlogs: true};
+    Actions.setIsProcessing(isProcessing);
+
+    let blogsPromise = Actions.getBlogs({'category' : category});
+    blogsPromise.then(blogPromise => {
+        let isProcessing = {searchingBlogs: false};
+        Actions.setIsProcessing(isProcessing);
+        Actions.setRoute('/blogs');
+    });
 }
+
+const onRecentPostClicked = function (blogId) {
+    let isProcessing = {loadingBlog: true};
+    Actions.setIsProcessing(isProcessing);
+
+    let blogPromise = Actions.getBlog({blogId})
+    blogPromise.then(result => {
+        let isProcessing = {loadingBlog: false};
+        Actions.setIsProcessing(isProcessing);
+        Actions.setRoute('/blog/'+blogId);
+    });
+}
+
 
 const RecentPost = function (props) {
     const styledLi = props.news && props.news.map(singleNews => {
         return  <li key={singleNews.id}>
                     <div className="mg-recnt-post">
                         <div className="mg-rp-date"> {DateHelper.formatDate(singleNews.created_at, 'D')} <div className="mg-rp-month"> {DateHelper.formatDate(singleNews.created_at, 'MMMM')} </div></div>
-                        <h3><Anchor onClick={() => {Actions.setRoute('/blog/' + singleNews.id)}} > {singleNews.title} </Anchor></h3>
+                        <h3><Anchor onClick={() => {onRecentPostClicked(singleNews.id)}} > {singleNews.title} </Anchor></h3>
                         <p>{singleNews.short_description}</p>
                     </div>
                 </li>

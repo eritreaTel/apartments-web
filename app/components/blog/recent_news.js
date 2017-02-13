@@ -10,44 +10,64 @@ const Slider = require('react-slick');
 import MDSpinner from "react-md-spinner";
 
 
-const NewsBody = function (props) {
-    return (
-        <div className="mg-news-gallery container">
-            <div className="row">
-                <div className="col-md-5">
-                    <h2 className="mg-sec-left-title">Recent News</h2>
-                </div>
-                <div className="col-md-7">
-                    <h2 className="mg-sec-left-title">Our Gallery</h2>
-                </div>
-            </div>
+class NewsBody extends React.Component{
+    render() {
+        const {isProcessing} = this.props;
+        let loadingBlog = isProcessing ? isProcessing.loadingBlog : false;
+        let spinnerCss = loadingBlog ? 'float-right show' : 'hide';
 
-            <div className="row">
-                {props.children}
+        return (
+            <div className="mg-news-gallery container">
+                <div className="row">
+                    <div className="col-md-5">
+                        <h2 className="mg-sec-left-title">Recent News</h2>
+                        <MDSpinner className={spinnerCss}>Loading </MDSpinner>
+                    </div>
+                    <div className="col-md-7">
+                        <h2 className="mg-sec-left-title">Our Gallery</h2>
+                    </div>
+                </div>
+
+                <div className="row">
+                    {this.props.children}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
-const NewsHeading = function (props) {
-    const contents = props.recentNews.map(singleNews => {
+const onBlogClicked = function (blogId) {
+    let isProcessing = {loadingBlog: true};
+    Actions.setIsProcessing(isProcessing);
+
+    let blogPromise = Actions.getBlog({blogId})
+    blogPromise.then(result => {
+        let isProcessing = {loadingBlog: false};
+        Actions.setIsProcessing(isProcessing);
+        Actions.setRoute('/blog/'+blogId);
+    });
+}
+
+class NewsHeading extends React.Component {
+    render() {
+        const contents = this.props.recentNews.map(singleNews => {
             return  <li key={singleNews.id}>
                         <div className="mg-recnt-post">
                             <div className="mg-rp-date">{ DateHelper.getDay(singleNews.created_at)} <div className="mg-rp-month">{ DateHelper.formatDate(singleNews.created_at, 'MMMM')}</div></div>
-                            <h3><Anchor onClick={()=>{Actions.setRoute('/blog/' + singleNews.id)}} >{singleNews.title}</Anchor></h3>
-                            <p>{singleNews.short_description}...</p>
-                        </div>
+                                <h3><Anchor onClick={()=>{onBlogClicked(singleNews.id)}} >{singleNews.title}</Anchor></h3>
+                                <p>{singleNews.short_description}...</p>
+                            </div>
                     </li>
-    });
+        });
 
-
-    return (
-        <div className="col-md-5">
-            <ul className="mg-recnt-posts">
-                {contents}
-            </ul>
-        </div>
-    );
+        return (
+            <div className="col-md-5">
+                <ul className="mg-recnt-posts">
+                    {contents}
+                </ul>
+            </div>
+        );
+    }
 }
 
 class NewsGalleries extends React.Component {
@@ -87,10 +107,10 @@ class NewsGalleries extends React.Component {
 
 class RecentNews extends React.Component {
     render() {
-        const {store: {recentNews}} = this.props;
+        const {store: {recentNews, isProcessing}} = this.props;
 
         return (
-            <NewsBody recentNews = {recentNews}>
+            <NewsBody recentNews = {recentNews} isProcessing={isProcessing}>
                 <NewsHeading recentNews = {recentNews} />
                 <NewsGalleries recentNews={recentNews} />
             </NewsBody>

@@ -22,6 +22,18 @@ const BlogList = function(props) {
 	);
 }
 
+const onBlogClicked = function (blogId) {
+	let isProcessing = {loadingBlog: true};
+	Actions.setIsProcessing(isProcessing);
+
+	let blogPromise = Actions.getBlog({blogId})
+	blogPromise.then(result => {
+		let isProcessing = {loadingBlog: false};
+		Actions.setIsProcessing(isProcessing);
+		Actions.setRoute('/blog/'+blogId);
+	});
+}
+
 const Articles = function (props) {
 	const StyledArticles = props.blogs.map(blog => {
 		return 	<article className="mg-post" key={blog.id}>
@@ -30,7 +42,7 @@ const Articles = function (props) {
 						<p>{blog.medium_description}</p>
 					</div>
 					<footer className="clearfix">
-						<Anchor onClick={()=>{Actions.setRoute('/blog/' + blog.id)}} className="mg-read-more">Continue Reading
+						<Anchor onClick={()=>{onBlogClicked(blog.id)}} className="mg-read-more">Continue Reading
 							<i className="fa fa-long-arrow-right"></i>
 						</Anchor>
 					</footer>
@@ -60,11 +72,18 @@ const BlogsBody = function (props) {
 class BlogsPage extends React.Component {
 
 	render() {
-		const {store : {blogs, blogMetaData, recentNews}} = this.props;
+		const {store : {blogs, blogMetaData, recentNews, isProcessing :{searchingBlogs} }} = this.props;
+
+		let content;
+		if (searchingBlogs) {
+			content = <div className="load-spin"> <MDSpinner /> </div>
+		} else {
+			content = <BlogList blogs={blogs} blogMetaData={blogMetaData} recentNews={recentNews} />
+		}
 
 		return (
 			<BlogsBody>
-				<BlogList blogs={blogs} blogMetaData={blogMetaData} recentNews={recentNews} />
+				{content}
 			</BlogsBody>
 		);
 	}

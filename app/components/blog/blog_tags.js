@@ -3,8 +3,15 @@ const Anchor = require('../shared/anchor');
 const Actions = require('../../actions/actions');
 
 function onBlogTagClicked(tag) {
-    Actions.getBlogs({'tags' : tag})
-    Actions.setRoute('/blogs');
+    let isProcessing = {searchingBlogs: true};
+    Actions.setIsProcessing(isProcessing);
+
+    let blogsPromise =  Actions.getBlogs({'tags' : tag})
+    blogsPromise.then(blogPromise => {
+        let isProcessing = {searchingBlogs: false};
+        Actions.setIsProcessing(isProcessing);
+        Actions.setRoute('/blogs');
+    });
 }
 
 class BlogTags extends React.Component {

@@ -84,7 +84,9 @@ module.exports = {
                             'processingResetCode' : false,
                             'updatingPassword' : false,
                             'creatingUser' : false,
-                            'updatingUser' : false
+                            'updatingUser' : false,
+                            'searchingBlogs' : false,
+                            'loadingBlog' : false
                         }
                     }
                 };

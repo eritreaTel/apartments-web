@@ -238,9 +238,17 @@ class BlogPage extends React.Component {
 
 	render() {
 		const {store : {blog, recentNews, blogMetaData, isProcessing, user}} = this.props;
+		let {loadingBlog} = isProcessing;
+		let content;
+		if (loadingBlog) {
+			content = <div className="load-spin"><MDSpinner /></div>
+		} else {
+			content = <BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
+		}
+
 		return (
 			<BlogBody>
-				<BlogContent blog={blog} recentNews={recentNews} blogMetaData={blogMetaData} isProcessing={isProcessing} user={user} />
+				{content}
 			</BlogBody>
 		);
 	}

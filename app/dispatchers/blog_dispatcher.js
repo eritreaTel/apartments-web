@@ -118,7 +118,8 @@ module.exports = {
 
     async getRecentNews() {
         const url = 'blogs?recent_post=true' ;
-        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('recentNews').length == 0) {
+        let recentNews = this.getStoreVal('recentNews') ? this.getStoreVal('recentNews') : [];
+        if (recentNews.length == 0) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getRecentNews')) {
@@ -147,7 +148,8 @@ module.exports = {
 
     async getBlogMetaData() {
         const url = 'blog_metadatas?tags=all&&category=all' ;
-        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('blogMetaData').length == 0) {
+        let blogMetaData = this.getStoreVal('blogMetaData') ? this.getStoreVal('blogMetaData') : [];
+        if (blogMetaData.length == 0) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getBlogMetaData')) {
