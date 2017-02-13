@@ -57,7 +57,7 @@ class ContactUsForm extends React.Component {
 		} else {
 			this.refs.full_name.focus();
 		}
-		window.scrollTo(0, 20);
+		window.scrollTo(0, 0);
 	}
 
 	render() {

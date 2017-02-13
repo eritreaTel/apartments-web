@@ -21,7 +21,7 @@ class PaymentInfo extends React.Component {
 
       componentDidMount() {
             Stripe.setPublishableKey('pk_test_xNk89utQrNjwzmaqOLlteVnz');
-            window.scrollTo(0, 20);
+            window.scrollTo(0, 0);
             this.refs.first_name.focus();
       }
 

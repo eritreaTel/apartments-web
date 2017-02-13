@@ -219,7 +219,7 @@ class BlogPage extends React.Component {
 	componentDidMount() {
 		const {store : {view : {blogId}}} = this.props;
 		Actions.getBlog({blogId});
-		window.scrollTo(0, 20);
+		window.scrollTo(0, 0);
 	}
 
 	shouldComponentUpdate() {
@@ -232,7 +232,7 @@ class BlogPage extends React.Component {
 	}
 
 	componentDidUpdate() {
-		window.scrollTo(0, 20);
+		window.scrollTo(0, 0);
 	}
 
 

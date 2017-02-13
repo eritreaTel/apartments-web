@@ -30,7 +30,7 @@ class PersonalInfo extends React.Component {
 
     componentDidMount() {
         Stripe.setPublishableKey(stripKey);
-        window.scrollTo(0, 20);
+        window.scrollTo(0, 0);
         this.refs.first_name.focus();
     }
 

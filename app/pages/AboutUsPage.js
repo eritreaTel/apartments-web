@@ -115,7 +115,7 @@ class AboutUsPage extends React.Component {
 	render() {
 		return (
 			<div>
-				{<PageTitle parentClassName="mg-page-title-space parallax"/>}
+				<PageTitle parentClassName="mg-page-title-space parallax"/>
 				<AboutUgandaGuestHouse />
 				<WeAreDifferent />
 				<HowWeGotStarted />
