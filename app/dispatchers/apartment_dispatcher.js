@@ -68,6 +68,7 @@ module.exports = {
                     const {results, errors} = ResponseHelper.processResponseReturnMany(response);
                     if (errors.length > 0) {
                         await this.dispatch({type: 'setErrorMessages', data: {errors}});
+                        this.setStoreVal('apartments', []);
                     } else {
                         this.setStoreVal('pageNumber', pageNumber);
                         this.setStoreVal('apartments', results);
