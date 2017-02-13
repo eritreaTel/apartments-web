@@ -20,7 +20,9 @@ class ApartmentAvailable extends React.Component {
         const {apartment } = this.props;
         let totalApartmentPrice  = PricingHelper.getTotalPrice(apartment, null);
         let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
+        let totalDays = apartment.pricingInfo.days_cnt;
         let totalPriceDecimalPart = parseFloat(totalApartmentPrice % 1).toFixed(2).toString().substr(1, 3); // Take .00 instead of 0.00
+        let guestHouseName = apartment.guestHouse.name;
 
 
         return (
@@ -30,8 +32,8 @@ class ApartmentAvailable extends React.Component {
                         <img src = {assetPath(apartment.best_photo)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-sm-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}>{apartment.title}</Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/Total</span></h3>
-                        <p>{apartment.medium_description}</p>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}}><label className="search-result-heading">{guestHouseName}</label>, <label className="search-result-subheading">{apartment.title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{totalDays} Days</span></h3>
+                        <p>{apartment.medium_description} ...</p>
                         <Amenities amentiesToDisplay="6" amenities={apartment.amenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
                         <Anchor onClick={()=>{Actions.setRoute('apartment/'+ apartment.id);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>

@@ -11,7 +11,7 @@ class BookingDetails extends React.Component {
         let {apartment, bookingStage } = this.props;
         let {additional,payment, searchInfo} = bookingStage;
         let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
-        let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
+        let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.end_date, 'D MMM, YYYY') ;
         let adult        = searchInfo.adult;
         let room = apartment.room ;
         let totalDays = apartment.pricingInfo.days_cnt;

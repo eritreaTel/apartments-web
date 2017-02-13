@@ -314,12 +314,14 @@ class ApartmentPage extends React.Component {
 
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
+		let guestHouseName = apartment.guestHouse.name;
 
 		return (
 			<ApartmentBody>
 				<PageTitle parentClassName="mg-page-title parallax">
-					<h2>{apartment.title}</h2>
-					<p>{apartment.short_description}</p>
+					<h2>{guestHouseName}</h2>
+					<h3>{apartment.title}</h3>
+					<p>&nbsp;</p>
 				</PageTitle>
 
 				<ApartmentPrice apartment = {apartment} />
