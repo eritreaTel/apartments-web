@@ -65,6 +65,11 @@ function onRoomChanged(val) {
     Actions.searchApartmentsUpdated(updatedData);
 }
 
+function onChildrenChanged(val) {
+    let updatedData =  {'children'  : val.value};
+    Actions.searchApartmentsUpdated(updatedData);
+}
+
 function isDayBlocked(date, checkInDate) {
     return date.isAfter(checkInDate, 'day');
 }
@@ -107,9 +112,25 @@ const Room  = function (props) {
     );
 }
 
+const Children  = function (props) {
+    var options = [
+        { value: '0', label: '0 Children' },
+        { value: '1', label: '1 Children' },
+        { value: '2', label: '2 Children' },
+        { value: '3', label: '3 Children' },
+        { value: '4', label: '4 Children' },
+        { value: '5', label: '5 Children' },
+        { value: '5', label: '6 Children' },
+        { value: '>6', label: '>7 Children' }
+    ];
+
+    return (
+        <Select value={props.value} className="search-children" placeholder='Children' clearable={false}  searchable={true}  options={options} onChange={onChildrenChanged} />
+    );
+}
+
 const Adults  = function (props) {
     var options = [
-        { value: '',   label: 'Adults' },
         { value: '1',  label: '1 Adult' },
         { value: '2',  label: '2 Adults' },
         { value: '3',  label: '3 Adults' },
@@ -120,7 +141,7 @@ const Adults  = function (props) {
     ];
 
     return (
-        <Select value={props.value} placeholder='Adults' clearable={false}  searchable={true}  options={options} onChange={onAdultsChanged} />
+        <Select value={props.value} className="search-adult" placeholder='Adults' clearable={false}  searchable={true}  options={options} onChange={onAdultsChanged} />
     );
 }
 
@@ -131,7 +152,7 @@ class SearchControls extends React.Component {
     }
 
     render() {
-        let checkInDate, checkOutDate, room, adult, checkInFocused = false, checkOutFocused = false;
+        let checkInDate, checkOutDate, room, adult, children, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
         let displayFormat = "DD-MM-YYYY";
 
@@ -144,35 +165,30 @@ class SearchControls extends React.Component {
             checkInDate     = searchInfo.checkInDate;
             checkOutDate    = searchInfo.checkOutDate;
             room            = searchInfo.room;
-            adult             = searchInfo.adult;
+            adult           = searchInfo.adult;
+            children        = searchInfo.children;
         }
 
         return (
             <div className="row">
-                <div className="col-md-3 col-sm-6 col-xs-6">
+                <div className="col-md-3">
                     <div className="input-group date">
                         <CheckInDateInstance  placeholder="CheckIn Date" displayFormat={displayFormat} date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
 
                     </div>
                 </div>
 
-                <div className="col-md-3 col-sm-6 col-xs-6">
+                <div className="col-md-3">
                     <div className="input-group date">
                         <CheckOutDateInstance  placeholder="Check Out" displayFormat={displayFormat} date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
                     </div>
                 </div>
 
-                <div className="col-md-3 col-sm-6 col-xs-6">
-                    <div className="row">
-                        <div className="col-xs-6">
-                            <Room id='room' value={room}/>
-                        </div>
-                        <div className="col-xs-6">
-                            <Adults id='adults' value={adult} />
-                        </div>
-                    </div>
+                <div className="col-md-3">
+                    <Adults id='adults' value={adult} />
+                    <Children id='children' value={children}/>
                 </div>
-                <div className="col-md-3 col-sm-6 col-xs-6">
+                <div className="col-md-3">
                         <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block">Check Now</button>
                 </div>
             </div>

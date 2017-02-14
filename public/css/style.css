@@ -4668,3 +4668,15 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
     font-size:18px;
     cursor: pointer;
 }
+
+.search-children {
+  width: 97px !important;
+  float: left;
+}
+
+.search-adult{
+  width: 85px !important;
+  float: left;
+  margin-right : 20px;
+  margin-left : -20px;
+}

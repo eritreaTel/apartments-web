@@ -16,8 +16,8 @@ class HomePage extends React.Component {
 			let searchParams = {
 					'checkInDate'   : DateHelper.getOneWeeksFromNow(),
 					'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
-					'room' : 1,
-					"adult" : 1
+					'children' : 0,
+					"adult" : 2
 			};
 			Actions.persistSearchInfo(searchParams);
 		}
