@@ -93,12 +93,13 @@ function onAdultsChanged(val) {
 const Room  = function (props) {
     var options = [
         { value: '', label: 'Room' },
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-        { value: '4', label: '4' },
-        { value: '5', label: '5' },
-        { value: '>6', label: '>6' }
+        { value: '1', label: '1 Room' },
+        { value: '2', label: '2 Rooms' },
+        { value: '3', label: '3 Rooms' },
+        { value: '4', label: '4 Rooms' },
+        { value: '5', label: '5 Rooms' },
+        { value: '5', label: '6 Rooms' },
+        { value: '>6', label: '>7 Rooms' }
     ];
 
     return (
@@ -109,16 +110,13 @@ const Room  = function (props) {
 const Adults  = function (props) {
     var options = [
         { value: '',   label: 'Adults' },
-        { value: '1',  label: '1' },
-        { value: '2',  label: '2' },
-        { value: '3',  label: '3' },
-        { value: '4',  label: '4' },
-        { value: '5',  label: '5' },
-        { value: '6',  label: '6' },
-        { value: '7',  label: '7' },
-        { value: '8',  label: '8' },
-        { value: '9',  label: '9' },
-        { value: '10', label: '10' }
+        { value: '1',  label: '1 Adult' },
+        { value: '2',  label: '2 Adults' },
+        { value: '3',  label: '3 Adults' },
+        { value: '4',  label: '4 Adults' },
+        { value: '5',  label: '5 Adults' },
+        { value: '6',  label: '6 Adults' },
+        { value: '7',  label: '> 7 Adults' }
     ];
 
     return (
