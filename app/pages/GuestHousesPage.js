@@ -148,7 +148,8 @@ const WithUserLoaded = withDataLoaded({
                             'checkInDate'   : DateHelper.getOneWeeksFromNow(),
                             'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
                             'children' : 0,
-                            "adult" : 2
+                            "adult" : 2,
+                            "room" : 1
                         };
                         Actions.persistSearchInfo(searchInfo);
                     }

@@ -1,3 +1,4 @@
+const CurrencyFormatter = require('currency-formatter');
 const helpers = {
   compact(array) {
     return array.filter(Boolean);
@@ -44,7 +45,7 @@ const helpers = {
   },
 
   formatCurrency(dollars) {
-    return `$${Math.round(dollars)}`;
+    return CurrencyFormatter.format(Math.round(dollars), { code: 'USD' , precision: 0 });
   }
 };
 
