@@ -30,6 +30,7 @@ module.exports = {
 
                 let bookingData = {
                     'apartment_id'   : apartment.id,
+                    'apartment_price_id' : pricingInfo.apartment_price_id,
                     'room'           : searchInfo.room,
                     'adult'          : searchInfo.adult,
                     'user_id'        : user.id,
@@ -40,9 +41,6 @@ module.exports = {
                     'stripe_token'   : stripe_token,
                     'start_date'     : pricingInfo.start_date,
                     'end_date'       : pricingInfo.end_date,
-                    'price_per_day'  : pricingInfo.price_per_day,
-                    'price_per_week' : pricingInfo.price_per_week,
-                    'price_per_month': pricingInfo.price_per_month,
                     'days_cnt'       : pricingInfo.days_cnt,
                     'total_price'    : totalAmount,
                     'paid_amount'    : payment.payment_amount,
