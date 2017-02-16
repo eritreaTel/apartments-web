@@ -4670,15 +4670,29 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .search-children {
-  width: 97px !important;
+  width: 105px !important;
   float: left;
+  margin-right: 15px;
+  margin-top: 2px;
 }
 
 .search-adult{
-  width: 85px !important;
+  width: 90px !important;
   float: left;
-  margin-right : 20px;
-  margin-left : -20px;
+  margin-right:15px;
+  margin-top: 2px;
+}
+
+.search-room {
+  width: 95px !important;
+  float: left;
+  margin-left : -55px;
+  margin-right:15px;
+  margin-top: 2px;
+}
+
+.search-booknow {
+  width:110px
 }
 
 .homepage-total_price{

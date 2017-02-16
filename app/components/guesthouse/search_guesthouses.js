@@ -8,15 +8,17 @@ const Constants = require('../../helpers/constants');
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 import { SingleDatePicker } from 'react-dates';
+import { DateRangePicker } from 'react-dates';
+
 var onClickOutside = require('react-onclickoutside');
 
-class CheckInDate extends React.Component {
+class SearchDates extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        return <SingleDatePicker {...this.props} />
+        return <DateRangePicker {...this.props} />
     }
 
     handleClickOutside() {
@@ -46,7 +48,6 @@ class CheckOutDate extends React.Component {
 
 
 const onSearchApartmentsClicked = function (searchInfo) {
-    //Make sure checkout date is greater than checkIn date
     let {checkInDate, checkOutDate} = searchInfo;
     let validDate = checkOutDate.isAfter(checkInDate, 'day');
     if (!validDate) {
@@ -70,24 +71,14 @@ function onChildrenChanged(val) {
     Actions.searchApartmentsUpdated(updatedData);
 }
 
-function isDayBlocked(date, checkInDate) {
-    return date.isAfter(checkInDate, 'day');
+function onDatePickerChanged(dates) {
+    Actions.searchApartmentsUpdated({'checkInDate'  : dates.startDate,  'checkOutDate' : dates.endDate});
 }
 
-function onCheckInDateChanged(date) {
-    Actions.searchApartmentsUpdated({'checkInDate'  : date});
-}
-
-function onCheckInDateFocused(focused) {
-    Actions.searchApartmentsUpdated({'checkInFocused'  : focused});
-}
-
-function onCheckOutDateChanged(date) {
-    Actions.searchApartmentsUpdated({'checkOutDate'  : date});
-}
-
-function onCheckOutDateFocused(focused) {
-    Actions.searchApartmentsUpdated({'checkOutFocused'  : focused});
+function onDatePickerFocused(focused) {
+    console.log('date picker focused' );
+    console.log(focused);
+    Actions.searchApartmentsUpdated({'focusedInput'  : focused});
 }
 
 function onAdultsChanged(val) {
@@ -108,7 +99,7 @@ const Room  = function (props) {
     ];
 
     return (
-        <Select value={props.value} placeholder='Room' clearable={false}  searchable={true}  options={options} onChange={onRoomChanged} />
+        <Select {...props} placeholder='Rooms' clearable={false}  searchable={true}  options={options} onChange={onRoomChanged} />
     );
 }
 
@@ -125,7 +116,7 @@ const Children  = function (props) {
     ];
 
     return (
-        <Select value={props.value} className="search-children" placeholder='Children' clearable={false}  searchable={true}  options={options} onChange={onChildrenChanged} />
+        <Select {...props} className="search-children" placeholder='Children' clearable={false}  searchable={true}  options={options} onChange={onChildrenChanged} />
     );
 }
 
@@ -141,7 +132,7 @@ const Adults  = function (props) {
     ];
 
     return (
-        <Select value={props.value} className="search-adult" placeholder='Adults' clearable={false}  searchable={true}  options={options} onChange={onAdultsChanged} />
+        <Select {...props} placeholder='Adults' clearable={false}  searchable={true}  options={options} onChange={onAdultsChanged} />
     );
 }
 
@@ -155,13 +146,10 @@ class SearchControls extends React.Component {
         let checkInDate, checkOutDate, room, adult, children, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
         let displayFormat = "DD-MM-YYYY";
-
-        var CheckInDateInstance = onClickOutside(CheckInDate);
-        var CheckOutDateInstance = onClickOutside(CheckOutDate);
+        let focusedInput = null;
 
         if (searchInfo != null) {
-            checkInFocused  = searchInfo.checkInFocused ? true : false;
-            checkOutFocused = searchInfo.checkOutFocused ? true : false;
+            focusedInput    = searchInfo.focusedInput ? searchInfo.focusedInput : null;
             checkInDate     = searchInfo.checkInDate;
             checkOutDate    = searchInfo.checkOutDate;
             room            = searchInfo.room;
@@ -171,25 +159,17 @@ class SearchControls extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-6">
                     <div className="input-group date">
-                        <CheckInDateInstance  placeholder="CheckIn Date" displayFormat={displayFormat} date={checkInDate} numberOfMonths={1} id="checkInDate"  focused={checkInFocused}  onFocusChange={({ focused }) => {onCheckInDateFocused(focused) }} onDateChange={(date) => { onCheckInDateChanged(date) }} />
-
+                        <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
                     </div>
                 </div>
 
-                <div className="col-md-3">
-                    <div className="input-group date">
-                        <CheckOutDateInstance  placeholder="Check Out" displayFormat={displayFormat} date={checkOutDate} numberOfMonths={1} id="checkOutDate"  focused={checkOutFocused}  onFocusChange={({ focused }) => {onCheckOutDateFocused(focused) }} onDateChange={(date) => { onCheckOutDateChanged(date) }} />
-                    </div>
-                </div>
-
-                <div className="col-md-3">
-                    <Adults id='adults' value={adult} />
-                    <Children id='children' value={children}/>
-                </div>
-                <div className="col-md-3">
-                        <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block">Check Now</button>
+                <div className="col-md-6">
+                    <Room className="search-room"  value={room} />
+                    <Adults className="search-adult" value={adult} />
+                    <Children  className="search-children" value={children}/>
+                    <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Check Now</button>
                 </div>
             </div>
         );
