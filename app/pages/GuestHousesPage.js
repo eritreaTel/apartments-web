@@ -2,7 +2,7 @@ const React = require('react');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 const AdditionalInfo = require('../components/guesthouse/additional_info');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
-const SearchResult   = require('../components/guesthouse/search_result');
+const SearchResultSingleRoom   = require('../components/guesthouse/search_result_single_room');
 const PaymentInfo   = require('../components/guesthouse/payment_info');
 const ReservationConfirmation      = require('../components/guesthouse/reservation_confirmation');
 const PageTitle = require('../components/shared/pageTitle');
@@ -88,12 +88,19 @@ class GuestHousesPage extends React.Component {
         const {store} = this.props;
         const {store : {user, pageNumber, apartments, apartment, bookingStage, acceptToS, isProcessing}} = this.props;
         let section ;
-        
+        let searchResult;
+        if (bookingStage.searchInfo.room == 1) {
+            searchResult = <SearchResultSingleRoom apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+        } else {
+            searchResult = "Coming soon bro. Stay tuned."
+        }
+
+
         switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                {searchResult}
                             </div>
                 break;
             case 'additional':
@@ -117,7 +124,7 @@ class GuestHousesPage extends React.Component {
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                {searchResult}
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );

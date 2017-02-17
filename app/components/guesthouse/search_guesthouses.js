@@ -29,24 +29,6 @@ class SearchDates extends React.Component {
     }
 }
 
-class CheckOutDate extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return <SingleDatePicker {...this.props} />
-    }
-
-    handleClickOutside() {
-        const {focused} = this.props;
-        if (focused) {
-            Actions.searchApartmentsUpdated({'checkOutFocused': false});
-        }
-    }
-}
-
-
 const onSearchApartmentsClicked = function (searchInfo) {
     let {checkInDate, checkOutDate} = searchInfo;
     let validDate = checkOutDate.isAfter(checkInDate, 'day');
@@ -88,7 +70,6 @@ function onAdultsChanged(val) {
 
 const Room  = function (props) {
     var options = [
-        { value: '', label: 'Room' },
         { value: '1', label: '1 Room' },
         { value: '2', label: '2 Rooms' },
         { value: '3', label: '3 Rooms' },
