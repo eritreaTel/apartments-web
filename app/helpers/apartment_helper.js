@@ -18,6 +18,7 @@ const ApartmentHelper = {
         }
         return {searching, additional, personal, confirmation};
     },
+
     getCategories(blogMetadatas) {
         const categories = [];
         blogMetadatas.forEach(function(metaData) {
@@ -26,6 +27,35 @@ const ApartmentHelper = {
             }
         });
         return categories;
+    },
+
+    getComboApartmentBestPhoto(apartments) {
+        return apartments[0].best_photo;
+    },
+
+    getComboApartmentUrl(apartments) {
+        let url = 'combo-apartment/';
+        apartments.forEach(function(apartment) {
+            url += apartment.id + '-';
+        });
+
+        return url; //remove the one - at the end
+    },
+
+    getComboApartmentTitle(apartments) {
+        return apartments.length + " rooms";
+    },
+
+    getComboApartmentIds(apartments) {
+        const apartmentIds = [];
+        apartments.forEach(function(apartment) {
+            apartmentIds.push(apartment.id);
+        });
+        return apartmentIds;
+    },
+
+    getComboAmenities(apartments) {
+        return apartments[0].amenities;
     }
 };
 

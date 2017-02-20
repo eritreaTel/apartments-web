@@ -73,6 +73,10 @@ module.exports = {
                         this.setStoreVal('pageNumber', pageNumber);
                         this.setStoreVal('apartments', results);
                     }
+
+                    let searchResultPage = (room > 1) ? 'many-room' : 'one-room';
+                    this.setStoreVal('searchResultPage', searchResultPage);
+
                 } catch (error) {
                     await this.dispatch({
                         type: 'handleRequestError',

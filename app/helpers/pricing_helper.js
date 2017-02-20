@@ -2,6 +2,15 @@ const CurrencyFormatter = require('currency-formatter');
 
 const PricingHelper = {
 
+    getTotalComboPrice(totalPrice, additional) {
+        let totalAmount = totalPrice;
+        let airportPickup = additional && additional.airport_pickup;
+        if (airportPickup) {
+            totalAmount = totalAmount + 30;
+        }
+        return totalAmount;
+    },
+
     getTotalPrice(apartment, additional) {
         let totalAmount = apartment.pricingInfo.total_price;
         let airportPickup = additional && additional.airport_pickup;
