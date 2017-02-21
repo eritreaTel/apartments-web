@@ -36,8 +36,8 @@ class PersonalInfo extends React.Component {
 
     componentWillMount() {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
-        const {user, apartment, bookingStage : {payment, additional}} = this.props;
-        let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
+        const {user, apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getTotalPrice(totalPrice, additional);
 
         if (payment == null || (payment && payment.payment_amount == undefined)) {
             Actions.paymentInfoUpdated({'payment_amount' : payment_amount});
@@ -62,14 +62,14 @@ class PersonalInfo extends React.Component {
     }
 
     onPayFull(e) {
-        const {apartment, bookingStage : {payment, additional}} = this.props;
-        let payment_amount = PricingHelper.getTotalPrice(apartment, additional);
+        const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getTotalPrice(totalPrice, additional);
         Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : e.target.checked, 'payPartial' : false, 'payment_amount' : payment_amount});
     }
 
     onPayPartial(e) {
-        const {apartment, bookingStage : {payment, additional}} = this.props;
-        let payment_amount = PricingHelper.getMinimumPrice(apartment, additional);
+        const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getMinimumPrice(totalPrice, additional);
         Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : false, 'payPartial' : e.target.checked, 'payment_amount' : payment_amount});
     }
 
@@ -153,7 +153,7 @@ class PersonalInfo extends React.Component {
     }
 
     render() {
-        const {apartment, bookingStage, acceptToS, user, isProcessing :{processingPayment}} = this.props;
+        const {apartmentResponse, bookingStage, acceptToS, user, isProcessing :{processingPayment}} = this.props;
         let {personal, payment, additional} = bookingStage;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
@@ -166,7 +166,7 @@ class PersonalInfo extends React.Component {
         let acctounInfoClass = loggedIn ? 'hide' : 'show';
         let acceptTermsCss = loggedIn? 'hide' : 'clearfix mg-terms-input';
 
-        let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartment, additional), { code: 'USD' });
+        let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartmentResponse.totalPrice, additional), { code: 'USD' });
 
         return (
                 <div className="row">
@@ -280,7 +280,7 @@ class PersonalInfo extends React.Component {
 
                         </div>
                     </div>
-                    <BookingDetails apartmentResponse={apartment} bookingStage={bookingStage} />
+                    <BookingDetails apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
                 </div>
             );
         }

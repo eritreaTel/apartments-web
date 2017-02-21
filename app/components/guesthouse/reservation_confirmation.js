@@ -2,6 +2,7 @@ const React = require('react');
 const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
+const ApartmentHelper = require('../../helpers/apartment_helper');
 const CurrencyFormatter = require('currency-formatter');
 const TotalPayment = require('./total_payment');
 
@@ -12,20 +13,22 @@ class  ReservationConfirmation extends React.Component {
     }
 
     render() {
-        let {apartment , user, bookingStage} = this.props;
-        let {pricingInfo, guestHouse} = apartment;
+        let {apartmentResponse , user, bookingStage} = this.props;
+        let {displayMessage, apartments, daysCnt, title, startDate, endDate} = apartmentResponse;
+
+        let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
+
         let {additional, confirmation, searchInfo} = bookingStage;
 
-        let confirmationId = PricingHelper.getReservationConfirmationNumber(confirmation.id);
-        let checkInDate  = DateHelper.formatDate(pricingInfo.start_date, 'D MMM, YYYY');
-        let checkOutDate = DateHelper.formatDate(pricingInfo.end_date, 'D MMM, YYYY');
-        let adult        = searchInfo.adult ;
-        let room         = apartment.room ;
-        let totalDays    = pricingInfo.days_cnt;
-        let customerName = user.first_name + ' ' + user.last_name;
-        let guestHouseName = guestHouse.name;
-        let guestHouseAddress = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
-        let guestHousePhone   = guestHouse.phone;
+        let confirmationId      = PricingHelper.getReservationConfirmationNumber(confirmation.id);
+        let checkInDate         = DateHelper.formatDate(startDate, 'D MMM, YYYY');
+        let checkOutDate        = DateHelper.formatDate(endDate, 'D MMM, YYYY');
+        let adult               = searchInfo.adult ;
+        let room                = apartments.length ;
+        let customerName        = user.first_name + ' ' + user.last_name;
+        let guestHouseName      = guestHouse.name;
+        let guestHouseAddress   = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
+        let guestHousePhone     = guestHouse.phone;
 
         let airportPickup = additional && additional.airport_pickup;
         let airlineName, arrivalDate, arrivalTime;
@@ -39,7 +42,6 @@ class  ReservationConfirmation extends React.Component {
             airportPickUpCss = 'mg-cart-address show';
             notAirportPickUpCss = 'mg-cart-address hide';
         }
-        let totalAmount  = CurrencyFormatter.format(PricingHelper.getTotalPrice(apartment, additional), { code: 'USD' });
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
@@ -56,8 +58,8 @@ class  ReservationConfirmation extends React.Component {
                                 <div className="col-md-6">
                                     <div className="mg-cart-room">
                                         <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
-                                        <h3>{apartment.title}</h3>
-                                        <p>{apartment.medium_description}</p>
+                                        <h3>{title}</h3>
+                                        <p>{displayMessage}</p>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
@@ -84,7 +86,7 @@ class  ReservationConfirmation extends React.Component {
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Number of Days:</strong>
-                                        <span>{totalDays}</span>
+                                        <span>{daysCnt}</span>
                                     </div>
                                     <div className={airportPickUpCss}>
                                         <strong>Airport Pickup: </strong><br />

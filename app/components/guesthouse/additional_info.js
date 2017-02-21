@@ -97,7 +97,7 @@ class AdditionalInfo extends React.Component {
     }
 
     render() {
-        const {apartment, bookingStage , user} = this.props;
+        const {apartmentResponse, bookingStage , user} = this.props;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let {additional, searchInfo} = bookingStage;
@@ -188,7 +188,7 @@ class AdditionalInfo extends React.Component {
                             <Anchor onClick={this.goBackToSearch.bind(this)} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
-                    <BookingDetails apartmentResponse={apartment} bookingStage={bookingStage} />
+                    <BookingDetails apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
                 </div>
             );
         }

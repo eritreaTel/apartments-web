@@ -6,13 +6,14 @@ const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 
 const bookBestApartmentClicked = function (aptResponse) {
-    //Actions.bookBestApartmentClicked({apartmentId});
-    //Actions.setRoute('/guest-houses');
+    const {apartmentKey} = aptResponse;
+    Actions.bookBestApartmentClicked({apartmentKey});
+    Actions.setRoute('/guest-houses');
 }
 
 const viewBestApartmentClicked = function (aptResponse) {
-    //Actions.viewBestApartmentClicked({apartmentId});
-    //Actions.setRoute('/apartment/' + apartmentId);
+    Actions.viewBestApartmentClicked({apartmentId});
+    Actions.setRoute('/apartment/' + apartmentId);
 }
 
 class ApartmentMedium extends React.Component {

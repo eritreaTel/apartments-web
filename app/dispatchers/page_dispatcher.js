@@ -114,33 +114,33 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {searchInfo: data});
     },
 
-    bookApartmentClicked({apartmentId}) {
+    bookApartmentClicked({apartmentKey}) {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
-        let apartment = this.getStoreVal('apartments').find(apt => apt.id == apartmentId);
+        let apartment = this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
     },
 
-    bookBestApartmentClicked({apartmentId}) {
-        let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
+    bookBestApartmentClicked({apartmentKey}) {
+        let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
-        let found = apartments && apartments.find(apt => apt.id == apartmentId);
+        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         if (found == null) {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
     },
 
-    viewBestApartmentClicked({apartmentId}) {
-        let apartment = this.getStoreVal('bestApartments').find(apt => apt.id == apartmentId);
+    viewBestApartmentClicked({apartmentKey}) {
+        let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
 
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
-        let found = apartments && apartments.find(apt => apt.id == apartmentId);
+        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         if (found == null) {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);

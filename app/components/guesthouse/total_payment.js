@@ -7,10 +7,10 @@ const CurrencyFormatter = require('currency-formatter');
 class  TotalPayment extends React.Component {
 
     render() {
-        let {apartmentResponse, bookingStage : {additional, payment}, currentPayCaption} = this.props;
+        let {apartmentResponse : {totalPrice}, bookingStage : {additional, payment}, currentPayCaption} = this.props;
 
         let totalAmount, partialPay, currentPayment = 0, remainingAmount = 0, partialPayCss='mg-cart-total hide';
-        totalAmount = PricingHelper.getTotalComboPrice(apartmentResponse.totalPrice, additional);
+        totalAmount = PricingHelper.getTotalPrice(totalPrice, additional);
         partialPay = (payment && payment.payment_amount != undefined && payment.payment_amount != totalAmount ) ? true : false;
 
         if (partialPay) {

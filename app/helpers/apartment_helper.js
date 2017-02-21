@@ -52,6 +52,10 @@ const ApartmentHelper = {
 
     getComboAmenities(apartments) {
         return apartments[0].amenities;
+    },
+
+    getGuestHouse(apartmentResponse) {
+        return apartmentResponse.apartments[0].guestHouse;
     }
 };
 

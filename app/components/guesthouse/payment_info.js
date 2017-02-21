@@ -230,7 +230,7 @@ class PaymentInfo extends React.Component {
                                     <Anchor disabled={disabled} onClick={this.goBackToPersonal.bind(this)} className="margin-top-10 btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                               </div>
                         </div>
-                        <BookingDetails apartment={apartment} bookingStage={bookingStage}/>
+                        <BookingDetails apartmentResponse={apartment} bookingStage={bookingStage}/>
                   </div>
             );
       }

@@ -2,8 +2,8 @@ const CurrencyFormatter = require('currency-formatter');
 
 const PricingHelper = {
 
-    getTotalComboPrice(totalPrice, additional) {
-        let totalAmount = totalPrice;
+    getTotalPrice(roomTotalAmount, additional) {
+        let totalAmount = roomTotalAmount;
         let airportPickup = additional && additional.airport_pickup;
         if (airportPickup) {
             totalAmount = totalAmount + 30;
@@ -11,20 +11,11 @@ const PricingHelper = {
         return totalAmount;
     },
 
-    getTotalPrice(apartment, additional) {
-        let totalAmount = apartment.pricingInfo.total_price;
+    getMinimumPrice(roomTotalAmount, additional) {
+        let totalAmount = roomTotalAmount;
         let airportPickup = additional && additional.airport_pickup;
         if (airportPickup) {
-            totalAmount = totalAmount + 30;
-        }
-        return totalAmount;
-    },
-
-    getMinimumPrice(apartment, additional) {
-        let totalAmount = apartment.pricingInfo.total_price;
-        let airportPickup = additional && additional.airport_pickup;
-        if (airportPickup) {
-            totalAmount = totalAmount + 30;
+            totalAmount = roomTotalAmount + 30;
         }
 
         return totalAmount * .15;
@@ -45,9 +36,9 @@ const PricingHelper = {
         return remainingAmount;
     },
 
-    paymentAmountIsValid(paymentAmount, apartment, additional) {
-        let totalAmount   = this.getTotalPrice(apartment, additional);
-        let minimumAmount = this.getMinimumPrice(apartment, additional);
+    paymentAmountIsValid(paymentAmount, totalRoomAmount, additional) {
+        let totalAmount   = this.getTotalPrice(totalRoomAmount, additional);
+        let minimumAmount = this.getMinimumPrice(totalRoomAmount, additional);
         if (paymentAmount <  minimumAmount) {
             return "Payment amount should be greater than " + CurrencyFormatter.format(minimumAmount, { code: 'USD' }); ;
         }

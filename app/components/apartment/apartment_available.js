@@ -15,15 +15,16 @@ const onComboApartmentBookNowClicked = function (apartmentsId) {
 
 }
 
-class ComboApartment extends React.Component {
+class ApartmentAvailable extends React.Component {
 
     render() {
-        const {aptResponse :{displayMessage, apartments, daysCnt, totalPrice, title} } = this.props;
+        const {aptResponse} = this.props;
+        const {displayMessage, apartments, daysCnt, totalPrice, title} = aptResponse;
 
-        let totalApartmentPrice  = PricingHelper.getTotalComboPrice(totalPrice, null);
+        let totalApartmentPrice  = PricingHelper.getTotalPrice(totalPrice, null);
         let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
         let totalPriceDecimalPart = parseFloat(totalApartmentPrice % 1).toFixed(2).toString().substr(1, 3); // Take .00 instead of 0.00
-        let guestHouseName = apartments[0].guestHouse.name;
+        let guestHouse = ApartmentHelper.getGuestHouse(aptResponse);
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
         let comboUrl = ApartmentHelper.getComboApartmentUrl(apartments);
@@ -37,7 +38,7 @@ class ComboApartment extends React.Component {
                         <img src = {assetPath(bestPhoto)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-sm-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute(comboUrl);}}><label className="search-result-heading">{guestHouseName}</label>, <label className="search-result-subheading">{title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute(comboUrl);}}><label className="search-result-heading">{guestHouse.name}</label>, <label className="search-result-subheading">{title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
                         <p>{displayMessage} ...</p>
                         <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
@@ -50,4 +51,4 @@ class ComboApartment extends React.Component {
     }
 }
 
-module.exports = ComboApartment;
+module.exports = ApartmentAvailable;

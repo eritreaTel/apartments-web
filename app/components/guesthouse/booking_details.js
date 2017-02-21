@@ -9,18 +9,17 @@ const {assetPath} = require('../../helpers/asset_helper');
 class BookingDetails extends React.Component {
 
     render() {
-        let {apartmentResponse, bookingStage } = this.props;
+        let {apartmentResponse , bookingStage } = this.props;
+        let {displayMessage, apartments, daysCnt, totalPrice, title, startDate, endDate} = apartmentResponse;
         let {additional,payment, searchInfo} = bookingStage;
-        console.log(apartmentResponse);
-        let apartments = apartmentResponse.apartments;
 
-        let apartmentTitle = ApartmentHelper.getComboApartmentTitle(apartments);
+
+
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
-        let checkInDate  = DateHelper.formatDate(apartmentResponse.startDate, 'D MMM, YYYY') ;
-        let checkOutDate = DateHelper.formatDate(apartmentResponse.endDate, 'D MMM, YYYY') ;
+        let checkInDate  = DateHelper.formatDate(startDate, 'D MMM, YYYY') ;
+        let checkOutDate = DateHelper.formatDate(endDate, 'D MMM, YYYY') ;
         let adult        = searchInfo.adult;
         let room         = apartments.length ;
-        let totalDays    = apartmentResponse.daysCnt;
         let airportPickup = additional && additional.airport_pickup;
 
         let airPortPickUpLabel = "No. You are on your own.";
@@ -40,7 +39,7 @@ class BookingDetails extends React.Component {
                             <div className="mg-widget-cart">
                                 <div className="mg-cart-room">
                                     <img src={assetPath(bestPhoto)} alt="Delux Room" className="img-responsive"/>
-                                    <h3>{apartmentTitle}</h3>
+                                    <h3>{title}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check In:&nbsp;</strong>
@@ -60,7 +59,7 @@ class BookingDetails extends React.Component {
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Number of Days: </strong>
-                                    <span>{totalDays}</span>
+                                    <span>{daysCnt}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Airport Pickup: </strong>
