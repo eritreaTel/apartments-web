@@ -188,7 +188,7 @@ class AdditionalInfo extends React.Component {
                             <Anchor onClick={this.goBackToSearch.bind(this)} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
                         </div>
                     </div>
-                    <BookingDetails apartment={apartment} bookingStage={bookingStage} />
+                    <BookingDetails apartmentResponse={apartment} bookingStage={bookingStage} />
                 </div>
             );
         }

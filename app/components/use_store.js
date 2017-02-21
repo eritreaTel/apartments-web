@@ -47,7 +47,6 @@ module.exports = {
                             },
                             confirmation : {}
                         },
-                        searchResultPage : 'one-room',
                         resetPassword: {
                             stage: null,
                             email: null,

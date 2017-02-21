@@ -2,8 +2,7 @@ const React = require('react');
 const SearchApartment = require('../components/guesthouse/search_guesthouses');
 const AdditionalInfo = require('../components/guesthouse/additional_info');
 const PersonalInfo   = require('../components/guesthouse/personal_info');
-const SearchResultSingleRoom   = require('../components/guesthouse/search_result_single_room');
-const SearchResultManyRoom     = require('../components/guesthouse/search_result_many_room');
+const SearchResult   = require('../components/guesthouse/search_result');
 const PaymentInfo   = require('../components/guesthouse/payment_info');
 const ReservationConfirmation      = require('../components/guesthouse/reservation_confirmation');
 const PageTitle = require('../components/shared/pageTitle');
@@ -89,19 +88,12 @@ class GuestHousesPage extends React.Component {
         const {store} = this.props;
         const {store : {searchResultPage, user, pageNumber, apartments, apartment, bookingStage, acceptToS, isProcessing}} = this.props;
         let section ;
-        let searchResult;
-        if (searchResultPage == 'one-room') {
-            searchResult = <SearchResultSingleRoom apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
-        } else {
-            searchResult = <SearchResultManyRoom apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
-        }
-
 
         switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                {searchResult}
+                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
                 break;
             case 'additional':
@@ -125,7 +117,7 @@ class GuestHousesPage extends React.Component {
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                {searchResult}
+                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );

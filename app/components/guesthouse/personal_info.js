@@ -280,7 +280,7 @@ class PersonalInfo extends React.Component {
 
                         </div>
                     </div>
-                    <BookingDetails apartment={apartment} bookingStage={bookingStage} />
+                    <BookingDetails apartmentResponse={apartment} bookingStage={bookingStage} />
                 </div>
             );
         }

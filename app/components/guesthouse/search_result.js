@@ -4,7 +4,7 @@ const ApartmentAvailable = require('../apartment/apartment_available');
 const Actions = require('../../actions/actions');
 const Anchor = require('../shared/anchor');
 
-class SearchResultSingleRoom extends React.Component {
+class SearchResult extends React.Component {
 
     state = {}
     componentDidMount() {
@@ -40,8 +40,7 @@ class SearchResultSingleRoom extends React.Component {
         let availableApartments;
         if (apartments.length > 0 ) {
             availableApartments = apartments.map(aptResponse => {
-                                     let apt = aptResponse.apartments[0];
-                                     return <ApartmentAvailable apartment={apt} key={apt.id} />
+                                     return <ApartmentAvailable aptResponse={aptResponse} key={Math.random()} />
                                   });
         } else {
             availableApartments =
@@ -71,6 +70,6 @@ class SearchResultSingleRoom extends React.Component {
               );
         }
 }
-module.exports = SearchResultSingleRoom;
+module.exports = SearchResult;
 
 

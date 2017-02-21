@@ -42,10 +42,6 @@ const ApartmentHelper = {
         return url; //remove the one - at the end
     },
 
-    getComboApartmentTitle(apartments) {
-        return apartments.length + " rooms";
-    },
-
     getComboApartmentIds(apartments) {
         const apartmentIds = [];
         apartments.forEach(function(apartment) {

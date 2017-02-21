@@ -15,12 +15,12 @@ module.exports = {
     async getBestApartments() {
         let url = 'available_apartments?best_apartments=1';
         let bookingStage = this.getStoreVal('bookingStage');
-        let {searchInfo : {checkInDate, checkOutDate, room, adult}} = bookingStage;
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, children}} = bookingStage;
         let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
-        url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult;
+        url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
 
-        console.log('get apartments section' + url);
+        console.log('get apartments section - ' + url);
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
             if (this.acquireLock('getBestApartments')) {
@@ -49,7 +49,7 @@ module.exports = {
     async getApartments() {
         let url = 'available_apartments?';
         let bookingStage = this.getStoreVal('bookingStage');
-        let {searchInfo : {checkInDate, checkOutDate, room, adult, pageNumber}} = bookingStage;
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, children, pageNumber}} = bookingStage;
         let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
 
@@ -57,7 +57,7 @@ module.exports = {
             pageNumber = 1;
         }
 
-        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&pageNumber=' + pageNumber;
+        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children + '&pageNumber=' + pageNumber;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartments') == null ) {
             console.log('apartment url : ' + url);
             this.setStoreVal('requestUrl', url);
@@ -72,11 +72,9 @@ module.exports = {
                     } else {
                         this.setStoreVal('pageNumber', pageNumber);
                         this.setStoreVal('apartments', results);
+                        //populating bestApartments
+                        this.dispatch({type: 'getBestApartments', data: {errors}});
                     }
-
-                    let searchResultPage = (room > 1) ? 'many-room' : 'one-room';
-                    this.setStoreVal('searchResultPage', searchResultPage);
-
                 } catch (error) {
                     await this.dispatch({
                         type: 'handleRequestError',

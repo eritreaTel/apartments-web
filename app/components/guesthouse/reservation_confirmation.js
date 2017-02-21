@@ -106,7 +106,7 @@ class  ReservationConfirmation extends React.Component {
                                         </address>
                                     </div>
 
-                                    <TotalPayment currentPayCaption="Paid Amount" apartment={apartment} bookingStage={bookingStage} />
+                                    <TotalPayment currentPayCaption="Paid Amount" apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
                                 </div>
                             </div>
                         </div>

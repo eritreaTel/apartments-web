@@ -1,6 +1,7 @@
 const React = require('react');
 const DateHelper = require('../../helpers/date_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
+const ApartmentHelper = require('../../helpers/apartment_helper');
 const CurrencyFormatter = require('currency-formatter');
 const TotalPayment = require('./total_payment');
 const {assetPath} = require('../../helpers/asset_helper');
@@ -8,13 +9,18 @@ const {assetPath} = require('../../helpers/asset_helper');
 class BookingDetails extends React.Component {
 
     render() {
-        let {apartment, bookingStage } = this.props;
+        let {apartmentResponse, bookingStage } = this.props;
         let {additional,payment, searchInfo} = bookingStage;
-        let checkInDate  = DateHelper.formatDate(apartment.pricingInfo.start_date, 'D MMM, YYYY') ;
-        let checkOutDate = DateHelper.formatDate(apartment.pricingInfo.end_date, 'D MMM, YYYY') ;
+        console.log(apartmentResponse);
+        let apartments = apartmentResponse.apartments;
+
+        let apartmentTitle = ApartmentHelper.getComboApartmentTitle(apartments);
+        let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
+        let checkInDate  = DateHelper.formatDate(apartmentResponse.startDate, 'D MMM, YYYY') ;
+        let checkOutDate = DateHelper.formatDate(apartmentResponse.endDate, 'D MMM, YYYY') ;
         let adult        = searchInfo.adult;
-        let room = apartment.room ;
-        let totalDays = apartment.pricingInfo.days_cnt;
+        let room         = apartments.length ;
+        let totalDays    = apartmentResponse.daysCnt;
         let airportPickup = additional && additional.airport_pickup;
 
         let airPortPickUpLabel = "No. You are on your own.";
@@ -33,8 +39,8 @@ class BookingDetails extends React.Component {
                             <h2 className="mg-widget-title">Booking Details</h2>
                             <div className="mg-widget-cart">
                                 <div className="mg-cart-room">
-                                    <img src={assetPath(apartment.best_photo)} alt="Delux Room" className="img-responsive"/>
-                                    <h3>{apartment.title}</h3>
+                                    <img src={assetPath(bestPhoto)} alt="Delux Room" className="img-responsive"/>
+                                    <h3>{apartmentTitle}</h3>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check In:&nbsp;</strong>
@@ -61,7 +67,7 @@ class BookingDetails extends React.Component {
                                     <span>{airPortPickUpLabel}</span>
                                 </div>
 
-                                <TotalPayment currentPayCaption="Paying Now" apartment={apartment} bookingStage={bookingStage} />
+                                <TotalPayment currentPayCaption="Paying Now" apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
                             </div>
                         </aside>
                     </div>
