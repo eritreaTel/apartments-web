@@ -41,8 +41,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'getApartmentReviews', data});
     },
 
-    getApartmentBookings(data) {
-        Dispatcher.dispatch({type: 'getApartmentBookings', data});
+    getReservationConfirmations(data) {
+        Dispatcher.dispatch({type: 'getReservationConfirmations', data});
     },
 
     getBlogs(data) {
@@ -173,8 +173,8 @@ const Actions = {
         Dispatcher.dispatch({type: 'saveUserSearches', data});
     },
 
-    processPayment() {
-        Dispatcher.dispatch({type: 'processPayment'});
+    cleanUpBookingData() {
+        Dispatcher.dispatch({type: 'cleanUpBookingData'});
     },
 
     createApartmentBooking(data) {

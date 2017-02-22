@@ -1,52 +1,63 @@
 const FetchHelper = require('../helpers/fetch_helper');
 const ResponseHelper = require('../helpers/response_helper');
 const PricingHelper = require('../helpers/pricing_helper');
+const ApartmentHelper = require('../helpers/apartment_helper');
 
 
 module.exports = {
-    processPayment() {
-        //This is where a call to Stripe API is done. This is awesome, as the data don't hit our server but theirs.
+
+    cleanUpBookingData() {
+        this.mergeStoreVal('bookingStage', {activeStage: null});
+        this.mergeStoreVal('bookingStage', {additional: {}});
+        this.mergeStoreVal('bookingStage', {personal: {}});
+        this.mergeStoreVal('bookingStage', {confirmation: {}});
+
+        let data  = { 'payFull'    : true,   'payLater'   : false,
+                         'payPartial' : false,  'number'     : '',
+                         'exp_month'  : '',     'exp_year'   : '' };
         this.mergeStoreVal('bookingStage', {payment: data});
-        return true;
     },
 
     async createApartmentBooking({stripe_token}) {
-        const url = 'apartment_bookings';
+        const url = "apartment_bookings?XDEBUG_SESSION_START='PHPSTORM'";
         this.setStoreVal('requestUrl', url);
 
         if (this.acquireLock('createApartmentBooking')) {
             try {
 
                 let apartment = this.getStoreVal('apartment');
+                let {apartments, daysCnt, totalPrice, startDate, endDate, guestHouseId} = apartment;
                 let bookingStage = this.getStoreVal('bookingStage');
                 let user = this.getStoreVal('user');
                 let pricingInfo = apartment.pricingInfo;
                 let {additional, personal, payment, searchInfo} = bookingStage;
-                let totalAmount = PricingHelper.getTotalPrice(apartment, additional);
+                let totalAmount = PricingHelper.getTotalPrice(totalPrice, additional);
+                let skinnyApartments = ApartmentHelper.getSkinyApartmentsRepresentation(apartments);
 
                 let carRental = (additional.car_rentals == 1) ? 1 : 0 ;
                 let tourGuide = (additional.tour_guides == 1) ? 1 : 0 ;
                 let airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
 
                 let bookingData = {
-                    'apartment_id'   : apartment.id,
-                    'apartment_price_id' : pricingInfo.apartment_price_id,
-                    'room'           : searchInfo.room,
-                    'adult'          : searchInfo.adult,
-                    'user_id'        : user.id,
-                    'first_name'     : personal.first_name,
-                    'last_name'      : personal.last_name,
-                    'city'           : personal.city,
-                    'country'        : personal.country,
-                    'stripe_token'   : stripe_token,
-                    'start_date'     : pricingInfo.start_date,
-                    'end_date'       : pricingInfo.end_date,
-                    'days_cnt'       : pricingInfo.days_cnt,
-                    'total_price'    : totalAmount,
-                    'paid_amount'    : payment.payment_amount,
-                    'airport_pickup' : airportPickup,
-                    'tour_guide'     : tourGuide,
-                    'car_rental'     : carRental
+                    'skinnyApartments'  : skinnyApartments,
+                    'guest_house_id'    : guestHouseId,
+                    'room'              : searchInfo.room,
+                    'adult'             : searchInfo.adult,
+                    'child'             : searchInfo.children,
+                    'user_id'           : user.id,
+                    'first_name'        : personal.first_name,
+                    'last_name'         : personal.last_name,
+                    'city'              : personal.city,
+                    'country'           : personal.country,
+                    'stripe_token'      : stripe_token,
+                    'start_date'        : startDate,
+                    'end_date'          : endDate,
+                    'days_cnt'          : daysCnt,
+                    'total_price'       : totalAmount,
+                    'paid_amount'       : payment.payment_amount,
+                    'airport_pickup'    : airportPickup,
+                    'tour_guide'        : tourGuide,
+                    'car_rental'        : carRental
                 };
 
                 if (airportPickup) {
@@ -56,7 +67,7 @@ module.exports = {
                         airport : 'Entebbe International'
                     }
                 }
-                console.log(bookingData);
+
                 const response = await FetchHelper.fetchJson(url, {body: bookingData , method: 'POST'});
                 const {object, errors} = ResponseHelper.processResponseReturnOne(response);
                 if (errors.length > 0) {
@@ -78,8 +89,8 @@ module.exports = {
         }
     },
 
-    async getApartmentBookings({userId}) {
-        let url = 'apartment_bookings?user_id=' + userId;
+    async getReservationConfirmations({userId}) {
+        let url = 'reservation_confirmations?user_id=' + userId;
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('apartmentBookings') == null ) {
 
             this.setStoreVal('requestUrl', url);
@@ -90,7 +101,7 @@ module.exports = {
                     if (errors.length > 0) {
                         await this.dispatch({type: 'setErrorMessages', data: {errors}});
                     } else {
-                        this.setStoreVal('apartmentBookings', results);
+                        this.setStoreVal('reservationConfirmations', results);
                     }
                 } catch (error) {
                     await this.dispatch({

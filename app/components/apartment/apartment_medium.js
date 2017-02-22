@@ -7,6 +7,7 @@ const {assetPath} = require('../../helpers/asset_helper');
 
 const bookBestApartmentClicked = function (aptResponse) {
     const {apartmentKey} = aptResponse;
+    Actions.cleanUpBookingData();
     Actions.bookBestApartmentClicked({apartmentKey});
     Actions.setRoute('/guest-houses');
 }

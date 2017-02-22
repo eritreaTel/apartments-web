@@ -58,8 +58,6 @@ function onDatePickerChanged(dates) {
 }
 
 function onDatePickerFocused(focused) {
-    console.log('date picker focused' );
-    console.log(focused);
     Actions.searchApartmentsUpdated({'focusedInput'  : focused});
 }
 

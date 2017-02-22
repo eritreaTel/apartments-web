@@ -14,12 +14,12 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
 const BookingSection = function (props) {
-    let {apartmentBookings} = props;
+    let {reservationConfirmations} = props;
 
     let content;
-    if (apartmentBookings && apartmentBookings.length > 0) {
-        content = apartmentBookings.map(apartmentBooking => {
-                return <OneBooking key={apartmentBooking.id} apartmentBooking={apartmentBooking}/>
+    if (reservationConfirmations && reservationConfirmations.length > 0) {
+        content = reservationConfirmations.map(reservationConfirmation => {
+                return <OneBooking key={reservationConfirmation.id} reservationConfirmation={reservationConfirmation}/>
         });
 
     } else {
@@ -46,19 +46,19 @@ const BookingSection = function (props) {
 }
 
 const OneBooking = function (props) {
-    let apartmentBooking = props.apartmentBooking;
-    let confirmationNumber =  PricingHelper.getReservationConfirmationNumber(apartmentBooking.id)
-    let paidAmount = CurrencyFormatter.format(apartmentBooking.paid_amount, { code: 'USD' });
-    let remainingAmount = CurrencyFormatter.format(apartmentBooking.total_price - apartmentBooking.paid_amount, { code: 'USD' });
-    let guestHouse = apartmentBooking.guestHouse;
+    let reservationConfirmation = props.reservationConfirmation;
+	let confirmationNumber =  PricingHelper.getReservationConfirmationNumber(reservationConfirmation.id)
+    let paidAmount = CurrencyFormatter.format(reservationConfirmation.paid_amount, { code: 'USD' });
+    let remainingAmount = CurrencyFormatter.format(reservationConfirmation.total_price - reservationConfirmation.paid_amount, { code: 'USD' });
+    let guestHouse = reservationConfirmation.guestHouse;
 
-    let checkInDay = DateHelper.getDay(apartmentBooking.start_date);
-    let checkInMonthNameYear = DateHelper.getMonthNameAndYear(apartmentBooking.start_date);
-    let checkInDayName = DateHelper.getDayName(apartmentBooking.start_date);
+    let checkInDay = DateHelper.getDay(reservationConfirmation.start_date);
+    let checkInMonthNameYear = DateHelper.getMonthNameAndYear(reservationConfirmation.start_date);
+    let checkInDayName = DateHelper.getDayName(reservationConfirmation.start_date);
 
-    let checkOutDay = DateHelper.getDay(apartmentBooking.end_date);
-    let checkOutMonthNameYear = DateHelper.getMonthNameAndYear(apartmentBooking.end_date);
-    let checkOutDayName = DateHelper.getDayName(apartmentBooking.end_date);
+    let checkOutDay = DateHelper.getDay(reservationConfirmation.end_date);
+    let checkOutMonthNameYear = DateHelper.getMonthNameAndYear(reservationConfirmation.end_date);
+    let checkOutDayName = DateHelper.getDayName(reservationConfirmation.end_date);
 
 
     return(
@@ -297,16 +297,16 @@ class Seeker extends React.Component {
     componentWillMount() {
         const {user} = this.props;
         if(user.type == 'seeker') {
-            Actions.getApartmentBookings({'userId' : user.id});
+            Actions.getReservationConfirmations({'userId' : user.id});
         }
     }
 
     render() {
-        const {user, userServices ,isProcessing, apartmentBookings} = this.props;
+        const {user, userServices ,isProcessing, reservationConfirmations} = this.props;
         let activeLink = userServices.seekerUser.activeLink;
 
         let seekerData;
-        if (apartmentBookings == null) {
+        if (reservationConfirmations == null) {
             seekerData = <SeekerBody userServices = {userServices}>
                             <div className="load-spin">
                                 <MDSpinner />
@@ -314,7 +314,7 @@ class Seeker extends React.Component {
                         </SeekerBody>
         } else {
             seekerData = <SeekerBody userServices = {userServices}>
-                            <BookingSection activeLink={activeLink} apartmentBookings={apartmentBookings}/>
+                            <BookingSection activeLink={activeLink} reservationConfirmations={reservationConfirmations}/>
                             <EditProfileSection activeLink={activeLink} user={user} userServices={userServices} isProcessing={isProcessing} />
                           </SeekerBody>
         }

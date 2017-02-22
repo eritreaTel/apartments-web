@@ -42,12 +42,12 @@ const ApartmentHelper = {
         return url; //remove the one - at the end
     },
 
-    getComboApartmentIds(apartments) {
-        const apartmentIds = [];
+    getSkinyApartmentsRepresentation(apartments) {
+        const skinnyApartments = [];
         apartments.forEach(function(apartment) {
-            apartmentIds.push(apartment.id);
+            skinnyApartments.push( {'apartmentId' : apartment.id, 'pricingId' : apartment.pricingInfo.apartment_price_id});
         });
-        return apartmentIds;
+        return skinnyApartments;
     },
 
     getComboAmenities(apartments) {
@@ -57,6 +57,7 @@ const ApartmentHelper = {
     getGuestHouse(apartmentResponse) {
         return apartmentResponse.apartments[0].guestHouse;
     }
+
 };
 
 module.exports = ApartmentHelper;

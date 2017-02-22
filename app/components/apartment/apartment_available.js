@@ -10,9 +10,10 @@ const CurrencyFormatter = require('currency-formatter');
 const PricingHelper = require('../../helpers/pricing_helper');
 
 
-const onComboApartmentBookNowClicked = function (apartmentsId) {
-    //Actions.bookApartmentClicked({apartmentId});
-
+const onComboApartmentBookNowClicked = function (aptResponse) {
+    const {apartmentKey} = aptResponse;
+    Actions.cleanUpBookingData();
+    Actions.bookApartmentClicked({apartmentKey});
 }
 
 class ApartmentAvailable extends React.Component {
@@ -28,7 +29,6 @@ class ApartmentAvailable extends React.Component {
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
         let comboUrl = ApartmentHelper.getComboApartmentUrl(apartments);
-        let apartmentIds = ApartmentHelper.getComboApartmentIds(apartments);
         let comboAmenities = ApartmentHelper.getComboAmenities(apartments);
 
         return (
@@ -43,7 +43,7 @@ class ApartmentAvailable extends React.Component {
                         <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
                         <Anchor onClick={()=>{Actions.setRoute(comboUrl);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
-                        <Anchor onClick={() => {onComboApartmentBookNowClicked(apartmentIds)}} className="btn btn-main pull-right">Book Now</Anchor>
+                        <Anchor onClick={() => {onComboApartmentBookNowClicked(aptResponse)}} className="btn btn-main pull-right">Book Now</Anchor>
                     </div>
                 </div>
             </div>

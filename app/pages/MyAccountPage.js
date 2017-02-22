@@ -27,11 +27,11 @@ const MyAccountBody = function(props) {
 class MyAccountPage extends React.Component {
 
     render() {
-        const {store : {user, userServices, isProcessing, apartmentBookings}} = this.props;
+        const {store : {user, userServices, isProcessing, reservationConfirmations}} = this.props;
         let  dashboard;
         switch (user.type) {
             case 'seeker':
-                dashboard =   <Seeker apartmentBookings={apartmentBookings} user = {user} userServices={userServices} isProcessing={isProcessing}/>;
+                dashboard =   <Seeker reservationConfirmations={reservationConfirmations} user = {user} userServices={userServices} isProcessing={isProcessing}/>;
                 break;
             case 'admin':
                 dashboard =   <Admin user = {user} />;

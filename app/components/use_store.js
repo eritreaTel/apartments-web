@@ -30,7 +30,7 @@ module.exports = {
                         apartments : null,
                         bestApartments : null,
                         apartmentReviews : null,
-                        apartmentBookings : null,
+                        reservationConfirmations : null,
                         searchCriteria : null,
                         bookingStage : {
                             activeStage : null,
