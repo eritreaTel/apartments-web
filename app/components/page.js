@@ -1,16 +1,17 @@
-const HomePage = require('../pages/HomePage');
-const GuestHousesPage = require('../pages/GuestHousesPage');
-const ApartmentPage = require('../pages/ApartmentPage');
-const AboutUsPage = require('../pages/AboutUsPage');
-const ContactUsPage = require('../pages/ContactUsPage');
-const BlogsPage = require('../pages/BlogsPage');
-const NotFoundPage = require('../pages/NotFoundPage');
-const BlogPage = require('../pages/BlogPage');
-const SignInPage = require('../pages/SignInPage');
+const HomePage          = require('../pages/HomePage');
+const GuestHousesPage   = require('../pages/GuestHousesPage');
+const ApartmentPage     = require('../pages/ApartmentPage');
+const AboutUsPage       = require('../pages/AboutUsPage');
+const ContactUsPage     = require('../pages/ContactUsPage');
+const BlogsPage         = require('../pages/BlogsPage');
+const NotFoundPage      = require('../pages/NotFoundPage');
+const BlogPage          = require('../pages/BlogPage');
+const SignInPage        = require('../pages/SignInPage');
 const MyAccountPage = require('../pages/MyAccountPage');
 const TermsOfUse = require('../pages/TermsOfUse');
 const PrivacyPolicy = require('../pages/PrivacyPolicy');
 const ResetPasswordPage = require('../pages/ResetPasswordPage');
+const ComboApartmentsPage = require('../pages/ComboApartmentsPage');
 const CookiesHelper = require('../helpers/cookies_helper');
 
 //Import third party css
@@ -73,7 +74,7 @@ class Page extends React.Component {
                 content = <ApartmentPage {...{store}} />
                 break;
             case 'combo-apartment':
-                content = <ApartmentPage {...{store}} />
+                content = <ComboApartmentsPage {...{store}} />
                 break;
             case 'my-account' :
                 content = loggedIn == true? <MyAccountPage {...{store}} /> : <SignInPage {...{store}} />;

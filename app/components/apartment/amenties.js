@@ -1,6 +1,5 @@
 const React = require('react');
 const Anchor = require('../shared/anchor')
-const ApplicationHelper = require('../../helpers/application_helper');
 
 class Amenities extends React.Component {
 

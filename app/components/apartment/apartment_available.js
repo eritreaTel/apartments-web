@@ -16,6 +16,18 @@ const onComboApartmentBookNowClicked = function (aptResponse) {
     Actions.bookApartmentClicked({apartmentKey});
 }
 
+const onViewApartmentClickedFromSearch = function (aptResponse) {
+    const {apartmentKey, aptCnt} = aptResponse;
+    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+
+    if (aptCnt == 1) {
+        Actions.setRoute(viewApartmentUrl);
+    } else {
+        Actions.viewComboApartmentClickedFromSearch({apartmentKey});
+        Actions.setRoute(viewApartmentUrl);
+    }
+}
+
 class ApartmentAvailable extends React.Component {
 
     render() {
@@ -28,7 +40,6 @@ class ApartmentAvailable extends React.Component {
         let guestHouse = ApartmentHelper.getGuestHouse(aptResponse);
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
-        let comboUrl = ApartmentHelper.getComboApartmentUrl(apartments);
         let comboAmenities = ApartmentHelper.getComboAmenities(apartments);
 
         return (
@@ -42,7 +53,7 @@ class ApartmentAvailable extends React.Component {
                         <p>{displayMessage} ...</p>
                         <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
-                        <Anchor onClick={()=>{Actions.setRoute(comboUrl);}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
+                        <Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
                         <Anchor onClick={() => {onComboApartmentBookNowClicked(aptResponse)}} className="btn btn-main pull-right">Book Now</Anchor>
                     </div>
                 </div>

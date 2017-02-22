@@ -13,8 +13,15 @@ const bookBestApartmentClicked = function (aptResponse) {
 }
 
 const viewBestApartmentClicked = function (aptResponse) {
-    Actions.viewBestApartmentClicked({apartmentId});
-    Actions.setRoute('/apartment/' + apartmentId);
+    let {apartmentKey, aptCnt} = aptResponse;
+    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+    if (aptCnt == 1) {
+        Actions.viewBestApartmentClicked({apartmentKey});
+        Actions.setRoute(viewApartmentUrl);
+    } else {
+        Actions.viewComboApartmentClickedFromHome({apartmentKey});
+        Actions.setRoute(viewApartmentUrl);
+    }
 }
 
 class ApartmentMedium extends React.Component {

@@ -97,7 +97,7 @@ module.exports = {
         let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
 
-        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
+        url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 

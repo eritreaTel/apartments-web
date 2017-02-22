@@ -45,13 +45,20 @@ const ApartmentHelper = {
         return apartments[0].best_photo;
     },
 
-    getComboApartmentUrl(apartments) {
-        let url = 'combo-apartment/';
-        apartments.forEach(function(apartment) {
-            url += apartment.id + '-';
-        });
+    generateViewApartmentUrl(apartmentResponse) {
+        let {apartments, aptCnt} = apartmentResponse;
 
-        return url; //remove the one - at the end
+        let url;
+        if (aptCnt ==1) {
+            url  = 'apartment/' + apartments[0].id;
+        } else {
+            let aptIds = [];
+            apartments.forEach(function(apartment) {
+                aptIds.push(apartment.id);
+            });
+            url  = 'combo-apartment/' + _.join(aptIds, '-');
+        }
+        return url;
     },
 
     getSkinyApartmentsRepresentation(apartments) {
@@ -72,6 +79,10 @@ const ApartmentHelper = {
 
     getApartmentEntity(apartmentResponse) {
         return apartmentResponse.apartments[0];
+    },
+
+    getGalleries(apartmentResponse) {
+        return apartmentResponse.apartments[0].galleries;
     }
 
 };

@@ -129,6 +129,14 @@ const Actions = {
         Dispatcher.dispatch({type: 'viewBestApartmentClicked', data});
     },
 
+    viewComboApartmentClickedFromSearch(data) {
+        Dispatcher.dispatch({type: 'viewComboApartmentClickedFromSearch', data});
+    },
+
+    viewComboApartmentClickedFromHome(data) {
+        Dispatcher.dispatch({type: 'viewComboApartmentClickedFromHome', data});
+    },
+
     goToPersonalInfoClicked() {
         Dispatcher.dispatch({type: 'goToPersonalInfoClicked'});
     },

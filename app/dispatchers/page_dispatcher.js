@@ -114,48 +114,66 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {searchInfo: data});
     },
 
-    bookApartmentPageClicked({apartmentKey}) {
+    async bookApartmentPageClicked({apartmentKey}) {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
         let apartment = this.getStoreVal('apartment')
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
-        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        let found = await apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         if (found == null) {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
     },
 
-    bookApartmentClicked({apartmentKey}) {
+    async bookApartmentClicked({apartmentKey}) {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
-        let apartment = this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        let apartment = await this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
     },
 
-    bookBestApartmentClicked({apartmentKey}) {
+    async bookBestApartmentClicked({apartmentKey}) {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
-        let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        let apartment = await this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
 
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
-        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        let found = await apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         if (found == null) {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
     },
 
-    viewBestApartmentClicked({apartmentKey}) {
+    async viewBestApartmentClicked({apartmentKey}) {
         let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
 
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
-        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        let found = await apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        if (found == null) {
+            apartments.push(apartment);
+            this.setStoreVal('apartments', apartments);
+        }
+    },
+
+    async viewComboApartmentClickedFromSearch({apartmentKey}) {
+        let apartment = await this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        this.setStoreVal('apartment', apartment);
+    },
+
+    async  viewComboApartmentClickedFromHome({apartmentKey}) {
+        let apartment = await this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        this.setStoreVal('apartment', apartment);
+
+        let apartments = this.getStoreVal('apartments');
+        apartments = (apartments != null) ? apartments : [];
+        let found = await apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         if (found == null) {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);

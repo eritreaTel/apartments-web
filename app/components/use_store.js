@@ -28,6 +28,7 @@ module.exports = {
                     store: {
                         user: null,
                         apartments : null,
+                        apartment : null,
                         bestApartments : null,
                         apartmentReviews : null,
                         reservationConfirmations : null,

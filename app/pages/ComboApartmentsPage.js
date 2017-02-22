@@ -25,17 +25,20 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 const ApartmentBody = function (props) {
 	return (
 		<div>
-			{props.children}
-		</div>
+		{props.children}
+	</div>
 	);
 }
 
-class ApartmentPage extends React.Component {
+class ComboApartmentsPage extends React.Component {
 
 	componentWillMount() {
 		const {store : {apartment}} = this.props;
-		let apartmentId = apartment.id;
-		Actions.getAuthenticatedUser();
+		if (apartment == null) {
+			Actions.setRoute("/guest-houses");
+		} else {
+			Actions.getAuthenticatedUser();
+		}
 	}
 
 	componentDidMount(){
@@ -66,30 +69,17 @@ class ApartmentPage extends React.Component {
 
 
 const WithUserLoaded = withDataLoaded({
-	WithData: ApartmentPage,
-	WithoutData: () => (
-			<ApartmentBody >
-				<PageTitle parentClassName="mg-page-title parallax">
-					<div className='load-spin'>
-						<MDSpinner />
-					</div>
-				</PageTitle >
-			</ApartmentBody>
+		WithData: ComboApartmentsPage,
+		WithoutData: () => (
+		<ApartmentBody >
+			<PageTitle parentClassName="mg-page-title parallax">
+				<div className='load-spin'>
+					<MDSpinner />
+				</div>
+			</PageTitle >
+		</ApartmentBody>
 	),
 	data: [
-		{
-			storeKeys: ['apartment'],
-			loadDataFn: ({view : {apartmentId}, bookingStage}) =>
-			{
-				let searchInfo = bookingStage.searchInfo;
-				if (searchInfo == null) {
-					searchInfo = ApartmentHelper.getDefaultSearchDates();
-					Actions.persistSearchInfo(searchInfo);
-				}
-				Actions.getApartment({apartmentId});
-			},
-			alwaysLoad : true
-		},
 		{
 			storeKeys: ['apartmentReviews'],
 			loadDataFn: ({view : {apartmentId}}) => Actions.getApartmentReviews({apartmentId}),
