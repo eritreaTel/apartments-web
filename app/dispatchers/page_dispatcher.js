@@ -114,16 +114,31 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {searchInfo: data});
     },
 
+    bookApartmentPageClicked({apartmentKey}) {
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+
+        let apartment = this.getStoreVal('apartment')
+        let apartments = this.getStoreVal('apartments');
+        apartments = (apartments != null) ? apartments : [];
+        let found = apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        if (found == null) {
+            apartments.push(apartment);
+            this.setStoreVal('apartments', apartments);
+        }
+    },
+
     bookApartmentClicked({apartmentKey}) {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+
         let apartment = this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
     },
 
     bookBestApartmentClicked({apartmentKey}) {
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+
         let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
 
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];

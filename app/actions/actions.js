@@ -113,6 +113,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'seekerUserInfoUpdated', data});
     },
 
+    bookApartmentPageClicked(data) {
+        Dispatcher.dispatch({type: 'bookApartmentPageClicked', data});
+    },
+
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },

@@ -5,8 +5,8 @@ const DateHelper = {
         return Moment().add(7, 'days');
     },
 
-    getThreeWeeksFromNow() {
-        return Moment().add(21, 'days');
+    getTwoWeeksFromNow() {
+        return Moment().add(14, 'days');
     },
 
     formatDate(inputDate, format){

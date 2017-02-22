@@ -1,3 +1,4 @@
+const DateHelper = require('./date_helper');
 const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
@@ -17,6 +18,17 @@ const ApartmentHelper = {
             confirmation ='mg-step-done';
         }
         return {searching, additional, personal, confirmation};
+    },
+
+    getDefaultSearchDates() {
+        let searchData = {
+            'checkInDate'   : DateHelper.getOneWeeksFromNow(),
+            'checkOutDate'  : DateHelper.getTwoWeeksFromNow(),
+            'room' : 1,
+            "adult" : 1,
+            "children" : 0
+        };
+        return searchData;
     },
 
     getCategories(blogMetadatas) {
@@ -56,6 +68,10 @@ const ApartmentHelper = {
 
     getGuestHouse(apartmentResponse) {
         return apartmentResponse.apartments[0].guestHouse;
+    },
+
+    getApartmentEntity(apartmentResponse) {
+        return apartmentResponse.apartments[0];
     }
 
 };

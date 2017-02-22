@@ -139,13 +139,7 @@ const WithUserLoaded = withDataLoaded({
                     let {bookingStage} = store;
                     searchInfo = bookingStage.searchInfo;
                     if (searchInfo == null) {
-                        searchInfo = {
-                            'checkInDate'   : DateHelper.getOneWeeksFromNow(),
-                            'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
-                            'children' : 0,
-                            "adult" : 2,
-                            "room" : 1
-                        };
+                        searchInfo = ApartmentHelper.getDefaultSearchDates();
                         Actions.persistSearchInfo(searchInfo);
                     }
                     Actions.getApartments(searchInfo);

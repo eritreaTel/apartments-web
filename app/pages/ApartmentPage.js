@@ -9,6 +9,7 @@ const withDataLoaded = require('../components/with_data_loaded')
 const {assetPath} = require('../helpers/asset_helper');
 const DateHelper = require('../helpers/date_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');
+const ApartmentHelper  = require('../helpers/apartment_helper');
 const Slider = require('react-slick');
 
 import MDSpinner from "react-md-spinner";
@@ -18,8 +19,8 @@ const Constants = require('../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
-const onBookNowClicked = function (apartmentId) {
-	Actions.bookApartmentClicked({apartmentId});
+const onBookApartmentPageClicked = function (apartmentKey) {
+	Actions.bookApartmentPageClicked({apartmentKey});
 	Actions.setRoute('/guest-houses');
 }
 
@@ -55,18 +56,8 @@ const ApartmentPrice = function(props) {
 	return (
 		<div>
 			<div className="mg-single-room-price">
-				<div className="mg-srp-inner-price-per-day">
-					{ApplicationHelper.formatCurrency(props.apartment.price_per_day)}<sup>.00</sup><span>/Night</span>
-				</div>
-			</div>
-			<div className="mg-single-room-price">
 				<div className="mg-srp-inner-price-per-week">
-					{ApplicationHelper.formatCurrency(props.apartment.price_per_week)}<sup>.00</sup><span>/Week</span>
-				</div>
-			</div>
-			<div className="mg-single-room-price">
-				<div className="mg-srp-inner-price-per-month">
-					{ApplicationHelper.formatCurrency(props.apartment.price_per_month)}<sup>.00</sup><span>/Month</span>
+					{ApplicationHelper.formatCurrency(props.totalPrice)}<sup>.00</sup><span>/{props.daysCnt} days</span>
 				</div>
 			</div>
 		</div>
@@ -83,7 +74,7 @@ const AmenitiesAndControlButtons = function(props) {
 					<Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark">Keep Searching</Anchor>
 				</div>
 				<div className="col-md-6">
-					<Anchor onClick = {() => {onBookNowClicked(props.apartment.id)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
+					<Anchor onClick = {() => {onBookApartmentPageClicked(props.apartmentKey)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
 				</div>
 			</div>
 
@@ -287,7 +278,7 @@ const ApartmentMiddleSection = function (props) {
 			<div className="container">
 				<div className="row">
 					<ApartmentGalleries galleries = {props.apartment.galleries} />
-					<AmenitiesAndControlButtons apartment={props.apartment} />
+					<AmenitiesAndControlButtons apartmentKey={props.apartmentKey} apartment={props.apartment} />
 				</div>
 				<ApartmentDescription apartment={props.apartment} />
 			</div>
@@ -318,19 +309,22 @@ class ApartmentPage extends React.Component {
 
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
-		let guestHouseName = apartment.guestHouse.name;
+
+		const {daysCnt, totalPrice, title, apartmentKey} = apartment;
+		let selectedApartment = ApartmentHelper.getApartmentEntity(apartment);
+		let guestHouse = ApartmentHelper.getGuestHouse(apartment);
 
 		return (
 			<ApartmentBody>
 				<PageTitle parentClassName="mg-page-title parallax">
-					<h2>{guestHouseName}</h2>
-					<h3>{apartment.title}</h3>
+					<h2>{guestHouse.name}</h2>
+					<h3>{title}</h3>
 					<p>&nbsp;</p>
 				</PageTitle>
 
-				<ApartmentPrice apartment = {apartment} />
-				<ApartmentMiddleSection apartment={apartment} />
-				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartment={apartment} apartmentReviews={apartmentReviews} />
+				<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
+				<ApartmentMiddleSection apartmentKey={apartmentKey} apartment={selectedApartment} />
+				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartment={selectedApartment} apartmentReviews={apartmentReviews} />
 			</ApartmentBody>
 		);
 	}
@@ -340,18 +334,26 @@ class ApartmentPage extends React.Component {
 const WithUserLoaded = withDataLoaded({
 	WithData: ApartmentPage,
 	WithoutData: () => (
-	<ApartmentBody >
-		<PageTitle parentClassName="mg-page-title parallax">
-			<div className='load-spin'>
-				<MDSpinner />
-			</div>
-		</PageTitle >
-	</ApartmentBody>
+			<ApartmentBody >
+				<PageTitle parentClassName="mg-page-title parallax">
+					<div className='load-spin'>
+						<MDSpinner />
+					</div>
+				</PageTitle >
+			</ApartmentBody>
 	),
 	data: [
 		{
 			storeKeys: ['apartment'],
-			loadDataFn: ({view : {apartmentId}}) => Actions.getApartment({apartmentId}),
+			loadDataFn: ({view : {apartmentId}, bookingStage}) =>
+			{
+				let searchInfo = bookingStage.searchInfo;
+				if (searchInfo == null) {
+					searchInfo = ApartmentHelper.getDefaultSearchDates();
+					Actions.persistSearchInfo(searchInfo);
+				}
+				Actions.getApartment({apartmentId});
+			},
 			alwaysLoad : true
 		},
 		{
@@ -359,25 +361,6 @@ const WithUserLoaded = withDataLoaded({
 			loadDataFn: ({view : {apartmentId}}) => Actions.getApartmentReviews({apartmentId}),
 			alwaysLoad : true,
 			checkDataFn: ({apartmentReviews}) => apartmentReviews != null
-		},
-		{
-			storeKeys: ['apartments'],
-			loadDataFn: (store) => {
-				let searchInfo;
-				let {bookingStage} = store;
-				searchInfo = bookingStage.searchInfo;
-				if (searchInfo == null) {
-					searchInfo = {
-						'checkInDate'   : DateHelper.getOneWeeksFromNow(),
-						'checkOutDate'  : DateHelper.getThreeWeeksFromNow(),
-						'room' : 1,
-						"adult" : 1
-					};
-					Actions.persistSearchInfo(searchInfo);
-				}
-				Actions.getApartments(searchInfo);
-			},
-			checkDataFn: ({apartments}) => apartments != null
 		}
 	]
 });

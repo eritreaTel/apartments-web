@@ -91,15 +91,25 @@ module.exports = {
     },
 
     async getApartment({apartmentId}) {
-        const url = 'apartments/' + apartmentId;
+        let url = 'apartments?apartment_id=' + apartmentId;
+        let bookingStage = this.getStoreVal('bookingStage');
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, children, pageNumber}} = bookingStage;
+        let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
+        let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
+
+        url = url + 'check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
         if ( url !== this.getStoreVal('requestUrl')) {
             this.setStoreVal('requestUrl', url);
 
             if (this.acquireLock('getApartment')) {
                 try {
                     const response = await FetchHelper.fetchJson(url, {method: 'GET'});
-                    if (response.data && response.data.results && response.data.results.length > 0) {
-                        this.setStoreVal('apartment', response.data.results[0]);
+                    const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+
+                    if (errors.length > 0) {
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    } else {
+                        this.setStoreVal('apartment', object);
                     }
                 } catch (error) {
                     await this.dispatch({
