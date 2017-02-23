@@ -82,7 +82,7 @@ const ApartmentHelper = {
 
         let bedAmenity = [{
             'name' : bedAmenityName,
-            'icon_name' : 'fp-ht-food',
+            'icon_name' : 'fp-ht-bed',
             'id' : ApplicationHelper.randomInt(),
             'priority' : 1
         }];
