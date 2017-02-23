@@ -46,7 +46,14 @@ const helpers = {
 
   formatCurrency(dollars) {
     return CurrencyFormatter.format(Math.round(dollars), { code: 'USD' , precision: 0 });
+  },
+
+  randomInt() {
+    let min = 1;
+    let max = 10000;
+    return Math.floor(Math.random() * (max - min)) + min;
   }
+
 };
 
 module.exports = helpers;

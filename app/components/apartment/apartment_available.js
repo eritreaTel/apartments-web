@@ -40,7 +40,7 @@ class ApartmentAvailable extends React.Component {
         let guestHouse = ApartmentHelper.getGuestHouse(aptResponse);
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
-        let comboAmenities = ApartmentHelper.getComboAmenities(apartments);
+        let comboAmenities = ApartmentHelper.getComboAmenities(aptResponse);
 
         return (
             <div className="mg-avl-room">

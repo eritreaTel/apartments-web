@@ -32,7 +32,7 @@ const ApartmentDescription = function(props) {
 }
 
 const AmenitiesAndControlButtons = function(props) {
-    let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse.apartments);
+    let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);
 
     return (
         <div className="col-md-5 mg-room-fecilities">

@@ -1,4 +1,5 @@
 const DateHelper = require('./date_helper');
+const ApplicationHelper = require('./application_helper');
 const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
@@ -69,8 +70,29 @@ const ApartmentHelper = {
         return skinnyApartments;
     },
 
-    getComboAmenities(apartments) {
-        return apartments[0].amenities;
+    getComboAmenities(apartmentResponse) {
+        let {apartments, totalBeds} = apartmentResponse;
+        let bedAmenityName = totalBeds == 1 ? totalBeds + ' Bed' : totalBeds + ' Beds';
+
+        if (apartments.length > 1) {
+            bedAmenityName += ' Total';
+        }
+
+        let amenities = apartments[0].amenities;
+
+        let bedAmenity = [{
+            'name' : bedAmenityName,
+            'icon_name' : 'fp-ht-food',
+            'id' : ApplicationHelper.randomInt(),
+            'priority' : 1
+        }];
+
+        var newAmenities = _.concat(bedAmenity, amenities);
+
+
+
+        return newAmenities;
+
     },
 
     getGuestHouse(apartmentResponse) {
