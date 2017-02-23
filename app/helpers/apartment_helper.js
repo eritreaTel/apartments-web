@@ -25,9 +25,9 @@ const ApartmentHelper = {
         let searchData = {
             'checkInDate'   : DateHelper.getOneWeeksFromNow(),
             'checkOutDate'  : DateHelper.getTwoWeeksFromNow(),
-            'room' : 1,
-            "adult" : 1,
-            "children" : 0
+            'room' : "1",
+            "adult" : "1",
+            "children" : "0"
         };
         return searchData;
     },
@@ -88,9 +88,6 @@ const ApartmentHelper = {
         }];
 
         var newAmenities = _.concat(bedAmenity, amenities);
-
-
-
         return newAmenities;
 
     },
