@@ -7,8 +7,10 @@ const ApartmentHelper  = require('../../helpers/apartment_helper');
 import MDSpinner from "react-md-spinner";
 import ReactDOM from 'react-dom';
 import StarRatingComponent from 'react-star-rating-component';
-const Constants = require('../../helpers/constants');
+const  Constants = require('../../helpers/constants');
+const  DateHelper = require('../../helpers/date_helper');
 
+const {assetPath} = require('../../helpers/asset_helper');
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
@@ -133,7 +135,9 @@ class ApartmentReviewForm extends React.Component {
 
 class ApartmentReviews extends React.Component {
     render () {
-        let	styledReview = this.props.apartmentReviews && this.props.apartmentReviews.map(review => {
+        let apartmentReviews = this.props.apartmentReviews;
+
+        let	styledReview = apartmentReviews && apartmentReviews.map(review => {
                 return 	<div className="media" key={review.id}>
                             <div className="media-left">
                                 <Anchor><img className="media-object" src= {assetPath("images/review.png")} alt="..."/></Anchor>
@@ -149,7 +153,8 @@ class ApartmentReviews extends React.Component {
                         </div>
         });
 
-        styledReview = this.props.apartmentReviews && this.props.apartmentReviews.length ==0 ? 'Please be the first one to review this apartment' : styledReview  ;
+
+        styledReview = apartmentReviews && apartmentReviews.length ==0 ? 'Please be the first one to review this apartment' : styledReview  ;
 
 
         return (
