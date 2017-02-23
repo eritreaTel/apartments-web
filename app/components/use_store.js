@@ -87,7 +87,8 @@ module.exports = {
                             'creatingUser' : false,
                             'updatingUser' : false,
                             'searchingBlogs' : false,
-                            'loadingBlog' : false
+                            'loadingBlog' : false,
+                            'searchingApartments' : false
                         }
                     }
                 };

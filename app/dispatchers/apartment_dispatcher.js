@@ -84,10 +84,10 @@ module.exports = {
                         }
                     });
                 }
-
                 this.releaseLock('getApartments');
             }
         }
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     async getApartment({apartmentId}) {

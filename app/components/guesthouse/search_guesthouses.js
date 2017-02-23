@@ -37,10 +37,20 @@ const onSearchApartmentsClicked = function (searchInfo) {
         return ;
     }
 
-    Actions.searchApartmentsClicked();
+    //Sequence of actions matters
     Actions.saveUserSearches(searchInfo);
-    Actions.getApartments();
-    Actions.setRoute('/guest-houses');
+
+    let isProcessing = {searchingApartments: true};
+    Actions.setIsProcessing(isProcessing);
+
+    const searchApartmentPromise = Actions.getApartments();
+    searchApartmentPromise.then(response => {
+        Actions.searchApartmentsClicked();
+        Actions.setRoute('/guest-houses');
+
+        isProcessing = {searchingApartments: false};
+        Actions.setIsProcessing(isProcessing);
+    });
 }
 
 function onRoomChanged(val) {

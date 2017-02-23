@@ -93,7 +93,7 @@ class GuestHousesPage extends React.Component {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                <SearchResult isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
                 break;
             case 'additional':
@@ -112,7 +112,7 @@ class GuestHousesPage extends React.Component {
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                <SearchResult isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );
