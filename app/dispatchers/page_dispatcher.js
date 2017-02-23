@@ -115,8 +115,6 @@ module.exports = {
     },
 
     async bookApartmentPageClicked({apartmentKey}) {
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
-
         let apartment = this.getStoreVal('apartment')
         let apartments = this.getStoreVal('apartments');
         apartments = (apartments != null) ? apartments : [];
@@ -125,18 +123,20 @@ module.exports = {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
+
+        //Sequence of this matter, this should be at the end
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
     },
 
     async bookApartmentClicked({apartmentKey}) {
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
-
         let apartment = await this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
+
+        //Sequence of this matter, this should be at the end
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
     },
 
     async bookBestApartmentClicked({apartmentKey}) {
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
-
         let apartment = await this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
 
@@ -147,6 +147,9 @@ module.exports = {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
+
+        //Sequence of this matter, this should be at the end
+        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
     },
 
     async viewBestApartmentClicked({apartmentKey}) {
