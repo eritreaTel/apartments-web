@@ -25,8 +25,8 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 const ApartmentBody = function (props) {
 	return (
 		<div>
-		{props.children}
-	</div>
+			{props.children}
+		</div>
 	);
 }
 
@@ -48,21 +48,29 @@ class ComboApartmentsPage extends React.Component {
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
 
-		const {daysCnt, totalPrice, title, apartmentKey} = apartment;
-		let guestHouse = ApartmentHelper.getGuestHouse(apartment);
+		let content = <ApartmentBody>Redirecting</ApartmentBody>;
+		if (apartment != null) {
+			console.log('render apartment details');
+			const {daysCnt, totalPrice, title, apartmentKey} = apartment;
+			let guestHouse = ApartmentHelper.getGuestHouse(apartment);
+
+			content = <ApartmentBody>
+						<PageTitle parentClassName="mg-page-title parallax">
+						<h2>{guestHouse.name}</h2>
+						<h3>{title}</h3>
+						<p>&nbsp;</p>
+					   </PageTitle>
+
+						<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
+						<ApartmentMiddleContent  apartmentResponse={apartment} />
+						<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
+					</ApartmentBody>
+		}
 
 		return (
-			<ApartmentBody>
-				<PageTitle parentClassName="mg-page-title parallax">
-					<h2>{guestHouse.name}</h2>
-					<h3>{title}</h3>
-					<p>&nbsp;</p>
-				</PageTitle>
-
-				<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
-				<ApartmentMiddleContent  apartmentResponse={apartment} />
-				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
-			</ApartmentBody>
+			<div>
+				{content}
+			</div>
 		);
 	}
 };
