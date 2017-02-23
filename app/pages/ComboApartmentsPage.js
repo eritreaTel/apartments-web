@@ -50,7 +50,6 @@ class ComboApartmentsPage extends React.Component {
 
 		let content = <ApartmentBody>Redirecting</ApartmentBody>;
 		if (apartment != null) {
-			console.log('render apartment details');
 			const {daysCnt, totalPrice, title, apartmentKey} = apartment;
 			let guestHouse = ApartmentHelper.getGuestHouse(apartment);
 
