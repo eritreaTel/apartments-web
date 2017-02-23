@@ -228,16 +228,15 @@ class PersonalInfo extends React.Component {
                             <h2 className="mg-sec-left-title">Card Details</h2>
 
                             <div className="row">
-                                <div className="col-md-3">
-                                    <input disabled={disabled} type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
-                                </div>
-                                <div className="col-md-3">
+                                <div className="col-md-4">
                                     <div className="mg-book-form-input">
-                                        <input disabled={disabled} type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later.
+                                        <input disabled={disabled} type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
                                     </div>
                                 </div>
-                                <div className="col-md-6">
-                                    <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required to confirm reservation.
+                                <div className="col-md-8">
+                                    <div className="mg-book-form-input">
+                                        <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required payment to confirm reservation.
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">
