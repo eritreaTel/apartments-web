@@ -5,6 +5,7 @@ const Actions = require('../../actions/actions');
 const BookingDetails = require('./booking_details');
 const CookiesHelper  = require('../../helpers/cookies_helper');
 const FormValidator = require('../../helpers/form_validation_helper');
+const PricingHelper = require('../../helpers/pricing_helper');
 const CurrencyFormatter = require('currency-formatter');
 const DatePicker = require('react-bootstrap-date-picker');
 var onClickOutside = require('react-onclickoutside');
@@ -48,7 +49,12 @@ class AdditionalInfo extends React.Component {
     }
 
     onReserveCarPickUpCheckBoxChanged(e) {
+        const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+
         Actions.additionalServicesUpdated({'airport_pickup' : e.target.checked});
+        let payment_amount = PricingHelper.getTotalPrice(totalPrice, additional);
+        Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : true, 'payPartial' : false, 'payment_amount' : payment_amount});
+
         this.refs.airline_name.focus();
     }
 
