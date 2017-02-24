@@ -19,6 +19,7 @@ class BookingDetails extends React.Component {
         let checkInDate  = DateHelper.formatDate(startDate, 'D MMM, YYYY') ;
         let checkOutDate = DateHelper.formatDate(endDate, 'D MMM, YYYY') ;
         let adult        = searchInfo.adult;
+        let child        = searchInfo.children;
         let room         = apartments.length ;
         let airportPickup = additional && additional.airport_pickup;
 
@@ -56,6 +57,10 @@ class BookingDetails extends React.Component {
                                 <div className="mg-widget-cart-row">
                                     <strong>Adult/s: </strong>
                                     <span>{adult}</span>
+                                </div>
+                                <div className="mg-widget-cart-row">
+                                    <strong>Children: </strong>
+                                    <span>{child}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Number of Days: </strong>

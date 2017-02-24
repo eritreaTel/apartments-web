@@ -5,6 +5,7 @@ const PricingHelper = require('../../helpers/pricing_helper');
 const ApartmentHelper = require('../../helpers/apartment_helper');
 const CurrencyFormatter = require('currency-formatter');
 const TotalPayment = require('./total_payment');
+const {assetPath} = require('../../helpers/asset_helper');
 
 class  ReservationConfirmation extends React.Component {
 
@@ -17,6 +18,7 @@ class  ReservationConfirmation extends React.Component {
         let {displayMessage, apartments, daysCnt, title, startDate, endDate} = apartmentResponse;
 
         let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
+        let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
 
         let {additional, confirmation, searchInfo} = bookingStage;
 
@@ -25,6 +27,7 @@ class  ReservationConfirmation extends React.Component {
         let checkOutDate        = DateHelper.formatDate(endDate, 'D MMM, YYYY');
         let adult               = searchInfo.adult ;
         let room                = apartments.length ;
+        let child               = searchInfo.children;
         let customerName        = user.first_name + ' ' + user.last_name;
         let guestHouseName      = guestHouse.name;
         let guestHouseAddress   = guestHouse.street_address + ', ' + guestHouse.neighborhood + ' - ' + guestHouse.city;
@@ -57,7 +60,7 @@ class  ReservationConfirmation extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-cart-room">
-                                        <img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
+                                        <img src={assetPath(bestPhoto)} alt="Delux Room" className="img-responsive"/>
                                         <h3>{title}</h3>
                                         <p>{displayMessage}</p>
                                     </div>
@@ -83,6 +86,10 @@ class  ReservationConfirmation extends React.Component {
                                     <div className="mg-widget-cart-row">
                                         <strong>Adult/s:</strong>
                                         <span>{adult}</span>
+                                    </div>
+                                    <div className="mg-widget-cart-row">
+                                        <strong>Children:</strong>
+                                        <span>{child}</span>
                                     </div>
                                     <div className="mg-widget-cart-row">
                                         <strong>Number of Days:</strong>
