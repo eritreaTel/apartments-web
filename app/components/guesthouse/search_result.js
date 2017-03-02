@@ -5,10 +5,30 @@ const Anchor = require('../shared/anchor');
 
 import MDSpinner from "react-md-spinner";
 
+const NoDataResponse = function (props) {
+    let {room, children, adult} = props.searchInfo;
+
+    let message ;
+    if (room > 6 || children > 12 || adult > 12) {
+        message = <span> You are travelling in a crowd. You deserve to get special pricing. Please <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>tell us what you want</Anchor>. We will get back to you in few hours.</span>
+    } else {
+        message = <span> There are no guest houses matching the selected criterias. Feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</span>
+    }
+
+
+
+    return (
+
+        <strong>
+            {message}
+        </strong>
+    );
+}
+
 class SearchResult extends React.Component {
 
     render() {
-        const {apartments, isProcessing : {searchingApartments}} = this.props;
+        const {apartments, isProcessing:{searchingApartments}, searchInfo} = this.props;
 
         let availableApartments;
         if (!searchingApartments) {  //If no searching - show contents, otherwise show spinner
@@ -24,7 +44,7 @@ class SearchResult extends React.Component {
                                     <div className="col-sm-8">
                                         <div className="alert alert-info" role="alert">
                                             <i className="fa fa-info-circle"></i>
-                                            <strong> There are no guest houses matching the selected criterias. Feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</strong>
+                                            <NoDataResponse searchInfo={searchInfo} />
                                        </div>
                                     </div>
                                     <div className="col-sm-2"/>

@@ -83,8 +83,12 @@ const Room  = function (props) {
         { value: '3', label: '3 Rooms' },
         { value: '4', label: '4 Rooms' },
         { value: '5', label: '5 Rooms' },
-        { value: '5', label: '6 Rooms' },
-        { value: '>6', label: '>7 Rooms' }
+        { value: '6', label: '6 Rooms' },
+        { value: '7', label: '7 Rooms' },
+        { value: '8', label: '8 Rooms' },
+        { value: '9', label: '9 Rooms' },
+        { value: '10', label: '10 Rooms' },
+        { value: '11', label: '> 10 Rooms' }
     ];
 
     return (
@@ -100,8 +104,12 @@ const Children  = function (props) {
         { value: '3', label: '3 Children' },
         { value: '4', label: '4 Children' },
         { value: '5', label: '5 Children' },
-        { value: '5', label: '6 Children' },
-        { value: '>6', label: '>7 Children' }
+        { value: '6', label: '6 Children' },
+        { value: '7', label: '7 Children' },
+        { value: '8', label: '8 Children' },
+        { value: '9', label: '9 Children' },
+        { value: '10', label: '10 Children' },
+        { value: '11', label: '> 10 Children' }
     ];
 
     return (
@@ -117,7 +125,11 @@ const Adults  = function (props) {
         { value: '4',  label: '4 Adults' },
         { value: '5',  label: '5 Adults' },
         { value: '6',  label: '6 Adults' },
-        { value: '7',  label: '> 7 Adults' }
+        { value: '7',  label: '7 Adults' },
+        { value: '8',  label: '8 Adults' },
+        { value: '9',  label: '9 Adults' },
+        { value: '10',  label: '10 Adults' },
+        { value: '11',  label: '> 10 Adults' }
     ];
 
     return (
