@@ -160,17 +160,19 @@ class SearchControls extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-5">
                     <div className="input-group date">
                         <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
                     </div>
                 </div>
 
-                <div className="col-md-6">
-                    <Room className="search-room"  value={room} />
-                    <Adults className="search-adult" value={adult} />
-                    <Children  className="search-children" value={children}/>
-                    <button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Check Now</button>
+                <div className="col-md-7">
+                    <div className="row">
+                        <div className="col-sm-3"><Room className="search-room"  value={room} /></div>
+                        <div className="col-sm-3"><Adults className="search-adult" value={adult} /></div>
+                        <div className="col-sm-3"><Children  className="search-children" value={children}/></div>
+                        <div className="col-sm-3"><button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Check Now</button></div>
+                    </div>
                 </div>
             </div>
         );
