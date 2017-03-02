@@ -101,7 +101,7 @@ const ApartmentHelper = {
     },
 
     getGalleries(apartmentResponse) {
-        return apartmentResponse.apartments[0].galleries;
+        return apartmentResponse.galleries;
     }
 
 };
