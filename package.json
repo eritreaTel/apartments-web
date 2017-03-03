@@ -43,9 +43,7 @@
     "lodash": "^4.0.0",
     "lodash.camelcase": "^3.0.1",
     "lodash.debounce": "^3.1.1",
-    "logdna": "^1.2.3",
     "moment": "^2.17.1",
-    "net": "^1.0.2",
     "path": "0.12.7",
     "rc-checkbox": "^1.4.3",
     "react": "^15.4.2",
@@ -69,7 +67,6 @@
     "superagent": "^3.3.1",
     "svg-inline-loader": "^0.7.1",
     "svg-inline-react": "^1.0.2",
-    "tls": "0.0.1",
     "url-join": "^1.1.0",
     "validator": "^6.2.0"
   },
