@@ -2,7 +2,7 @@ require('isomorphic-fetch');
 const _ = require('lodash');
 const config = require('../../config/config');
 const {post} = require('superagent');
-const DebugHelper = require('../helpers/debug_helper');
+const Logger = require('../helpers/log_helper');
 const CookiesHelper = require('../helpers/cookies_helper');
 
 const {loginHost, baseURI, version} = config;
@@ -38,13 +38,6 @@ module.exports = {
         let fetchPromise = fetch(options.url, options)
             .then(response => {
                 const {status, statusText} = response;
-                DebugHelper.log({
-                    url: options.url,
-                    method: options.method,
-                    requestBody: options.body,
-                    status,
-                    statusText
-                });
                 return response;
             })
             .then(checkStatus);

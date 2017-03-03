@@ -1,7 +1,6 @@
 const config = require('../../config/config');
 const Dispatcher = require('../dispatchers/dispatcher');
 const React = require('react');
-const DebugHelper = require('../helpers/debug_helper');
 
 module.exports = {
     useStore(Component) {
@@ -14,7 +13,6 @@ module.exports = {
 
                 Dispatcher.updateStore = function (callback) {
                     this.setState({store: callback(this.state.store)});
-                    DebugHelper.trackStore(this.state.store);
                 }.bind(this);
 
                 Dispatcher.getStore = function () {

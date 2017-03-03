@@ -4,12 +4,10 @@ const BlogDispatcher      = require('./blog_dispatcher');
 const BookingDispatcher      = require('./booking_dispatcher');
 const MessageDispatcher   = require('./message_dispatcher');
 const UserDispatcher      = require('./user_dispatcher');
-const DebugHelper         = require('../helpers/debug_helper');
+const Logger         = require('../helpers/log_helper');
 
 const Dispatcher = {
     dispatch(action) {
-        DebugHelper.trackAction(action);
-
         const {type, data} = action;
         const dispatchers = [
             PageDispatcher,

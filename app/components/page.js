@@ -31,7 +31,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 const HeaderBar = require('./ribbons/header_bar');
 const Footer = require('./shared/footer');
-const DebugHelper = require('../helpers/debug_helper');
+const Logger = require('../helpers/log_helper');
 
 const React = require('react');
 const types = React.PropTypes;
@@ -47,6 +47,9 @@ class Page extends React.Component {
         loggedIn = (!!CookiesHelper.getSessionCookie());
         type = CookiesHelper.getDataFromCookie('userType');
         userId = CookiesHelper.getDataFromCookie('userId');
+        
+        Logger.log("Loaded page is " + view.page);
+
         switch (view.page) {
             case 'index' :
             case 'home' :
