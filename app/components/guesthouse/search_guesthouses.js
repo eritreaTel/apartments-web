@@ -58,6 +58,11 @@ function onRoomChanged(val) {
     Actions.searchApartmentsUpdated(updatedData);
 }
 
+function onCityChanged(val) {
+    let updatedData =  {'city'  : val.value};
+    Actions.searchApartmentsUpdated(updatedData);
+}
+
 function onChildrenChanged(val) {
     let updatedData =  {'children'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
@@ -75,6 +80,17 @@ function onAdultsChanged(val) {
     let updatedData =  {'adult'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
 }
+
+const City  = function (props) {
+    var options = [
+        { value: 'Kampala', label: 'Kampala' }
+    ];
+
+    return (
+        <Select {...props} placeholder='City' clearable={false}  searchable={true}  options={options} onChange={onCityChanged} />
+    );
+}
+
 
 const Room  = function (props) {
     var options = [
@@ -147,7 +163,8 @@ class SearchControls extends React.Component {
         let checkInDate, checkOutDate, room, adult, children, checkInFocused = false, checkOutFocused = false;
         let {searchInfo} = this.props;
         let displayFormat = "DD-MM-YYYY";
-        let focusedInput = null;
+        let focusedInput = null
+        let city = 'Kampala';
 
         if (searchInfo != null) {
             focusedInput    = searchInfo.focusedInput ? searchInfo.focusedInput : null;
@@ -160,13 +177,16 @@ class SearchControls extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-md-5">
+                <div className="col-md-2">
+                    <City className="search-city" value={city}/>
+                </div>
+                <div className="col-md-4">
                     <div className="input-group date">
                         <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
                     </div>
                 </div>
 
-                <div className="col-md-7">
+                <div className="col-md-6">
                     <div className="row">
                         <div className="col-sm-3"><Room className="search-room"  value={room} /></div>
                         <div className="col-sm-3"><Adults className="search-adult" value={adult} /></div>
@@ -188,11 +208,7 @@ class searchApartment extends React.Component {
             <div className={parentClassName}>
                 <div className={wrapInContainer}>
                     <div className="row">
-                        <div className="col-md-3">
-                            <h2 className="mg-bn-title">Guest Houses <span className="mg-bn-big">For rates & availability</span></h2>
-                        </div>
-
-                        <div className="col-md-9">
+                        <div className="col-md-12">
                             <div className="mg-bn-forms">
                                 <SearchControls searchInfo={searchInfo} />
                            </div>

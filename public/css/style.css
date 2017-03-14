@@ -4600,28 +4600,13 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
     cursor: pointer;
 }
 
-.search-children {
-  width: 105px !important;
-  float: left;
-  margin-top: 2px;
+.search-children, .search-adult, .search-room, .search-city, .search-booknow{
+  margin-top: 5px;
 }
 
-.search-adult{
-  width: 90px !important;
-  float: left;
-  margin-top: 2px;
-  margin-left : 10px;
-}
-
-.search-room {
-  width: 95px !important;
-  float: left;
-  margin-top: 2px;
-  margin-left : 15px;
-}
-
-.search-booknow {
-  width:110px
+.mg-search-results {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .homepage-total_price{
@@ -4630,5 +4615,5 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .DateRangePicker {
-  width: 350px !important;
+  margin-top: 3px !important;
 }

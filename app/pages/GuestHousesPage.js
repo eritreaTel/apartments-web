@@ -52,7 +52,7 @@ const GuestHouseBody = function(props) {
         <div>
             <PageTitle parentClassName="mg-page-title-space parallax"/>
             <div className="mg-page">
-                <div className="container">
+                <div className="mg-search-results container">
                     <div className="row">
                         <div className="col-md-12">
                             <div className="mg-booking-form">
