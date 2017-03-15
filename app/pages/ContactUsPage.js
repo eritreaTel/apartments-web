@@ -103,9 +103,10 @@ class ContactUsForm extends React.Component {
 						<h2 className="mg-sec-left-title">Office Address</h2>
 						<p>Thank you for contacing us. We take customer feedback seriously and our customer support team will get back to you as soon as possible. We thrive to give the best customer exeperience and you feedback means a lot to us. Thank you again.</p>
 						<ul className="mg-contact-info">
-							<li><i className="fa fa-map-marker"></i> Level 13, 2 Elizabeth St, Kampala, Uganda</li>
-							<li><i className="fa fa-phone"></i> +000-123-456-789 (Sale)</li>
-							<li><i className="fa fa-envelope"></i> <a href="mailto:#">support@ugandaBooking.com</a></li>
+							<li><i className="fa fa-map-marker"></i> Off Kansanga-Ggaba Road (Oppossite Kansanga Secondary School), Kampala - Uganda</li>
+							<li><i className="fa fa-map-marker"></i> 477 Jean St, H , Oakland, CA 94610 - USA</li>
+							<li><i className="fa fa-phone"></i> +256-757-038880 - +256-704-924531 (Sales)</li>
+							<li><i className="fa fa-envelope"></i> <a href="mailto:#">ugandaBooking@gmail.com</a></li>
 						</ul>
 						<div id="mg-map" className="mg-map">
 

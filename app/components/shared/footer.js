@@ -77,16 +77,17 @@ const ContactUs = function () {
             <div className="widget">
                 <h2 className="mg-widget-title">Contact US</h2>
                 <address>
-                    <strong>UgandaBooking</strong><br/>
-                    Level 13, 2 Elizabeth St<br/>
+                    <strong>UgandaBooking</strong><br/><br/>
+                    Off Kansanga-Ggaba Road<br/>
+                    Oppossite Kansanga Secondary School<br/>
                     Kampala, Uganda
                 </address>
                 <p>
-                    +000-123-456-789<br/>
-                    +000-123-456-789
+                    +256-757-038880<br/>
+                    +256-704-924531
                 </p>
                 <p>
-                    <span >support@ugandaBooking.com</span>
+                    <span>ugandaBooking@gmail.com</span>
                 </p>
             </div>
         </div>
