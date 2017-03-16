@@ -1,0 +1,10 @@
+{
+  "assetHost": "https://s3.eu-west-2.amazonaws.com",
+  "bucketInfo" : "ugandabooking-assets/prod/system",
+  "hotModule": false,
+  "isLocal": false,
+  "loginHost": "https://staging-api.ugandabooking.com",
+  "clientErrorLoggingEnabled": false,
+  "cookieDomain": "staging.ugandabooking.com",
+  "stripKey" : "pk_test_xNk89utQrNjwzmaqOLlteVnz"
+}
