@@ -49,7 +49,7 @@ class ApartmentAvailable extends React.Component {
                         <img src = {assetPath(bestPhoto)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-sm-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{Actions.setRoute(comboUrl);}}><label className="search-result-heading">{guestHouse.name}</label>, <label className="search-result-subheading">{title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label>, <label className="search-result-subheading">{title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
                         <p>{displayMessage} ...</p>
                         <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
