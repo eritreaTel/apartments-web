@@ -78,7 +78,6 @@ const OurStaff = function (props) {
 								<strong>{member.title}</strong>
 								<ul className="mg-team-member-social">
 									<li><a href={member.fb_link}><i className="fa fa-facebook"></i></a></li>
-									<li><a href={member.tw_link}><i className="fa fa-twitter"></i></a></li>
 									<li><a href={member.ld_link}><i className="fa fa-linkedin"></i></a></li>
 								</ul>
 							</div>
@@ -134,7 +133,6 @@ function getDefaultProps() {
 				title: "Chief Executive Officer, CEO",
 				photo : "images/team-members/amanuel_yohannes.jpg",
 				fb_link : "https://www.facebook.com/amanuelcp",
-				tw_link : "#",
 				ld_link : "#"
 			},
 			{
@@ -143,7 +141,6 @@ function getDefaultProps() {
 				title: "Chief Technology Officer, CTO",
 				photo : "images/member2.png",
 				fb_link : "#",
-				tw_link : "#",
 				ld_link : "#"
 			},
 			{
@@ -152,16 +149,30 @@ function getDefaultProps() {
 				title: "Chief Operating Officer, COO",
 				photo : "images/member3.png",
 				fb_link : "#",
-				tw_link : "#",
 				ld_link : "#"
 			},
 			{
 				"id" : 4,
-				full_name: "Kenneth Ogali",
-				title: "VP of Sales and Marketting",
+				full_name: "Lizabeth Paulat",
+				title: "Director of Content",
 				photo : "images/member4.png",
 				fb_link : "#",
-				tw_link : "#",
+				ld_link : "#"
+			},
+			{
+				"id" : 5,
+				full_name: "Rubanza Kenneth",
+				title: "Sales Manager",
+				photo : "images/member4.png",
+				fb_link : "#",
+				ld_link : "#"
+			},
+			{
+				"id" : 6,
+				full_name: "Ruth Nakayima",
+				title: "Sales Manager",
+				photo : "images/member4.png",
+				fb_link : "#",
 				ld_link : "#"
 			}
 		]
