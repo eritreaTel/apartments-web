@@ -79,7 +79,7 @@ const ContactUs = function () {
                 <address>
                     <strong>UgandaBooking</strong><br/><br/>
                     Off Kansanga-Ggaba Road<br/>
-                    Oppossite Kansanga Secondary School<br/>
+                    Oppossite Kansanga Senior Secondary<br/>
                     Kampala, Uganda
                 </address>
                 <p>
