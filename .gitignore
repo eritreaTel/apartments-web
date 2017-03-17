@@ -6,3 +6,8 @@ npm-debug.log.*
 .DS_Store
 .env
 public/application.js
+public/fonts
+public/images
+public/application.js.gz
+public/application.js.map
+public/index.html
