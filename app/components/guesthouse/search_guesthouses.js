@@ -177,21 +177,28 @@ class SearchControls extends React.Component {
 
         return (
             <div className="row">
-                <div className="col-sm-2">
-                    <City className="search-city" value={city}/>
-                </div>
-                <div className="col-sm-4">
-                    <div className="input-group date">
-                        <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
+                <div className="col-md-6">
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <City className="search-city" value={city}/>
+                        </div>
+                        <div className="col-sm-8">
+                            <div className="input-group date">
+                                <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div className="col-sm-6">
+                <div className="col-md-4">
                     <div className="row">
-                        <div className="col-sm-3"><Room className="search-room"  value={room} /></div>
-                        <div className="col-sm-3"><Adults className="search-adult" value={adult} /></div>
-                        <div className="col-sm-3"><Children  className="search-children" value={children}/></div>
-                        <div className="col-sm-3"><button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Check Now</button></div>
+                        <div className="col-sm-4"><Room className="search-room"  value={room} /></div>
+                        <div className="col-sm-4"><Adults className="search-adult" value={adult} /></div>
+                        <div className="col-sm-4"><Children  className="search-children" value={children}/></div>
+                    </div>
+                </div>
+                <div className="col-md-2">
+                    <div className="row">
+                        <div className="col-sm-12"><button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Search</button></div>
                     </div>
                 </div>
             </div>
