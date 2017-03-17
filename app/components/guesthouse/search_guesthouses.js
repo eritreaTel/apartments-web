@@ -183,9 +183,7 @@ class SearchControls extends React.Component {
                             <City className="search-city" value={city}/>
                         </div>
                         <div className="col-sm-8">
-                            <div className="input-group date">
-                                <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
-                            </div>
+                            <SearchDates  focusedInput={focusedInput} minimumNights={1} startDate={checkInDate}  endDate={checkOutDate} startDatePlaceholderText="CheckIn" endDatePlaceholderText="CheckOut" displayFormat={displayFormat}  onFocusChange={(focused) => {onDatePickerFocused(focused) }} onDatesChange={(dates) => { onDatePickerChanged(dates) }} />
                         </div>
                     </div>
                 </div>
