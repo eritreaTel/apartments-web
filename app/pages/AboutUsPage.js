@@ -131,24 +131,24 @@ function getDefaultProps() {
 				"id" : 1,
  				full_name: "Amanuel Yohannes",
 				title: "Chief Executive Officer, CEO",
-				photo : "images/team-members/amanuel_yohannes.jpg",
+				photo : "images/team-members/ugandaBooking-ceo.jpg",
 				fb_link : "https://www.facebook.com/amanuelcp",
-				ld_link : "#"
+				ld_link : "https://www.linkedin.com/in/amanuel-yohannes-78287a17"
 			},
 			{
 				"id" : 2,
 				full_name: "Rafael Orozco",
 				title: "Chief Technology Officer, CTO",
-				photo : "images/member2.png",
-				fb_link : "#",
+				photo : "images/team-members/ugandaBooking-cto.jpg",
+				fb_link : "https://www.facebook.com/xylosoft",
 				ld_link : "#"
 			},
 			{
 				"id" : 3,
 				full_name: "Ruth Tekle",
 				title: "Chief Operating Officer, COO",
-				photo : "images/member3.png",
-				fb_link : "#",
+				photo : "images/team-members/ugandaBooking-coo.jpg",
+				fb_link : "https://www.facebook.com/ruta.tekle.96",
 				ld_link : "#"
 			},
 			{
@@ -156,6 +156,7 @@ function getDefaultProps() {
 				full_name: "Lizabeth Paulat",
 				title: "Director of Content",
 				photo : "images/member4.png",
+				photo : "images/team-members/ugandaBooking-director-of-content.jpg",
 				fb_link : "#",
 				ld_link : "#"
 			},
@@ -163,15 +164,15 @@ function getDefaultProps() {
 				"id" : 5,
 				full_name: "Rubanza Kenneth",
 				title: "Sales Manager",
-				photo : "images/member4.png",
-				fb_link : "#",
-				ld_link : "#"
+				photo : "images/team-members/ugandaBooking-sales-manager.jpg",
+				fb_link : "https://www.facebook.com/kabuleeta.kenneth",
+				ld_link : "https://www.linkedin.com/in/rubanza-kenneth-284b34139"
 			},
 			{
 				"id" : 6,
 				full_name: "Ruth Nakayima",
 				title: "Sales Manager",
-				photo : "images/member4.png",
+				photo : "images/team-members/ugandaBooking-sales-manager-2.jpg",
 				fb_link : "#",
 				ld_link : "#"
 			}
