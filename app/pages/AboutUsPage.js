@@ -77,8 +77,8 @@ const OurStaff = function (props) {
 								<h3>{member.full_name}</h3>
 								<strong>{member.title}</strong>
 								<ul className="mg-team-member-social">
-									<li><a href={member.fb_link}><i className="fa fa-facebook"></i></a></li>
-									<li><a href={member.ld_link}><i className="fa fa-linkedin"></i></a></li>
+									<li><a target="_blank" href={member.fb_link}><i className="fa fa-facebook"></i></a></li>
+									<li><a target="_blank" href={member.ld_link}><i className="fa fa-linkedin"></i></a></li>
 								</ul>
 							</div>
 						</div>
