@@ -175,6 +175,14 @@ function getDefaultProps() {
 				photo : "images/team-members/ugandaBooking-sales-manager-2.jpg",
 				fb_link : "#",
 				ld_link : "#"
+			},
+			{
+				"id" : 7,
+				full_name: "Kibret Bereket",
+				title: "Development Team Manager",
+				photo : "images/team-members/ugandaBooking-director-of-development.jpg",
+				fb_link : "https://www.facebook.com/kibret.bereket",
+				ld_link : "#"
 			}
 		]
 	};
