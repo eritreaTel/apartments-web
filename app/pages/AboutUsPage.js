@@ -14,7 +14,7 @@ const AboutUgandaGuestHouse = function () {
 							<h2>Our Mission</h2>
 							<p>Find you the greatest apartments ever, your home away from home experience</p>
 						</div>
-						<p>Uganda offers lots and lots of apartments and guest houses to choose from. And what’s more, most of these apartments lack Internet visibility. You would need to actually be there to book one or find a broker to do it for you. And this can be an unbelievably overwhelming and tiresome experience, but thats where we came in. Our mission, to put in simple words, is to do the heavy work for you. We will go through these hundreds of guest houses, their availability, their ranking, the feedback of customers that have actually being there and we will offer you the best choice, for the best price. All you need to do is just click, not leaving the comforts of your own home and trust us, we will provide you the best apartment that fits you. </p>
+						<p>Uganda offers some incredible apartments and guest houses to choose from. However the problem is most of these apartments lack internet visibility. You would need to actually be here to find a broker, spend a day or two looking at options, book the apartment and then move in. This can be an unbelievably overwhelming and tiresome experience, but that's where we come in. Our mission, to put it simply, is to do the heavy lifting for you. We go through the hundreds of apartments and guest houses, their availability, their ranking, the feedback of customers, and we will offer you the best choice, for the best price. All you need to do is click and Uganda Booking will find you a home away from home.</p>
 					</div>
 					<div className="col-md-1"></div>
 				</div>
@@ -34,9 +34,9 @@ const WeAreDifferent = function () {
 						<div className="mg-sec-title">
 							<h2>We Are Different</h2>
 						</div>
-						<p>How are we different? It is simple. We have a small yet exclusive business, we offer our clients all the attention they need. We believe in being selective and are determined to make our clients very happy. We have offices both in San Francisco, USA, the technology hub of the world and Kampala, Uganda, the center of all the information you need. This enables us to use the brand-new and latest technologies, to implement our first hand knowledge of the apartments, resulting in the most reliable and latest information ever.</p>
-						<p>Apartment booking is not the only service we provide. Having an office in Uganda enables us to have a one to one relationship with the key players, this in turn allows us to provide you with additional services including airport pickups, connecting with the right car rentals and tour guides.</p>
-						<p>Seeing is believing, so come and see us. We aim to please and you will be definitely pleased. </p>
+						<p>How are we different? It is simple. We have a small yet exclusive business. We believe in being selective and are determined to ensure our customers are satisfied. We have offices both in San Francisco, USA, the technology hub of the world, and Kampala, Uganda, the center of all the information you need. This enables us to use the latest technologies to implement our first hand knowledge of guesthouses and apartments, resulting in up-to-date and reliable information. </p>
+						<p>Apartment booking is not the only service we provide. Having an office in Uganda allows us to have a one to one relationship with the key players, meaning we can provide you with additional services including airport pickups, connecting with the right car rentals and tour guides. </p>
+						<p>Seeing is believing, so take a look through the apartments and guesthouses on offer. From budget to luxury, we offer a number of different options to suit the needs of our visitors from around the globe.</p>
 					</div>
 					<div className="col-md-1"></div>
 				</div>
@@ -55,7 +55,8 @@ const HowWeGotStarted  = function () {
 							<div className="mg-sec-title">
 								<h2>How We Got Started</h2>
 							</div>
-							<p>The reason behind the starting of all this is very simple and clear. A personal experience of our founders, an experience we are trying to protect you from. Most apartments in Uganda don’t have Internet visibility. And for someone coming to Uganda for the first time, they have to first come to Uganda, then start the process. They usually have to hassle a lot to find the apartments they like for the best deal they can get, changing from one apartment to another, struggling with reliable car rentals and airport pickup services. This made us think it could all have been easy, and that’s what we did. We made it easy.</p>
+							<p>The reason we started Uganda Booking began with the personal experience of our founders, an experience we want to protect you from. Most apartments in Uganda aren't viewable online. And for someone coming to Uganda for the first time, they have to go through endless hassle to find the apartments they like for a price they can afford. Our goal is to make this the easiest part of your stay. To smooth the process we also offer car rentals and airport pickup services. </p>
+                            <p>Our own experiences left us questioning the notion that finding accommodation in Uganda is never easy. And so that’s what we did. We made it easy.</p>
 						</div>
 						<div className="col-md-1"></div>
 					</div>
