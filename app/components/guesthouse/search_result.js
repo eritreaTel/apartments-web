@@ -65,12 +65,20 @@ class SearchResult extends React.Component {
 
         return (
                     <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                          <div className="mg-available-rooms">
-                                <h2 className="mg-sec-left-title">Available Apartments</h2>
-                                <div className="mg-avl-rooms">
-                                      {availableApartments}
+                        <div className="mg-available-rooms">
+                            <div className = "row">
+                                <div className= "col-md-3">
+                                    <h2 className="mg-sec-left-title">Filtered By </h2>
                                 </div>
-                          </div>
+                                <div className= "col-md-9">
+
+                                    <h2 className="mg-sec-left-title">Available Apartments</h2>
+                                    <div className="mg-avl-rooms">
+                                        {availableApartments}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
               );
         }

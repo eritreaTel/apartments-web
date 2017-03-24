@@ -49,8 +49,9 @@ class ApartmentAvailable extends React.Component {
                         <img src = {assetPath(bestPhoto)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-sm-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label>, <label className="search-result-subheading">{title}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
-                        <p>{displayMessage} ...</p>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
+                        <p>This <strong>{guestHouse.type}</strong> is located in {guestHouse.neighborhood} area of {guestHouse.city}.<br/><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}>{title} ...</Anchor> </p>
+
                         <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-sm-6" />
 
                         <Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
