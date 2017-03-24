@@ -72,7 +72,7 @@ class SearchResult extends React.Component {
                                 </div>
                                 <div className= "col-md-9">
 
-                                    <h2 className="mg-sec-left-title">Available Apartments</h2>
+                                    <h2 className="mg-sec-left-title">Available Accommodations</h2>
                                     <div className="mg-avl-rooms">
                                         {availableApartments}
                                     </div>

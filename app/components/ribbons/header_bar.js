@@ -93,7 +93,7 @@ class HeaderBar extends React.Component {
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
                                 <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={this.onHomeClicked.bind(this)}>Home</Anchor> </li>
-                                <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onGuestHousesClicked.bind(this)}>Guest Houses</Anchor> </li>
+                                <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onGuestHousesClicked.bind(this)}>Accommodations</Anchor> </li>
                                 <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
                                 <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsClicked.bind(this)}>Blog</Anchor> </li>
                                 <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={this.onContactUsClicked.bind(this)}>Contact Us</Anchor> </li>
