@@ -4617,3 +4617,28 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 .DateRangePicker {
   margin-top: 3px !important;
 }
+
+.mg-widget-filter {
+  background-color: #ebeced;
+  box-shadow: 0px 1px 2px #888888;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-right: 2px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.mg-widget-filter-title {
+  font-size:18px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}
+
+.mg-options-top {
+  padding-top: 10px;
+}
+
+.mg-options {
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
