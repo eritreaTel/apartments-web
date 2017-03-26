@@ -16,13 +16,8 @@ const NoDataResponse = function (props) {
         message = <span> There are no guest houses matching the selected criterias. Feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</span>
     }
 
-
-
     return (
-
-        <strong>
-            {message}
-        </strong>
+        <strong> {message} </strong>
     );
 }
 
@@ -50,7 +45,7 @@ const RoomFacility = function (props) {
             <div className="mg-options"><Checkbox /> Ceiling Fan</div>
             <div className="mg-options"><Checkbox /> Balcony</div>
             <div className="mg-options"><Checkbox /> Bathtub</div>
-            <div className="mg-options"><Checkbox /> TV Service</div>
+            <div className="mg-options"><Checkbox /> TV</div>
         </div>
     );
 }
@@ -87,30 +82,89 @@ const StarRating = function (props) {
 }
 
 
-const PropertyTypeFilters = function (props) {
+const PropertyType = function (props) {
     return (
         <div>
             <h3 className="mg-widget-filter-title">Property Type</h3>
             <div className="mg-options"><Checkbox /> Hotels</div>
-            <div className="mg-options"><Checkbox /> Guesthouses</div>
-            <div className="mg-options"><Checkbox /> Apartments</div>
             <div className="mg-options"><Checkbox /> Suites</div>
-            <div className="mg-options"><Checkbox /> Inns</div>
+            <div className="mg-options"><Checkbox /> Apartments</div>
+            <div className="mg-options"><Checkbox /> Guesthouses</div>
             <div className="mg-options"><Checkbox /> Cottages</div>
+            <div className="mg-options"><Checkbox /> Inns</div>
         </div>
     );
 }
 
+const Neighboorhood = function (props) {
+
+    return (
+        <div>
+            <h3 className="mg-widget-filter-title">Neighborhood</h3>
+            <div className="mg-options"><Checkbox /> Bugoloobi</div>
+            <div className="mg-options"><Checkbox /> Bukoto</div>
+            <div className="mg-options"><Checkbox /> Busega</div>
+            <div className="mg-options"><Checkbox /> Butabika</div>
+            <div className="mg-options"><Checkbox /> Bwaise</div>
+            <div className="mg-options"><Checkbox /> Ggaba</div>
+            <div className="mg-options"><Checkbox /> Kabalagala </div>
+            <div className="mg-options"><Checkbox /> Kaleerwe</div>
+            <div className="mg-options"><Checkbox /> Kampala Hill</div>
+            <div className="mg-options"><Checkbox /> Kamwookya</div>
+            <div className="mg-options"><Checkbox /> Kansanga</div>
+            <div className="mg-options"><Checkbox /> Kanyanya</div>
+            <div className="mg-options"><Checkbox /> Kasubi hill</div>
+            <div className="mg-options"><Checkbox /> Katanga Slum</div>
+            <div className="mg-options"><Checkbox /> Katwe</div>
+            <div className="mg-options"><Checkbox /> Kawaala</div>
+            <div className="mg-options"><Checkbox /> Kawempe</div>
+            <div className="mg-options"><Checkbox /> Kibuli</div>
+            <div className="mg-options"><Checkbox /> Kibuye</div>
+            <div className="mg-options"><Checkbox /> Kigoowa</div>
+            <div className="mg-options"><Checkbox /> Kikaaya</div>
+            <div className="mg-options"><Checkbox /> Kisaasi</div>
+            <div className="mg-options"><Checkbox /> Kiwaatule</div>
+            <div className="mg-options"><Checkbox /> Kololo</div>
+            <div className="mg-options"><Checkbox /> Kulambiro</div>
+            <div className="mg-options"><Checkbox /> Lubaga</div>
+            <div className="mg-options"><Checkbox /> Lugogo</div>
+            <div className="mg-options"><Checkbox /> Lungujja</div>
+            <div className="mg-options"><Checkbox /> Luzira</div>
+            <div className="mg-options"><Checkbox /> Makerere</div>
+            <div className="mg-options"><Checkbox /> Makerere Kikoni</div>
+            <div className="mg-options"><Checkbox /> Makindye</div>
+            <div className="mg-options"><Checkbox /> Mbuya</div>
+            <div className="mg-options"><Checkbox /> Mengo</div>
+            <div className="mg-options"><Checkbox /> Mpererwe</div>
+            <div className="mg-options"><Checkbox /> Mulago</div>
+            <div className="mg-options"><Checkbox /> Munyonyo</div>
+            <div className="mg-options"><Checkbox /> Muyenga</div>
+            <div className="mg-options"><Checkbox /> Naakulabye</div>
+            <div className="mg-options"><Checkbox /> Nakasero</div>
+            <div className="mg-options"><Checkbox /> Nakawa</div>
+            <div className="mg-options"><Checkbox /> Namirembe Hill</div>
+            <div className="mg-options"><Checkbox /> Namungoona</div>
+            <div className="mg-options"><Checkbox /> Namuwongo</div>
+            <div className="mg-options"><Checkbox /> Nateete</div>
+            <div className="mg-options"><Checkbox /> Ndeeba</div>
+            <div className="mg-options"><Checkbox /> Nsambya</div>
+            <div className="mg-options"><Checkbox /> Ntinda</div>
+            <div className="mg-options"><Checkbox /> Port Bell</div>
+            <div className="mg-options"><Checkbox /> Wandegeya</div>
+        </div>
+    );
+}
 
 const Filters = function (props) {
     return (
         <div className="mg-widget-area">
             <aside className="mg-widget-filter">
-                <PropertyTypeFilters />
+                <PropertyType />
                 <PriceFilters />
                 <StarRating />
                 <Facility />
                 <RoomFacility />
+                <Neighboorhood />
             </aside>
         </div>
     );
