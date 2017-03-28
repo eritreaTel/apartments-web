@@ -86,14 +86,14 @@ class GuestHousesPage extends React.Component {
 
     render() {
         const {store} = this.props;
-        const {store : {searchResultPage, user, pageNumber, apartments, apartment, bookingStage, acceptToS, isProcessing}} = this.props;
+        const {store : {searchResultPage, user, pageNumber, apartments, filteredApartments,  apartment, bookingStage, acceptToS, isProcessing}} = this.props;
         let section ;
 
         switch (bookingStage.activeStage) {
             case 'search':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                <SearchResult filteredApartments={filteredApartments} isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
                 break;
             case 'additional':
@@ -112,7 +112,7 @@ class GuestHousesPage extends React.Component {
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                                 <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
+                                <SearchResult filteredApartments={filteredApartments} isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} searchInfo={bookingStage.searchInfo}/>
                             </div>
         }
         return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );

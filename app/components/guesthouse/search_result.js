@@ -174,12 +174,12 @@ const Filters = function (props) {
 class SearchResult extends React.Component {
 
     render() {
-        const {apartments, isProcessing:{searchingApartments}, searchInfo} = this.props;
+        const {filteredApartments, isProcessing:{searchingApartments}, searchInfo} = this.props;
 
         let availableApartments;
         if (!searchingApartments) {  //If no searching - show contents, otherwise show spinner
-            if (apartments.length > 0 ) {
-                availableApartments = apartments.map(aptResponse => {
+            if (filteredApartments.length > 0 ) {
+                availableApartments = filteredApartments.map(aptResponse => {
                                          return <ApartmentAvailable aptResponse={aptResponse} key={Math.random()} />
                                       });
             } else {
@@ -214,11 +214,13 @@ class SearchResult extends React.Component {
                         <div className="mg-available-rooms">
                             <div className = "row">
                                 <div className= "col-md-3">
-                                    <h2 className="mg-sec-left-title">Filtered By </h2>
-                                    <Filters />
+                                    <span className="mg-sec-left-title">Filtered By </span>
+                                    <div className="mg-avl-rooms">
+                                        <Filters />
+                                    </div>
                                 </div>
                                 <div className= "col-md-9">
-                                    <h2 className="mg-sec-left-title">Available Accommodations</h2>
+                                    <span className="mg-sec-left-title">Available Accommodations : </span> <span className="mg-sec-left-sub-title">{filteredApartments.length} Properties</span>
                                     <div className="mg-avl-rooms">
                                         {availableApartments}
                                     </div>

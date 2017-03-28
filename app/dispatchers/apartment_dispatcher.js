@@ -71,6 +71,7 @@ module.exports = {
                         this.setStoreVal('apartments', []);
                     } else {
                         this.setStoreVal('pageNumber', pageNumber);
+                        this.setStoreVal('filteredApartments', results);
                         this.setStoreVal('apartments', results);
                         //populating bestApartments
                         this.dispatch({type: 'getBestApartments', data: {errors}});
