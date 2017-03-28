@@ -179,6 +179,11 @@ module.exports = {
 
             this.releaseLock('getApartmentReviews');
         }
+    },
+
+    async updateFilteredApartments({filteredApartments}) {
+        console.log('filtered apartments updated');
+        this.setStoreVal('filteredApartments', filteredApartments);
     }
 
 };

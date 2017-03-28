@@ -2,7 +2,9 @@ const React = require('react');
 const ApartmentAvailable = require('../apartment/apartment_available');
 const Actions = require('../../actions/actions');
 const Anchor = require('../shared/anchor');
-import Checkbox from 'rc-checkbox';
+const ApartmentFilterHelper = require('../../helpers/apartment_filter_helper');
+import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 
 import MDSpinner from "react-md-spinner";
 
@@ -82,18 +84,30 @@ const StarRating = function (props) {
 }
 
 
-const PropertyType = function (props) {
-    return (
-        <div>
-            <h3 className="mg-widget-filter-title">Property Type</h3>
-            <div className="mg-options"><Checkbox /> Hotels</div>
-            <div className="mg-options"><Checkbox /> Suites</div>
-            <div className="mg-options"><Checkbox /> Apartments</div>
-            <div className="mg-options"><Checkbox /> Guesthouses</div>
-            <div className="mg-options"><Checkbox /> Cottages</div>
-            <div className="mg-options"><Checkbox /> Inns</div>
-        </div>
-    );
+class  PropertyType extends  React.Component {
+
+    onPropertyTypeChanged(apartmentTypes) {
+        console.log(apartmentTypes);
+        let filteredApartments  = ApartmentFilterHelper.filterApartmentByType(apartmentTypes, this.props.apartments);
+        Actions.updateFilteredApartments({filteredApartments});
+
+    }
+
+    render() {
+        return (
+            <div>
+                <h3 className="mg-widget-filter-title">Property Type</h3>
+                <CheckboxGroup name="fruits"  value={this.props.propertyType} onChange={this.onPropertyTypeChanged.bind(this)}>
+                    <div className="mg-options"><Checkbox value='hotel'/> Hotels</div>
+                    <div className="mg-options"><Checkbox value='suite'/> Suites</div>
+                    <div className="mg-options"><Checkbox value='apartment'/> Apartments</div>
+                    <div className="mg-options"><Checkbox value='guest house'/> Guesthouses</div>
+                    <div className="mg-options"><Checkbox value='cottage'/> Cottages</div>
+                    <div className="mg-options"><Checkbox value='inn'/> Inns</div>
+                </CheckboxGroup>
+            </div>
+        );
+    }
 }
 
 const Neighboorhood = function (props) {
@@ -156,15 +170,11 @@ const Neighboorhood = function (props) {
 }
 
 const Filters = function (props) {
+    let filterCriteria = props.filterCriteria;
     return (
         <div className="mg-widget-area">
             <aside className="mg-widget-filter">
-                <PropertyType />
-                <PriceFilters />
-                <StarRating />
-                <Facility />
-                <RoomFacility />
-                <Neighboorhood />
+                <PropertyType propertyType={filterCriteria.propertyType} apartments={props.apartments} filteredApartments={props.filteredApartments}/>
             </aside>
         </div>
     );
@@ -174,7 +184,7 @@ const Filters = function (props) {
 class SearchResult extends React.Component {
 
     render() {
-        const {filteredApartments, isProcessing:{searchingApartments}, searchInfo} = this.props;
+        const {filteredApartments, apartments, isProcessing:{searchingApartments}, bookingStage : {searchInfo, filterCriteria}} = this.props;
 
         let availableApartments;
         if (!searchingApartments) {  //If no searching - show contents, otherwise show spinner
@@ -216,7 +226,7 @@ class SearchResult extends React.Component {
                                 <div className= "col-md-3">
                                     <span className="mg-sec-left-title">Filtered By </span>
                                     <div className="mg-avl-rooms">
-                                        <Filters />
+                                        <Filters filterCriteria= {filterCriteria} filteredApartments={filteredApartments} apartments={apartments} />
                                     </div>
                                 </div>
                                 <div className= "col-md-9">

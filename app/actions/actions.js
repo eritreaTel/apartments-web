@@ -225,6 +225,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'updatePassword', data});
     },
 
+    updateFilteredApartments(data) {
+        return Dispatcher.dispatch({type: 'updateFilteredApartments', data});
+    },
+
     goBackToResetPasswordBody(data) {
         Dispatcher.dispatch({type: 'goBackToResetPasswordBody'});
     },

@@ -34,6 +34,16 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {searchInfo: existing});
     },
 
+    async filterCriteriaUpdated(data) {
+        let bookingStage = this.getStoreVal('bookingStage');
+        let existing = (bookingStage.filterCriteria != null) ? bookingStage.filterCriteria : {};
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+        this.mergeStoreVal('bookingStage', {filterCriteria: existing});
+    },
+
     async personalInfoUpdated(data) {
         let bookingStage = this.getStoreVal('bookingStage');
         let existing = (bookingStage.personal != null) ? bookingStage.personal : {};

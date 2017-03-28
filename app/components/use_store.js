@@ -35,6 +35,10 @@ module.exports = {
                         bookingStage : {
                             activeStage : null,
                             searchInfo  : null,
+                            filterCriteria : {
+                                'propertyType' : null,
+                                'priceRange' : null
+                            },
                             additional  : {},
                             personal    : {},
                             payment     : {
