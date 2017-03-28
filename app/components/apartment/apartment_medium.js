@@ -30,12 +30,13 @@ class ApartmentMedium extends React.Component {
         const {aptResponse} = this.props;
         const {displayMessage, apartments, daysCnt, totalPrice, title, starRating, shortDesciption} = aptResponse;
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
+        let guestHouse = ApartmentHelper.getGuestHouse(aptResponse);
 
         return (
             <figure className="mg-room">
                 <img src={assetPath(bestPhoto)} alt="img11" className="img-responsive"/>
                 <figcaption>
-                    <h2>{title}</h2>
+                    <h2>{guestHouse.name}</h2>
                     <div className="mg-room-rating"><i className="fa fa-star"></i> {starRating}</div>
                     <div className="mg-room-price">{ApplicationHelper.formatCurrency(totalPrice)}<sup>.00</sup><span className="homepage-total_price">/{daysCnt} Days</span></div>
                     <p>{shortDesciption}</p>

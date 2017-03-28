@@ -16,6 +16,7 @@ class BookingDetails extends React.Component {
 
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
+        let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
         let checkInDate  = DateHelper.formatDate(startDate, 'D MMM, YYYY') ;
         let checkOutDate = DateHelper.formatDate(endDate, 'D MMM, YYYY') ;
         let adult        = searchInfo.adult;
@@ -40,7 +41,11 @@ class BookingDetails extends React.Component {
                             <div className="mg-widget-cart">
                                 <div className="mg-cart-room">
                                     <img src={assetPath(bestPhoto)} alt="Delux Room" className="img-responsive"/>
-                                    <h3>{title}</h3>
+                                    <h3> {guestHouse.name} </h3>
+                                </div>
+                                <div className="mg-widget-cart-row">
+                                    <strong>Accommodation Title:&nbsp;</strong>
+                                    <span>{title}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check In:&nbsp;</strong>
