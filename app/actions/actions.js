@@ -97,6 +97,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'additionalServicesUpdated', data});
     },
 
+    filterCriteriaUpdated(data) {
+        return Dispatcher.dispatch({type: 'filterCriteriaUpdated', data});
+    },
+
     userInfoUpdated(data) {
         return Dispatcher.dispatch({type: 'userInfoUpdated', data});
     },
@@ -225,8 +229,8 @@ const Actions = {
         return Dispatcher.dispatch({type: 'updatePassword', data});
     },
 
-    updateFilteredApartments(data) {
-        return Dispatcher.dispatch({type: 'updateFilteredApartments', data});
+    applyApartmentFilters(data) {
+        return Dispatcher.dispatch({type: 'applyApartmentFilters', data});
     },
 
     goBackToResetPasswordBody(data) {

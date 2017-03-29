@@ -3,7 +3,10 @@ const ApartmentAvailable = require('../apartment/apartment_available');
 const Actions = require('../../actions/actions');
 const Anchor = require('../shared/anchor');
 const ApartmentFilterHelper = require('../../helpers/apartment_filter_helper');
+const ApartmentHelper = require('../../helpers/apartment_helper');
+const ReactSlider = require('react-slider');
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+
 
 
 import MDSpinner from "react-md-spinner";
@@ -23,19 +26,36 @@ const NoDataResponse = function (props) {
     );
 }
 
-const PriceFilters = function (props) {
-    return (
-        <div>
-            <h3 className="mg-widget-filter-title">Your Budget, in US Dollars</h3>
-            <div className="mg-options"><Checkbox /><span> $0  - $25 per night</span></div>
-            <div className="mg-options"><Checkbox /> $26 - $50 per night</div>
-            <div className="mg-options"><Checkbox /> $51 - $75 per night</div>
-            <div className="mg-options"><Checkbox /> $76 - $100 per night</div>
-            <div className="mg-options"><Checkbox /> $100 - $150 per night</div>
-            <div className="mg-options"><Checkbox /> $151 - $200 per night</div>
-            <div className="mg-options"><Checkbox /> $200+ per night</div>
-        </div>
-    );
+class PriceFilters extends React.Component {
+    onPriceFilterChanged(priceRange) {
+        Actions.filterCriteriaUpdated({'priceRange' : priceRange});
+    }
+
+    render() {
+        const priceRange = this.props.priceRange;
+        const filteredApartments = this.props.filteredApartments;
+        let minPrice = 5;
+        let maxPrice = 300;
+
+        let min = priceRange != null && priceRange.length > 0? priceRange[0] : minPrice;
+        let max = priceRange != null && priceRange.length > 0? priceRange[1] : maxPrice;
+        let defValue = [min, max];
+        console.log('default value is ');
+        console.log(defValue);
+
+        return (
+            <div className="price-filter">
+                <h3 className="mg-widget-filter-title">Price/per night, in US Dollars</h3>
+                <div className="price-filter-captions">
+                    <span>Min Price: <label>${min} </label></span> &nbsp; <span>Max Price: <label>${max} </label></span>
+                </div>
+                <ReactSlider  className="horizontal-slider" defaultValue={defValue} withBars={true} min={minPrice} max={maxPrice} step={5} minDistance={10} onAfterChange={this.onPriceFilterChanged.bind(this)} >
+                    <div className="my-handle">${min}</div>
+                    <div className="my-handle">${max}</div>
+                </ReactSlider>
+            </div>
+        );
+    }
 }
 
 const RoomFacility = function (props) {
@@ -69,35 +89,41 @@ const Facility = function (props) {
     );
 }
 
-const StarRating = function (props) {
-    return (
-        <div>
-            <h3 className="mg-widget-filter-title">Star Rating</h3>
-            <div className="mg-options"><Checkbox /> 1 Stars</div>
-            <div className="mg-options"><Checkbox /> 2 Stars</div>
-            <div className="mg-options"><Checkbox /> 3 Stars</div>
-            <div className="mg-options"><Checkbox /> 4 Stars</div>
-            <div className="mg-options"><Checkbox /> 5 Stars</div>
-            <div className="mg-options"><Checkbox /> Unrated</div>
-        </div>
-    );
+class StarRating extends React.Component {
+    onStarRatingFilterChanged(starRating) {
+        Actions.filterCriteriaUpdated({'starRating' : starRating});
+    }
+
+    render () {
+        return (
+            <div>
+                <h3 className="mg-widget-filter-title">Star Rating</h3>
+
+                <CheckboxGroup name="starRating" value={this.props.starRating}  onChange={this.onStarRatingFilterChanged.bind(this)}>
+                    <div className="mg-options"><Checkbox value='0'/> Unrated</div>
+                    <div className="mg-options"><Checkbox value='1'/> 1 Star</div>
+                    <div className="mg-options"><Checkbox value='2'/> 2 Star</div>
+                    <div className="mg-options"><Checkbox value='3'/> 3 Star</div>
+                    <div className="mg-options"><Checkbox value='4'/> 4 Star</div>
+                    <div className="mg-options"><Checkbox value='5'/> 5 Star</div>
+                </CheckboxGroup>
+            </div>
+        );
+    }
 }
 
 
 class  PropertyType extends  React.Component {
 
     onPropertyTypeChanged(apartmentTypes) {
-        console.log(apartmentTypes);
-        let filteredApartments  = ApartmentFilterHelper.filterApartmentByType(apartmentTypes, this.props.apartments);
-        Actions.updateFilteredApartments({filteredApartments});
-
+        Actions.filterCriteriaUpdated({'propertyType' : apartmentTypes});
     }
 
     render() {
         return (
             <div>
                 <h3 className="mg-widget-filter-title">Property Type</h3>
-                <CheckboxGroup name="fruits"  value={this.props.propertyType} onChange={this.onPropertyTypeChanged.bind(this)}>
+                <CheckboxGroup name="propertyType"  value={this.props.propertyType} onChange={this.onPropertyTypeChanged.bind(this)}>
                     <div className="mg-options"><Checkbox value='hotel'/> Hotels</div>
                     <div className="mg-options"><Checkbox value='suite'/> Suites</div>
                     <div className="mg-options"><Checkbox value='apartment'/> Apartments</div>
@@ -174,7 +200,10 @@ const Filters = function (props) {
     return (
         <div className="mg-widget-area">
             <aside className="mg-widget-filter">
-                <PropertyType propertyType={filterCriteria.propertyType} apartments={props.apartments} filteredApartments={props.filteredApartments}/>
+                <PropertyType propertyType={filterCriteria.propertyType} />
+                <PriceFilters priceRange={filterCriteria.priceRange} />
+                <StarRating starRating={filterCriteria.starRating} />
+
             </aside>
         </div>
     );

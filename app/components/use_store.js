@@ -36,8 +36,9 @@ module.exports = {
                             activeStage : null,
                             searchInfo  : null,
                             filterCriteria : {
-                                'propertyType' : null,
-                                'priceRange' : null
+                                'propertyType' : [],
+                                'priceRange' : null,
+                                'starRating' : null
                             },
                             additional  : {},
                             personal    : {},

@@ -1,5 +1,6 @@
 const FetchHelper = require('../helpers/fetch_helper');
 const ResponseHelper = require('../helpers/response_helper');
+const ApartmentFilterHelper = require('../helpers/apartment_filter_helper');
 
 
 module.exports = {
@@ -181,8 +182,26 @@ module.exports = {
         }
     },
 
-    async updateFilteredApartments({filteredApartments}) {
-        console.log('filtered apartments updated');
+    async applyApartmentFilters({filterCriteria}) {
+
+        let apartments = this.getStoreVal('apartments');
+        let filteredApartments = apartments;
+
+        let {propertyType, priceRange, starRating} = filterCriteria;
+        if (propertyType != null && propertyType.length > 0) {
+            filteredApartments = ApartmentFilterHelper.filterApartmentByType(propertyType, filteredApartments);
+        }
+
+        if (priceRange != null && priceRange.length > 0) {
+            filteredApartments = ApartmentFilterHelper.filterApartmentByPriceRange(priceRange, filteredApartments);
+        }
+
+        if (starRating != null && starRating.length > 0) {
+            filteredApartments = ApartmentFilterHelper.filterApartmentByStarRating(starRating, filteredApartments);
+        }
+
+        console.log('filtered criteria is ');
+        console.log(filterCriteria);
         this.setStoreVal('filteredApartments', filteredApartments);
     }
 

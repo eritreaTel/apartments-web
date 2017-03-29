@@ -42,6 +42,8 @@ module.exports = {
             existing[key] = value;
         });
         this.mergeStoreVal('bookingStage', {filterCriteria: existing});
+
+        this.dispatch({type: 'applyApartmentFilters', data : {filterCriteria : existing}});
     },
 
     async personalInfoUpdated(data) {
