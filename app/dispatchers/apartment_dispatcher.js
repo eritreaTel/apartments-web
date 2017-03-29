@@ -187,17 +187,21 @@ module.exports = {
         let apartments = this.getStoreVal('apartments');
         let filteredApartments = apartments;
 
-        let {propertyType, priceRange, starRating} = filterCriteria;
-        if (propertyType != null && propertyType.length > 0) {
+        let {propertyType, priceRange, starRating, locations} = filterCriteria;
+        if (propertyType.length > 0) {
             filteredApartments = ApartmentFilterHelper.filterApartmentByType(propertyType, filteredApartments);
         }
 
-        if (priceRange != null && priceRange.length > 0) {
+        if (priceRange.length > 0) {
             filteredApartments = ApartmentFilterHelper.filterApartmentByPriceRange(priceRange, filteredApartments);
         }
 
-        if (starRating != null && starRating.length > 0) {
+        if (starRating.length > 0) {
             filteredApartments = ApartmentFilterHelper.filterApartmentByStarRating(starRating, filteredApartments);
+        }
+
+        if (locations.length > 0) {
+            filteredApartments = ApartmentFilterHelper.filterApartmentByLocation(locations, filteredApartments);
         }
 
         console.log('filtered criteria is ');

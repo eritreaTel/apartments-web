@@ -54,6 +54,22 @@ const ApartmentFilterHelper = {
         return filteredApartments;
     },
 
+
+    filterApartmentByLocation(locations, apartments) {
+        if (locations == null || locations.length == 0) {
+            return apartments;
+        }
+
+        let filteredApartments = [];
+        apartments.forEach(function(apartment) {
+            let result =  locations.find(location => location === apartment.apartments[0].guestHouse.neighborhood);
+            if (result != undefined) {
+                filteredApartments.push(apartment);
+            }
+        });
+
+        return filteredApartments;
+    }
 };
 
 module.exports = ApartmentFilterHelper;

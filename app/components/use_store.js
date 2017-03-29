@@ -37,8 +37,9 @@ module.exports = {
                             searchInfo  : null,
                             filterCriteria : {
                                 'propertyType' : [],
-                                'priceRange' : null,
-                                'starRating' : null
+                                'priceRange' : [],
+                                'starRating' : [],
+                                'locations' : []
                             },
                             additional  : {},
                             personal    : {},

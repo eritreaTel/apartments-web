@@ -136,63 +136,36 @@ class  PropertyType extends  React.Component {
     }
 }
 
-const Neighboorhood = function (props) {
+class Location extends React.Component{
 
-    return (
-        <div>
-            <h3 className="mg-widget-filter-title">Neighborhood</h3>
-            <div className="mg-options"><Checkbox /> Bugoloobi</div>
-            <div className="mg-options"><Checkbox /> Bukoto</div>
-            <div className="mg-options"><Checkbox /> Busega</div>
-            <div className="mg-options"><Checkbox /> Butabika</div>
-            <div className="mg-options"><Checkbox /> Bwaise</div>
-            <div className="mg-options"><Checkbox /> Ggaba</div>
-            <div className="mg-options"><Checkbox /> Kabalagala </div>
-            <div className="mg-options"><Checkbox /> Kaleerwe</div>
-            <div className="mg-options"><Checkbox /> Kampala Hill</div>
-            <div className="mg-options"><Checkbox /> Kamwookya</div>
-            <div className="mg-options"><Checkbox /> Kansanga</div>
-            <div className="mg-options"><Checkbox /> Kanyanya</div>
-            <div className="mg-options"><Checkbox /> Kasubi hill</div>
-            <div className="mg-options"><Checkbox /> Katanga Slum</div>
-            <div className="mg-options"><Checkbox /> Katwe</div>
-            <div className="mg-options"><Checkbox /> Kawaala</div>
-            <div className="mg-options"><Checkbox /> Kawempe</div>
-            <div className="mg-options"><Checkbox /> Kibuli</div>
-            <div className="mg-options"><Checkbox /> Kibuye</div>
-            <div className="mg-options"><Checkbox /> Kigoowa</div>
-            <div className="mg-options"><Checkbox /> Kikaaya</div>
-            <div className="mg-options"><Checkbox /> Kisaasi</div>
-            <div className="mg-options"><Checkbox /> Kiwaatule</div>
-            <div className="mg-options"><Checkbox /> Kololo</div>
-            <div className="mg-options"><Checkbox /> Kulambiro</div>
-            <div className="mg-options"><Checkbox /> Lubaga</div>
-            <div className="mg-options"><Checkbox /> Lugogo</div>
-            <div className="mg-options"><Checkbox /> Lungujja</div>
-            <div className="mg-options"><Checkbox /> Luzira</div>
-            <div className="mg-options"><Checkbox /> Makerere</div>
-            <div className="mg-options"><Checkbox /> Makerere Kikoni</div>
-            <div className="mg-options"><Checkbox /> Makindye</div>
-            <div className="mg-options"><Checkbox /> Mbuya</div>
-            <div className="mg-options"><Checkbox /> Mengo</div>
-            <div className="mg-options"><Checkbox /> Mpererwe</div>
-            <div className="mg-options"><Checkbox /> Mulago</div>
-            <div className="mg-options"><Checkbox /> Munyonyo</div>
-            <div className="mg-options"><Checkbox /> Muyenga</div>
-            <div className="mg-options"><Checkbox /> Naakulabye</div>
-            <div className="mg-options"><Checkbox /> Nakasero</div>
-            <div className="mg-options"><Checkbox /> Nakawa</div>
-            <div className="mg-options"><Checkbox /> Namirembe Hill</div>
-            <div className="mg-options"><Checkbox /> Namungoona</div>
-            <div className="mg-options"><Checkbox /> Namuwongo</div>
-            <div className="mg-options"><Checkbox /> Nateete</div>
-            <div className="mg-options"><Checkbox /> Ndeeba</div>
-            <div className="mg-options"><Checkbox /> Nsambya</div>
-            <div className="mg-options"><Checkbox /> Ntinda</div>
-            <div className="mg-options"><Checkbox /> Port Bell</div>
-            <div className="mg-options"><Checkbox /> Wandegeya</div>
-        </div>
-    );
+    onLocationChanged(locations) {
+        Actions.filterCriteriaUpdated({'locations' : locations});
+    }
+
+    render() {
+        return (
+            <div>
+                <h3 className="mg-widget-filter-title">Neighborhood</h3>
+                <CheckboxGroup name="location"  value={this.props.locations} onChange={this.onLocationChanged.bind(this)}>
+                    <div className="mg-options"><Checkbox value='Bugolobi'/> Bugolobi</div>
+                    <div className="mg-options"><Checkbox value='Bunga'/> Bunga</div>
+                    <div className="mg-options"><Checkbox value='Bukoto'/> Bukoto</div>
+                    <div className="mg-options"><Checkbox value='Kabale'/> Kabale</div>
+                    <div className="mg-options"><Checkbox value='Kabusu'/> Kabusu</div>
+                    <div className="mg-options"><Checkbox value='Kanyanya'/> Kanyanya</div>
+                    <div className="mg-options"><Checkbox value='Makindye'/> Makindye</div>
+                    <div className="mg-options"><Checkbox value='Mulago'/> Mulago</div>
+                    <div className="mg-options"><Checkbox value='Muyenga'/> Muyenga</div>
+                    <div className="mg-options"><Checkbox value='Naalya'/> Naalya</div>
+                    <div className="mg-options"><Checkbox value='Naguru'/> Naguru</div>
+                    <div className="mg-options"><Checkbox value='Nakasero'/> Nakasero</div>
+                    <div className="mg-options"><Checkbox value='Namirembe'/> Namirembe</div>
+                    <div className="mg-options"><Checkbox value='Nsambya'/> Nsambya</div>
+                    <div className="mg-options"><Checkbox value='Rubaga'/> Rubaga</div>
+                </CheckboxGroup>
+            </div>
+        );
+    }
 }
 
 const Filters = function (props) {
@@ -203,6 +176,7 @@ const Filters = function (props) {
                 <PropertyType propertyType={filterCriteria.propertyType} />
                 <PriceFilters priceRange={filterCriteria.priceRange} />
                 <StarRating starRating={filterCriteria.starRating} />
+                <Location locations={filterCriteria.locations} />
 
             </aside>
         </div>
