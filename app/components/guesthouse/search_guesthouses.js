@@ -39,7 +39,7 @@ const onSearchApartmentsClicked = function (searchInfo) {
 
     //Sequence of actions matters
     Actions.saveUserSearches(searchInfo);
-    Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], location:[]});
+    Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations:[]});
 
     let isProcessing = {searchingApartments: true};
     Actions.setIsProcessing(isProcessing);
