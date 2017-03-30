@@ -43,8 +43,6 @@ const ApartmentFilterHelper = {
 
         let filteredApartments = [];
         apartments.forEach(function(apartment) {
-            console.log( apartment);
-            console.log("ratig is" + apartment.apartments[0].guestHouse.star_rating);
             let result =  starRating.find(rating => rating == apartment.apartments[0].guestHouse.star_rating);
             if (result != undefined) {
                 filteredApartments.push(apartment);

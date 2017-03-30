@@ -158,9 +158,7 @@ class Footer extends React.Component {
     render() {
 
         const {store : {isProcessing}} = this.props;
-        //console.log("Inside footer, and is processing is");
-        //console.log(isProcessing);
-
+        
         return (
             <footer className="mg-footer">
                 <div className="mg-footer-widget">

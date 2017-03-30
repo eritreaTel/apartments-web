@@ -42,7 +42,7 @@ const Router = React.createClass({
         Actions.setView({page: 'sign-in', data});
     },
 
-    viewApartment(apartmentId) {
+    viewApartment(description, apartmentId) {
         Actions.setView({page: 'apartment', apartmentId});
     },
 
