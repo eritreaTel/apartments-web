@@ -46,7 +46,7 @@ const Router = React.createClass({
         Actions.setView({page: 'apartment', apartmentId});
     },
 
-    viewComboApartment(apartmentId) {
+    viewComboApartment(description, apartmentId) {
         Actions.setView({page: 'combo-apartment', apartmentId});
     },
 

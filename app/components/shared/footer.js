@@ -158,7 +158,7 @@ class Footer extends React.Component {
     render() {
 
         const {store : {isProcessing}} = this.props;
-        
+
         return (
             <footer className="mg-footer">
                 <div className="mg-footer-widget">
