@@ -21,7 +21,7 @@ module.exports = {
     },
 
     setRoute(data) {
-        //this.router.setRoute('/')
+        this.router.setRoute('/')
         this.router.setRoute(data);
     },
 
