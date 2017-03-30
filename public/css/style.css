@@ -4681,12 +4681,12 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .price-filter {
-  height: 120px;
+  height: 135px;
 }
 
 .price-filter-captions {
   margin-top:20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-left: 5px;
 }
 
