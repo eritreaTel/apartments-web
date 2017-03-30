@@ -87,7 +87,7 @@ const ContactUs = function () {
                     +256-704-924531
                 </p>
                 <p>
-                    <span>ugandaBooking@gmail.com</span>
+                    <span>info@ugandaBooking.com</span>
                 </p>
             </div>
         </div>

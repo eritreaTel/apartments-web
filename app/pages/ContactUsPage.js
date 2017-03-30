@@ -106,7 +106,7 @@ class ContactUsForm extends React.Component {
 							<li><i className="fa fa-map-marker"></i> Off Kansanga-Ggaba Road (Oppossite Kansanga Senior Secondary), Kampala - Uganda</li>
 							<li><i className="fa fa-map-marker"></i> 477 Jean St, H , Oakland, CA 94610 - USA</li>
 							<li><i className="fa fa-phone"></i> +256-757-038880 - +256-704-924531 (Sales)</li>
-							<li><i className="fa fa-envelope"></i> <a href="mailto:#">ugandaBooking@gmail.com</a></li>
+							<li><i className="fa fa-envelope"></i> <a href="mailto:#">info@ugandaBooking.com</a></li>
 						</ul>
 						<div id="mg-map" className="mg-map">
 
