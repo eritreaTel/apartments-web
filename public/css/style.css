@@ -4722,7 +4722,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 .horizontal-slider .handle {
   top: 8px;
-  width: 30px;
+  width: 36px;
   height: 30px;
   line-height: 30px;
 }
@@ -4734,4 +4734,12 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 #horizontal-2 .bar.bar-2 {
   background: #ddd;
+}
+
+.handle-0 {
+  margin-top:12px;
+}
+
+.handle-1 {
+  margin-top:-12px;
 }
