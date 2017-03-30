@@ -1,259 +1,408 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://www.ugandabooking.com/</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/index</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/guest-houses</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/error</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/sign-in</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/reset-password</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/about-us</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/contact-us</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blogs</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/my-account</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/reset-password</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/terms-of-use</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/privacy-policy</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/1</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/5</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/6</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/7</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/8</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/9</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/10</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/11</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/12</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/13</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/14</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/15</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/16</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/17</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/18</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/19</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/20</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/21</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/22</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/23</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/24</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/25</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/26</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
-    </url>
-    <url>
-        <loc>https://www.ugandabooking.com/apartment/27</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/28</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/29</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/30</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/31</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/32</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/33</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/34</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/35</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/36</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/37</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/38</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/39</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/40</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/41</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/apartment/42</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/43</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/44</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/45</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/46</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/47</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/48</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/49</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/50</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/51</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/52</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/53</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/54</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/55</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/56</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/57</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/58</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/59</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/60</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.ugandabooking.com/apartment/61</loc>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/1</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/2</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/3</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/4</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/5</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/6</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/7</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/8</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/9</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/10</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
     <url>
         <loc>https://www.ugandabooking.com/blog/11</loc>
-        <lastmod>2017-02-14T05:45:14+00:00</lastmod>
+        <lastmod>2017-03-30T05:45:14+00:00</lastmod>
+        <changefreq>weekly</changefreq>
     </url>
 </urlset>
