@@ -29,26 +29,6 @@ class SearchDates extends React.Component {
     }
 }
 
-const onSearchApartmentsClicked = function (searchInfo) {
-    //Sequence of actions matters
-    Actions.saveUserSearches(searchInfo);
-    Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations:[]});
-
-    let isProcessing = {searchingApartments: true};
-    Actions.setIsProcessing(isProcessing);
-
-    //Make sure user is in guest house page and continue searching.
-    Actions.setRoute('/guest-houses');
-
-    const searchApartmentPromise = Actions.getApartments();
-    searchApartmentPromise.then(response => {
-        Actions.searchApartmentsClicked();
-
-        isProcessing = {searchingApartments: false};
-        Actions.setIsProcessing(isProcessing);
-    });
-}
-
 function onRoomChanged(val) {
     let updatedData =  {'room'  : val.value};
     Actions.searchApartmentsUpdated(updatedData);
@@ -151,6 +131,28 @@ const Adults  = function (props) {
 
 class SearchControls extends React.Component {
 
+    onSearchApartmentsClicked() {
+        let {searchInfo} = this.props;
+
+        //Sequence of actions matters
+        Actions.saveUserSearches(searchInfo);
+        Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations:[]});
+
+        let isProcessing = {searchingApartments: true};
+        Actions.setIsProcessing(isProcessing);
+
+        //Make sure user is in guest house page and continue searching.
+        Actions.setRoute('/guest-houses');
+
+        const searchApartmentPromise = Actions.getApartments();
+        searchApartmentPromise.then(response => {
+            Actions.searchApartmentsClicked();
+
+            isProcessing = {searchingApartments: false};
+            Actions.setIsProcessing(isProcessing);
+        });
+    }
+
     componentWillMount() {
         const {searchInfo} = this.props;
     }
@@ -192,7 +194,7 @@ class SearchControls extends React.Component {
                 </div>
                 <div className="col-md-2">
                     <div className="row">
-                        <div className="col-sm-12"><button tabIndex="5" onClick={() =>{onSearchApartmentsClicked(searchInfo)}}  className="btn btn-main btn-block search-booknow">Search</button></div>
+                        <div className="col-sm-12"><button tabIndex="5" onClick={this.onSearchApartmentsClicked.bind(this)}  className="btn btn-main btn-block search-booknow">Search</button></div>
                     </div>
                 </div>
             </div>
