@@ -142,7 +142,7 @@ function getDefaultProps() {
 				title: "Chief Technology Officer, CTO",
 				photo : "images/team-members/ugandaBooking-cto.jpg",
 				fb_link : "https://www.facebook.com/xylosoft",
-				ld_link : "#"
+				ld_link : "https://www.linkedin.com/in/rafaelorozco"
 			},
 			{
 				"id" : 3,
