@@ -22,10 +22,6 @@ const goBackToAdditionalInfo = function (e) {
     Actions.goBackToAdditional();
 }
 
-function onTermsCheckBoxChanged(e, checked) {
-    Actions.personalInfoUpdated({'terms' : e.target.checked});
-}
-
 class PersonalInfo extends React.Component {
 
     componentDidMount() {
@@ -50,8 +46,7 @@ class PersonalInfo extends React.Component {
                 'city'        : user.city,
                 'phone_number': user.phone_number,
                 'email'       : user.email,
-                'country'     : user.country,
-                'terms'       : loggedIn
+                'country'     : user.country
             };
             Actions.personalInfoUpdated(personal);
         }
@@ -77,8 +72,8 @@ class PersonalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
         const {bookingStage: {personal, payment}} = this.props;
         let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
-            'country'   : "Please select your country", "terms"     : "Please accept terms and services",
-            'number'   : 'Please enter card number', 'cvc' : "Please enter cvc", 'exp_month' : "Please enter expiration month",
+            'country'   : "Please select your country", 'number'   : 'Please enter card number',
+            'cvc' : "Please enter cvc", 'exp_month' : "Please enter expiration month",
             'exp_year' : 'Please enter expiration year'};
 
         if (!loggedIn) {
@@ -158,13 +153,12 @@ class PersonalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let {payLater, payFull, payPartial, number, exp_month, exp_year} = payment;
-        let {first_name,last_name, city, phone_number, email, terms}  = personal;
+        let {first_name,last_name, city, phone_number, email}  = personal;
         let country = personal && personal.country ? personal.country : 'Select your country';
 
         let disabled  = processingPayment;
         let spinnerClassName = processingPayment ? 'margin-right-20' : 'hide margin-right-20';
         let acctounInfoClass = loggedIn ? 'hide' : 'show';
-        let acceptTermsCss = loggedIn? 'hide' : 'clearfix mg-terms-input';
 
         let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartmentResponse.totalPrice, additional), { code: 'USD' });
 
@@ -266,9 +260,9 @@ class PersonalInfo extends React.Component {
                             </div>
 
 
-                            <div className={acceptTermsCss}>
+                            <div className="clearfix mg-book-form-input-payment">
                                 <div className="pull-right">
-                                    <Checkbox defaultChecked={terms}  onChange={onTermsCheckBoxChanged}/> By Signing up you are agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms and condition</Anchor>
+                                    By using UgandaBooking, you agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms of use</Anchor>
                                 </div>
                             </div>
                             <div className="pull-right">
