@@ -30,13 +30,6 @@ class SearchDates extends React.Component {
 }
 
 const onSearchApartmentsClicked = function (searchInfo) {
-    let {checkInDate, checkOutDate} = searchInfo;
-    let validDate = checkOutDate.isAfter(checkInDate, 'day');
-    if (!validDate) {
-        NotificationManager.error('Please provide valid CheckOut date', 'Booking - Search GuestHouses', Constants.ERROR_DISPLAY_TIME);
-        return ;
-    }
-
     //Sequence of actions matters
     Actions.saveUserSearches(searchInfo);
     Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations:[]});
@@ -44,10 +37,12 @@ const onSearchApartmentsClicked = function (searchInfo) {
     let isProcessing = {searchingApartments: true};
     Actions.setIsProcessing(isProcessing);
 
+    //Make sure user is in guest house page and continue searching.
+    Actions.setRoute('/guest-houses');
+
     const searchApartmentPromise = Actions.getApartments();
     searchApartmentPromise.then(response => {
         Actions.searchApartmentsClicked();
-        Actions.setRoute('/guest-houses');
 
         isProcessing = {searchingApartments: false};
         Actions.setIsProcessing(isProcessing);
