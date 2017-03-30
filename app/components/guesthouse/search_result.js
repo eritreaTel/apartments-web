@@ -40,18 +40,16 @@ class PriceFilters extends React.Component {
         let min = priceRange != null && priceRange.length > 0? priceRange[0] : minPrice;
         let max = priceRange != null && priceRange.length > 0? priceRange[1] : maxPrice;
         let defValue = [min, max];
-        console.log('default value is ');
-        console.log(defValue);
 
         return (
             <div className="price-filter">
                 <h3 className="mg-widget-filter-title">Price/per night, in US Dollars</h3>
                 <div className="price-filter-captions">
-                    <span>Min Price: <label>${min} </label></span> &nbsp; <span>Max Price: <label>${max} </label></span>
+                    <span className="font-size-15">Min Price: <span className="font-weight-400">${min} </span></span> &nbsp; <span className="font-size-15">Max Price: <span className="font-weight-400">${max} </span></span>
                 </div>
                 <ReactSlider  className="horizontal-slider" defaultValue={defValue} withBars={true} min={minPrice} max={maxPrice} step={5} minDistance={10} onAfterChange={this.onPriceFilterChanged.bind(this)} >
-                    <div className="my-handle">${min}</div>
-                    <div className="my-handle">${max}</div>
+                    <div className="my-handle"><span className="font-size-15 font-weight-400">${min}</span></div>
+                    <div className="my-handle"><span className="font-size-15 font-weight-400">${max}</span></div>
                 </ReactSlider>
             </div>
         );
@@ -100,12 +98,12 @@ class StarRating extends React.Component {
                 <h3 className="mg-widget-filter-title">Star Rating</h3>
 
                 <CheckboxGroup name="starRating" value={this.props.starRating}  onChange={this.onStarRatingFilterChanged.bind(this)}>
-                    <div className="mg-options"><Checkbox value='0'/> Unrated</div>
-                    <div className="mg-options"><Checkbox value='1'/> 1 Star</div>
-                    <div className="mg-options"><Checkbox value='2'/> 2 Star</div>
-                    <div className="mg-options"><Checkbox value='3'/> 3 Star</div>
-                    <div className="mg-options"><Checkbox value='4'/> 4 Star</div>
-                    <div className="mg-options"><Checkbox value='5'/> 5 Star</div>
+                    <div className="mg-options"><Checkbox value='0'/> <span>Unrated</span></div>
+                    <div className="mg-options"><Checkbox value='1'/> <span>1 Star</span></div>
+                    <div className="mg-options"><Checkbox value='2'/> <span>2 Star</span></div>
+                    <div className="mg-options"><Checkbox value='3'/> <span>3 Star</span></div>
+                    <div className="mg-options"><Checkbox value='4'/> <span>4 Star</span></div>
+                    <div className="mg-options"><Checkbox value='5'/> <span>5 Star</span></div>
                 </CheckboxGroup>
             </div>
         );
@@ -124,12 +122,12 @@ class  PropertyType extends  React.Component {
             <div>
                 <h3 className="mg-widget-filter-title">Property Type</h3>
                 <CheckboxGroup name="propertyType"  value={this.props.propertyType} onChange={this.onPropertyTypeChanged.bind(this)}>
-                    <div className="mg-options"><Checkbox value='hotel'/> Hotels</div>
-                    <div className="mg-options"><Checkbox value='suite'/> Suites</div>
-                    <div className="mg-options"><Checkbox value='apartment'/> Apartments</div>
-                    <div className="mg-options"><Checkbox value='guest house'/> Guesthouses</div>
-                    <div className="mg-options"><Checkbox value='cottage'/> Cottages</div>
-                    <div className="mg-options"><Checkbox value='inn'/> Inns</div>
+                    <div className="mg-options"><Checkbox value='hotel'/> <span>Hotels</span></div>
+                    <div className="mg-options"><Checkbox value='suite'/> <span>Suites</span></div>
+                    <div className="mg-options"><Checkbox value='apartment'/> <span>Apartments</span></div>
+                    <div className="mg-options"><Checkbox value='guest house'/> <span>Guesthouses</span></div>
+                    <div className="mg-options"><Checkbox value='cottage'/> <span>Cottages</span></div>
+                    <div className="mg-options"><Checkbox value='inn'/> <span>Inns</span></div>
                 </CheckboxGroup>
             </div>
         );
@@ -147,21 +145,21 @@ class Location extends React.Component{
             <div>
                 <h3 className="mg-widget-filter-title">Neighborhood</h3>
                 <CheckboxGroup name="location"  value={this.props.locations} onChange={this.onLocationChanged.bind(this)}>
-                    <div className="mg-options"><Checkbox value='Bugolobi'/> Bugolobi</div>
-                    <div className="mg-options"><Checkbox value='Bunga'/> Bunga</div>
-                    <div className="mg-options"><Checkbox value='Bukoto'/> Bukoto</div>
-                    <div className="mg-options"><Checkbox value='Kabale'/> Kabale</div>
-                    <div className="mg-options"><Checkbox value='Kabusu'/> Kabusu</div>
-                    <div className="mg-options"><Checkbox value='Kanyanya'/> Kanyanya</div>
-                    <div className="mg-options"><Checkbox value='Makindye'/> Makindye</div>
-                    <div className="mg-options"><Checkbox value='Mulago'/> Mulago</div>
-                    <div className="mg-options"><Checkbox value='Muyenga'/> Muyenga</div>
-                    <div className="mg-options"><Checkbox value='Naalya'/> Naalya</div>
-                    <div className="mg-options"><Checkbox value='Naguru'/> Naguru</div>
-                    <div className="mg-options"><Checkbox value='Nakasero'/> Nakasero</div>
-                    <div className="mg-options"><Checkbox value='Namirembe'/> Namirembe</div>
-                    <div className="mg-options"><Checkbox value='Nsambya'/> Nsambya</div>
-                    <div className="mg-options"><Checkbox value='Rubaga'/> Rubaga</div>
+                    <div className="mg-options"><Checkbox value='Bugolobi'/><span> Bugolobi</span></div>
+                    <div className="mg-options"><Checkbox value='Bunga'/> <span>Bunga</span></div>
+                    <div className="mg-options"><Checkbox value='Bukoto'/> <span>Bukoto</span></div>
+                    <div className="mg-options"><Checkbox value='Kabale'/> <span>Kabale</span></div>
+                    <div className="mg-options"><Checkbox value='Kabusu'/> <span>Kabusu</span></div>
+                    <div className="mg-options"><Checkbox value='Kanyanya'/> <span>Kanyanya</span></div>
+                    <div className="mg-options"><Checkbox value='Makindye'/> <span>Makindye</span></div>
+                    <div className="mg-options"><Checkbox value='Mulago'/> <span>Mulago</span></div>
+                    <div className="mg-options"><Checkbox value='Muyenga'/> <span>Muyenga</span></div>
+                    <div className="mg-options"><Checkbox value='Naalya'/> <span>Naalya</span></div>
+                    <div className="mg-options"><Checkbox value='Naguru'/> <span>Naguru</span></div>
+                    <div className="mg-options"><Checkbox value='Nakasero'/> <span>Nakasero</span></div>
+                    <div className="mg-options"><Checkbox value='Namirembe'/> <span>Namirembe</span></div>
+                    <div className="mg-options"><Checkbox value='Nsambya'/> <span>Nsambya</span></div>
+                    <div className="mg-options"><Checkbox value='Rubaga'/> <span>Rubaga</span></div>
                 </CheckboxGroup>
             </div>
         );
