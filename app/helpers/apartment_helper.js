@@ -48,21 +48,21 @@ const ApartmentHelper = {
 
     generateViewApartmentUrl(apartmentResponse) {
         let {apartments, aptCnt} = apartmentResponse;
-        let guestHouseName = apartments[0].guestHouse.name;
+        let urlDescription = apartments[0].guestHouse.city + '-' +apartments[0].guestHouse.name;
 
         // take out empty space and make guest house, lower case
-        guestHouseName = _.replace(guestHouseName, new RegExp(" ","g"), '-');
-        guestHouseName = _.toLower(guestHouseName);
+        urlDescription = _.replace(urlDescription, new RegExp(" ","g"), '-');
+        urlDescription = _.toLower(urlDescription);
 
         let url;
         if (aptCnt ==1) {
-            url  = 'apartment/' + guestHouseName + '/' + apartments[0].id;
+            url  = 'apartment/' + urlDescription + '/' + apartments[0].id;
         } else {
             let aptIds = [];
             apartments.forEach(function(apartment) {
                 aptIds.push(apartment.id);
             });
-            url  = 'combo-apartment/' + guestHouseName + '/' + _.join(aptIds, '-');
+            url  = 'combo-apartment/' + urlDescription + '/' + _.join(aptIds, '-');
         }
         return url;
     },
