@@ -9,7 +9,7 @@ module.exports = {
                 super(props);
 
                 const routes = require('../../config/routes');
-                const router = new (require('director').Router)(routes);
+                const router = new (require('director').Router)(routes).init();
 
                 Dispatcher.updateStore = function (callback) {
                     this.setState({store: callback(this.state.store)});
