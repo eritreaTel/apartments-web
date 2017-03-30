@@ -51,6 +51,7 @@ const ApartmentHelper = {
         let urlDescription = apartments[0].guestHouse.city + '-' +apartments[0].guestHouse.name;
 
         // take out empty space and make guest house, lower case
+        urlDescription = _.replace(urlDescription, new RegExp(" & ","g"), '-');
         urlDescription = _.replace(urlDescription, new RegExp(" ","g"), '-');
         urlDescription = _.toLower(urlDescription);
 
