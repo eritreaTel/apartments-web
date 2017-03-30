@@ -4412,6 +4412,10 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   margin-top: 30px;
 }
 
+.min-height-50 {
+  min-height: 50px !important;
+}
+
 .font-weight-400 {
   font-weight: 400 !important;
 }
@@ -4464,6 +4468,18 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 
 .mg-book-form-input-payment {
   min-height: 70px;
+}
+
+.mg-book-form-input-additional-info {
+  min-height: 70px;
+}
+
+.mg-book-form-input-additional-info label {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  color: #16262e;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .seeker-bookings-container {

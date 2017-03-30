@@ -124,7 +124,8 @@ class AdditionalInfo extends React.Component {
             tourGuides    = (additional.tour_guides == 1) ? 1 : 0 ;
         }
 
-        let airportPickUpCss = airportPickup? 'row margin-left-20' : 'hide';
+        let airportPickUpSectionCss = airportPickup? 'row margin-bottom-20' : 'hide';
+        let airportPickUpOptionCSS  = airportPickup ? 'mg-book-form-input-additional-info min-height-50' : 'mg-book-form-input-additional-info';
         let airportPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
 
         return (
@@ -134,56 +135,60 @@ class AdditionalInfo extends React.Component {
                             <h2 className="mg-sec-left-title">Additional Services</h2>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="mg-book-form-input">
-                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Private car pick for <strong>{airportPickUpFee}? </strong> Note: Airport is 42 kilometers/26 miles away from kampala.</div>
+                                    <div className={airportPickUpOptionCSS}>
+                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline"><label>Private car pick for <strong>{airportPickUpFee}? </strong> Note: Airport is 42 kilometers/26 miles away from kampala.</label></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className={airportPickUpCss}>
+                            <div className={airportPickUpSectionCss}>
                                 <div className="row">
+                                    <div className="col-md-1" />
                                     <div className="col-md-4">
-                                        <div className="mg-book-form-input">
+                                        <div className="mg-book-form-input-additional-info">
                                             <label>Arrive At:</label>
                                             <span className="display-block"><strong>Entebe International Airport</strong></span>
                                         </div>
                                     </div>
                                     <div className="col-md-1" />
                                     <div className="col-md-4">
-                                        <div className="mg-book-form-input">
+                                        <div className="mg-book-form-input-additional-info">
                                             <label>Airline Name</label><span className='required-input'> * </span>
                                             <input value={airline_name} ref='airline_name' type="text" className="input-with-validation form-control" onChange={this.onAirlineNameChanged.bind(this)}/>
                                         </div>
                                     </div>
+                                    <div className="col-md-2" />
                                 </div>
                                 <div className="row">
+                                    <div className="col-md-1"/>
                                     <div className="col-md-4">
-                                        <div className="mg-book-form-input">
+                                        <div className="mg-book-form-input-additional-info">
                                             <label>Arrival Date</label><span className='required-input'> * </span>
                                             <ArrivalDateInstance className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
                                         </div>
                                     </div>
                                     <div className="col-md-1"/>
                                     <div className="col-md-4">
-                                        <div className="mg-book-form-input">
+                                        <div className="mg-book-form-input-additional-info">
                                             <label>Arrival Time/24-hour clock</label><span className='required-input'> * </span>
                                             <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
                                         </div>
                                     </div>
+                                    <div className="col-md-2" />
                                 </div>
                             </div>
 
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={tourGuides}  onChange={this.onReserveTourGuidesCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Get list of  tourGuides, for free?</div>
+                                    <div className="mg-book-form-input-additional-info">
+                                        <Checkbox defaultChecked={tourGuides}  onChange={this.onReserveTourGuidesCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline"><label>Get list of  tourGuides, for free?</label></div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="mg-book-form-input">
-                                        <Checkbox defaultChecked={carRentals}  onChange={this.onReserveCarRentalsCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline">Get list of car rentals, for free? </div>
+                                    <div className="mg-book-form-input-additional-info">
+                                        <Checkbox defaultChecked={carRentals}  onChange={this.onReserveCarRentalsCheckBoxChanged.bind(this)}/><div className="margin-left-10 fontsize-16 display-inline"><label>Get list of car rentals, for free?</label> </div>
                                     </div>
                                 </div>
                             </div>

@@ -19,7 +19,7 @@ module.exports = {
     },
 
     async createApartmentBooking({stripe_token}) {
-        const url = "apartment_bookings";
+        const url = "apartment_bookings?XDEBUG_SESSION_START='PHPSTORM'";
         this.setStoreVal('requestUrl', url);
 
         if (this.acquireLock('createApartmentBooking')) {
