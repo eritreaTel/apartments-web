@@ -26,7 +26,7 @@ module.exports = {
                     store: {
                         user: null,
                         apartments : null,
-                        filteredApartments : null,
+                        filteredApartments : [],
                         apartment : null,
                         bestApartments : null,
                         apartmentReviews : null,
