@@ -47,7 +47,7 @@ class PriceFilters extends React.Component {
                 <div className="price-filter-captions">
                     <span className="font-size-15">Min Price: <span className="font-weight-400">${min} </span></span> &nbsp; <span className="font-size-15">Max Price: <span className="font-weight-400">${max} </span></span>
                 </div>
-                <ReactSlider  className="horizontal-slider" defaultValue={defValue} withBars={true} min={minPrice} max={maxPrice} step={5} minDistance={10} onAfterChange={this.onPriceFilterChanged.bind(this)} >
+                <ReactSlider  className="horizontal-slider" defaultValue={defValue} withBars={true} min={minPrice} max={maxPrice} step={5} minDistance={5} onAfterChange={this.onPriceFilterChanged.bind(this)} >
                     <div className="my-handle"><span className="font-size-15 font-weight-400">${min}</span></div>
                     <div className="my-handle"><span className="font-size-15 font-weight-400">${max}</span></div>
                 </ReactSlider>
