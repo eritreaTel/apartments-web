@@ -10,6 +10,8 @@ module.exports = {
   "/combo-apartment/:description/:id": "viewComboApartment",
   "/contact-us": "contactUs",
   "/blogs": "blogs",
+  "/your-trip": "YourTrip",
+  "/your-trip/:trip/:id": "ATrip",
   "/blog/:id": "viewBlog",
   "/my-account" : "myAccount",
   "/reset-password" : "resetPassword",

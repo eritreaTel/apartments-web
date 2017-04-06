@@ -53,6 +53,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getBlog', data});
     },
 
+    getTrip(data) {
+        return Dispatcher.dispatch({type: 'getTrip', data});
+    },
+
     getRecentNews() {
         return Dispatcher.dispatch({type: 'getRecentNews'});
     },

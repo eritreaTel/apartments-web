@@ -11,6 +11,7 @@ module.exports = {
     CATEGORY_APARTMENT_PAGE : 'apartment',
     CATEGORY_CONTACT_US_PAGE: 'contact-us',
     CATEGORY_BLOGS_PAGE     : 'blogs',
+    CATEGORY_PLAN_YOUR_TRIP : 'your-trip',
     CATEGORY_BLOG_PAGE      : 'blog',
     CATEGORY_ERROR_PAGE     : 'error',
     CATEGORY_RESET_PASSWORD_PAGE : 'reset-password',

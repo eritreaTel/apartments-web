@@ -68,6 +68,7 @@ module.exports = {
                         },
                         blogs : null,
                         blog : null,
+                        trip : null,
                         contactUs : null,
                         blogComments : null,
                         blogMetaData : null,
@@ -93,7 +94,8 @@ module.exports = {
                             'updatingUser' : false,
                             'searchingBlogs' : false,
                             'loadingBlog' : false,
-                            'searchingApartments' : false
+                            'searchingApartments' : false,
+                            'loadingTrip' : false,
                         }
                     }
                 };

@@ -4759,3 +4759,103 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 .handle-1 {
   margin-top:-12px;
 }
+
+.Collapsible {
+  background-color: white;
+}
+
+.Collapsible__contentInner {
+  padding: 10px;
+  border: 1px solid #ebebeb;
+  border-top: 0;
+  background-color: #effdfc;
+}
+
+.Collapsible__contentInner p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.Collapsible__contentInner p:last-child {
+  margin-bottom: 0;
+}
+
+.Collapsible__trigger {
+  display: block;
+  font-weight: 400;
+  text-decoration: none;
+  position: relative;
+  padding: 15px;
+  padding-left: 5px;
+  background: #ebeced;
+  color: #16262e;
+  font-size:19px;
+  margin-bottom:1px;
+}
+
+.Collapsible__trigger:after {
+  font-family: 'FontAwesome';
+  content: '\f107';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  transition: transform 300ms;
+}
+
+.Collapsible__trigger.is-open:after {
+  transform: rotateZ(180deg);
+}
+
+.Collapsible__trigger.is-disabled {
+  opacity: 0.5;
+  background-color: grey;
+}
+
+.CustomTriggerCSS {
+  background-color: lightcoral;
+  transition: background-color 200ms ease;
+}
+
+.CustomTriggerCSS--open {
+  background-color: darkslateblue;
+}
+
+.mg-widget-plan-your-trip {
+  background-color: #ebeced;
+  box-shadow: 0px 1px 2px #888888;
+  padding-left: 5px;
+  padding-top: 2px;
+  padding-right: 2px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+}
+
+.plan-your-trip-sub-menu span {
+  color: #000;
+  font-size: 18px;
+  font-weight: 300;
+  padding-left: 5px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.plan-your-trip-sub-menu a {
+  color: #16262e;
+}
+
+.plan-your-trip-sub-menu a:hover {
+  color: #e7b315;
+}
+
+.plan-your-trip-sub-menu a:active {
+  color: blueviolet;
+}
+
+
+.mg-widget-plan-your-trip-title {
+  font-size:18px;
+  font-weight: 600;
+  font-family: "Playfair Display", serif;
+}

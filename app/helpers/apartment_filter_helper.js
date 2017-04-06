@@ -26,6 +26,9 @@ const ApartmentFilterHelper = {
         let minPrice = priceRange[0];
         let maxPrice = priceRange[1];
 
+        //If maxPrice is 200, then set max price to 500.. basically get all hotels up to 500 per night
+        maxPrice = (maxPrice == 200) ? 500 : maxPrice;
+
         let filteredApartments = [];
         apartments.forEach(function(apartment) {
             if (apartment.pricePerDay >= minPrice && apartment.pricePerDay <= maxPrice) {

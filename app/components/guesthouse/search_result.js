@@ -35,7 +35,7 @@ class PriceFilters extends React.Component {
         const priceRange = this.props.priceRange;
         const filteredApartments = this.props.filteredApartments;
         let minPrice = 5;
-        let maxPrice = 300;
+        let maxPrice = '200';
 
         let min = priceRange != null && priceRange.length > 0? priceRange[0] : minPrice;
         let max = priceRange != null && priceRange.length > 0? priceRange[1] : maxPrice;
@@ -127,7 +127,7 @@ class  PropertyType extends  React.Component {
                     <div className="mg-options"><Checkbox value='apartment'/> <span>Apartments</span></div>
                     <div className="mg-options"><Checkbox value='guest house'/> <span>Guesthouses</span></div>
                     <div className="mg-options"><Checkbox value='cottage'/> <span>Cottages</span></div>
-                    <div className="mg-options"><Checkbox value='inn'/> <span>Inns</span></div>
+                    <div className="mg-options"><Checkbox value='inn'/> <span>Motels</span></div>
                 </CheckboxGroup>
             </div>
         );

@@ -38,6 +38,14 @@ const Router = React.createClass({
         Actions.setView({page: 'blogs', data});
     },
 
+    YourTrip(data) {
+        Actions.setView({page: 'your-trip', data});
+    },
+
+    ATrip(trip, tripId) {
+        Actions.setView({page: 'your-trip', tripId});
+    },
+
     signIn(data) {
         Actions.setView({page: 'sign-in', data});
     },

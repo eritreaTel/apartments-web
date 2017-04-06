@@ -21,6 +21,12 @@ class HeaderBar extends React.Component {
         Actions.setRoute('/blogs');
     }
 
+    onPlanYourTripClicked() {
+        AnHelper.logEvent(AnHelper.CATEGORY_PLAN_YOUR_TRIP, AnHelper.ACTION_CLICKED);
+        Actions.getTrip({tripId : 1});
+        Actions.setRoute('/your-trip');
+    }
+
     onHomeClicked() {
         AnHelper.logEvent(AnHelper.CATEGORY_HOME_PAGE, AnHelper.ACTION_CLICKED);
         Actions.setRoute('/index');
@@ -94,8 +100,9 @@ class HeaderBar extends React.Component {
                             <ul className="nav navbar-nav navbar-right">
                                 <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={this.onHomeClicked.bind(this)}>Home</Anchor> </li>
                                 <li  className={(page == 'guest-houses' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onGuestHousesClicked.bind(this)}>Accommodations</Anchor> </li>
-                                <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
+                                <li  className={(page == 'your-trip') ? 'active' : ''}><Anchor onClick={this.onPlanYourTripClicked.bind(this)}>Your Trip</Anchor> </li>
                                 <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsClicked.bind(this)}>Blog</Anchor> </li>
+                                <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
                                 <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={this.onContactUsClicked.bind(this)}>Contact Us</Anchor> </li>
                                 {content}
                             </ul>

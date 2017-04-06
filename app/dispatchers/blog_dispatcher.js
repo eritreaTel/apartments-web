@@ -175,5 +175,39 @@ module.exports = {
                 this.releaseLock('getBlogMetaData');
             }
         }
+    },
+
+    async getTrip({tripId}) {
+        if (tripId == undefined) {
+            tripId = 1;
+        }
+
+        const url = 'trips/' + tripId;
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('trip') == null) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getTrip')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    let {object, errors} = ResponseHelper.processResponseReturnOne(response);
+                    if (errors.length > 0) {
+                        await this.dispatch({type: 'setErrorMessages', data : {errors}});
+                    } else {
+                        this.setStoreVal('trip', object);
+                    }
+                } catch (error) {
+                    this.releaseLock('getTrip');
+                    await this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch trip'
+                        }
+                    });
+                }
+                this.releaseLock('getTrip');
+            }
+        }
     }
+
 };

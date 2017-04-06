@@ -12,6 +12,8 @@ const TermsOfUse = require('../pages/TermsOfUse');
 const PrivacyPolicy = require('../pages/PrivacyPolicy');
 const ResetPasswordPage = require('../pages/ResetPasswordPage');
 const ComboApartmentsPage = require('../pages/ComboApartmentsPage');
+const YourTripPage = require('../pages/YourTripPage');
+
 const CookiesHelper = require('../helpers/cookies_helper');
 
 //Import third party css
@@ -66,6 +68,9 @@ class Page extends React.Component {
                 break;
             case 'blog':
                 content = <BlogPage {...{store}} />
+                break;
+            case 'your-trip' :
+                content = <YourTripPage {...{store}} />
                 break;
             case 'contact-us' :
                 content = <ContactUsPage {...{store}} />;
