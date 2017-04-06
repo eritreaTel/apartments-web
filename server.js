@@ -40,6 +40,7 @@ app.use('/apartment/*', express.static(pathToPublic));
 app.use('/combo-apartment/*', express.static(pathToPublic));
 app.use('/blogs', express.static(pathToPublic));
 app.use('/blog/*', express.static(pathToPublic));
+app.use('/your-trip', express.static(pathToPublic));
 app.use('/your-trip/*', express.static(pathToPublic));
 app.use('/my-account', express.static(pathToPublic));
 app.use('/reset-password', express.static(pathToPublic));
