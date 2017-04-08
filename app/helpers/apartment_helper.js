@@ -1,5 +1,6 @@
 const DateHelper = require('./date_helper');
 const ApplicationHelper = require('./application_helper');
+const StringHelper = require('./string_helper');
 const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
@@ -50,10 +51,7 @@ const ApartmentHelper = {
         let {apartments, aptCnt} = apartmentResponse;
         let urlDescription = apartments[0].guestHouse.city + '-' +apartments[0].guestHouse.name;
 
-        // take out empty space and make guest house, lower case
-        urlDescription = _.replace(urlDescription, new RegExp(" & ","g"), '-');
-        urlDescription = _.replace(urlDescription, new RegExp(" ","g"), '-');
-        urlDescription = _.toLower(urlDescription);
+        urlDescription = StringHelper.makeStringUrlFriendly(urlDescription);
 
         let url;
         if (aptCnt ==1) {

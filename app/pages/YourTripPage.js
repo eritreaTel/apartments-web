@@ -3,7 +3,8 @@ const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const withDataLoaded = require('../components/with_data_loaded');
 const Actions = require('../actions/actions');
-const DateHelper = require('../helpers/date_helper')
+const DateHelper = require('../helpers/date_helper');
+const StringHelper = require('../helpers/string_helper');
 
 import MDSpinner from "react-md-spinner";
 import Collapsible from 'react-collapsible';
@@ -23,9 +24,14 @@ const onTripClicked = function (tripId, tripInfo) {
 
 const CreateSubMenu = function (props) {
 	let items = props.items;
+	let activeTripId = props.activeTripId;
+	let tripInfo, activeCssClass = '';
 	let subMenus = items.map(item => {
-						let tripInfo = item.subsection === false ? props.section : props.section + '-' + _.lowerCase(item.label);
-						return <span key={item.id}><Anchor onClick={()=> onTripClicked(item.id, tripInfo)}>{item.label}</Anchor></span>
+						tripInfo = item.subsection === false ? props.section : props.section + '-' + _.lowerCase(item.label);
+						tripInfo = StringHelper.makeStringUrlFriendly(tripInfo);
+						activeCssClass = (activeTripId == item.id) ? 'plan-your-trip-active-sub-menu' : '';
+
+						return <span key={item.id}><Anchor className={activeCssClass} onClick={()=> onTripClicked(item.id, tripInfo)}>{item.label}</Anchor></span>
 					});
 
 	return (
@@ -45,7 +51,7 @@ const UgandaOverViewMenu = function (props) {
 
 	return (
 		<Collapsible trigger="Uganda Overview" open={true}>
-			<CreateSubMenu items={ugandaOverview} section="uganda-overview" />
+			<CreateSubMenu items={ugandaOverview} section="uganda-overview" activeTripId={props.activeTripId} />
 		</Collapsible>
 	);
 }
@@ -53,10 +59,11 @@ const UgandaOverViewMenu = function (props) {
 
 const  NationalParksMenu = function (props) {
 	var nationalParks = [
+		{ id: '3', label: 'Bwindi Impenetrable' },
+		{ id: '4', label: 'Mgahinga Gorilla' },
+		{ id: '5', label: 'Kibale' },
 		{ id: '90', label: 'Queen Elizabeth' },
-		{ id: '91', label: 'Bwindi Impenetrable' },
 		{ id: '92', label: 'Murchison Falls' },
-		{ id: '93', label: 'Mgahinga Gorilla' },
 		{ id: '94', label: 'Lake Mburo' },
 		{ id: '95', label: 'Kidepo' },
 		{ id: '96', label: 'Rwenzori Mountain' },
@@ -66,7 +73,7 @@ const  NationalParksMenu = function (props) {
 
 	return (
 		<Collapsible trigger="National Parks" open={true}>
-			<CreateSubMenu items={nationalParks} />
+			<CreateSubMenu items={nationalParks} section="national-parks" activeTripId={props.activeTripId} />
 		</Collapsible>
 	);
 }
@@ -80,7 +87,7 @@ const  KampalaCityMenu = function (props) {
 
 	return (
 		<Collapsible trigger="Kampala City" open={true}>
-			<CreateSubMenu items={kampalaCity} />
+			<CreateSubMenu items={kampalaCity} section="kampala-city" activeTripId={props.activeTripId} />
 		</Collapsible>
 	);
 }
@@ -93,7 +100,7 @@ const TouristAttractionsMenu = function (props) {
 
 	return (
 		<Collapsible trigger="Tourist Attractions" open={true}>
-			<CreateSubMenu items={touristAttractions} />
+			<CreateSubMenu items={touristAttractions} section="tourist-attractions" />
 		</Collapsible>
 	);
 }
@@ -109,7 +116,7 @@ const PlanningYourItineraryMenu = function (props) {
 
 	return (
 		<Collapsible trigger="Planning Your Itinerary" open={true}>
-			<CreateSubMenu items={planningYourItinerary} />
+			<CreateSubMenu items={planningYourItinerary} section="planning-your-itinerary" />
 		</Collapsible>
 	);
 }
@@ -123,22 +130,23 @@ const GorillaTrekkingMenu = function (props) {
 
 	return (
 		<Collapsible trigger="Gorilla Trekking" open={true}>
-			<CreateSubMenu items={gorillaTrekking} />
+			<CreateSubMenu items={gorillaTrekking} section="gorilla-trekking" />
 		</Collapsible>
 	);
 }
 
 const LeftSection = function (props) {
+	let activeTripId = props.tripId;
 	return (
 		<div className="col-md-3">
 			<div className="mg-widget-area">
 				<aside className="mg-widget-plan-your-trip">
-					<UgandaOverViewMenu />
-					<GorillaTrekkingMenu />
-					<NationalParksMenu />
-					<KampalaCityMenu />
-					<TouristAttractionsMenu />
-					<PlanningYourItineraryMenu />
+					<UgandaOverViewMenu  activeTripId={activeTripId}/>
+					<NationalParksMenu activeTripId={activeTripId}/>
+					<GorillaTrekkingMenu activeTripId={activeTripId}/>
+					<KampalaCityMenu activeTripId={activeTripId}/>
+					<TouristAttractionsMenu activeTripId={activeTripId}/>
+					<PlanningYourItineraryMenu activeTripId={activeTripId}/>
 				</aside>
 			</div>
 		</div>
@@ -199,7 +207,7 @@ const TripContent = function (props) {
 class TripPage extends React.Component {
 
 	render() {
-		const {store : {trip, isProcessing :{loadingTrip} }} = this.props;
+		const {store : {trip, view , isProcessing :{loadingTrip} }} = this.props;
 
 		let middleSection;
 		if (loadingTrip) {
@@ -208,10 +216,12 @@ class TripPage extends React.Component {
 			middleSection = <TripContent trip={trip} />
 		}
 
+		let tripId = (view.tripId != undefined) ? view.tripId : 1;
+
 		let content = 	<div className="mg-blog-list">
 							<div className="container">
 								<div className="row">
-									<LeftSection/>
+									<LeftSection tripId={tripId}/>
 									{middleSection}
 								</div>
 							</div>

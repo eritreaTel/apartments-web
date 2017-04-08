@@ -4853,6 +4853,9 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   color: blueviolet;
 }
 
+.plan-your-trip-active-sub-menu {
+  color: #e7b315 !important;
+}
 
 .mg-widget-plan-your-trip-title {
   font-size:18px;
