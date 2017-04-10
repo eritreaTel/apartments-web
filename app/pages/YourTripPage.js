@@ -62,13 +62,13 @@ const  NationalParksMenu = function (props) {
 		{ id: '3', label: 'Bwindi Impenetrable' },
 		{ id: '4', label: 'Mgahinga Gorilla' },
 		{ id: '5', label: 'Kibale' },
+        { id: '6', label: 'Mount Elgon' },
 		{ id: '90', label: 'Queen Elizabeth' },
 		{ id: '92', label: 'Murchison Falls' },
-		{ id: '94', label: 'Lake Mburo' },
-		{ id: '95', label: 'Kidepo' },
-		{ id: '96', label: 'Rwenzori Mountain' },
-		{ id: '97', label: 'Mount Elgon' },
-		{ id: '98', label: 'Semuliki' }
+		{ id: '93', label: 'Lake Mburo' },
+		{ id: '94', label: 'Kidepo' },
+		{ id: '95', label: 'Rwenzori Mountain' },
+		{ id: '96', label: 'Semuliki' }
 	];
 
 	return (
