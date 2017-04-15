@@ -55,13 +55,13 @@ const ApartmentHelper = {
 
         let url;
         if (aptCnt ==1) {
-            url  = 'apartment/' + urlDescription + '/' + apartments[0].id;
+            url  = '/apartment/' + urlDescription + '/' + apartments[0].id;
         } else {
             let aptIds = [];
             apartments.forEach(function(apartment) {
                 aptIds.push(apartment.id);
             });
-            url  = 'combo-apartment/' + urlDescription + '/' + _.join(aptIds, '-');
+            url  = '/combo-apartment/' + urlDescription + '/' + _.join(aptIds, '-');
         }
         return url;
     },

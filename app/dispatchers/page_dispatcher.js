@@ -22,7 +22,7 @@ module.exports = {
 
     setRoute(data) {
         //this.router.setRoute('/')
-        this.router.setRoute(data);
+        this.router.setRoute(data + '/');
     },
 
     async searchApartmentsUpdated(data) {
