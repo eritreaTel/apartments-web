@@ -5,7 +5,7 @@ const fs = require('fs');
 */
 const path = require('path');
 const app = express();
-const pathToPublic = path.join(__dirname, 'public');
+const pathToPublic = path.join(__dirname, 'views');
 
 app.set('port', (process.env.PORT || 8080));
 
