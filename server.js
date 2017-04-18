@@ -5,15 +5,17 @@ const fs = require('fs');
 */
 const path = require('path');
 const app = express();
-const pathToPublic = path.join(__dirname, 'views');
+const pathToView = path.join(__dirname, 'views');
+const pathToPublic = path.join(__dirname, 'public');
 
 app.set('port', (process.env.PORT || 8080));
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-
-app.use(express.static(pathToPublic));
 app.enable('view cache');
+
+app.use(express.static(pathToView));
+app.use(express.static(pathToPublic));
 
 
 app.use(function(req, res, next) {
