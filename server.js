@@ -13,6 +13,7 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 app.use(express.static(pathToPublic));
+app.enable('view cache');
 
 
 app.use(function(req, res, next) {
@@ -42,19 +43,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/index', (req, res) => {
-  return res.render('home');
+  return res.render('home', {'title' : 'UgandaBooking - Hotels in Uganda'});
 });
 
 app.get('/guest-houses', (req, res) => {
-  return res.render('home');
+  return res.render('home', {'title' : 'UgandaBooking - Hotels in Uganda'});
 });
 
 app.get('/sign-in', (req, res) => {
-  return res.render('home');
+  return res.render('home', {'title' : 'UgandaBooking - Sign In'});
 });
 
 app.get('/reset-password', (req, res) => {
-  return res.render('home');
+  return res.render('home', {'title' : 'UgandaBooking - Reset Password'});
 });
 
 app.get('/about-us', (req, res) => {
