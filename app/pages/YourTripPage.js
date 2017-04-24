@@ -59,16 +59,16 @@ const UgandaOverViewMenu = function (props) {
 
 const  NationalParksMenu = function (props) {
 	var nationalParks = [
-		{ id: '3', label: 'Bwindi Impenetrable' },
-		{ id: '4', label: 'Mgahinga Gorilla' },
-		{ id: '5', label: 'Kibale' },
-        { id: '6', label: 'Mount Elgon' },
-		{ id: '7', label: 'Queen Elizabeth' },
 		{ id: '10', label: 'Murchison Falls' },
+		{ id: '3', label: 'Bwindi Impenetrable' },
+		{ id: '7', label: 'Queen Elizabeth' },
+		{ id: '5', label: 'Kibale' },
 		{ id: '9', label: 'Lake Mburo' },
 		{ id: '8', label: 'Kidepo' },
 		{ id: '11', label: 'Rwenzori Mountain' },
-		{ id: '12', label: 'Semuliki' }
+		{ id: '4', label: 'Mgahinga Gorilla' },
+		{ id: '12', label: 'Semuliki' },
+        { id: '6', label: 'Mount Elgon' }
 	];
 
 	return (
