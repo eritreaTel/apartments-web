@@ -1,4 +1,5 @@
 const join = require('url-join');
+const _ = require('lodash');
 
 module.exports = {
   getSeoInfo() {
