@@ -1,6 +1,6 @@
 const express = require('express');
 var exphbs  = require('express-handlebars');
-var seoHelper = require('./app/helpers/seo_helper');
+var metaHelper = require('./app/helpers/meta_helper');
 /*const bodyParser = require('body-parser');
 const fs = require('fs');
 */
@@ -41,10 +41,13 @@ app.get('/heartbeat', (req, res) => {
   return res.send('<html><head></head><body>success</body></html>');
 });
 
-let seoData = seoHelper.getSeoInfo();
+
 
 app.get('*', function(req, res) {
-  return res.render('home');
+  let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  let metaData = metaHelper.getMetaDataByUrl(fullUrl);
+
+  return res.render('home', metaData);
 });
 
 

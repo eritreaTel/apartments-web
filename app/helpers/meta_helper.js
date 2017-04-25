@@ -28,5 +28,11 @@ module.exports = {
         "deleted_at": null
       }
     }
+  },
+
+  getMetaDataByUrl(url) {
+      let seoData = this.getSeoInfo();
+      return _.get(seoData, url);
   }
+
 };
