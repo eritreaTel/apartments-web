@@ -9,6 +9,7 @@ const FormValidator = require('../../helpers/form_validation_helper');
 const PricingHelper = require('../../helpers/pricing_helper');
 const DateHelper = require('../../helpers/date_helper');
 const CurrencyFormatter = require('currency-formatter');
+const {assetPath} = require('../../helpers/asset_helper');
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
@@ -65,7 +66,7 @@ const OneBooking = function (props) {
 			<div className="seeker-bookings-container">
 				<div className ="row">
 					<div className="col-md-3">
-						<img src="images/room-1.png" alt="Delux Room" className="img-responsive"/>
+						<img src={assetPath("/images/room-1.png")} alt="Delux Room" className="img-responsive"/>
 					</div>
 
 					<div className="col-md-5">
