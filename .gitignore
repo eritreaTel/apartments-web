@@ -10,4 +10,4 @@ public/fonts
 public/images
 public/application.js.gz
 public/application.js.map
-public/index.html
+views/index.html
