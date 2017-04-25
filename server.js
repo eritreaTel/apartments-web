@@ -1,5 +1,6 @@
 const express = require('express');
 var exphbs  = require('express-handlebars');
+var seoHelper = require('./app/helpers/seo_helper');
 /*const bodyParser = require('body-parser');
 const fs = require('fs');
 */
@@ -40,82 +41,11 @@ app.get('/heartbeat', (req, res) => {
   return res.send('<html><head></head><body>success</body></html>');
 });
 
-app.get('/', (req, res) => {
+let seoData = seoHelper.getSeoInfo();
+
+app.get('*', function(req, res) {
   return res.render('home');
 });
-
-app.get('/index', (req, res) => {
-  return res.render('home', {'title' : 'UgandaBooking - Hotels in Uganda'});
-});
-
-app.get('/guest-houses', (req, res) => {
-  return res.render('home', {'title' : 'UgandaBooking - Hotels in Uganda'});
-});
-
-app.get('/sign-in', (req, res) => {
-  return res.render('home', {'title' : 'UgandaBooking - Sign In'});
-});
-
-app.get('/reset-password', (req, res) => {
-  return res.render('home', {'title' : 'UgandaBooking - Reset Password'});
-});
-
-app.get('/about-us', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/contact-us', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/apartment/*', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/combo-apartment/*', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/blogs', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/blog/*', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/your-trip', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/your-trip/*', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/my-account', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/reset-password', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/terms-of-use', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/privacy-policy', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/error', (req, res) => {
-  return res.render('home');
-});
-
-app.get('/', (req, res) => {
-    return res.render('home');
-});
-
 
 
 app.listen(app.get('port'), () => {
