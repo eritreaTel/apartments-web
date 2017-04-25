@@ -44,7 +44,7 @@ app.get('/heartbeat', (req, res) => {
 
 
 app.get('*', function(req, res) {
-  let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+  let fullUrl = 'https://' + req.get('host') + req.originalUrl;
   let metaData = metaHelper.getMetaDataByUrl(fullUrl);
 
   return res.render('home', metaData);
