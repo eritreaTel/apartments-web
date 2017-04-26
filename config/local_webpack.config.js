@@ -40,7 +40,7 @@ module.exports = {
       pathinfo: true
     },
     devServer: {
-        contentBase: "./public",
+        contentBase: "./view",
         colors: true,
         historyApiFallback: true,
         inline: true
