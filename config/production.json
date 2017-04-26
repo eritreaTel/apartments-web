@@ -5,6 +5,7 @@
   "isLocal": false,
   "loginHost": "https://api.ugandabooking.com",
   "clientErrorLoggingEnabled": false,
-  "cookieDomain": ".ugandabooking.com",
+  "cookieDomain": "ugandabooking.com",
+  "secureCookie" : true,
   "stripKey" : "pk_live_mVOvWEWpnZ4oZdqE0G05829E"
 }

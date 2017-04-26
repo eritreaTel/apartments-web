@@ -6,5 +6,6 @@
   "loginHost": "https://api-staging.ugandabooking.com",
   "clientErrorLoggingEnabled": false,
   "cookieDomain": "staging.ugandabooking.com",
+  "secureCookie" : true,
   "stripKey" : "pk_test_xNk89utQrNjwzmaqOLlteVnz"
 }

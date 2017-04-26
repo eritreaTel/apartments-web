@@ -1,25 +1,27 @@
 const cookie = require('js-cookie');
 const moment = require('moment');
-const {cookieDomain} = require('../../config/config');
+const {cookieDomain, secureCookie} = require('../../config/config');
 
 module.exports = {
   oauthToken: 'oauthToken',
   oauthApplicationAccessToken : 'oauthApplicationAccessToken',
 
   deleteSessionCookie() {
-      cookie.remove(this.oauthToken);
+      let options = {'secure' : secureCookie };
+      cookie.remove(this.oauthToken, options);
   },
 
   setSessionCookie(token, expiresInSeconds) {
     const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
 
-    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain };
+    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain, 'secure' : secureCookie };
+    console.log(options);
     cookie.set(this.oauthToken, token, options);
   },
 
   addDataToCookie(fieldName, Value, expiresInSeconds) {
     const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
-    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain };
+    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain, 'secure' : secureCookie };
 
     cookie.set(fieldName, Value, options);
   },
@@ -29,7 +31,8 @@ module.exports = {
   },
 
   removeDataFromCookie(name) {
-    cookie.remove(name);
+    let options = {'secure' : secureCookie };
+    cookie.remove(name, options);
   },
 
   getSessionCookie() {
@@ -42,7 +45,7 @@ module.exports = {
 
   setApplicationAccessToken(token, expiresInSeconds) {
     const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
-    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain };
+    let options = {'expires' : expiresDate,  'path' : '/', 'domain' : cookieDomain, 'secure' : secureCookie };
 
     cookie.set(this.oauthApplicationAccessToken, token, options);
   },

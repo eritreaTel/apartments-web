@@ -2,5 +2,6 @@
   "loginHost": "http://www.apt-api.com",
   "assetHost": "http://localhost:4000",
   "cookieDomain" : "localhost",
-  "stripKey" : "pk_test_xNk89utQrNjwzmaqOLlteVnz"
+  "stripKey" : "pk_test_xNk89utQrNjwzmaqOLlteVnz",
+  "secureCookie" : false
 }
