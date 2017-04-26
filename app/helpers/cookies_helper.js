@@ -12,7 +12,7 @@ module.exports = {
   },
 
   setSessionCookie(token, expiresInSeconds) {
-    const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
+    const expiresDate = moment().add(Number(expiresInSeconds) + 1, 'seconds').toDate();
 
     let options = {'expires' : expiresDate,  'path' : '/', 'secure' : secureCookie };
     console.log(options);
@@ -20,7 +20,7 @@ module.exports = {
   },
 
   addDataToCookie(fieldName, Value, expiresInSeconds) {
-    const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
+    const expiresDate = moment().add(Number(expiresInSeconds) + 1, 'seconds').toDate();
     let options = {'expires' : expiresDate,  'path' : '/', 'secure' : secureCookie };
 
     cookie.set(fieldName, Value, options);
@@ -44,7 +44,7 @@ module.exports = {
   },
 
   setApplicationAccessToken(token, expiresInSeconds) {
-    const expiresDate = moment().add(Number(expiresInSeconds) + 5, 'seconds').toDate();
+    const expiresDate = moment().add(Number(expiresInSeconds) + 1, 'seconds').toDate();
     let options = {'expires' : expiresDate,  'path' : '/',  'secure' : secureCookie };
 
     cookie.set(this.oauthApplicationAccessToken, token, options);

@@ -47,7 +47,7 @@ module.exports = {
         let response = await this.fetchJsonAuthorization(path, options);
         oauthToken =    response.access_token;
 
-        CookiesHelper.setApplicationAccessToken(oauthToken, response.expires_in);
+        CookiesHelper.setApplicationAccessToken(oauthToken, response.expires_in - 10);
         console.log('oauth - from server ' + oauthToken);
         return oauthToken;
     },
