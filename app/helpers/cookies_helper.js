@@ -4,6 +4,7 @@ const {cookieDomain} = require('../../config/config');
 
 module.exports = {
   oauthToken: 'oauthToken',
+  oauthApplicationAccessToken : 'oauthApplicationAccessToken',
 
   deleteSessionCookie() {
       cookie.remove(`${this.oauthToken}`);
@@ -25,5 +26,15 @@ module.exports = {
 
   getSessionCookie() {
     return cookie.load(`${this.oauthToken}`);
-  }
+  },
+
+  getApplicationAccessToken() {
+    return cookie.load(`${this.oauthApplicationAccessToken}`);
+  },
+
+  setApplicationAccessToken(token, expiresInSeconds) {
+    const expiresDate = moment().add(Number(expiresInSeconds) + 1, 'seconds').toDate().toUTCString();
+    cookie.save(`${this.oauthApplicationAccessToken}`, `${token}`, `expires=${expiresDate}; path=/; domain=${cookieDomain};`);
+  },
+
 };

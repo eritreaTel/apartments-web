@@ -22,11 +22,82 @@ function setRESTEndpointOptions(path, options) {
     }
 }
 
+
 module.exports = {
-    fetchJson(path, {headers = {}, ...options} = {}) {
+     async getClientCredentialsToken() {
+        let oauthToken = CookiesHelper.getApplicationAccessToken();
+        console.log('oauth - from cookie ' + oauthToken);
+        if (oauthToken) {
+            return oauthToken;
+        }
+
+        let path = `oauth/access_token`;
+        const options = {
+            headers: {
+                accept: 'application/json'
+            },
+            method: 'POST',
+            body: {
+                grant_type: 'client_credentials',
+                client_id: 100001,
+                client_secret: ',r.pe,Z9[XB<bAmanXQ%BS'
+            }
+        };
+
+        let response = await this.fetchJsonAuthorization(path, options);
+        oauthToken =    response.access_token;
+
+        //CookiesHelper.setSessionCookie(oauthResponse.access_token, oauthResponse.expires_in);
+        console.log('oauth - from server ' + oauthToken);
+        return oauthToken;
+    },
+
+
+    fetchJsonAuthorization(path, {headers = {}, ...options} = {}) {
         headers.accept = 'application/json';
         headers['gh-ui'] = true;
 
+        options = {
+            headers: headers,
+            ...options
+        };
+
+        setRESTEndpointOptions(path, options);
+
+        let fetchPromise = fetch(options.url, options)
+                .then(response => {
+                const {status, statusText} = response;
+            return response;
+        }).then(checkStatus);
+
+
+        if (options.isBytes) {
+            fetchPromise = fetchPromise
+                .then(response => [204, 304].includes(response.status) ? '{}' : response.blob());
+        } else {
+            fetchPromise = fetchPromise
+                .then(response => [204, 304].includes(response.status) ? '{}' : response.text())
+                .then(JSON.parse);
+        }
+
+        return fetchPromise;
+    },
+
+    async fetchJson(path, {headers = {}, ...options} = {}) {
+        headers.accept = 'application/json';
+        headers['gh-ui'] = true;
+
+        const oauthToken = await this.getClientCredentialsToken();
+
+        if (oauthToken) headers.authorization = `Bearer ${oauthToken}`;
+        /*if (oauthToken) {
+            let {method} = options;
+            if (_.toLower(method) == 'get') {
+                path = path + '&access_token=' + oauthToken;
+            } else {
+                path = path + '?access_token=' + oauthToken;
+            }
+        }*/
 
         options = {
             headers: headers,
