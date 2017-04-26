@@ -102,8 +102,8 @@ module.exports = {
                     user = object;
                     this.setStoreVal('user', user);
 
-                    CookiesHelper.removeDataFromCookie('userId');
-                    CookiesHelper.removeDataFromCookie('userType');
+                    await CookiesHelper.removeDataFromCookie('userId');
+                    await CookiesHelper.removeDataFromCookie('userType');
 
                     CookiesHelper.setSessionCookie(object.php_session_id, 3600);
                     CookiesHelper.addDataToCookie('userId', object.id, 3600);
