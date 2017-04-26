@@ -101,6 +101,10 @@ module.exports = {
                 } else {
                     user = object;
                     this.setStoreVal('user', user);
+
+                    CookiesHelper.removeDataFromCookie('userId');
+                    CookiesHelper.removeDataFromCookie('userType');
+
                     CookiesHelper.setSessionCookie(object.php_session_id, 3600);
                     CookiesHelper.addDataToCookie('userId', object.id, 3600);
                     CookiesHelper.addDataToCookie('userType', object.type, 3600);
@@ -149,6 +153,8 @@ module.exports = {
             }
 
             let userId = CookiesHelper.getDataFromCookie('userId');
+            console.log('User Id stored in cookie is' + userId);
+
             let url = 'users/' + userId;
             const response = await FetchHelper.fetchJson(url, {method: 'GET'});
 

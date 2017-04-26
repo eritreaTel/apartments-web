@@ -24,6 +24,10 @@ module.exports = {
     return cookie.load(`${name}`);
   },
 
+  removeDataFromCookie(name) {
+    cookie.remove(`${name}`);
+  },
+
   getSessionCookie() {
     return cookie.load(`${this.oauthToken}`);
   },
