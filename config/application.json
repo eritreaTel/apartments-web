@@ -9,5 +9,6 @@
   "baseURI": "/api",
   "version": "/v1",
   "clientErrorLoggingEnabled": true,
-  "cookieDomain": ".localhost.com"
+  "cookieDomain": "localhost.com",
+  "oauthSecret" : ",r.pe,Z9[XB<bAmanXQ%BS"
 }

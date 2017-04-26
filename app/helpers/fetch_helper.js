@@ -5,7 +5,7 @@ const {post} = require('superagent');
 const Logger = require('../helpers/log_helper');
 const CookiesHelper = require('../helpers/cookies_helper');
 
-const {loginHost, baseURI, version} = config;
+const {loginHost, baseURI, version, oauthSecret} = config;
 
 function checkStatus(response) {
     if (response.status >= 200 && response.status < 400) return response;
@@ -40,7 +40,7 @@ module.exports = {
             body: {
                 grant_type: 'client_credentials',
                 client_id: 100001,
-                client_secret: ',r.pe,Z9[XB<bAmanXQ%BS'
+                client_secret: oauthSecret
             }
         };
 

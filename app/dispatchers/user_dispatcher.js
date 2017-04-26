@@ -153,7 +153,6 @@ module.exports = {
             }
 
             let userId = CookiesHelper.getDataFromCookie('userId');
-            console.log('User Id stored in cookie is' + userId);
 
             let url = 'users/' + userId;
             const response = await FetchHelper.fetchJson(url, {method: 'GET'});
