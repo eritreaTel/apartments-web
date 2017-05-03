@@ -9,12 +9,25 @@ const Slider = require('react-slick');
 
 const onBookApartmentPageClicked = function (apartmentKey) {
     Actions.bookApartmentPageClicked({apartmentKey});
-    Actions.setRoute('/guest-houses');
+    Actions.setRoute('/hotels');
 }
 
 const onKeepSearchingClicked = function () {
     Actions.goBackToSearch(null);
-    Actions.setRoute('/guest-houses');
+    Actions.setRoute('/hotels');
+}
+
+
+const ApartmentFacilities = function(props) {
+    return (
+        <div className="row">
+            <div className="col-md-12">
+                <div className="mg-single-room-txt">
+                    
+                </div>
+            </div>
+        </div>
+    );
 }
 
 
@@ -22,11 +35,11 @@ const ApartmentDescription = function(props) {
     return(
         <div className="row">
             <div className="col-md-12">
-                <div className="mg-single-room-txt">
-                <h2 className="mg-sec-left-title">Apartment Description</h2>
-                <div dangerouslySetInnerHTML={{__html: props.longDescription}}></div>
+                <div>
+                    <h2 className="mg-sec-left-title">Apartment Description</h2>
+                    <div dangerouslySetInnerHTML={{__html: props.longDescription}}></div>
+                </div>
             </div>
-        </div>
         </div>
     );
 }
@@ -83,6 +96,7 @@ const ApartmentMiddleContent = function (props) {
     let apartmentResponse = props.apartmentResponse ;
     let {apartmentKey, longDescription} = apartmentResponse;
     let galleries = ApartmentHelper.getGalleries(apartmentResponse);
+    let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
 
     return (
         <div className="mg-single-room">
@@ -92,6 +106,7 @@ const ApartmentMiddleContent = function (props) {
                     <AmenitiesAndControlButtons apartmentResponse = {apartmentResponse} />
                 </div>
                 <ApartmentDescription longDescription={longDescription} />
+                <ApartmentFacilities guestHouse={guestHouse} />
             </div>
         </div>
     );
