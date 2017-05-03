@@ -1,10 +1,10 @@
 const React = require('react');
-const SearchApartment = require('../components/guesthouse/search_guesthouses');
-const AdditionalInfo = require('../components/guesthouse/additional_info');
-const PersonalInfo   = require('../components/guesthouse/personal_info');
-const SearchResult   = require('../components/guesthouse/search_result');
-const PaymentInfo   = require('../components/guesthouse/payment_info');
-const ReservationConfirmation      = require('../components/guesthouse/reservation_confirmation');
+const SearchApartment = require('../components/hotel/search_guesthouses');
+const AdditionalInfo = require('../components/hotel/additional_info');
+const PersonalInfo   = require('../components/hotel/personal_info');
+const SearchResult   = require('../components/hotel/search_result');
+const PaymentInfo   = require('../components/hotel/payment_info');
+const ReservationConfirmation      = require('../components/hotel/reservation_confirmation');
 const PageTitle = require('../components/shared/pageTitle');
 const withDataLoaded = require('../components/with_data_loaded');
 const SvgImage = require('../components/shared/svg_image');
@@ -47,7 +47,7 @@ const SearchApartments = function (props) {
     );
 }
 
-const GuestHouseBody = function(props) {
+const HotelBody = function(props) {
     return (
         <div>
             <PageTitle parentClassName="mg-page-title-space parallax"/>
@@ -72,7 +72,7 @@ const GuestHouseBody = function(props) {
 
 
 
-class GuestHousesPage extends React.Component {
+class HotelsPage extends React.Component {
 
     state = {};
 
@@ -115,21 +115,21 @@ class GuestHousesPage extends React.Component {
                                 <SearchResult filteredApartments={filteredApartments} isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} bookingStage={bookingStage}/>
                             </div>
         }
-        return ( <GuestHouseBody activeStage={bookingStage.activeStage}> {section} </GuestHouseBody> );
+        return ( <HotelBody activeStage={bookingStage.activeStage}> {section} </HotelBody> );
     }
 };
 
 const WithUserLoaded = withDataLoaded({
-        WithData: GuestHousesPage,
+        WithData: HotelsPage,
         WithoutData: () => (
-            <GuestHouseBody >
+            <HotelBody >
                 <div role="tabpanel" className="tab-pane fade in active" id="select-room">
                     <SearchApartments />
                     <div className="load-spin">
                         <MDSpinner />
                     </div>
                 </div>
-            </GuestHouseBody>
+            </HotelBody>
         ),
         data: [
             {

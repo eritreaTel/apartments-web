@@ -30,8 +30,8 @@ const Router = React.createClass({
         Actions.setView({page: 'contact-us', data});
     },
 
-    guestHouses(data) {
-        Actions.setView({page: 'guest-houses', data});
+    hotels(data) {
+        Actions.setView({page: 'hotels', data});
     },
 
     blogs(data) {

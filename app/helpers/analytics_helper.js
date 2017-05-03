@@ -4,7 +4,7 @@ ReactGA.initialize('UA-91184275-1 ');
 
 module.exports = {
     CATEGORY_HOME_PAGE      : 'index',
-    CATEGORY_GUESTHOUSE_PAGE: 'guest-houses',
+    CATEGORY_HOTELS_PAGE:   'hotels',
     CATEGORY_SIGN_IN_PAGE   : 'sign-in',
     CATEGORY_SIGN_OUT_PAGE  : 'sign-out',
     CATEGORY_ABOUT_US_PAGE  : 'about-us',

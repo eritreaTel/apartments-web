@@ -1,7 +1,7 @@
 module.exports = {
   "/" : "index",
   "/index/" : "index",
-  "/guest-houses/": "guestHouses",
+  "/hotels/": "hotels",
   "/error/": "error",
   "/sign-in/": "signIn",
   "/reset-password/": "resetPassword",
