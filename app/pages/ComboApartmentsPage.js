@@ -35,7 +35,7 @@ class ComboApartmentsPage extends React.Component {
 	componentWillMount() {
 		const {store : {apartment}} = this.props;
 		if (apartment == null) {
-			Actions.setRoute("/guest-houses");
+			Actions.setRoute("/hotels");
 		} else {
 			Actions.getAuthenticatedUser();
 		}

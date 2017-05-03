@@ -101,7 +101,7 @@ const OneBooking = function (props) {
                                 </div>
                                 <div className="col-md-4">
                                     <span><Anchor onClick={() => {Actions.setRoute('/contact-us')}} className="btn btn-primary">Talk to Us</Anchor></span>
-                                    <span><Anchor onClick={() => {Actions.goBackToSearch(); Actions.setRoute('/guest-houses')}}  className="btn btn-primary" >Book again</Anchor></span>
+                                    <span><Anchor onClick={() => {Actions.goBackToSearch(); Actions.setRoute('/hotels')}}  className="btn btn-primary" >Book again</Anchor></span>
                                 </div>
                             </div>
                         </div>

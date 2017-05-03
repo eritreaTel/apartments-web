@@ -142,7 +142,7 @@ class SearchControls extends React.Component {
         Actions.setIsProcessing(isProcessing);
 
         //Make sure user is in guest house page and continue searching.
-        Actions.setRoute('/guest-houses');
+        Actions.setRoute('/hotels');
 
         const searchApartmentPromise = Actions.getApartments();
         searchApartmentPromise.then(response => {

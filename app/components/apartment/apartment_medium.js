@@ -9,7 +9,7 @@ const bookBestApartmentClicked = function (aptResponse) {
     const {apartmentKey} = aptResponse;
     Actions.cleanUpBookingData();
     Actions.bookBestApartmentClicked({apartmentKey});
-    Actions.setRoute('/guest-houses');
+    Actions.setRoute('/hotels');
 }
 
 const viewBestApartmentClicked = function (aptResponse) {
