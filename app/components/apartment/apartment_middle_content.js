@@ -108,13 +108,14 @@ const ApartmentMiddleContent = function (props) {
     let galleries = ApartmentHelper.getGalleries(apartmentResponse);
     let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
     let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);
+    let amenitiesWithValueOne = ApartmentHelper.getAmenitiesByValue(amenities, 1);
 
     return (
         <div className="mg-single-room">
             <div className="container">
                 <div className="row">
                     <ApartmentGalleries galleries = {galleries} />
-                    <AmenitiesAndControlButtons amenities={amenities} apartmentResponse = {apartmentResponse} />
+                    <AmenitiesAndControlButtons amenities={amenitiesWithValueOne} apartmentResponse = {apartmentResponse} />
                 </div>
                 <ApartmentDescription longDescription={longDescription} />
                 <ApartmentFacilities guestHouse={guestHouse} amenities={amenities} />

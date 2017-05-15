@@ -129,6 +129,16 @@ const ApartmentHelper = {
         });
 
         return {bedroom, bathroom, livingArea, foodAndDrink, technology, activities};
+    },
+
+    getAmenitiesByValue(amenities, value) {
+        let amenitiesByVal = [];
+        _.each(amenities, (amenity) => {
+            if (amenity.value == value) {
+                amenitiesByVal.push(amenity);
+            }
+        });
+        return amenitiesByVal;
     }
 
 };
