@@ -20,6 +20,8 @@ const StringHelper = {
         // take out empty space and make guest house, lower case
         let urlString = _.replace(inputString, new RegExp(" & ","g"), '-');
         urlString = _.replace(urlString, new RegExp(" ","g"), '-');
+        urlString = _.replace(urlString, new RegExp("`","g"), '-');
+        urlString = _.replace(urlString, new RegExp("'","g"), '');
         urlString = _.toLower(urlString);
 
         return urlString;

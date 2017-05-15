@@ -11,6 +11,7 @@ module.exports = {
 
     clearApartment() {
         this.setStoreVal('apartment', null);
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     async getBestApartments() {

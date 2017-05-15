@@ -106,6 +106,29 @@ const ApartmentHelper = {
 
     getGalleries(apartmentResponse) {
         return apartmentResponse.galleries;
+    },
+
+    getAmenitiesByCategory(amenities) {
+        let bedroom = [], bathroom = [], livingArea = [], foodAndDrink =[], technology = [], activities =[], outdoors = [];
+        _.each(amenities, (amenity) => {
+            if (amenity.category == 'Bedroom') {
+                bedroom.push(amenity);
+            } else if (amenity.category == 'Bathroom') {
+                bathroom.push(amenity);
+            } else if (amenity.category == 'Activities') {
+                activities.push(amenity);
+            } else if (amenity.category == 'Food & Drink') {
+                foodAndDrink.push(amenity);
+            }  else if (amenity.category == 'Technology') {
+                technology.push(amenity);
+            }  else if (amenity.category == 'Outdoors') {
+                outdoors.push(amenity);
+            }  else if (amenity.category == 'Living Area') {
+                livingArea.push(amenity);
+            }
+        });
+
+        return {bedroom, bathroom, livingArea, foodAndDrink, technology, activities};
     }
 
 };

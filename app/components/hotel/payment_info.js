@@ -102,14 +102,14 @@ class PaymentInfo extends React.Component {
             } else {
                   var stripe_token = response.id;
                   let bookingPromise = Actions.createApartmentBooking({stripe_token});
-                        bookingPromise.then(bookingResponse => {
-                              Actions.setIsProcessing(isProcessing);
-                              if (response.status == 'fail') {
-                                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
-                              }     else {
-                                    Actions.goToConfirmationClicked()
-                              }
-                      });
+                  bookingPromise.then(bookingResponse => {
+                        Actions.setIsProcessing(isProcessing);
+                        if (response.status == 'fail') {
+                              NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
+                        }     else {
+                              Actions.goToConfirmationClicked()
+                        }
+                  });
             }
       }
 

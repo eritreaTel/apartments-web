@@ -5,6 +5,7 @@ const Anchor = require('../../components/shared/anchor');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 const ApartmentHelper  = require('../../helpers/apartment_helper');
+const AllAmenities = require('./all_amenties');
 const Slider = require('react-slick');
 
 const onBookApartmentPageClicked = function (apartmentKey) {
@@ -19,11 +20,22 @@ const onKeepSearchingClicked = function () {
 
 
 const ApartmentFacilities = function(props) {
+    let {amenities} = props;
+    let {bedroom, bathroom, livingArea, foodAndDrink, technology, activities, outdoors} = ApartmentHelper.getAmenitiesByCategory(amenities);
+
     return (
-        <div className="row">
+        <div className="row mg-single-room-facilities">
             <div className="col-md-12">
-                <div className="mg-single-room-txt">
-                    
+                <h2 className="mg-sec-left-title">Facilities of {props.guestHouse.name}</h2>
+                <div className="row margin-bottom-40 pricing-medium-light">
+                    <AllAmenities category ='Bedroom' items={bedroom} />
+                    <AllAmenities category = 'Bathroom' items={bathroom}/>
+                    <AllAmenities category = 'Activities' items={activities}/>
+                    <AllAmenities category = 'Technology' items={technology}/>
+                </div>
+                <div className="row margin-bottom-40 pricing-medium-light">
+                    <AllAmenities category = 'Living Area' items={livingArea}/>
+                    <AllAmenities category = 'Food & Drink' items={foodAndDrink}/>
                 </div>
             </div>
         </div>
@@ -33,19 +45,17 @@ const ApartmentFacilities = function(props) {
 
 const ApartmentDescription = function(props) {
     return(
-        <div className="row">
+        <div className="row mg-single-room-description">
             <div className="col-md-12">
-                <div>
-                    <h2 className="mg-sec-left-title">Apartment Description</h2>
-                    <div dangerouslySetInnerHTML={{__html: props.longDescription}}></div>
-                </div>
+                <h2 className="mg-sec-left-title">Apartment Description</h2>
+                <div dangerouslySetInnerHTML={{__html: props.longDescription}}></div>
             </div>
         </div>
     );
 }
 
 const AmenitiesAndControlButtons = function(props) {
-    let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);
+    let {amenities} = props;
 
     return (
         <div className="col-md-5 mg-room-fecilities">
@@ -97,16 +107,17 @@ const ApartmentMiddleContent = function (props) {
     let {apartmentKey, longDescription} = apartmentResponse;
     let galleries = ApartmentHelper.getGalleries(apartmentResponse);
     let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
+    let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);
 
     return (
         <div className="mg-single-room">
             <div className="container">
                 <div className="row">
                     <ApartmentGalleries galleries = {galleries} />
-                    <AmenitiesAndControlButtons apartmentResponse = {apartmentResponse} />
+                    <AmenitiesAndControlButtons amenities={amenities} apartmentResponse = {apartmentResponse} />
                 </div>
                 <ApartmentDescription longDescription={longDescription} />
-                <ApartmentFacilities guestHouse={guestHouse} />
+                <ApartmentFacilities guestHouse={guestHouse} amenities={amenities} />
             </div>
         </div>
     );

@@ -1,6 +1,5 @@
 const React = require('react');
 const ApplicationHelper = require('../helpers/application_helper');
-const Amenities = require('../components/apartment/amenties');
 const Anchor = require('../components/shared/anchor');
 const PageTitle = require('../components/shared/pageTitle');
 const SvgImage = require('../components/shared/svg_image');

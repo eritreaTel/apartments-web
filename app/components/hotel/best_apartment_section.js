@@ -24,8 +24,8 @@ const Section = function(props) {
 const TitleSection  = function() {
         return (
             <div className="mg-sec-title">
-                <h2>Recommended Accommodations</h2>
-                <p>These guest houses are chosen by our customers</p>
+                <h2>Recommended Hotels</h2>
+                <p>These hotels are chosen by our customers</p>
             </div>
         );
 }
@@ -47,7 +47,7 @@ const  ApartmentsSection = function(props) {
                                 <div  className="col-sm-8">
                                     <div className="alert alert-info" role="alert">
                                         <i className="fa fa-info-circle"></i>
-                                        <strong> There are no guest houses matching the selected criterias. Feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</strong>
+                                        <strong> There are no hotels matching the selected criterias. Feel free to <Anchor onClick={()=>{Actions.setRoute('/contact-us')}}>contact us</Anchor>. We are here to help.</strong>
                                     </div>
                                 </div>
                                 <div  className="col-sm-2"></div>

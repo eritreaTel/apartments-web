@@ -17,14 +17,18 @@ const onComboApartmentBookNowClicked = function (aptResponse) {
 }
 
 const onViewApartmentClickedFromSearch = function (aptResponse) {
-    const {apartmentKey, aptCnt} = aptResponse;
-    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+    let response = Actions.clearApartment();
 
-    if (aptCnt == 1) {
-        Actions.setRoute(viewApartmentUrl);
-    } else {
-        Actions.viewComboApartmentClickedFromSearch({apartmentKey});
-        Actions.setRoute(viewApartmentUrl);
+    if (response && response.status != 'fail') {
+        const {apartmentKey, aptCnt} = aptResponse;
+        let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+
+        if (aptCnt == 1) {
+            Actions.setRoute(viewApartmentUrl);
+        } else {
+            Actions.viewComboApartmentClickedFromSearch({apartmentKey});
+            Actions.setRoute(viewApartmentUrl);
+        }
     }
 }
 
