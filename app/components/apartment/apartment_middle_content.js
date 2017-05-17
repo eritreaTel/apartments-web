@@ -86,15 +86,21 @@ class ApartmentGalleries extends React.Component {
         }
 
         const {galleries} = this.props;
-        const styledImages = galleries && galleries.map(gallery => {
-                                return 	<img key={gallery.id} src={assetPath(gallery.full_image)} alt={gallery.caption}/>;
-                            });
+
+        let sliderWithData = '';
+        if (galleries.length > 0) {
+            let styledGalleries = galleries.map(gallery => {
+                                    return 	<img key={gallery.id} src={assetPath(gallery.full_image)} alt={gallery.caption}/>;
+                                  });
+
+            sliderWithData = <Slider {...sliderProps}>
+                                {styledGalleries}
+                            </Slider>
+        }
 
         return (
             <div className="col-md-7">
-                <Slider {...sliderProps}>
-                    {styledImages}
-                </Slider>
+                {sliderWithData}
             </div>
         )
     }

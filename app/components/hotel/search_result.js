@@ -127,7 +127,7 @@ class  PropertyType extends  React.Component {
                     <div className="mg-options"><Checkbox value='apartment'/> <span>Apartments</span></div>
                     <div className="mg-options"><Checkbox value='guest house'/> <span>Guesthouses</span></div>
                     <div className="mg-options"><Checkbox value='cottage'/> <span>Cottages</span></div>
-                    <div className="mg-options"><Checkbox value='inn'/> <span>Motels</span></div>
+                    <div className="mg-options"><Checkbox value='motel'/> <span>Motels</span></div>
                 </CheckboxGroup>
             </div>
         );
