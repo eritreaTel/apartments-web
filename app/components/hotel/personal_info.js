@@ -53,7 +53,9 @@ class PersonalInfo extends React.Component {
     }
 
     onPayLater(e) {
-        Actions.paymentInfoUpdated({'payLater' : e.target.checked, 'payFull' : false, 'payPartial' : false, 'payment_amount' : 0});
+        const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+        let payment_amount = PricingHelper.getTotalPrice(0, additional);
+        Actions.paymentInfoUpdated({'payLater' : e.target.checked, 'payFull' : false, 'payPartial' : false, 'payment_amount' : payment_amount});
     }
 
     onPayFull(e) {
@@ -222,17 +224,24 @@ class PersonalInfo extends React.Component {
                             <h2 className="mg-sec-left-title">Card Details</h2>
 
                             <div className="row">
-                                <div className="col-md-4">
+                                <div className="col-md-3">
                                     <div className="mg-book-form-input">
                                         <input disabled={disabled} type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
                                     </div>
                                 </div>
-                                <div className="col-md-8">
+
+                                <div className="col-md-4">
                                     <div className="mg-book-form-input">
-                                        <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - required payment to confirm reservation.
+                                        <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - 15% of total price.
+                                    </div>
+                                </div>
+                                <div className="col-md-5">
+                                    <div className="mg-book-form-input">
+                                        <input disabled={disabled} type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later, at check-in.
                                     </div>
                                 </div>
                             </div>
+
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
@@ -243,40 +252,40 @@ class PersonalInfo extends React.Component {
                                     <div className="mg-book-form-input-payment">
                                         <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
                                     </div>
-                                    </div>
                                 </div>
+                            </div>
 
-                                <div className="row">
-                                    <div className="col-md-6">
-                                        <div className="mg-book-form-input-payment">
-                                            <Month disabled={disabled} value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
-                                    </div>
-                                </div>
+                            <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <Year disabled={disabled} value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
-                                    </div>
+                                        <Month disabled={disabled} value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
                                 </div>
                             </div>
-
-
-                            <div className="clearfix mg-book-form-input-payment">
-                                <div className="pull-right">
-                                    By using UgandaBooking, you agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms of use</Anchor>
+                            <div className="col-md-6">
+                                <div className="mg-book-form-input-payment">
+                                    <Year disabled={disabled} value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
                                 </div>
                             </div>
-                            <div className="pull-right">
-                                <MDSpinner className={spinnerClassName}  />
-                                <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
-                            </div>
-                            <Anchor disabled={disabled} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
-
                         </div>
+
+
+                        <div className="clearfix mg-book-form-input-payment">
+                            <div className="pull-right">
+                                By using UgandaBooking, you agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms of use</Anchor>
+                            </div>
+                        </div>
+                        <div className="pull-right">
+                            <MDSpinner className={spinnerClassName}  />
+                            <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
+                        </div>
+                        <Anchor disabled={disabled} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+
                     </div>
-                    <BookingDetails apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
                 </div>
-            );
-        }
+            <BookingDetails apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
+        </div>
+        );
+    }
 }
 
 module.exports = PersonalInfo;

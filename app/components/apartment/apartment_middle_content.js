@@ -21,7 +21,7 @@ const onKeepSearchingClicked = function () {
 
 const ApartmentFacilities = function(props) {
     let {amenities} = props;
-    let {bedroom, bathroom, livingArea, foodAndDrink, technology, activities, outdoors} = ApartmentHelper.getAmenitiesByCategory(amenities);
+    let {bedroom, bathroom, livingArea, foodAndDrink, technology, activities, kitchen, seating} = ApartmentHelper.getAmenitiesByCategory(amenities);
 
     return (
         <div className="row mg-single-room-facilities">
@@ -34,6 +34,8 @@ const ApartmentFacilities = function(props) {
                     <AllAmenities category = 'Technology' items={technology}/>
                 </div>
                 <div className="row margin-bottom-40 pricing-medium-light">
+                    <AllAmenities category = 'Kitchen' items={kitchen}/>
+                    <AllAmenities category = 'Seating' items={seating}/>
                     <AllAmenities category = 'Living Area' items={livingArea}/>
                     <AllAmenities category = 'Food & Drink' items={foodAndDrink}/>
                 </div>

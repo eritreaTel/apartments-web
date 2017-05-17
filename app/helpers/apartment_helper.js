@@ -109,7 +109,7 @@ const ApartmentHelper = {
     },
 
     getAmenitiesByCategory(amenities) {
-        let bedroom = [], bathroom = [], livingArea = [], foodAndDrink =[], technology = [], activities =[], outdoors = [];
+        let bedroom = [], bathroom = [], livingArea = [], foodAndDrink =[], technology = [], activities =[], kitchen = [], seating =[];
         _.each(amenities, (amenity) => {
             if (amenity.category == 'Bedroom') {
                 bedroom.push(amenity);
@@ -121,14 +121,16 @@ const ApartmentHelper = {
                 foodAndDrink.push(amenity);
             }  else if (amenity.category == 'Technology') {
                 technology.push(amenity);
-            }  else if (amenity.category == 'Outdoors') {
-                outdoors.push(amenity);
+            }  else if (amenity.category == 'Kitchen') {
+                kitchen.push(amenity);
             }  else if (amenity.category == 'Living Area') {
                 livingArea.push(amenity);
+            } else if (amenity.category == 'Seating') {
+                seating.push(amenity);
             }
         });
 
-        return {bedroom, bathroom, livingArea, foodAndDrink, technology, activities};
+        return {bedroom, bathroom, livingArea, foodAndDrink, technology, activities, kitchen, seating};
     },
 
     getAmenitiesByValue(amenities, value) {
