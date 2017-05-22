@@ -93,6 +93,54 @@ module.exports = {
         return this.dispatch({type: 'prepareResponse'});
     },
 
+
+    async getOtherApartmentsInHotel() {
+        let url = 'available_apartments_in_hotel?';
+        let bookingStage = this.getStoreVal('bookingStage');
+        let apartment  = this.getStoreVal('apartment');
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, children, pageNumber}} = bookingStage;
+        let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
+        let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
+
+        let exclude_apartment_id = apartment.apartments[0].id ;
+        let guest_house_id = apartment.apartments[0].guestHouse.id;
+
+        if (typeof pageNumber ==='undefined') {
+            pageNumber = 1;
+        }
+
+        url = url + 'exclude_apartment_id=' + exclude_apartment_id + '&guest_house_id=' + guest_house_id + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children + '&pageNumber=' + pageNumber;
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('otherApartmentsInHotel') == null ) {
+            console.log('otherApartmentInHotel url : ' + url);
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getOtherApartmentsInHotel')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                    if (errors.length > 0) {
+                        await this.dispatch({type: 'setErrorMessages', data: {errors}});
+                        this.setStoreVal('otherApartmentsInHotel', []);
+                    } else {
+                        this.setStoreVal('pageNumber', pageNumber);
+                        this.setStoreVal('otherApartmentsInHotel', results);
+                    }
+                } catch (error) {
+                    await this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch other apartments in hotel'
+                        }
+                    });
+                }
+                this.releaseLock('getOtherApartmentsInHotel');
+            }
+        }
+        return this.dispatch({type: 'prepareResponse'});
+    },
+
+
     async getApartment({apartmentId}) {
         let url = 'apartments?apartment_id=' + apartmentId;
         let bookingStage = this.getStoreVal('bookingStage');

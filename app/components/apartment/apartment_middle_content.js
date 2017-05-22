@@ -4,9 +4,12 @@ const Amenities = require('../../components/apartment/amenties');
 const Anchor = require('../../components/shared/anchor');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
+const PricingHelper = require('../../helpers/pricing_helper');
 const ApartmentHelper  = require('../../helpers/apartment_helper');
 const AllAmenities = require('./all_amenties');
 const Slider = require('react-slick');
+
+import MDSpinner from "react-md-spinner";
 
 const onBookApartmentPageClicked = function (apartmentKey) {
     Actions.bookApartmentPageClicked({apartmentKey});
@@ -16,6 +19,92 @@ const onBookApartmentPageClicked = function (apartmentKey) {
 const onKeepSearchingClicked = function () {
     Actions.goBackToSearch(null);
     Actions.setRoute('/hotels');
+}
+
+
+const OneOtherRoom = function (props) {
+    let aptResponse = props.aptResponse;
+    const {displayMessage, apartments, daysCnt, totalPrice, title, starRating, shortDesciption} = aptResponse;
+
+    let totalApartmentPrice  = PricingHelper.getTotalPrice(totalPrice, null);
+    let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
+    let totalPriceDecimalPart = parseFloat(totalApartmentPrice % 1).toFixed(2).toString().substr(1, 3); // Take .00 instead of 0.00
+
+    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+    let bed = 2;
+    let maxAdults = 2;
+    let maxChild = 1;
+    return (
+        <div className="col-md-4 col-sm-6">
+            <div className="service-block service-block-default">
+                <span className="display-block margin-bottom-5">
+                    <span className="other-room-heading">{title}</span>
+                    <span className="other-room-pricing">{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span>
+                </span>
+                <a href={viewApartmentUrl}  className="btn-link">View Details <i className="fa fa-angle-double-right"></i></a>
+            </div>
+        </div>
+    )
+}
+
+class OtherRoomsInHotel extends React.Component {
+    componentWillMount() {
+        let isProcessing = {loadingOtherRoomsInHotel: true};
+        Actions.setIsProcessing(isProcessing);
+
+        let otherApartmentsInHotelResponse = Actions.getOtherApartmentsInHotel();
+
+        otherApartmentsInHotelResponse.then(response => {
+            let isProcessing = {loadingOtherRoomsInHotel: false};
+            Actions.setIsProcessing(isProcessing);
+        });
+    }
+
+
+    render() {
+        const {isProcessing :{loadingOtherRoomsInHotel}, guestHouse, otherApartmentsInHotel} = this.props;
+        console.log('other apartments in hotel are');
+        console.log(otherApartmentsInHotel);
+
+        let content = '';
+        if (loadingOtherRoomsInHotel == true) {
+            content =  <div className="row margin-bottom-40">
+                            <div className = "col-md-5"> </div>
+                            <div className = "col-md-2"> <MDSpinner/> </div>
+                            <div className = "col-md-5"> </div>
+                        </div>
+        } else {
+            if (otherApartmentsInHotel && otherApartmentsInHotel.length > 0 ) {
+                let sectionOne = otherApartmentsInHotel.slice(0, 3).map(item =>{
+                                    return <OneOtherRoom aptResponse={item} />
+                                 });
+                let sectionTwo = otherApartmentsInHotel.slice(3, 6).map(item => {
+                                    return <OneOtherRoom aptResponse={item} />
+                                 });
+
+                content = <div className="row margin-bottom-40">
+                                <div className="col-md-12 col-sm-12">
+                                    <h2 className="mg-sec-left-title">Other rooms in {guestHouse.name}</h2>
+                                </div>
+                                {sectionOne}
+                                {sectionTwo}
+                          </div>
+            } else {
+                content = '';
+            }
+
+        }
+
+
+
+        return (
+            <div className="row mg-single-room-facilities">
+                <div className="col-md-12">
+                    {content}
+                </div>
+            </div>
+        );
+    }
 }
 
 
@@ -111,12 +200,17 @@ class ApartmentGalleries extends React.Component {
 
 
 const ApartmentMiddleContent = function (props) {
-    let apartmentResponse = props.apartmentResponse ;
+    let {apartmentResponse, pageType, isProcessing, otherApartmentsInHotel} = props;
     let {apartmentKey, longDescription} = apartmentResponse;
     let galleries = ApartmentHelper.getGalleries(apartmentResponse);
     let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
     let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);
     let amenitiesWithValueOne = ApartmentHelper.getAmenitiesByValue(amenities, 1);
+
+    let otherRoomsInHotel = '';
+    if (pageType == 'apartment') { // Add a condition to check, otherApartmentInHotel has actual data
+        otherRoomsInHotel = <OtherRoomsInHotel guestHouse={guestHouse} isProcessing={isProcessing} otherApartmentsInHotel={otherApartmentsInHotel}/>
+    }
 
     return (
         <div className="mg-single-room">
@@ -127,6 +221,7 @@ const ApartmentMiddleContent = function (props) {
                 </div>
                 <ApartmentDescription longDescription={longDescription} />
                 <ApartmentFacilities guestHouse={guestHouse} amenities={amenities} />
+                {otherRoomsInHotel}
             </div>
         </div>
     );

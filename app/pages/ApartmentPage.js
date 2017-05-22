@@ -42,7 +42,7 @@ class ApartmentPage extends React.Component {
 	}
 
 	render() {
-		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
+		const {store : {apartment, otherApartmentsInHotel, user, apartmentReviews, isProcessing}} = this.props;
 
 		const {daysCnt, totalPrice, title, apartmentKey} = apartment;
 		let guestHouse = ApartmentHelper.getGuestHouse(apartment);
@@ -56,7 +56,7 @@ class ApartmentPage extends React.Component {
 				</PageTitle>
 
 				<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
-				<ApartmentMiddleContent  apartmentResponse={apartment} />
+				<ApartmentMiddleContent  apartmentResponse={apartment} pageType='apartment' isProcessing={isProcessing} otherApartmentsInHotel={otherApartmentsInHotel} />
 				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
 			</ApartmentBody>
 		);

@@ -28,6 +28,7 @@ module.exports = {
                         apartments : null,
                         filteredApartments : [],
                         apartment : null,
+                        otherApartmentsInHotel : null,
                         bestApartments : null,
                         apartmentReviews : null,
                         reservationConfirmations : null,
@@ -96,6 +97,7 @@ module.exports = {
                             'loadingBlog' : false,
                             'searchingApartments' : false,
                             'loadingTrip' : false,
+                            'loadingOtherRoomsInHotel' : false
                         }
                     }
                 };

@@ -25,6 +25,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartments'});
     },
 
+    getOtherApartmentsInHotel() {
+        return Dispatcher.dispatch({type: 'getOtherApartmentsInHotel'});
+    },
+
     getApartment(data) {
         return Dispatcher.dispatch({type: 'getApartment', data});
     },
@@ -128,6 +132,10 @@ const Actions = {
     bookApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },
+
+    /*viewOtherApartmentClicked(data) {
+        Dispatcher.dispatch({type: 'viewOtherApartmentClicked', data});
+    },*/
 
     bookBestApartmentClicked(data) {
         Dispatcher.dispatch({type: 'bookBestApartmentClicked', data});

@@ -61,7 +61,7 @@ class ComboApartmentsPage extends React.Component {
 					   </PageTitle>
 
 						<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
-						<ApartmentMiddleContent  apartmentResponse={apartment} />
+						<ApartmentMiddleContent  apartmentResponse={apartment} pageType='combo' isProcessing={isProcessing} />
 						<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
 					</ApartmentBody>
 		}

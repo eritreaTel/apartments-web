@@ -150,6 +150,19 @@ module.exports = {
         this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
     },
 
+    /*async viewOtherApartmentClicked({apartmentKey}) {
+        let apartment = this.getStoreVal('otherApartmentsInHotel').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        this.setStoreVal('apartment', apartment);
+
+        let apartments = this.getStoreVal('apartments');
+        apartments = (apartments != null) ? apartments : [];
+        let found = await apartments && apartments.find(aptResponse => aptResponse.apartmentKey == apartmentKey);
+        if (found == null) {
+            apartments.push(apartment);
+            this.setStoreVal('apartments', apartments);
+        }
+    },*/
+
     async viewBestApartmentClicked({apartmentKey}) {
         let apartment = this.getStoreVal('bestApartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
