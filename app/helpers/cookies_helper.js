@@ -15,7 +15,6 @@ module.exports = {
     const expiresDate = moment().add(Number(expiresInSeconds) + 1, 'seconds').toDate();
 
     let options = {'expires' : expiresDate,  'path' : '/', 'secure' : secureCookie };
-    console.log(options);
     cookie.set(this.oauthToken, token, options);
   },
 

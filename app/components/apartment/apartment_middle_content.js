@@ -63,9 +63,7 @@ class OtherRoomsInHotel extends React.Component {
 
     render() {
         const {isProcessing :{loadingOtherRoomsInHotel}, guestHouse, otherApartmentsInHotel} = this.props;
-        console.log('other apartments in hotel are');
-        console.log(otherApartmentsInHotel);
-
+        
         let content = '';
         if (loadingOtherRoomsInHotel == true) {
             content =  <div className="row margin-bottom-40">

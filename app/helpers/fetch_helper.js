@@ -26,7 +26,7 @@ function setRESTEndpointOptions(path, options) {
 module.exports = {
      async getClientCredentialsToken() {
         let oauthToken = CookiesHelper.getApplicationAccessToken();
-        console.log('oauth - from cookie ' + oauthToken);
+        //console.log('oauth - from cookie ' + oauthToken);
         if (oauthToken) {
             return oauthToken;
         }
@@ -48,7 +48,7 @@ module.exports = {
         oauthToken =    response.access_token;
 
         CookiesHelper.setApplicationAccessToken(oauthToken, response.expires_in - 10);
-        console.log('oauth - from server ' + oauthToken);
+        //console.log('oauth - from server ' + oauthToken);
         return oauthToken;
     },
 
