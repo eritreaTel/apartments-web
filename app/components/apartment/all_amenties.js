@@ -9,7 +9,7 @@ class AllAmenities extends React.Component {
         let cssClass = '';
         const styledItems = items.map(item =>{
                 cssClass = (item.value == 1) ? 'fa fa-check' : 'fa fa-times';
-                return <li>{item.name} <span><i className={cssClass}></i></span> </li>;
+                return <li key={item.id}>{item.name} <span><i className={cssClass}></i></span> </li>;
         });
 
         return (

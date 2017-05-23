@@ -74,10 +74,10 @@ class OtherRoomsInHotel extends React.Component {
         } else {
             if (otherApartmentsInHotel && otherApartmentsInHotel.length > 0 ) {
                 let sectionOne = otherApartmentsInHotel.slice(0, 3).map(item =>{
-                                    return <OneOtherRoom aptResponse={item} />
+                                    return <OneOtherRoom key={Math.random()}  aptResponse={item} />
                                  });
                 let sectionTwo = otherApartmentsInHotel.slice(3, 6).map(item => {
-                                    return <OneOtherRoom aptResponse={item} />
+                                    return <OneOtherRoom key={Math.random()}  aptResponse={item} />
                                  });
 
                 content = <div className="row margin-bottom-40">
