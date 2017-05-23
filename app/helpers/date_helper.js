@@ -5,12 +5,12 @@ const DateHelper = {
         return  Moment(strDate);
     },
 
-    getOneWeeksFromNow() {
-        return Moment().add(7, 'days');
+    getTommorrow() {
+        return Moment().add(1, 'days');
     },
 
-    getTwoWeeksFromNow() {
-        return Moment().add(14, 'days');
+    getNDaysFromToday(days) {
+        return Moment().add(days, 'days');
     },
 
     formatDate(inputDate, format){
@@ -27,6 +27,10 @@ const DateHelper = {
 
     getDayName(inputDate) {
         return this.formatDate(inputDate,'dddd')
+    },
+
+    isGreaterThanToday(inputDate){
+        return true; //TODO - Amanuel
     }
 
 };

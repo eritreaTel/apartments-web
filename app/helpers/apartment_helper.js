@@ -33,8 +33,20 @@ const ApartmentHelper = {
         room        = (room == null || room == undefined) ? "1" : room ;
         adult       = (adult == null || adult == undefined) ? "1" : adult ;
         children    = (children == null || children == undefined) ? "1" : children ;
-        checkInDate  = (checkInDate == null || checkInDate == undefined) ? DateHelper.getOneWeeksFromNow() : DateHelper.getDateFromString(checkInDate) ;
-        checkOutDate = (checkOutDate == null || checkOutDate == undefined) ? DateHelper.getTwoWeeksFromNow() : DateHelper.getDateFromString(checkOutDate) ;
+
+        if (checkInDate == null || checkInDate == undefined) {
+            checkInDate = DateHelper.getTommorrow();
+        } else {
+            let checkInFromCookie = DateHelper.getDateFromString(checkInDate);
+            checkInDate = DateHelper.isGreaterThanToday(checkInDate)? checkInFromCookie: DateHelper.getTommorrow() ;
+        }
+
+        if (checkOutDate == null || checkOutDate == undefined) {
+            checkOutDate = DateHelper.getNDaysFromToday(8);
+        } else {
+            let checkOutFromCookie = DateHelper.getDateFromString(checkOutDate);
+            checkOutDate = DateHelper.isGreaterThanToday(checkOutFromCookie)? checkOutFromCookie : DateHelper.getNDaysFromToday(8);
+        }
 
         let searchData = {
             'checkInDate'   : checkInDate,
