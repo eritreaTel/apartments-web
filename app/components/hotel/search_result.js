@@ -35,7 +35,7 @@ class PriceFilters extends React.Component {
         const priceRange = this.props.priceRange;
         const filteredApartments = this.props.filteredApartments;
         let minPrice = 5;
-        let maxPrice = '200';
+        let maxPrice = 200;
 
         let min = priceRange != null && priceRange.length > 0? priceRange[0] : minPrice;
         let max = priceRange != null && priceRange.length > 0? priceRange[1] : maxPrice;
