@@ -1,6 +1,7 @@
 const DateHelper = require('./date_helper');
 const ApplicationHelper = require('./application_helper');
 const StringHelper = require('./string_helper');
+const CookiesHelper = require('./cookies_helper');
 const ApartmentHelper = {
 
     getReservationStatuses(activeStage) {
@@ -23,13 +24,26 @@ const ApartmentHelper = {
     },
 
     getDefaultSearchDates() {
+        let room        =  CookiesHelper.getDataFromCookie('room');
+        let adult       =  CookiesHelper.getDataFromCookie('adult');
+        let children    =  CookiesHelper.getDataFromCookie('children');
+        let checkInDate =  CookiesHelper.getDataFromCookie('checkInDate');
+        let checkOutDate = CookiesHelper.getDataFromCookie('checkOutDate');
+
+        room        = (room == null || room == undefined) ? "1" : room ;
+        adult       = (adult == null || adult == undefined) ? "1" : adult ;
+        children    = (children == null || children == undefined) ? "1" : children ;
+        checkInDate  = (checkInDate == null || checkInDate == undefined) ? DateHelper.getOneWeeksFromNow() : DateHelper.getDateFromString(checkInDate) ;
+        checkOutDate = (checkOutDate == null || checkOutDate == undefined) ? DateHelper.getTwoWeeksFromNow() : DateHelper.getDateFromString(checkOutDate) ;
+
         let searchData = {
-            'checkInDate'   : DateHelper.getOneWeeksFromNow(),
-            'checkOutDate'  : DateHelper.getTwoWeeksFromNow(),
-            'room' : "1",
-            "adult" : "1",
-            "children" : "0"
-        };
+            'checkInDate'   : checkInDate,
+            'checkOutDate'  : checkOutDate,
+            'room' : room,
+            "adult" : adult,
+            "children" : children
+        }
+
         return searchData;
     },
 

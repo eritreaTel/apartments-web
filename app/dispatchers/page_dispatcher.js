@@ -1,4 +1,7 @@
 const FetchHelper = require('../helpers/fetch_helper');
+const CookiesHelper = require('../helpers/cookies_helper');
+const DateHelper = require('../helpers/date_helper');
+
 
 module.exports = {
     setView(data) {
@@ -18,6 +21,17 @@ module.exports = {
             existing[key] = value;
         });
         this.mergeStoreVal('bookingStage', {searchInfo: existing});
+
+        //add search data to cookie. That way, page refresh will still get us the data
+        let {checkInDate , checkOutDate, room, adult, children} = existing;
+        checkInDate = DateHelper.formatDate(checkInDate, 'D-MMM-YYYY') ;
+        checkOutDate = DateHelper.formatDate(checkOutDate, 'D-MMM-YYYY') ;
+
+        CookiesHelper.addDataToCookie('checkInDate', checkInDate, 360000);
+        CookiesHelper.addDataToCookie('checkOutDate', checkOutDate, 360000);
+        CookiesHelper.addDataToCookie('room', room, 360000);
+        CookiesHelper.addDataToCookie('adult', adult, 360000);
+        CookiesHelper.addDataToCookie('children', children, 360000);
     },
 
     async filterCriteriaUpdated(data) {

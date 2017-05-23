@@ -1,6 +1,10 @@
 const Moment = require('moment');
 const DateHelper = {
 
+    getDateFromString(strDate) {
+        return  Moment(strDate);
+    },
+
     getOneWeeksFromNow() {
         return Moment().add(7, 'days');
     },
