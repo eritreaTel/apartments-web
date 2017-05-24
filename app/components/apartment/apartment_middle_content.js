@@ -37,7 +37,7 @@ const OneOtherRoom = function (props) {
     return (
         <div className="col-md-4 col-sm-6">
             <div className="service-block service-block-default">
-                <span className="display-block margin-bottom-5">
+                <span className="display-block margin-bottom-10">
                     <span className="other-room-heading">{title}</span>
                     <span className="other-room-pricing">{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span>
                 </span>
