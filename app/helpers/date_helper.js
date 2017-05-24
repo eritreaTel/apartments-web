@@ -30,7 +30,7 @@ const DateHelper = {
     },
 
     isGreaterThanToday(inputDate){
-        return true; //TODO - Amanuel
+        return inputDate.isAfter(new Moment());
     }
 
 };

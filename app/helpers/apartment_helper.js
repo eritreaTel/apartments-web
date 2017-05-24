@@ -38,7 +38,7 @@ const ApartmentHelper = {
             checkInDate = DateHelper.getTommorrow();
         } else {
             let checkInFromCookie = DateHelper.getDateFromString(checkInDate);
-            checkInDate = DateHelper.isGreaterThanToday(checkInDate)? checkInFromCookie: DateHelper.getTommorrow() ;
+            checkInDate = DateHelper.isGreaterThanToday(checkInFromCookie)? checkInFromCookie: DateHelper.getTommorrow() ;
         }
 
         if (checkOutDate == null || checkOutDate == undefined) {
