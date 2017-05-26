@@ -45,6 +45,7 @@ class ApartmentAvailable extends React.Component {
 
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
         let comboAmenities = ApartmentHelper.getComboAmenities(aptResponse);
+        let amenitiesWithValueOne = ApartmentHelper.getAmenitiesByValue(comboAmenities, 1);
 
         let apartmentType = _.startCase(_.toLower(guestHouse.type));
         title =  _.truncate(title, {length : 20, omission : '..'})
@@ -75,7 +76,7 @@ class ApartmentAvailable extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <Amenities amentiesToDisplay="6" amenities={comboAmenities} outerDivClass="row mg-room-fecilities" innerDivClass="col-md-6" />
+                        <Amenities amentiesToDisplay="6" amenities={amenitiesWithValueOne} outerDivClass="row mg-room-fecilities" innerDivClass="col-md-6" />
                         <div  className="row">
                             <div className="col-md-6">
                                 <Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
