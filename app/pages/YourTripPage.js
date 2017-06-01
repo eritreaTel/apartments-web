@@ -27,10 +27,9 @@ const CreateSubMenu = function (props) {
 	let activeTripId = props.activeTripId;
 	let tripInfo, activeCssClass = '';
 	let subMenus = items.map(item => {
-						tripInfo = item.subsection === false ? props.section : props.section + '-' + _.lowerCase(item.label);
+						let tripInfo = item.subsection === false ? props.section : props.section + '-' + _.lowerCase(item.label);
 						tripInfo = StringHelper.makeStringUrlFriendly(tripInfo);
 						activeCssClass = (activeTripId == item.id) ? 'plan-your-trip-active-sub-menu' : '';
-
 						return <span key={item.id}><Anchor className={activeCssClass} onClick={()=> onTripClicked(item.id, tripInfo)}>{item.label}</Anchor></span>
 					});
 
