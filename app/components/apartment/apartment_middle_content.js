@@ -24,7 +24,7 @@ const onKeepSearchingClicked = function () {
 
 const OneOtherRoom = function (props) {
     let aptResponse = props.aptResponse;
-    const {displayMessage, apartments, daysCnt, totalPrice, title, starRating, shortDesciption} = aptResponse;
+    const {apartments, daysCnt, totalPrice, title, starRating} = aptResponse;
 
     let totalApartmentPrice  = PricingHelper.getTotalPrice(totalPrice, null);
     let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
@@ -199,7 +199,8 @@ class ApartmentGalleries extends React.Component {
 
 const ApartmentMiddleContent = function (props) {
     let {apartmentResponse, pageType, isProcessing, otherApartmentsInHotel} = props;
-    let {apartmentKey, longDescription} = apartmentResponse;
+    let {apartmentKey} = apartmentResponse;
+    let longDescription = ApartmentHelper.getLongDescription(apartmentResponse);
     let galleries = ApartmentHelper.getGalleries(apartmentResponse);
     let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
     let amenities = ApartmentHelper.getComboAmenities(props.apartmentResponse);

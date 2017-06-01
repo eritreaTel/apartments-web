@@ -28,9 +28,10 @@ class ApartmentMedium extends React.Component {
 
     render() {
         const {aptResponse} = this.props;
-        const {displayMessage, apartments, daysCnt, totalPrice, title, starRating, shortDesciption} = aptResponse;
+        const {apartments, daysCnt, totalPrice, title, starRating} = aptResponse;
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
         let guestHouse = ApartmentHelper.getGuestHouse(aptResponse);
+        let shortDesciption = ApartmentHelper.getShortDescription(aptResponse);
 
         return (
             <figure className="mg-room">

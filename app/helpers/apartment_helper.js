@@ -131,7 +131,20 @@ const ApartmentHelper = {
     },
 
     getGalleries(apartmentResponse) {
-        return apartmentResponse.galleries;
+        let guestHouse =  this.getGuestHouse(apartmentResponse);
+        return _.merge(guestHouse.galleries, apartmentResponse.apartments[0].galleries);
+    },
+
+    getLongDescription(apartmentResponse) {
+        return apartmentResponse.apartments[0].long_description;
+    },
+
+    getShortDescription(apartmentResponse) {
+        return apartmentResponse.apartments[0].short_description;
+    },
+
+    getDisplayMessage(apartmentResponse) {
+        return apartmentResponse.apartments[0].medium_description;
     },
 
     getAmenitiesByCategory(amenities) {

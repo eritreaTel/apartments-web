@@ -7,7 +7,7 @@ npm-debug.log.*
 .env
 public/application.js
 public/fonts
-public/images
+views/images
 public/application.js.gz
 public/application.js.map
 views/index.html
