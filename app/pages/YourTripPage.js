@@ -77,22 +77,9 @@ const  NationalParksMenu = function (props) {
 	);
 }
 
-const  KampalaCityMenu = function (props) {
-	var kampalaCity = [
-		{ id: '80', label: 'Hindu Temple' },
-		{ id: '81', label: 'Big Mosque' },
-		{ id: '82', label: 'Kings House' }
-	];
-
-	return (
-		<Collapsible trigger="Kampala City" open={true}>
-			<CreateSubMenu items={kampalaCity} section="kampala-city" activeTripId={props.activeTripId} />
-		</Collapsible>
-	);
-}
-
 const TouristAttractionsMenu = function (props) {
 	var touristAttractions = [
+		{ id: '13', label: 'Kampala City' },
 		{ id: '70', label: 'Cultural Hotspots' },
 		{ id: '71', label: 'Igongo Cultural Centre' }
 	];
@@ -143,7 +130,6 @@ const LeftSection = function (props) {
 					<UgandaOverViewMenu  activeTripId={activeTripId}/>
 					<NationalParksMenu activeTripId={activeTripId}/>
 					<GorillaTrekkingMenu activeTripId={activeTripId}/>
-					<KampalaCityMenu activeTripId={activeTripId}/>
 					<TouristAttractionsMenu activeTripId={activeTripId}/>
 					<PlanningYourItineraryMenu activeTripId={activeTripId}/>
 				</aside>
