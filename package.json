@@ -28,6 +28,7 @@
     "big": "^0.5.2",
     "body-parser": "^1.14.1",
     "classnames": "^2.2.5",
+    "compression": "^1.6.2",
     "compression-webpack-plugin": "^0.3.2",
     "currency-formatter": "^1.0.8",
     "director": "^1.2.8",
