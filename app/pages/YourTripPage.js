@@ -165,7 +165,7 @@ const TripHeader = function (props) {
 	let subsection = (trip.sub_section == '' || trip.sub_section == undefined) ? '' : ': ' + trip.sub_section;
 	return (
 		<header>
-			<h2 className="mg-post-title"> <Anchor onClick={()=>{Actions.setRoute('/your-trip')}}> {trip.section}{subsection} </Anchor> </h2>
+			<h2 className="mg-post-title"> {trip.section}{subsection}</h2>
 			<div className="mg-post-meta">
 				<span>{ DateHelper.formatDate(trip.created_at, 'D MMM, YYYY')}</span>
 				<span>by UgandaBooking team</span>
