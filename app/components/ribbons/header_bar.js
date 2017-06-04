@@ -93,7 +93,7 @@ class HeaderBar extends React.Component {
                                 <span className="icon-bar"></span>
                                 <span className="icon-bar"></span>
                             </button>
-                            <img className="margin-top-20" src={assetPath("images/logo.png")} alt="logo"/>
+                            <img className="margin-top-5" src={assetPath("images/logo.png")} alt="logo"/>
                         </div>
 
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
