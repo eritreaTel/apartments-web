@@ -1600,6 +1600,156 @@ module.exports = {
         "title": "UgandaBooking.com - National Parks: Semuliki",
         "description": "National Parks: Semuliki. Find detailed information in UgandaBooking.com",
         "keywords": "Uganda National Parks,kampala National Parks,National Parks Semuliki,Uganda, uganda, kampala, Kampala, UgandaBooking"
+      },
+      "/apartment/kampala-etana-motel/317/": {
+        "url_path": "/apartment/kampala-etana-motel/317/",
+        "title": "UgandaBooking.com - Etana Motel - Standard Room",
+        "description": "UgandaBooking.com - Etana Motel - Standard Room",
+        "keywords": "Etana Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kt-estate-apartments/321/": {
+        "url_path": "/apartment/kampala-kt-estate-apartments/321/",
+        "title": "UgandaBooking.com - Kt Estate Apartments - King Size",
+        "description": "UgandaBooking.com - Kt Estate Apartments - King Size",
+        "keywords": "Kt Estate Apartments,apartment in Kampala,apartment in Uganda,Apartment in Kampala,Apartment in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kt-estate-apartments/322/": {
+        "url_path": "/apartment/kampala-kt-estate-apartments/322/",
+        "title": "UgandaBooking.com - Kt Estate Apartments - Double",
+        "description": "UgandaBooking.com - Kt Estate Apartments - Double",
+        "keywords": "Kt Estate Apartments,apartment in Kampala,apartment in Uganda,Apartment in Kampala,Apartment in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-pacify-executive-hotel/323/": {
+        "url_path": "/apartment/kampala-pacify-executive-hotel/323/",
+        "title": "UgandaBooking.com - Pacify Executive Hotel - Twin Room",
+        "description": "UgandaBooking.com - Pacify Executive Hotel - Twin Room",
+        "keywords": "Pacify Executive Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-pacify-executive-hotel/324/": {
+        "url_path": "/apartment/kampala-pacify-executive-hotel/324/",
+        "title": "UgandaBooking.com - Pacify Executive Hotel - Executive Room",
+        "description": "UgandaBooking.com - Pacify Executive Hotel - Executive Room",
+        "keywords": "Pacify Executive Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-pacify-executive-hotel/325/": {
+        "url_path": "/apartment/kampala-pacify-executive-hotel/325/",
+        "title": "UgandaBooking.com - Pacify Executive Hotel - Presidential Room",
+        "description": "UgandaBooking.com - Pacify Executive Hotel - Presidential Room",
+        "keywords": "Pacify Executive Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-samppro-hotels/326/": {
+        "url_path": "/apartment/kampala-samppro-hotels/326/",
+        "title": "UgandaBooking.com - Samppro Hotels - Double",
+        "description": "UgandaBooking.com - Samppro Hotels - Double",
+        "keywords": "Samppro Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-samppro-hotels/327/": {
+        "url_path": "/apartment/kampala-samppro-hotels/327/",
+        "title": "UgandaBooking.com - Samppro Hotels - Suite",
+        "description": "UgandaBooking.com - Samppro Hotels - Suite",
+        "keywords": "Samppro Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-top-five-hotel/328/": {
+        "url_path": "/apartment/kampala-top-five-hotel/328/",
+        "title": "UgandaBooking.com - Top Five Hotel - Single Room",
+        "description": "UgandaBooking.com - Top Five Hotel - Single Room",
+        "keywords": "Top Five Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-top-five-hotel/329/": {
+        "url_path": "/apartment/kampala-top-five-hotel/329/",
+        "title": "UgandaBooking.com - Top Five Hotel - Double Room",
+        "description": "UgandaBooking.com - Top Five Hotel - Double Room",
+        "keywords": "Top Five Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-top-five-hotel/330/": {
+        "url_path": "/apartment/kampala-top-five-hotel/330/",
+        "title": "UgandaBooking.com - Top Five Hotel - Twin Room",
+        "description": "UgandaBooking.com - Top Five Hotel - Twin Room",
+        "keywords": "Top Five Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-vinetea-hotel/331/": {
+        "url_path": "/apartment/kampala-vinetea-hotel/331/",
+        "title": "UgandaBooking.com - Vinetea Hotel - King",
+        "description": "UgandaBooking.com - Vinetea Hotel - King",
+        "keywords": "Vinetea Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-vinetea-hotel/332/": {
+        "url_path": "/apartment/kampala-vinetea-hotel/332/",
+        "title": "UgandaBooking.com - Vinetea Hotel - Deluxe",
+        "description": "UgandaBooking.com - Vinetea Hotel - Deluxe",
+        "keywords": "Vinetea Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-africana/333/": {
+        "url_path": "/apartment/kampala-hotel-africana/333/",
+        "title": "UgandaBooking.com - Hotel Africana - Executive Deluxe",
+        "description": "UgandaBooking.com - Hotel Africana - Executive Deluxe",
+        "keywords": "Hotel Africana,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-africana/334/": {
+        "url_path": "/apartment/kampala-hotel-africana/334/",
+        "title": "UgandaBooking.com - Hotel Africana - Executive Twin",
+        "description": "UgandaBooking.com - Hotel Africana - Executive Twin",
+        "keywords": "Hotel Africana,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-africana/335/": {
+        "url_path": "/apartment/kampala-hotel-africana/335/",
+        "title": "UgandaBooking.com - Hotel Africana - Family room",
+        "description": "UgandaBooking.com - Hotel Africana - Family room",
+        "keywords": "Hotel Africana,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-africana/336/": {
+        "url_path": "/apartment/kampala-hotel-africana/336/",
+        "title": "UgandaBooking.com - Hotel Africana - Executive Suite",
+        "description": "UgandaBooking.com - Hotel Africana - Executive Suite",
+        "keywords": "Hotel Africana,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-africana/337/": {
+        "url_path": "/apartment/kampala-hotel-africana/337/",
+        "title": "UgandaBooking.com - Hotel Africana - Apartment",
+        "description": "UgandaBooking.com - Hotel Africana - Apartment",
+        "keywords": "Hotel Africana,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-silver-spring-hotel/338/": {
+        "url_path": "/apartment/kampala-silver-spring-hotel/338/",
+        "title": "UgandaBooking.com - Silver Spring Hotel - Standard Rooms",
+        "description": "UgandaBooking.com - Silver Spring Hotel - Standard Rooms",
+        "keywords": "Silver Spring Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-silver-spring-hotel/339/": {
+        "url_path": "/apartment/kampala-silver-spring-hotel/339/",
+        "title": "UgandaBooking.com - Silver Spring Hotel - Executive Deluxe Rooms",
+        "description": "UgandaBooking.com - Silver Spring Hotel - Executive Deluxe Rooms",
+        "keywords": "Silver Spring Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-silver-spring-hotel/340/": {
+        "url_path": "/apartment/kampala-silver-spring-hotel/340/",
+        "title": "UgandaBooking.com - Silver Spring Hotel - Executive Deluxe Suites",
+        "description": "UgandaBooking.com - Silver Spring Hotel - Executive Deluxe Suites",
+        "keywords": "Silver Spring Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-crystal-suites/341/": {
+        "url_path": "/apartment/kampala-crystal-suites/341/",
+        "title": "UgandaBooking.com - Crystal Suites - Executive Single",
+        "description": "UgandaBooking.com - Crystal Suites - Executive Single",
+        "keywords": "Crystal Suites,suite in Kampala,suite in Uganda,Suite in Kampala,Suite in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-crystal-suites/342/": {
+        "url_path": "/apartment/kampala-crystal-suites/342/",
+        "title": "UgandaBooking.com - Crystal Suites - Executive Twin",
+        "description": "UgandaBooking.com - Crystal Suites - Executive Twin",
+        "keywords": "Crystal Suites,suite in Kampala,suite in Uganda,Suite in Kampala,Suite in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-crystal-suites/343/": {
+        "url_path": "/apartment/kampala-crystal-suites/343/",
+        "title": "UgandaBooking.com - Crystal Suites - Royal Executive Suite",
+        "description": "UgandaBooking.com - Crystal Suites - Royal Executive Suite",
+        "keywords": "Crystal Suites,suite in Kampala,suite in Uganda,Suite in Kampala,Suite in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-crystal-suites/344/": {
+        "url_path": "/apartment/kampala-crystal-suites/344/",
+        "title": "UgandaBooking.com - Crystal Suites - Two Bedroom Apartment",
+        "description": "UgandaBooking.com - Crystal Suites - Two Bedroom Apartment",
+        "keywords": "Crystal Suites,suite in Kampala,suite in Uganda,Suite in Kampala,Suite in Uganda,UgandaBooking"
       }
     }
     )
