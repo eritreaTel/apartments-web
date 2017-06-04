@@ -70,6 +70,47 @@ const ApartmentFilterHelper = {
         });
 
         return filteredApartments;
+    },
+
+    getNeighborhoods() {
+        return (
+            [
+                {'name' :'Bugolobi' , 'count' : 5},
+                {'name' :'Bukoto'	, 'count' : 2},
+                {'name' :'Bunga'	, 'count' : 2},
+                {'name' :'Busega'	, 'count' : 1},
+                {'name' :'City Center', 'count' : 7},
+                {'name' :'Ggaba', 'count' : 3},
+                {'name' :'Kabalagala'	, 'count' : 4},
+                {'name' :'Kabusu'		, 'count' : 2},
+                {'name' :'Kamwokya', 'count' : 1},
+                {'name' :'Kansanga', 'count' : 4},
+                {'name' :'Katwe', 'count' : 1},
+                {'name' :'Kawempe', 'count' : 3},
+                {'name' :'Kibuye'	, 'count' : 3},
+                {'name' :'Kireka'	, 'count' : 3},
+                {'name' :'Kirinya', 'count' : 1},
+                {'name' :'Kiwatule', 'count' : 1},
+                {'name' :'Kololo', 'count' : 3},
+                {'name' :'Makindye', 'count' : 1},
+                {'name' :'Mbuya', 'count' : 1},
+                {'name' :'Mengo', 'count' : 8},
+                {'name' :'Mulago', 'count' : 2},
+                {'name' :'Munyonyo', 'count' : 2},
+                {'name' :'Mutundwe', 'count' : 1},
+                {'name' :'Mutungo', 'count' : 1},
+                {'name' :'Muyenga', 'count' : 4},
+                {'name' :'Naalya', 'count' : 1},
+                {'name' :'Naguru', 'count' : 1},
+                {'name' :'Nakasero', 'count' : 1},
+                {'name' :'Namugongo', 'count' : 1},
+                {'name' :'Ndeeba', 'count' : 3},
+                {'name' :'Nsambya', 'count' : 2},
+                {'name' :'Ntinda', 'count' : 5},
+                {'name' :'Wakaliga', 'count' : 1},
+                {'name' :'Zana', 'count' : 1}
+            ]
+        )
     }
 };
 

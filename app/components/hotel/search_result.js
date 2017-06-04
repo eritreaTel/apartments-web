@@ -141,25 +141,17 @@ class Location extends React.Component{
     }
 
     render() {
+
+        let neighborhoods = ApartmentFilterHelper.getNeighborhoods();
+        var styledHoods = neighborhoods.map(hood => {
+                return <div key={Math.random()} className="mg-options"><Checkbox value={hood.name}/><span> {hood.name}</span></div>
+        });
+
         return (
             <div>
                 <h3 className="mg-widget-filter-title">Neighborhood</h3>
                 <CheckboxGroup name="location"  value={this.props.locations} onChange={this.onLocationChanged.bind(this)}>
-                    <div className="mg-options"><Checkbox value='Bugolobi'/><span> Bugolobi</span></div>
-                    <div className="mg-options"><Checkbox value='Bunga'/> <span>Bunga</span></div>
-                    <div className="mg-options"><Checkbox value='Bukoto'/> <span>Bukoto</span></div>
-                    <div className="mg-options"><Checkbox value='Kabale'/> <span>Kabale</span></div>
-                    <div className="mg-options"><Checkbox value='Kabusu'/> <span>Kabusu</span></div>
-                    <div className="mg-options"><Checkbox value='Kanyanya'/> <span>Kanyanya</span></div>
-                    <div className="mg-options"><Checkbox value='Makindye'/> <span>Makindye</span></div>
-                    <div className="mg-options"><Checkbox value='Mulago'/> <span>Mulago</span></div>
-                    <div className="mg-options"><Checkbox value='Muyenga'/> <span>Muyenga</span></div>
-                    <div className="mg-options"><Checkbox value='Naalya'/> <span>Naalya</span></div>
-                    <div className="mg-options"><Checkbox value='Naguru'/> <span>Naguru</span></div>
-                    <div className="mg-options"><Checkbox value='Nakasero'/> <span>Nakasero</span></div>
-                    <div className="mg-options"><Checkbox value='Namirembe'/> <span>Namirembe</span></div>
-                    <div className="mg-options"><Checkbox value='Nsambya'/> <span>Nsambya</span></div>
-                    <div className="mg-options"><Checkbox value='Rubaga'/> <span>Rubaga</span></div>
+                    {styledHoods}
                 </CheckboxGroup>
             </div>
         );

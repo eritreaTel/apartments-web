@@ -253,8 +253,6 @@ module.exports = {
             filteredApartments = ApartmentFilterHelper.filterApartmentByLocation(locations, filteredApartments);
         }
 
-        console.log('filtered criteria is ');
-        console.log(filterCriteria);
         this.setStoreVal('filteredApartments', filteredApartments);
     }
 
