@@ -88,6 +88,7 @@ class AdditionalInfo extends React.Component {
             }
         }
         Actions.goToPersonalInfoClicked();
+        Actions.setRoute('/payment');
     }
 
     goBackToSearch() {
@@ -96,6 +97,7 @@ class AdditionalInfo extends React.Component {
             Actions.additionalServicesUpdated({'airline_name' : this.refs.airline_name.value});
         }
         Actions.goBackToSearch();
+        Actions.setRoute('/hotels');
     }
 
     componentDidMount() {

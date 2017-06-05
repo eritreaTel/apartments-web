@@ -2,10 +2,12 @@ const React = require('react');
 const SearchApartment = require('../components/hotel/search_guesthouses');
 const SearchResult   = require('../components/hotel/search_result');
 const HotelBody   = require('../components/hotel/main_body');
+const ReservationConfirmation      = require('../components/hotel/reservation_confirmation');
 const withDataLoaded = require('../components/with_data_loaded');
 const Actions = require('../actions/actions');
 const ApartmentHelper = require('../helpers/apartment_helper');
 import MDSpinner from "react-md-spinner";
+
 
 const SearchApartments = function (props) {
     return (
@@ -15,8 +17,7 @@ const SearchApartments = function (props) {
     );
 }
 
-
-class HotelsPage extends React.Component {
+class OrderConfirmationPage extends React.Component {
 
     state = {};
 
@@ -34,11 +35,8 @@ class HotelsPage extends React.Component {
         let section ;
 
         switch (bookingStage.activeStage) {
-            case 'search':
-                section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult filteredApartments={filteredApartments} isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} bookingStage={bookingStage}/>
-                            </div>
+            case 'confirmation' :
+                section =  <ReservationConfirmation apartmentResponse={apartment} bookingStage={bookingStage} user={user} />
                 break;
             default:
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
@@ -51,7 +49,7 @@ class HotelsPage extends React.Component {
 };
 
 const WithUserLoaded = withDataLoaded({
-        WithData: HotelsPage,
+        WithData: OrderConfirmationPage,
         WithoutData: () => (
             <HotelBody >
                 <div role="tabpanel" className="tab-pane fade in active" id="select-room">

@@ -1,11 +1,13 @@
 const React = require('react');
 const SearchApartment = require('../components/hotel/search_guesthouses');
+const AdditionalInfo = require('../components/hotel/additional_info');
 const SearchResult   = require('../components/hotel/search_result');
 const HotelBody   = require('../components/hotel/main_body');
 const withDataLoaded = require('../components/with_data_loaded');
 const Actions = require('../actions/actions');
 const ApartmentHelper = require('../helpers/apartment_helper');
 import MDSpinner from "react-md-spinner";
+
 
 const SearchApartments = function (props) {
     return (
@@ -15,8 +17,7 @@ const SearchApartments = function (props) {
     );
 }
 
-
-class HotelsPage extends React.Component {
+class AdditionalServicesPage extends React.Component {
 
     state = {};
 
@@ -34,10 +35,9 @@ class HotelsPage extends React.Component {
         let section ;
 
         switch (bookingStage.activeStage) {
-            case 'search':
+            case 'additional':
                 section =   <div role="tabpanel" className="tab-pane fade in active" id="select-room">
-                                <SearchApartments searchInfo={bookingStage.searchInfo} />
-                                <SearchResult filteredApartments={filteredApartments} isProcessing={isProcessing} apartments = {apartments} pageNumber={pageNumber} bookingStage={bookingStage}/>
+                                <AdditionalInfo bookingStage={bookingStage} apartmentResponse={apartment} isProcessing={isProcessing} />
                             </div>
                 break;
             default:
@@ -51,7 +51,7 @@ class HotelsPage extends React.Component {
 };
 
 const WithUserLoaded = withDataLoaded({
-        WithData: HotelsPage,
+        WithData: AdditionalServicesPage,
         WithoutData: () => (
             <HotelBody >
                 <div role="tabpanel" className="tab-pane fade in active" id="select-room">

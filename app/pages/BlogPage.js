@@ -5,7 +5,6 @@ const RightSection = require('../components/blog/right_section');
 const BlogHeader = require('../components/blog/blog_header');
 const BlogTags = require('../components/blog/blog_tags');
 const withDataLoaded = require('../components/with_data_loaded');
-const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const {assetPath} = require('../helpers/asset_helper');
 const CookiesHelper  = require('../helpers/cookies_helper');

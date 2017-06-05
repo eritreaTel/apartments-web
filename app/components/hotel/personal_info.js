@@ -20,6 +20,7 @@ import CurrencyInput from 'react-currency-input';
 
 const goBackToAdditionalInfo = function (e) {
     Actions.goBackToAdditional();
+    Actions.setRoute("/additional-services");
 }
 
 class PersonalInfo extends React.Component {
@@ -143,7 +144,8 @@ class PersonalInfo extends React.Component {
                 if (bookingResponse.status == 'fail') {
                     NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
                 } else {
-                    Actions.goToConfirmationClicked()
+                    Actions.goToConfirmationClicked();
+                    Actions.setRoute('/order-confirmation');
                 }
             });
         }

@@ -23,7 +23,7 @@ module.exports = {
         url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
 
         console.log('get best apartments section - ' + url);
-        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments').length == 0) {
+        if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments') == null || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
             if (this.acquireLock('getBestApartments')) {
                 try {

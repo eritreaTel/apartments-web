@@ -14,6 +14,7 @@ const onComboApartmentBookNowClicked = function (aptResponse) {
     const {apartmentKey} = aptResponse;
     Actions.cleanUpBookingData();
     Actions.bookApartmentClicked({apartmentKey});
+    Actions.setRoute('/additional-services');
 }
 
 const onViewApartmentClickedFromSearch = function (aptResponse) {

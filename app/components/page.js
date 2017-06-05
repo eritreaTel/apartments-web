@@ -1,5 +1,7 @@
 const HomePage          = require('../pages/HomePage');
-const HotelsPage   = require('../pages/HotelsPage');
+const HotelsPage        = require('../pages/HotelsPage');
+const AdditionalServicesPage   = require('../pages/AdditionalServicesPage');
+const PaymentPage        = require('../pages/PaymentPage');
 const ApartmentPage     = require('../pages/ApartmentPage');
 const AboutUsPage       = require('../pages/AboutUsPage');
 const ContactUsPage     = require('../pages/ContactUsPage');
@@ -59,6 +61,12 @@ class Page extends React.Component {
                 break;
             case 'hotels':
                 content = <HotelsPage {...{store}} />
+                break;
+            case 'payment' :
+                content = <PaymentPage  {...{store}} />
+                break;
+            case 'additional-services':
+                content = <AdditionalServicesPage {...{store}} />
                 break;
             case 'about-us':
                 content = <AboutUsPage {...{store}} />

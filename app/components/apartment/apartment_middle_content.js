@@ -13,7 +13,7 @@ import MDSpinner from "react-md-spinner";
 
 const onBookApartmentPageClicked = function (apartmentKey) {
     Actions.bookApartmentPageClicked({apartmentKey});
-    Actions.setRoute('/hotels');
+    Actions.setRoute('/additional-services');
 }
 
 const onKeepSearchingClicked = function () {

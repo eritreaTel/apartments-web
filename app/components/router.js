@@ -34,6 +34,18 @@ const Router = React.createClass({
         Actions.setView({page: 'hotels', data});
     },
 
+    additionalServices(data) {
+        Actions.setView({page: 'additional-services', data});
+    },
+
+    payment(data) {
+        Actions.setView({page: 'payment', data});
+    },
+
+    orderConfirmation(data) {
+        Actions.setView({page: 'order-confirmation', data});
+    },
+
     blogs(data) {
         Actions.setView({page: 'blogs', data});
     },
