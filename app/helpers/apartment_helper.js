@@ -38,14 +38,16 @@ const ApartmentHelper = {
             checkInDate = DateHelper.getTommorrow();
         } else {
             let checkInFromCookie = DateHelper.getDateFromString(checkInDate);
-            checkInDate = DateHelper.isGreaterThanToday(checkInFromCookie)? checkInFromCookie: DateHelper.getTommorrow() ;
+            checkInDate = DateHelper.isSameOrAfter(checkInFromCookie)? checkInFromCookie: DateHelper.getTommorrow() ;
+            console.log(checkInDate);
+
         }
 
         if (checkOutDate == null || checkOutDate == undefined) {
-            checkOutDate = DateHelper.getNDaysFromToday(8);
+            checkOutDate = DateHelper.getNDaysFromToday(2);
         } else {
             let checkOutFromCookie = DateHelper.getDateFromString(checkOutDate);
-            checkOutDate = DateHelper.isGreaterThanToday(checkOutFromCookie)? checkOutFromCookie : DateHelper.getNDaysFromToday(8);
+            checkOutDate = DateHelper.isGreaterThanToday(checkOutFromCookie)? checkOutFromCookie : DateHelper.getNDaysFromToday(2);
         }
 
         let searchData = {

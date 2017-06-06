@@ -29,8 +29,16 @@ const DateHelper = {
         return this.formatDate(inputDate,'dddd')
     },
 
+    isSameOrAfter(inputDate){
+        let today = new Moment();
+        today = this.formatDate(today, 'D-MMM-YYYY');
+        return inputDate.isSameOrAfter(today);
+    },
+
     isGreaterThanToday(inputDate){
-        return inputDate.isAfter(new Moment());
+        let today = new Moment();
+        today = this.formatDate(today, 'D-MMM-YYYY');
+        return inputDate.isAfter(today);
     }
 
 };
