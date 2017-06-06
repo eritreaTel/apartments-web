@@ -138,11 +138,12 @@ const ApartmentHelper = {
     },
 
     getLongDescription(apartmentResponse) {
-        return apartmentResponse.apartments[0].long_description;
+        return  apartmentResponse.apartments[0].guestHouse.long_description ;
     },
 
     getShortDescription(apartmentResponse) {
-        return apartmentResponse.apartments[0].short_description;
+        let descr = (apartmentResponse.apartments[0].short_description) ? apartmentResponse.apartments[0].short_description + ' ...' : '';
+        return descr;
     },
 
     getDisplayMessage(apartmentResponse) {
