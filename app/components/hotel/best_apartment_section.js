@@ -25,7 +25,7 @@ const TitleSection  = function() {
         return (
             <div className="mg-sec-title">
                 <h2>Recommended Hotels</h2>
-                <p>Some of Kampala's greatest accommodations</p>
+                <p>Some of Kampala's awesome accommodations</p>
             </div>
         );
 }
