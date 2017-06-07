@@ -1,5 +1,6 @@
 const express = require('express');
 const compression = require('compression');
+const nocache = require('nocache')
 var exphbs  = require('express-handlebars');
 var metaHelper = require('./app/helpers/meta_helper');
 /*const bodyParser = require('body-parser');
@@ -12,6 +13,7 @@ const pathToPublic = path.join(__dirname, 'public');
 
 app.set('port', (process.env.PORT || 8080));
 
+app.use(nocache());
 app.use(compression());
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
