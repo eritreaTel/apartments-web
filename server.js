@@ -13,7 +13,7 @@ const pathToPublic = path.join(__dirname, 'public');
 
 app.set('port', (process.env.PORT || 8080));
 
-app.use(nocache());
+//app.use(nocache());
 app.use(compression());
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
