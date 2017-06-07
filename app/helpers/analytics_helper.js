@@ -15,7 +15,6 @@ module.exports = {
     CATEGORY_BLOG_PAGE      : 'blog',
     CATEGORY_ERROR_PAGE     : 'error',
     CATEGORY_RESET_PASSWORD_PAGE : 'reset-password',
-    CATEGORY_RESET_PASSWORD_PAGE : 'reset-password',
     CATEGORY_TERMS_OF_USE_PAGE   : 'terms-of-use',
     CATEGORY_PRIVACY_POLICY_PAGE : 'privacy-policy',
     CATEGORY_SEEKER_ACCOUNT_BOOKING_PAGE : 'seeker-account-booking',
