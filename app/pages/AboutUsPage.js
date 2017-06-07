@@ -156,7 +156,6 @@ function getDefaultProps() {
 				"id" : 4,
 				full_name: "Lizabeth Paulat",
 				title: "Director of Content",
-				photo : "images/member4.png",
 				photo : "images/team-members/ugandaBooking-director-of-content.jpg",
 				fb_link : "#",
 				ld_link : "#"
