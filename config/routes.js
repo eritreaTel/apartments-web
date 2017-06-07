@@ -7,7 +7,6 @@ module.exports = {
   "/order-confirmation/" : "orderConfirmation",
   "/error/": "error",
   "/sign-in/": "signIn",
-  "/reset-password/": "resetPassword",
   "/about-us/": "aboutUs",
   "/apartment/:description/:id/": "viewApartment",
   "/combo-apartment/:description/:id/": "viewComboApartment",
