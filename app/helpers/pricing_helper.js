@@ -1,4 +1,5 @@
 const CurrencyFormatter = require('currency-formatter');
+const _ = require('lodash');
 
 const PricingHelper = {
 
@@ -9,6 +10,16 @@ const PricingHelper = {
             totalAmount = totalAmount + 30;
         }
         return totalAmount;
+    },
+
+    getGoogleAddValue(roomTotalAmount, additional){
+        let value = roomTotalAmount * .09;
+        let airportPickup = additional && additional.airport_pickup;
+        if (airportPickup) {
+            value = value + 10;
+        }
+
+        return _.round(value, 2);
     },
 
     getMinimumPrice(roomTotalAmount, additional) {

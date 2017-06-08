@@ -15,12 +15,13 @@ class  ReservationConfirmation extends React.Component {
 
     render() {
         let {apartmentResponse , user, bookingStage} = this.props;
-        let {displayMessage, apartments, daysCnt, title, startDate, endDate} = apartmentResponse;
+        let {displayMessage, apartments, daysCnt, title, startDate, endDate, totalPrice} = apartmentResponse;
 
         let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
 
         let {additional, confirmation, searchInfo} = bookingStage;
+        let myAdwordsValue = PricingHelper.getGoogleAddValue(totalPrice, additional);
 
         let confirmationId      = PricingHelper.getReservationConfirmationNumber(confirmation.id);
         let checkInDate         = DateHelper.formatDate(startDate, 'D MMM, YYYY');
@@ -45,6 +46,8 @@ class  ReservationConfirmation extends React.Component {
             airportPickUpCss = 'mg-cart-address show';
             notAirportPickUpCss = 'mg-cart-address hide';
         }
+
+        let conversionUrl = "//www.googleadservices.com/pagead/conversion/853981481/?value="+ myAdwordsValue +"&amp;currency_code=USD&amp;label=lawfCKmD4XEQqfKalwM&amp;guid=ON&amp;script=0";
 
         return(
             <div role="tabpanel" className="tab-pane in active" id="confirmation">
@@ -113,6 +116,7 @@ class  ReservationConfirmation extends React.Component {
                                             <strong>Address: </strong>{guestHouseAddress}, Uganda <br/>
                                             <strong>Tel : </strong>{guestHousePhone}
                                         </address>
+                                        <img className="google-conversion-tracking" alt="" src={conversionUrl}/>
                                     </div>
 
                                     <TotalPayment currentPayCaption="Paid Amount" apartmentResponse={apartmentResponse} bookingStage={bookingStage} />
