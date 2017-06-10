@@ -49,6 +49,14 @@ const Actions = {
         Dispatcher.dispatch({type: 'getReservationConfirmations', data});
     },
 
+    getApartmentsByOwner(data) {
+        Dispatcher.dispatch({type: 'getApartmentsByOwner', data});
+    },
+
+    getGuestHouseByOwner() {
+        Dispatcher.dispatch({type: 'getGuestHouseByOwner'});
+    },
+
     getBlogs(data) {
         return Dispatcher.dispatch({type: 'getBlogs', data});
     },
@@ -111,6 +119,14 @@ const Actions = {
 
     userInfoUpdated(data) {
         return Dispatcher.dispatch({type: 'userInfoUpdated', data});
+    },
+
+    guestHouseInfoUpdated(data) {
+        return Dispatcher.dispatch({type: 'guestHouseInfoUpdated', data});
+    },
+
+    ownerUserInfoUpdated(data) {
+        return Dispatcher.dispatch({type: 'ownerUserInfoUpdated', data});
     },
 
     paymentInfoUpdated(data) {
@@ -195,6 +211,10 @@ const Actions = {
 
     updateUser(data) {
         return Dispatcher.dispatch({type: 'updateUser', data});
+    },
+
+    updateGuestHouse(data) {
+        return Dispatcher.dispatch({type: 'updateGuestHouse', data});
     },
 
     saveUserSearches(data) {

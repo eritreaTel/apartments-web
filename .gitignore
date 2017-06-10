@@ -11,3 +11,4 @@ views/images
 public/application.js.gz
 public/application.js.map
 views/index.html
+public/index.html

@@ -4,6 +4,7 @@ const BlogDispatcher      = require('./blog_dispatcher');
 const BookingDispatcher      = require('./booking_dispatcher');
 const MessageDispatcher   = require('./message_dispatcher');
 const UserDispatcher      = require('./user_dispatcher');
+const OwnerDispatcher      = require('./owner_dispatcher');
 const Logger         = require('../helpers/log_helper');
 
 const Dispatcher = {
@@ -15,7 +16,8 @@ const Dispatcher = {
             BlogDispatcher,
             MessageDispatcher,
             UserDispatcher,
-            BookingDispatcher
+            BookingDispatcher,
+            OwnerDispatcher
         ];
 
         if (type === 'noop') {

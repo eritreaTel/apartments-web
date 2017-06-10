@@ -15,7 +15,8 @@ module.exports = {
   "/your-trip/": "YourTrip",
   "/your-trip/:trip/:id/": "ATrip",
   "/blog/:id/": "viewBlog",
-  "/my-account/" : "myAccount",
+  "/seeker-account/" : "seekerAccount",
+  "/owner-account/" : "ownerAccount",
   "/reset-password/" : "resetPassword",
   "/terms-of-use/" : "termsOfUse",
   "/privacy-policy/" : "privacyPolicy"

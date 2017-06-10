@@ -4,6 +4,7 @@ const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
 const Country = require('../components/shared/country');
 const Constants = require('../helpers/constants');
+const CookiesHelper = require('../helpers/cookies_helper');
 
 const FormValidator = require('../helpers/form_validation_helper');
 const StringHelper = require('../helpers/string_helper');
@@ -36,7 +37,12 @@ const authenticateUser = function (e) {
 		if (response.status == 'fail') {
 			NotificationManager.error(response.error, 'Log In', Constants.ERROR_DISPLAY_TIME);
 		} else {
-			Actions.setRoute('/my-account');
+			let userType = CookiesHelper.getDataFromCookie('userType');
+			if (userType == 'seeker') {
+				Actions.setRoute('/seeker-account');
+			} else if (userType == 'owner') {
+				Actions.setRoute('/owner-account');
+			}
 		}
 	});
 }
@@ -162,7 +168,7 @@ class SignUpBody extends React.Component {
 				}
 
 				Actions.logIn(credentials);
-				Actions.setRoute('/my-account');
+				Actions.setRoute('/seeker-account');
 				Actions.setIsProcessing(isProcessing);
 			}
 		});

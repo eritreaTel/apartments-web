@@ -3,7 +3,8 @@ const PageTitle = require('../components/shared/pageTitle');
 const Anchor = require('../components/shared/anchor');
 const Actions = require('../actions/actions');
 const FormValidator = require('../helpers/form_validation_helper');
-const Constants = require('../helpers/constants');
+const Constants = require('../helpers/constants')
+const CookiesHelper = require('../helpers/cookies_helper');
 
 import MDSpinner from "react-md-spinner";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -198,7 +199,12 @@ class UpdatePasswordBody extends React.Component {
 						NotificationManager.error(response.error, 'Reset Password - Update Password', Constants.ERROR_DISPLAY_TIME);
 						this.refs.password.focus();
 					} else {
-						Actions.setRoute('/my-account');
+						let userType = CookiesHelper.getDataFromCookie('userType');
+						if (userType == 'seeker') {
+							Actions.setRoute('/seeker-account');
+						} else if (userType == 'owner') {
+							Actions.setRoute('/owner-account');
+						}
 					}
 				});
 			}

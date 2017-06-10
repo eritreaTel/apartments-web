@@ -74,8 +74,12 @@ const Router = React.createClass({
         Actions.setView({page: 'blog', blogId});
     },
 
-    myAccount() {
-        Actions.setView({page: 'my-account'});
+    seekerAccount() {
+        Actions.setView({page: 'seeker-account'});
+    },
+
+    ownerAccount() {
+        Actions.setView({page: 'owner-account'});
     },
 
     resetPassword() {
