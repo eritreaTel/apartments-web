@@ -33,6 +33,7 @@ module.exports = {
                         apartmentReviews : null,
                         reservationConfirmations : null,
                         searchCriteria : null,
+                        ownerGuestHouse : null,
                         bookingStage : {
                             activeStage : null,
                             searchInfo  : null,
@@ -40,7 +41,10 @@ module.exports = {
                                 'propertyType' : [],
                                 'priceRange' : [],
                                 'starRating' : [],
-                                'locations' : []
+                                'locations' : [],
+                                'showMe' : 500,
+                                'sortBy' : 'popularity'
+
                             },
                             additional  : {},
                             personal    : {},
@@ -63,8 +67,15 @@ module.exports = {
                             activeSignInSection: 'signIn',
                             signUpData : null,
                             updateUserInfo : null,
-                            seekerUser : {
-                                'activeLink' : 'booking'
+                            seekerUserInfo : {
+                                'activeLink' : 'booking',
+                                'updateUserInfo' : null
+                            },
+                            ownerUserInfo : {
+                                'activeLink' : 'edit-accommodation',
+                                'myApartments' : null,
+                                'guestHouse' : null,
+                                'updateGuestHouseInfo' : null
                             }
                         },
                         blogs : null,
@@ -97,7 +108,8 @@ module.exports = {
                             'loadingBlog' : false,
                             'searchingApartments' : false,
                             'loadingTrip' : false,
-                            'loadingOtherRoomsInHotel' : false
+                            'loadingOtherRoomsInHotel' : false,
+                            'updatingGuestHouse' : false
                         }
                     }
                 };

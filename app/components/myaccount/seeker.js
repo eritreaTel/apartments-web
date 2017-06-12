@@ -39,7 +39,7 @@ const BookingSection = function (props) {
 
     let className = props.activeLink == 'booking' ? "tab-pane fade in active" : "tab-pane fade";
     return(
-        <div role="tabpanel" className={className} id="home3">
+        <div role="tabpanel" className={className} id="booking-section">
             {content}
         </div>
     );
@@ -189,7 +189,7 @@ class EditProfileSection extends React.Component{
 		let disabled  = updatingUser;
 
 		return (
-			<div role="tabpanel" className={className} id="messages3">
+			<div role="tabpanel" className={className} id="edit-profile">
 				<div className="row">
 					<div className="col-md-12">
 						<div className="row">
@@ -274,16 +274,16 @@ class EditProfileSection extends React.Component{
 
 const SeekerBody = function (props) {
     let userServices = props.userServices;
-    let activeLink = userServices.seekerUser.activeLink;
+    let activeLink = userServices.seekerUserInfo.activeLink;
 
     return (
         <div className="mg-tab-left-nav">
             <ul className="nav nav-tabs nav-justified" role="tablist">
                 <li role="presentation" className={activeLink == 'booking'? 'active' : ''}>
-                    <a href="#home3" aria-controls="home3" role="tab" data-toggle="tab"><i className="fa fa-home"></i> Bookings</a>
+                    <a href="#booking-section" aria-controls="booking-section" role="tab" data-toggle="tab"><i className="fa fa-home"></i> Bookings</a>
                 </li>
                 <li role="presentation" className={activeLink == 'editProfile'? 'active' : ''}>
-                    <a href="#messages3" aria-controls="messages3" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Edit Profile</a>
+                    <a href="#edit-profile" aria-controls="edit-profile" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Edit Profile</a>
                 </li>
             </ul>
             <div className="tab-content">
@@ -295,16 +295,15 @@ const SeekerBody = function (props) {
 
 
 class Seeker extends React.Component {
-    componentWillMount() {
+
+	componentWillMount() {
         const {user} = this.props;
-        if(user.type == 'seeker') {
-            Actions.getReservationConfirmations({'userId' : user.id});
-        }
-    }
+		Actions.getReservationConfirmations({'userId' : user.id});
+	}
 
     render() {
         const {user, userServices ,isProcessing, reservationConfirmations} = this.props;
-        let activeLink = userServices.seekerUser.activeLink;
+        let activeLink = userServices.seekerUserInfo.activeLink;
 
         let seekerData;
         if (reservationConfirmations == null) {

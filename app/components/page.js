@@ -10,7 +10,8 @@ const BlogsPage         = require('../pages/BlogsPage');
 const NotFoundPage      = require('../pages/NotFoundPage');
 const BlogPage          = require('../pages/BlogPage');
 const SignInPage        = require('../pages/SignInPage');
-const MyAccountPage = require('../pages/MyAccountPage');
+const SeekerAccountPage = require('../pages/SeekerAccountPage');
+const OwnerAccountPage = require('../pages/OwnerAccountPage');
 const TermsOfUse = require('../pages/TermsOfUse');
 const PrivacyPolicy = require('../pages/PrivacyPolicy');
 const ResetPasswordPage = require('../pages/ResetPasswordPage');
@@ -88,7 +89,7 @@ class Page extends React.Component {
                 content = <ContactUsPage {...{store}} />;
                 break;
             case 'sign-in':
-                content = loggedIn == true? <MyAccountPage {...{store}} /> : <SignInPage {...{store}} />;
+                content = <SignInPage {...{store}} />;
                 break;
             case 'apartment':
                 content = <ApartmentPage {...{store}} />
@@ -96,8 +97,11 @@ class Page extends React.Component {
             case 'combo-apartment':
                 content = <ComboApartmentsPage {...{store}} />
                 break;
-            case 'my-account' :
-                content = loggedIn == true? <MyAccountPage {...{store}} /> : <SignInPage {...{store}} />;
+            case 'seeker-account' :
+                content = loggedIn == true? <SeekerAccountPage {...{store}} /> : <SignInPage {...{store}} />;
+                break;
+            case 'owner-account' :
+                content = loggedIn == true? <OwnerAccountPage {...{store}} /> : <SignInPage {...{store}} />;
                 break;
             case 'reset-password' :
                 content = <ResetPasswordPage {...{store}} />

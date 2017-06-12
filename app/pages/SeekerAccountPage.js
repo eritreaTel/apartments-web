@@ -1,11 +1,7 @@
 const React = require('react');
 const PageTitle = require('../components/shared/pageTitle');
-const Admin = require('../components/myaccount/admin');
-const Owner = require('../components/myaccount/owner');
 const Seeker = require('../components/myaccount/seeker');
-const Employee = require('../components/myaccount/employee');
 const withDataLoaded = require('../components/with_data_loaded');
-const SvgImage = require('../components/shared/svg_image');
 const Actions = require('../actions/actions');
 const Anchor = require('../components/shared/anchor');
 
@@ -24,25 +20,16 @@ const MyAccountBody = function(props) {
 }
 
 
-class MyAccountPage extends React.Component {
+class SeekerAccountPage extends React.Component {
+    componentWillMount() {
+        const {store : {user}} = this.props;
+        if (user.type != 'seeker') {
+            Actions.setRoute('/sign-in');
+        }
+    }
 
     render() {
         const {store : {user, userServices, isProcessing, reservationConfirmations}} = this.props;
-        let  dashboard;
-        switch (user.type) {
-            case 'seeker':
-                dashboard =   <Seeker reservationConfirmations={reservationConfirmations} user = {user} userServices={userServices} isProcessing={isProcessing}/>;
-                break;
-            case 'admin':
-                dashboard =   <Admin user = {user} />;
-                break;
-            case 'employee':
-                dashboard =   <Employee user = {user} />;
-                break;
-            case 'owner':
-                dashboard =   <Owner user = {user} />;
-                break;
-        }
         return (
             <div>
                 <PageTitle parentClassName="mg-page-title-space parallax"/>
@@ -51,7 +38,7 @@ class MyAccountPage extends React.Component {
                     <div className="margin-bottom-30">
                         <h4> Hello {user.first_name}, it's nice to see you </h4>
                     </div>
-                    {dashboard}
+                    <Seeker reservationConfirmations={reservationConfirmations} user = {user} userServices={userServices} isProcessing={isProcessing}/>;
                 </MyAccountBody>
             </div>
         );
@@ -59,7 +46,7 @@ class MyAccountPage extends React.Component {
 };
 
 const WithUserLoaded = withDataLoaded({
-		WithData: MyAccountPage,
+		WithData: SeekerAccountPage,
 		WithoutData: () => (
 		    <div>
                 <PageTitle parentClassName="mg-my-account-page-title-space parallax"/>

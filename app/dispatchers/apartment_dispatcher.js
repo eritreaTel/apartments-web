@@ -236,7 +236,7 @@ module.exports = {
         let apartments = this.getStoreVal('apartments');
         let filteredApartments = apartments;
 
-        let {propertyType, priceRange, starRating, locations} = filterCriteria;
+        let {propertyType, priceRange, starRating, locations, showMe, sortBy} = filterCriteria;
         if (propertyType.length > 0) {
             filteredApartments = ApartmentFilterHelper.filterApartmentByType(propertyType, filteredApartments);
         }
@@ -252,6 +252,17 @@ module.exports = {
         if (locations.length > 0) {
             filteredApartments = ApartmentFilterHelper.filterApartmentByLocation(locations, filteredApartments);
         }
+
+
+        //The below two methods should always be at the end.
+        if (showMe != null) {
+            filteredApartments = ApartmentFilterHelper.filterByShowMe(showMe, filteredApartments);
+        }
+
+        if (sortBy != null) {
+            filteredApartments = ApartmentFilterHelper.sortByCriteria(sortBy, filteredApartments);
+        }
+
 
         this.setStoreVal('filteredApartments', filteredApartments);
     }

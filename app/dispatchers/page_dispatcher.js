@@ -106,15 +106,42 @@ module.exports = {
         return existing;
     },
 
-    async seekerUserInfoUpdated(data){
+    async guestHouseInfoUpdated(data) {
         let userServices = this.getStoreVal('userServices');
-        let existing = userServices.seekerUser;
+        let {ownerUserInfo} = userServices
+        let existing = (ownerUserInfo.updateGuestHouseInfo != null) ? ownerUserInfo.updateGuestHouseInfo : {};
 
         await _.forEach(data, function(value, key) {
             existing[key] = value;
         });
 
-        this.mergeStoreVal('userServices', {seekerUser: existing});
+        userServices.ownerUserInfo.updateGuestHouseInfo = existing;
+        this.setStoreVal('userServices', userServices);
+        return existing;
+    },
+
+    async ownerUserInfoUpdated(data){
+        let userServices = this.getStoreVal('userServices');
+        let existing = userServices.ownerUserInfo;
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('userServices', {ownerUserInfo: existing});
+        return existing;
+    },
+
+
+    async seekerUserInfoUpdated(data){
+        let userServices = this.getStoreVal('userServices');
+        let existing = userServices.seekerUserInfo;
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        this.mergeStoreVal('userServices', {seekerUserInfo: existing});
         return existing;
     },
 

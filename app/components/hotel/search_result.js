@@ -5,11 +5,13 @@ const Anchor = require('../shared/anchor');
 const ApartmentFilterHelper = require('../../helpers/apartment_filter_helper');
 const ApartmentHelper = require('../../helpers/apartment_helper');
 const ReactSlider = require('react-slider');
+var Select = require('react-select');
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 
 
 import MDSpinner from "react-md-spinner";
+
 
 const NoDataResponse = function (props) {
     let {room, children, adult} = props.searchInfo;
@@ -24,6 +26,45 @@ const NoDataResponse = function (props) {
     return (
         <strong> {message} </strong>
     );
+}
+
+class ShowResults  extends React.Component {
+    onShowResultsChanged(val) {
+        Actions.filterCriteriaUpdated({'showMe' : val.value});
+    }
+
+    render() {
+        var options = [
+            { value: 500, label: 'All' },
+            { value: 50,  label: '50' },
+            { value: 20,  label: '20' },
+            { value: 10,  label: '10' },
+            { value: 5,   label: '5' }
+        ];
+
+        return (
+            <Select {...this.props}  placeholder='All' clearable={false}  searchable={true}  options={options} onChange={this.onShowResultsChanged.bind(this)} />
+        );
+    }
+}
+
+class SortByResults  extends React.Component {
+
+    onSortByResultsChanged(val) {
+        Actions.filterCriteriaUpdated({'sortBy' : val.value});
+    }
+
+    render() {
+        var options = [
+            { value: 'popularity', label: 'Popularity' },
+            { value: 'cheapest-first', label: 'Cheapest First' },
+            { value: 'expensive-first', label: 'Expensive First' }
+        ];
+
+        return (
+            <Select {...this.props} placeholder='popularity' clearable={false}  searchable={true}  options={options} onChange={this.onSortByResultsChanged.bind(this)} />
+        );
+    }
 }
 
 class PriceFilters extends React.Component {
@@ -43,10 +84,6 @@ class PriceFilters extends React.Component {
 
         return (
             <div className="price-filter">
-                <h3 className="mg-widget-filter-title">Price/per night, in US Dollars</h3>
-                <div className="price-filter-captions">
-                    <span className="font-size-15">Min Price: <span className="font-weight-400">${min} </span></span> &nbsp; <span className="font-size-15">Max Price: <span className="font-weight-400">${max} </span></span>
-                </div>
                 <ReactSlider  className="horizontal-slider" defaultValue={defValue} withBars={true} min={minPrice} max={maxPrice} step={5} minDistance={5} onAfterChange={this.onPriceFilterChanged.bind(this)} >
                     <div className="my-handle"><span className="font-size-15 font-weight-400">${min}</span></div>
                     <div className="my-handle"><span className="font-size-15 font-weight-400">${max}</span></div>
@@ -95,8 +132,6 @@ class StarRating extends React.Component {
     render () {
         return (
             <div>
-                <h3 className="mg-widget-filter-title">Star Rating</h3>
-
                 <CheckboxGroup name="starRating" value={this.props.starRating}  onChange={this.onStarRatingFilterChanged.bind(this)}>
                     <div className="mg-options"><Checkbox value='0'/> <span>Unrated</span></div>
                     <div className="mg-options"><Checkbox value='1'/> <span>1 Star</span></div>
@@ -120,7 +155,6 @@ class  PropertyType extends  React.Component {
     render() {
         return (
             <div>
-                <h3 className="mg-widget-filter-title">Property Type</h3>
                 <CheckboxGroup name="propertyType"  value={this.props.propertyType} onChange={this.onPropertyTypeChanged.bind(this)}>
                     <div className="mg-options"><Checkbox value='hotel'/> <span>Hotels</span></div>
                     <div className="mg-options"><Checkbox value='suite'/> <span>Suites</span></div>
@@ -149,7 +183,6 @@ class Location extends React.Component{
 
         return (
             <div>
-                <h3 className="mg-widget-filter-title">Neighborhood</h3>
                 <CheckboxGroup name="location"  value={this.props.locations} onChange={this.onLocationChanged.bind(this)}>
                     {styledHoods}
                 </CheckboxGroup>
@@ -158,19 +191,97 @@ class Location extends React.Component{
     }
 }
 
-const Filters = function (props) {
-    let filterCriteria = props.filterCriteria;
-    return (
-        <div className="mg-widget-area">
-            <aside className="mg-widget-filter">
-                <PropertyType propertyType={filterCriteria.propertyType} />
-                <PriceFilters priceRange={filterCriteria.priceRange} />
-                <StarRating starRating={filterCriteria.starRating} />
-                <Location locations={filterCriteria.locations} />
+class Filters extends React.Component {
 
-            </aside>
-        </div>
-    );
+    onResetFiltersClicked() {
+        Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
+        window.scrollTo(0, 40);
+    }
+
+    render() {
+        let filterCriteria = this.props.filterCriteria;
+        return (
+            <div className="mg-widget-area">
+                <div className="filter-by-block">
+                <h1>Filter By</h1>
+                    <div className="panel-group" id="accordion">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h2 className="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        Property Type
+                                        <i className="fa fa-angle-down"></i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" className="panel-collapse collapse in">
+                                <div className="panel-body">
+                                    <PropertyType propertyType={filterCriteria.propertyType} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion-v2">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h2 className="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-v2" href="#collapseTwo">
+                                        Price Per Night
+                                        <i className="fa fa-angle-down"></i>
+                                    </a>
+                                </h2>
+                            </div>
+                                <div id="collapseTwo" className="panel-collapse collapse in">
+                                <div className="panel-body">
+                                    <PriceFilters priceRange={filterCriteria.priceRange} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion-v3">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h2 className="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-v3" href="#collapseThree">
+                                        Star Rating
+                                        <i className="fa fa-angle-down"></i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" className="panel-collapse collapse in">
+                                <div className="panel-body">
+                                    <StarRating starRating={filterCriteria.starRating} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="panel-group" id="accordion-v4">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">
+                                <h2 className="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion-v4" href="#collapseFour">
+                                        Neighborhood
+                                        <i className="fa fa-angle-down"></i>
+                                    </a>
+                                </h2>
+                            </div>
+                            <div id="collapseFour" className="panel-collapse collapse in">
+                                <div className="panel-body">
+                                    <Location locations={filterCriteria.locations} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" className="btn-u btn-brd btn-brd-hover btn-u-lg btn-u-sea-shop btn-block" onClick={this.onResetFiltersClicked.bind(this)}>Reset</button>
+
+                </div>
+            </div>
+        )
+    }
 }
 
 
@@ -217,15 +328,35 @@ class SearchResult extends React.Component {
                         <div className="mg-available-rooms">
                             <div className = "row">
                                 <div className= "col-md-3">
-                                    <span className="mg-sec-left-title">Filtered By </span>
-                                    <div className="mg-avl-rooms">
-                                        <Filters filterCriteria= {filterCriteria} filteredApartments={filteredApartments} apartments={apartments} />
-                                    </div>
+                                    <Filters filterCriteria= {filterCriteria} filteredApartments={filteredApartments} apartments={apartments} />
                                 </div>
                                 <div className= "col-md-9">
-                                    <span className="mg-sec-left-title">Available Accommodations : </span> <span className="mg-sec-left-sub-title">{filteredApartments.length} Properties</span>
-                                    <div className="mg-avl-rooms">
-                                        {availableApartments}
+                                    <div className="row margin-bottom-5">
+                                        <div className="col-sm-5 result-category">
+                                            <h2>Results</h2>
+                                            <small className="shop-bg-red badge-results">{filteredApartments.length}</small>
+                                        </div>
+                                        <div className="col-sm-7">
+                                            <ul className="list-inline clear-both">
+                                                <li></li>
+                                                <li className="sort-list-btn">
+                                                    <h3>Sort By :</h3>
+                                                    <SortByResults className="sort-results-combo" value= {filterCriteria.sortBy} filteredApartments={filteredApartments}/>
+                                                </li>
+                                                <li className="sort-list-btn">
+                                                    <h3>Show :</h3>
+                                                    <ShowResults className="show-results-combo" value= {filterCriteria.showMe} filteredApartments={filteredApartments} />
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className= "col-md-12">
+                                            <div className="mg-avl-rooms">
+                                                {availableApartments}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

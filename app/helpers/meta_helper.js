@@ -53,8 +53,8 @@ module.exports = {
         "description": "UgandaBooking.com’s Official Website! Located in Uganda and have hundreds of hotels online. Get Instant Confirmation · No Booking Fees · Cheap Price",
         "keywords": "guest houses, bed and breakfast,  accommodation, guesthouses, cheap hotels in uganda, cheap guesthouses, guesthouses in kampala ,guesthouses in uganda, affordable accommodation in uganda, safari guesthouses in uganda, hotels in uganda, hotels in kampala, "
       },
-      "/my-account/": {
-        "url_path": "/my-account/",
+      "/seeker-account/": {
+        "url_path": "/seeker-account/",
         "title": "UgandaBooking.com - My Account",
         "description": "UgandaBooking.com’s Official Website! Located in Uganda and have hundreds of hotels online. Get Instant Confirmation · No Booking Fees · Cheap Price",
         "keywords": "guest houses, bed and breakfast,  accommodation, guesthouses, cheap hotels in uganda, cheap guesthouses, guesthouses in kampala ,guesthouses in uganda, affordable accommodation in uganda, safari guesthouses in uganda, hotels in uganda, hotels in kampala, "
