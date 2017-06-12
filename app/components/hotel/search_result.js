@@ -36,10 +36,10 @@ class ShowResults  extends React.Component {
     render() {
         var options = [
             { value: 500, label: 'All' },
-            { value: 50,  label: 'Top 50' },
-            { value: 20,  label: 'Top 20' },
-            { value: 10,  label: 'Top 10' },
-            { value: 5,   label: 'Top 5' }
+            { value: 50,  label: '50' },
+            { value: 20,  label: '20' },
+            { value: 10,  label: '10' },
+            { value: 5,   label: '5' }
         ];
 
         return (

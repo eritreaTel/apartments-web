@@ -3,6 +3,7 @@ const DatePicker = require('react-bootstrap-date-picker');
 var Select = require('react-select');
 const Actions = require('../../actions/actions');
 const DateHelper = require('../../helpers/date_helper');
+const ApartmentFilterHelper = require('../../helpers/apartment_filter_helper');
 const Constants = require('../../helpers/constants');
 
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -136,7 +137,7 @@ class SearchControls extends React.Component {
 
         //Sequence of actions matters
         //Actions.saveUserSearches(searchInfo);  - Disable it for now.
-        Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations:[]});
+        Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
 
         let isProcessing = {searchingApartments: true};
         Actions.setIsProcessing(isProcessing);
