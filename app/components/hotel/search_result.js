@@ -5,11 +5,13 @@ const Anchor = require('../shared/anchor');
 const ApartmentFilterHelper = require('../../helpers/apartment_filter_helper');
 const ApartmentHelper = require('../../helpers/apartment_helper');
 const ReactSlider = require('react-slider');
+var Select = require('react-select');
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 
 
 
 import MDSpinner from "react-md-spinner";
+
 
 const NoDataResponse = function (props) {
     let {room, children, adult} = props.searchInfo;
@@ -24,6 +26,45 @@ const NoDataResponse = function (props) {
     return (
         <strong> {message} </strong>
     );
+}
+
+class ShowResults  extends React.Component {
+    onShowResultsChanged(val) {
+        Actions.filterCriteriaUpdated({'showMe' : val.value});
+    }
+
+    render() {
+        var options = [
+            { value: 500, label: 'All' },
+            { value: 50,  label: 'Top 50' },
+            { value: 20,  label: 'Top 20' },
+            { value: 10,  label: 'Top 10' },
+            { value: 5,   label: 'Top 5' }
+        ];
+
+        return (
+            <Select {...this.props}  placeholder='All' clearable={false}  searchable={true}  options={options} onChange={this.onShowResultsChanged.bind(this)} />
+        );
+    }
+}
+
+class SortByResults  extends React.Component {
+
+    onSortByResultsChanged(val) {
+        Actions.filterCriteriaUpdated({'sortBy' : val.value});
+    }
+
+    render() {
+        var options = [
+            { value: 'popularity', label: 'Popularity' },
+            { value: 'cheapest-first', label: 'Cheapest First' },
+            { value: 'expensive-first', label: 'Expensive First' }
+        ];
+
+        return (
+            <Select {...this.props} placeholder='popularity' clearable={false}  searchable={true}  options={options} onChange={this.onSortByResultsChanged.bind(this)} />
+        );
+    }
 }
 
 class PriceFilters extends React.Component {
@@ -223,9 +264,28 @@ class SearchResult extends React.Component {
                                     </div>
                                 </div>
                                 <div className= "col-md-9">
-                                    <span className="mg-sec-left-title">Available Accommodations : </span> <span className="mg-sec-left-sub-title">{filteredApartments.length} Properties</span>
-                                    <div className="mg-avl-rooms">
-                                        {availableApartments}
+                                    <div className = "row">
+                                        <div className= "col-md-6">
+                                            <span className="mg-sec-left-title">Accommodations : </span> <span className="mg-sec-left-sub-title fg-white bg-red">{filteredApartments.length} results</span>
+                                        </div>
+                                        <div className= "col-md-1">
+                                            <span className="mg-sec-left-sub-title">Show: </span>
+                                        </div>
+                                        <div className= "col-md-2">
+                                            <ShowResults className="show-results-combo" value= {filterCriteria.showMe} filteredApartments={filteredApartments} />
+                                        </div>
+                                        <div className= "col-md-1">
+                                            <span className="mg-sec-left-sub-title">Sort:</span>
+                                        </div>
+                                        <div className= "col-md-2">
+                                            <SortByResults className="sort-results-combo" value= {filterCriteria.sortBy} filteredApartments={filteredApartments}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="ror mg-avl-rooms">
+                                        <div className= "col-md-12">
+                                            {availableApartments}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

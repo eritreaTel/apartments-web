@@ -41,7 +41,10 @@ module.exports = {
                                 'propertyType' : [],
                                 'priceRange' : [],
                                 'starRating' : [],
-                                'locations' : []
+                                'locations' : [],
+                                'showMe' : 500,
+                                'sortBy' : 'popularity'
+
                             },
                             additional  : {},
                             personal    : {},

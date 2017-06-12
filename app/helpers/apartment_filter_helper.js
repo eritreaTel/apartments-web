@@ -72,6 +72,26 @@ const ApartmentFilterHelper = {
         return filteredApartments;
     },
 
+    filterByShowMe(showMe, apartments) {
+        if (showMe == null || showMe == undefined || showMe == '500') {
+            return apartments;
+        }
+        return _.slice(apartments, 0, showMe);
+    },
+
+    sortByCriteria(sortBy, apartments){
+        if (sortBy == null || sortBy == undefined || sortBy =='popularity') {
+            return apartments;
+        }
+
+        //Parameters of _.orderBy looks weird, but it works, so we are good for now.
+        if (sortBy == 'cheapest-first') {
+            return _.orderBy(apartments, ['apartment', 'totalPrice'], ['desc', 'asc']);
+        } else if (sortBy == 'expensive-first') {
+            return _.orderBy(apartments, ['apartment', 'totalPrice'], ['asc', 'desc'])
+        }
+    },
+
     getNeighborhoods() {
         return (
             [
