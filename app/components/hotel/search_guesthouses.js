@@ -138,6 +138,7 @@ class SearchControls extends React.Component {
         //Sequence of actions matters
         //Actions.saveUserSearches(searchInfo);  - Disable it for now.
         Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
+        //ApartmentFilterHelper.resetSearchCriteria();
 
         let isProcessing = {searchingApartments: true};
         Actions.setIsProcessing(isProcessing);

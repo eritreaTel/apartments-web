@@ -94,6 +94,8 @@ const ApartmentFilterHelper = {
     },
 
     resetSearchCriteria() {
+        //Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
+        //There is some problem with the above method.
 
     },
 
