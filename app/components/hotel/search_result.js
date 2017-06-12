@@ -195,6 +195,7 @@ class Filters extends React.Component {
 
     onResetFiltersClicked() {
         Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
+        window.scrollTo(0, 40);
     }
 
     render() {
