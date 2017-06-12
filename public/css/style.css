@@ -3040,7 +3040,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   padding: 20px 35px;
 }
 .mg-available-rooms {
-  padding: 70px 0;
+  padding: 40px 0;
 }
 .mg-available-rooms .mg-avl-room {
   padding-bottom: 80px;
@@ -3288,65 +3288,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
   background-color: #f8f9f9;
   color: #16262e;
 }
-.panel {
-  border-radius: 1px;
-  box-shadow: none;
-  border-color: #eaedee;
-}
-.panel.panel-default .panel-heading {
-  border-color: #eaedee;
-  background-color: #fff;
-  padding: 0;
-}
-.panel.panel-default .panel-heading a {
-  display: block;
-  padding: 10px 15px;
-  position: relative;
-  color: #e7b315;
-  outline-width: 0;
-}
-.panel.panel-default .panel-heading a:after {
-  content: '';
-  width: 21px;
-  height: 1px;
-  background-color: #e7b315;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-}
-.panel.panel-default .panel-heading a:before {
-  content: '';
-  width: 1px;
-  height: 21px;
-  background-color: #e7b315;
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  margin-top: -10px;
-  -webkit-transform: scale(0);
-      -ms-transform: scale(0);
-          transform: scale(0);
-  -webkit-transition: -webkit-transform 0.5s ease 0.2s;
-          transition: transform 0.5s ease 0.2s;
-}
-.panel.panel-default .panel-heading a.collapsed {
-  color: #16262e;
-}
-.panel.panel-default .panel-heading a.collapsed:before {
-  background-color: #16262e;
-  -webkit-transform: scale(1);
-      -ms-transform: scale(1);
-          transform: scale(1);
-}
-.panel.panel-default .panel-heading a.collapsed:after {
-  background-color: #16262e;
-}
-.panel.panel-default .panel-heading .panel-title {
-  font-size: 19px;
-}
-.panel.panel-default .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #eaedee;
-}
+
 .mg-footer-widget {
   background-color: #16262e;
   padding: 70px 0 20px;
@@ -4672,10 +4614,12 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 .mg-options {
   padding-bottom: 5px;
   padding-left: 5px;
+  font-size: 15px;
 }
 
 .mg-avl-rooms {
-  margin-top:50px;
+  padding: 40px 0;
+  border-top: 1px solid #dedede;
 }
 
 .mg-sec-left-sub-title {
@@ -4696,7 +4640,8 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .price-filter {
-  height: 135px;
+  height: 65px;
+  margin-top: 15px;
 }
 
 .price-filter-captions {
@@ -5261,5 +5206,163 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .sort-results-combo, .show-results-combo {
-  margin-top: -8px;
+  display: inline-block;
+  width:125px;
+  margin-top: 12px;
+}
+
+
+/*Filter By Block
+------------------------------------*/
+/*Panel Group*/
+.filter-by-block h1 {
+  color: #fff;
+  width: 100%;
+  font-size: 24px;
+  padding: 7px 10px;
+  text-align: center;
+  background: #18ba9b;
+  text-transform: uppercase;
+}
+
+.filter-by-block .panel-default {
+  border-color: #dedede;
+}
+
+.filter-by-block .panel-heading {
+  padding: 0;
+  background: inherit;
+}
+
+.filter-by-block .panel-title {
+  overflow: hidden;
+}
+
+.filter-by-block .panel-group h2 a {
+  color: #687074;
+  display: block;
+  font-size: 20px;
+  padding: 10px 15px;
+  border-bottom: 1px solid #dedede;
+}
+
+.filter-by-block .panel-group h2 i {
+  float: right;
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.filter-by-block .panel-group h2 a:hover {
+  color: #687074;
+  text-decoration: none;
+}
+
+.filter-by-block .panel-body {
+  padding: 15px 20px;
+  border-top: none !important;
+}
+
+/*Result Category*/
+.result-category {
+  /*background: #000;*/
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.result-category h2 {
+  float: left;
+  font-size: 30px;
+  margin-right: 20px;
+  text-transform: uppercase;
+  text-shadow: none;
+  font-weight: normal;
+  color : #687074;
+}
+
+.result-category .badge-results {
+  top: 24px;
+  color: #fff;
+  font-size: 18px;
+  padding: 3px 8px;
+  position: relative;
+}
+
+/*Shop Background Red*/
+.shop-bg-red {
+  background: #c9253c;
+}
+
+/*Sort List Button*/
+.sort-list-btn {
+  float: right;
+  margin: 6px 0px 0 10px;
+}
+
+.sort-list-btn h3 {
+  float: left;
+  color: #555;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.sort-list-btn .btn {
+  margin-top: 2px;
+}
+
+.sort-list-btn .btn .caret {
+  margin-left: 50px;
+}
+
+.sort-list-btn .btn-default {
+  color: #999;
+  font-size: 13px;
+  border-color: #dedede;
+}
+
+.sort-list-btn .btn-default:hover,
+.sort-list-btn .btn-default:focus,
+.sort-list-btn .btn-default:active,
+.sort-list-btn .btn-default.active,
+.sort-list-btn .open > .dropdown-toggle.btn-default {
+  color: #999;
+  box-shadow: none;
+  background: inherit;
+  border-color: #dedede;
+}
+
+.sort-list-btn .dropdown-menu {
+  box-shadow: 0 5px 5px 0px rgba(90,90,90,0.075);
+}
+
+.sort-list-btn .dropdown-menu li a {
+  color: #999;
+  font-size: 12px;
+}
+
+ul.list-inline {
+  margin-left: 0;
+}
+
+.list-inline li {
+  padding-right: 0px !important;
+}
+
+.clear-both { clear: both;}
+
+/*Button Bordered Sea Shop*/
+.btn-u.btn-brd.btn-u-sea-shop {
+  color: #18ba9b;
+  background: none;
+  border-color: #18ba9b;
+}
+.btn-u.btn-brd.btn-u-sea-shop:hover {
+  color: #18ba9b;
+  border-color: #18ba9b;
+}
+.btn-u.btn-brd.btn-u-sea-shop.btn-brd-hover:hover {
+  background: #18ba9b;
+}
+.btn-u-lg {
+  font-size: 18px;
+  padding: 10px 25px;
 }

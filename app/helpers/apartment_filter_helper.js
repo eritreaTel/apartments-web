@@ -1,6 +1,5 @@
 const DateHelper = require('./date_helper');
 const ApplicationHelper = require('./application_helper');
-const Actions = require('../actions/actions');
 const ApartmentFilterHelper = {
 
     filterApartmentByType(propertyTypes, apartments) {
@@ -91,12 +90,6 @@ const ApartmentFilterHelper = {
         } else if (sortBy == 'expensive-first') {
             return _.orderBy(apartments, ['apartment', 'totalPrice'], ['asc', 'desc'])
         }
-    },
-
-    resetSearchCriteria() {
-        //Actions.filterCriteriaUpdated({propertyType : [], priceRange : [], starRating : [], locations: [], showMe : 500, sortBy : 'popularity'});
-        //There is some problem with the above method.
-
     },
 
     getNeighborhoods() {
