@@ -232,12 +232,12 @@ class PersonalInfo extends React.Component {
                                     </div>
                                 </div>
 
-                                <div className="col-md-4">
+                                <div className="col-md-5">
                                     <div className="mg-book-form-input">
                                         <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - 15% of total price.
                                     </div>
                                 </div>
-                                <div className="col-md-5">
+                                <div className="col-md-4">
                                     <div className="mg-book-form-input">
                                         <input disabled={disabled} type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later, at check-in.
                                     </div>
