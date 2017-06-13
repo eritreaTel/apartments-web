@@ -75,7 +75,8 @@ module.exports = {
                                 'activeLink' : 'edit-accommodation',
                                 'myApartments' : null,
                                 'guestHouse' : null,
-                                'updateGuestHouseInfo' : null
+                                'updateGuestHouseInfo' : null,
+                                'updateApartmentInfo' : {}
                             }
                         },
                         blogs : null,
@@ -109,8 +110,7 @@ module.exports = {
                             'searchingApartments' : false,
                             'loadingTrip' : false,
                             'loadingOtherRoomsInHotel' : false,
-                            'updatingGuestHouse' : false,
-                            'updatingApartment' : false
+                            'updatingGuestHouse' : false
                         }
                     }
                 };

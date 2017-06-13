@@ -97,5 +97,35 @@ module.exports = {
             this.releaseLock('updateGuestHouse');
             return this.dispatch({type: 'prepareResponse'});
         }
+    },
+
+    async updateApartment(data) {
+        let url = "owner/update_apartment/" + data.id + "?XDEBUG_SESSION_START='PHPSTORM'";
+        this.setStoreVal('requestUrl', url);
+
+        if (this.acquireLock('updateApartment')) {
+            try {
+                const response = await FetchHelper.fetchJson(url, {body: data , method: 'PUT'});
+                const {results, errors} = ResponseHelper.processResponseReturnMany(response);
+                if (errors.length > 0) {
+                    await this.dispatch({type: 'setErrorMessages', data: {errors}});
+                } else {
+                    let userServices = this.getStoreVal('userServices');
+                    userServices.ownerUserInfo.myApartments = results;
+                    this.setStoreVal('userServices', userServices);
+                }
+
+            } catch (error) {
+                await this.dispatch({
+                    type: 'handleRequestError',
+                    data: {
+                        error,
+                        defaultErrorMessage: 'Cannot update room. Please try again'
+                    }
+                });
+            }
+            this.releaseLock('updateApartment');
+            return this.dispatch({type: 'prepareResponse'});
+        }
     }
 };

@@ -125,6 +125,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'guestHouseInfoUpdated', data});
     },
 
+    apartmentInfoUpdated(data) {
+        return Dispatcher.dispatch({type: 'apartmentInfoUpdated', data});
+    },
+
     ownerUserInfoUpdated(data) {
         return Dispatcher.dispatch({type: 'ownerUserInfoUpdated', data});
     },
@@ -215,6 +219,10 @@ const Actions = {
 
     updateGuestHouse(data) {
         return Dispatcher.dispatch({type: 'updateGuestHouse', data});
+    },
+
+    updateApartment(data) {
+        return Dispatcher.dispatch({type: 'updateApartment', data});
     },
 
     saveUserSearches(data) {

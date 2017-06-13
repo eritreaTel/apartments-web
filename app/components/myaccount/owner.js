@@ -50,8 +50,8 @@ class EditGuestHouseSection extends React.Component {
 		let isProcessing = {updatingGuestHouse: true};
 		Actions.setIsProcessing(isProcessing);
 
-		const updateUserPromise = Actions.updateGuestHouse({ owner_id, guest_house_id , ...updateGuestHouseInfo});
-		updateUserPromise.then(response => {
+		const updateGuesthousePromise = Actions.updateGuestHouse({ owner_id, guest_house_id , ...updateGuestHouseInfo});
+		updateGuesthousePromise.then(response => {
 			if (response.status == 'fail') {
 				NotificationManager.error(response.error, 'Update Accommodation Information', Constants.ERROR_DISPLAY_TIME);
 			} else {
@@ -174,10 +174,126 @@ class EditGuestHouseSection extends React.Component {
 	}
 }
 
-class EditRooms extends React.Component {
+class EditOneRoom extends React.Component {
+
+	componentDidMount() {
+		this.refs.bed.focus();
+	}
 
 	render() {
-		const {ownerUserInfo : {myApartments, activeLink, editingRoomInfo}, isProcessing : {updatingApartment}} = this.props;
+		let {apartment, updateApartmentInfo, user} = this.props;
+		let {title, maximum_people, maximum_adult, maximum_child} = apartment;
+		let {bed, num_of_apartments, free_count} = updateApartmentInfo;
+		let userId = user.id;
+
+		bed = (bed == null || bed == undefined) ? apartment.bed : bed;
+		num_of_apartments = (num_of_apartments == null || num_of_apartments == undefined) ? apartment.num_of_apartments :  num_of_apartments ;
+		free_count = (free_count == null || free_count == undefined) ? apartment.free_count : free_count;
+
+
+		let disabled = false;
+		return (
+			<div>
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Room Title:
+					</div>
+					<div className="col-md-8">
+						<input placeholder="title" value={title} disabled={true} ref="title" type="text" className="input-with-validation form-control" />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Bed
+					</div>
+					<div className="col-md-8">
+						<input placeholder="bed" value={bed} disabled={disabled} ref="bed" type="text" className="input-with-validation form-control"  onChange={()=>{Actions.apartmentInfoUpdated({'bed': this.refs.bed.value, 'id' : apartment.id, 'owner_id' : userId})}} />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Number of Rooms
+					</div>
+					<div className="col-md-8">
+						<input placeholder="Number of Rooms" value={num_of_apartments} disabled={disabled} ref="num_of_apartments" type="text" className="input-with-validation form-control" onChange={()=>{Actions.apartmentInfoUpdated({'num_of_apartments': this.refs.num_of_apartments.value, 'id' : apartment.id, 'owner_id' : userId} )}} />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						<strong>Number of Free Rooms</strong>
+					</div>
+					<div className="col-md-8">
+						<input placeholder="Number Free Rooms" value={free_count} disabled={disabled} ref="free_count" type="text" className="input-with-validation form-control" onChange={()=>{Actions.apartmentInfoUpdated({'free_count': this.refs.free_count.value, 'id' : apartment.id,  'owner_id' : userId})}} />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Max Number of People
+					</div>
+					<div className="col-md-8">
+						<input placeholder="Maximum Number of People" value={maximum_people} disabled={true} ref="maximum_people" type="text" className="input-with-validation form-control" />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Max Number of Adults
+					</div>
+					<div className="col-md-8">
+						<input placeholder="Maximum Number of Adults" value={maximum_adult} disabled={true} ref="maximum_adult" type="text" className="input-with-validation form-control" />
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-md-4 margin-top-10">
+						Max Number of Children
+					</div>
+					<div className="col-md-8">
+						<input placeholder="Maximum Number of Children" value={maximum_child} disabled={true} ref="maximum_child" type="text" className="input-with-validation form-control" />
+					</div>
+				</div>
+
+			</div>
+		)
+	}
+}
+
+class EditRooms extends React.Component {
+
+	updateApartment() {
+		const {ownerUserInfo : {updateApartmentInfo : {id, bed, num_of_apartments, free_count, owner_id}}} = this.props;
+		//There is something to update, otherwise - there is nothing to update.
+		if (id != null) {
+			let data = {id};
+			if (bed != null) {data = {bed, ...data}};
+			if (num_of_apartments != null) {data = {num_of_apartments, ...data}};
+			if (free_count != null) {data = {free_count, ...data}};
+			if (owner_id != null) {data = {owner_id, ...data}};
+
+			const updateApartmentPromise = Actions.updateApartment(data);
+			updateApartmentPromise.then(response => {
+				if (response.status == 'fail') {
+					NotificationManager.error(response.error, 'Update Room', Constants.ERROR_DISPLAY_TIME);
+				} else {
+					NotificationManager.success('Your room changes have been saved.', 'Update Room', Constants.SUCCESS_DISPLAY_TIME);
+				}
+			});
+		} else {
+			NotificationManager.info('You did not change anything, yet.', 'Update Room', Constants.SUCCESS_DISPLAY_TIME);
+		}
+	}
+
+	resetUpdateApartmentInfo() {
+		console.log('here in reset apartment');
+		Actions.apartmentInfoUpdated({"bed" : null, "num_of_apartments" : null, "free_count" : null, "id" : null})
+	}
+
+	render() {
+		const {ownerUserInfo : {myApartments, activeLink, updateApartmentInfo}, user} = this.props;
 		let className = activeLink == 'edit-rooms' ? "tab-pane fade in active" : "tab-pane fade";
 
 		let content = <tr><td/><td/><td/><td/><td><MDSpinner /> </td> <td/><td/><td/></tr>
@@ -195,9 +311,19 @@ class EditRooms extends React.Component {
 									<td> {apartment.maximum_adult} </td>
 									<td> {apartment.maximum_child} </td>
 									<td>
-										<button className="btn-u" data-toggle="modal" data-target={dataTarget}>Modal Form Sample</button>
-										<Modal apartment={apartment}>
-											<span> This is edit room contents </span>
+										<button className="btn btn-warning btn-xs" data-toggle="modal" data-target={dataTarget}><i className="fa fa-pencil" /> Edit</button>
+										<Modal  modalId= {modalId}>
+											<div className="modal-header">
+												<button onClick={this.resetUpdateApartmentInfo.bind(this)} type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<h4 className="modal-title" id="myModalLabel4">Editing: {apartment.title}</h4>
+											</div>
+											<div className="modal-body">
+												<EditOneRoom user={user}  updateApartmentInfo={updateApartmentInfo} apartment={apartment}> </EditOneRoom>
+											</div>
+											<div className="modal-footer">
+												<button onClick={this.resetUpdateApartmentInfo.bind(this)} type="button" className="btn-u btn-u-default margin-right-20" data-dismiss="modal">Close</button>
+												<button onClick={this.updateApartment.bind(this)} type="button" className="btn-u btn-u-primary">Save changes</button>
+											</div>
 										</Modal>
 									</td>
 								</tr>
@@ -276,7 +402,7 @@ class Owner extends React.Component {
 		return (
 			<OwnerBody ownerUserInfo = {ownerUserInfo}>
 				<EditGuestHouseSection user={user} ownerGuestHouse={ownerGuestHouse} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing} />
-				<EditRooms ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
+				<EditRooms user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
 			</OwnerBody>
 		);
 	}

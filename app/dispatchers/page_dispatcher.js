@@ -120,6 +120,20 @@ module.exports = {
         return existing;
     },
 
+    async apartmentInfoUpdated(data) {
+        let userServices = this.getStoreVal('userServices');
+        let {ownerUserInfo} = userServices
+        let existing = (ownerUserInfo.updateApartmentInfo != null) ? ownerUserInfo.updateApartmentInfo : {};
+
+        await _.forEach(data, function(value, key) {
+            existing[key] = value;
+        });
+
+        userServices.ownerUserInfo.updateApartmentInfo = existing;
+        this.setStoreVal('userServices', userServices);
+        return existing;
+    },
+
     async ownerUserInfoUpdated(data){
         let userServices = this.getStoreVal('userServices');
         let existing = userServices.ownerUserInfo;
