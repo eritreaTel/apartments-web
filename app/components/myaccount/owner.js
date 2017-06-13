@@ -4,6 +4,7 @@ const Constants = require('../../helpers/constants');
 const Actions = require('../../actions/actions');
 import MDSpinner from "react-md-spinner";
 const FormValidator = require('../../helpers/form_validation_helper');
+const Modal = require('../shared/modal');
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
@@ -176,8 +177,32 @@ class EditGuestHouseSection extends React.Component {
 class EditRooms extends React.Component {
 
 	render() {
-		const {ownerUserInfo, isProcessing : {updatingApartment}} = this.props;
-		let className = ownerUserInfo.activeLink == 'edit-rooms' ? "tab-pane fade in active" : "tab-pane fade";
+		const {ownerUserInfo : {myApartments, activeLink, editingRoomInfo}, isProcessing : {updatingApartment}} = this.props;
+		let className = activeLink == 'edit-rooms' ? "tab-pane fade in active" : "tab-pane fade";
+
+		let content = <tr><td/><td/><td/><td/><td><MDSpinner /> </td> <td/><td/><td/></tr>
+		let disabled = true;
+		if (myApartments != null) {
+			 content = myApartments.map(apartment =>{
+					 	 let modalId = "apartment" + apartment.id;
+						 let dataTarget = "#" + modalId;
+						 return <tr  key={apartment.id}>
+									<td> {apartment.title} </td>
+									<td> {apartment.bed} </td>
+									<td> {apartment.num_of_apartments} </td>
+									<td> <strong>{apartment.free_count}</strong> </td>
+									<td> {apartment.maximum_people} </td>
+									<td> {apartment.maximum_adult} </td>
+									<td> {apartment.maximum_child} </td>
+									<td>
+										<button className="btn-u" data-toggle="modal" data-target={dataTarget}>Modal Form Sample</button>
+										<Modal apartment={apartment}>
+											<span> This is edit room contents </span>
+										</Modal>
+									</td>
+								</tr>
+						});
+		}
 
 		return(
 			<div role="tabpanel" className={className} id="edit-rooms">
@@ -185,7 +210,27 @@ class EditRooms extends React.Component {
 					<div className="col-md-12">
 						<div className="row">
 							<div className="col-md-12">
-								I am here dude
+
+								<div className="panel panel-sea">
+									<table className="table table-hover">
+										<thead>
+											<tr>
+												<th>Title</th>
+												<th>Beds</th>
+												<th>Total Count</th>
+												<th>Free Count</th>
+												<th>Max People</th>
+												<th>Max Adults</th>
+												<th>Max Children</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											{content}
+										</tbody>
+									</table>
+								</div>
+
 							</div>
 						</div>
 					</div>

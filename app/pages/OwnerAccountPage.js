@@ -22,10 +22,11 @@ const MyAccountBody = function(props) {
 
 class OwnerAccountPage extends React.Component {
     componentWillMount(){
-        const {store : {user}} = this.props;
+        const {store : {user, ownerGuestHouse}} = this.props;
         if (user.type != 'owner') {
             Actions.setRoute('/sign-in');
         }
+
     }
 
     render() {

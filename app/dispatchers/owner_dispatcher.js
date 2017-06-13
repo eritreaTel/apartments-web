@@ -5,7 +5,7 @@ const CookiesHelper = require('../helpers/cookies_helper');
 module.exports = {
 
     async getApartmentsByOwner({ownerId}) {
-        let url = 'owner/my_apartments?owner_id=' + ownerId;
+        let url = 'owner/get_my_apartments?owner_id=' + ownerId;
         let {ownerUserInfo : {myApartments}} = this.getStoreVal('userServices');
 
         if ( url !== this.getStoreVal('requestUrl') || myApartments == null ) {
