@@ -181,7 +181,7 @@ class EditOneRoom extends React.Component {
 	}
 
 	render() {
-		let {apartment, updateApartmentInfo, user} = this.props;
+		let {isProcessing : {updatingApartment}, apartment, updateApartmentInfo, user} = this.props;
 		let {title, maximum_people, maximum_adult, maximum_child} = apartment;
 		let {bed, num_of_apartments, free_count} = updateApartmentInfo;
 		let userId = user.id;
@@ -191,7 +191,7 @@ class EditOneRoom extends React.Component {
 		free_count = (free_count == null || free_count == undefined) ? apartment.free_count : free_count;
 
 
-		let disabled = false;
+		let disabled = updatingApartment;
 		return (
 			<div>
 				<div className="row">
@@ -274,6 +274,10 @@ class EditRooms extends React.Component {
 			if (free_count != null) {data = {free_count, ...data}};
 			if (owner_id != null) {data = {owner_id, ...data}};
 
+
+			let isProcessing = {updatingApartment: true};
+			Actions.setIsProcessing(isProcessing);
+
 			const updateApartmentPromise = Actions.updateApartment(data);
 			updateApartmentPromise.then(response => {
 				if (response.status == 'fail') {
@@ -281,6 +285,9 @@ class EditRooms extends React.Component {
 				} else {
 					NotificationManager.success('Your room changes have been saved.', 'Update Room', Constants.SUCCESS_DISPLAY_TIME);
 				}
+
+				let isProcessing = {updatingApartment: false};
+				Actions.setIsProcessing(isProcessing);
 			});
 		} else {
 			NotificationManager.info('You did not change anything, yet.', 'Update Room', Constants.SUCCESS_DISPLAY_TIME);
@@ -288,16 +295,15 @@ class EditRooms extends React.Component {
 	}
 
 	resetUpdateApartmentInfo() {
-		console.log('here in reset apartment');
 		Actions.apartmentInfoUpdated({"bed" : null, "num_of_apartments" : null, "free_count" : null, "id" : null})
 	}
 
 	render() {
-		const {ownerUserInfo : {myApartments, activeLink, updateApartmentInfo}, user} = this.props;
+		const {isProcessing, ownerUserInfo : {myApartments, activeLink, updateApartmentInfo}, user} = this.props;
 		let className = activeLink == 'edit-rooms' ? "tab-pane fade in active" : "tab-pane fade";
+		let spinnerClassName = (isProcessing.updatingApartment == true)? 'spinner-inline-display' : 'hide';
 
 		let content = <tr><td/><td/><td/><td/><td><MDSpinner /> </td> <td/><td/><td/></tr>
-		let disabled = true;
 		if (myApartments != null) {
 			 content = myApartments.map(apartment =>{
 					 	 let modalId = "apartment" + apartment.id;
@@ -318,11 +324,12 @@ class EditRooms extends React.Component {
 												<h4 className="modal-title" id="myModalLabel4">Editing: {apartment.title}</h4>
 											</div>
 											<div className="modal-body">
-												<EditOneRoom user={user}  updateApartmentInfo={updateApartmentInfo} apartment={apartment}> </EditOneRoom>
+												<EditOneRoom isProcessing={isProcessing} user={user}  updateApartmentInfo={updateApartmentInfo} apartment={apartment}> </EditOneRoom>
 											</div>
 											<div className="modal-footer">
 												<button onClick={this.resetUpdateApartmentInfo.bind(this)} type="button" className="btn-u btn-u-default margin-right-20" data-dismiss="modal">Close</button>
 												<button onClick={this.updateApartment.bind(this)} type="button" className="btn-u btn-u-primary">Save changes</button>
+												<MDSpinner className={spinnerClassName}  />
 											</div>
 										</Modal>
 									</td>

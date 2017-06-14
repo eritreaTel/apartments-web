@@ -110,7 +110,8 @@ module.exports = {
                             'searchingApartments' : false,
                             'loadingTrip' : false,
                             'loadingOtherRoomsInHotel' : false,
-                            'updatingGuestHouse' : false
+                            'updatingGuestHouse' : false,
+                            'updatingApartment' : false
                         }
                     }
                 };

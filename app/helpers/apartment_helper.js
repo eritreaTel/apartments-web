@@ -39,8 +39,6 @@ const ApartmentHelper = {
         } else {
             let checkInFromCookie = DateHelper.getDateFromString(checkInDate);
             checkInDate = DateHelper.isSameOrAfter(checkInFromCookie)? checkInFromCookie: DateHelper.getTommorrow() ;
-            console.log(checkInDate);
-
         }
 
         if (checkOutDate == null || checkOutDate == undefined) {
