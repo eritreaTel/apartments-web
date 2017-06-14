@@ -39,7 +39,7 @@ class OwnerAccountPage extends React.Component {
                     <div className="margin-bottom-30">
                         <h4> Hello {user.first_name}, it's nice to see you </h4>
                     </div>
-                    <Owner user={user} ownerGuestHouse={ownerGuestHouse} user={user} userServices={userServices} isProcessing={isProcessing}/>
+                    <Owner ownerGuestHouse={ownerGuestHouse} user={user} userServices={userServices} isProcessing={isProcessing}/>
                 </MyAccountBody>
             </div>
         );
