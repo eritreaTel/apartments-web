@@ -149,7 +149,7 @@ const AmenitiesAndControlButtons = function(props) {
 
     return (
         <div className="col-md-5 mg-room-fecilities">
-            <h2 className="mg-sec-left-title">{guestHouse.name} Amenities</h2>
+            <h3 className="mg-sec-left-title">{guestHouse.name} Amenities</h3>
             <Amenities amentiesToDisplay="10" amenities={amenities} outerDivClass="row" innerDivClass="col-sm-6" />
             <div className="row">
                 <div className="col-md-6">
