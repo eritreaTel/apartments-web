@@ -136,7 +136,7 @@ const ApartmentDescription = function(props) {
     return(
         <div className="row mg-single-room-description">
             <div className="col-md-12">
-                <h2 className="mg-sec-left-title">Apartment Description</h2>
+                <h2 className="mg-sec-left-title">{props.guestHouse.name} Description</h2>
                 <div dangerouslySetInnerHTML={{__html: props.longDescription}}></div>
             </div>
         </div>
@@ -144,18 +144,19 @@ const ApartmentDescription = function(props) {
 }
 
 const AmenitiesAndControlButtons = function(props) {
-    let {amenities} = props;
+    let {amenities, apartmentResponse} = props;
+    let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
 
     return (
         <div className="col-md-5 mg-room-fecilities">
-            <h2 className="mg-sec-left-title">Apartment Amenities</h2>
+            <h2 className="mg-sec-left-title">{guestHouse.name} Amenities</h2>
             <Amenities amentiesToDisplay="10" amenities={amenities} outerDivClass="row" innerDivClass="col-sm-6" />
             <div className="row">
                 <div className="col-md-6">
                     <Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark">Keep Searching</Anchor>
                 </div>
                 <div className="col-md-6">
-                    <Anchor onClick = {() => {onBookApartmentPageClicked(props.apartmentResponse.apartmentKey)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
+                    <Anchor onClick = {() => {onBookApartmentPageClicked(apartmentResponse.apartmentKey)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
                 </div>
             </div>
         </div>
@@ -218,7 +219,7 @@ const ApartmentMiddleContent = function (props) {
                     <ApartmentGalleries galleries = {galleries} />
                     <AmenitiesAndControlButtons amenities={amenitiesWithValueOne} apartmentResponse = {apartmentResponse} />
                 </div>
-                <ApartmentDescription longDescription={longDescription} />
+                <ApartmentDescription longDescription={longDescription} guestHouse={guestHouse}/>
                 <ApartmentFacilities guestHouse={guestHouse} amenities={amenities} />
                 {otherRoomsInHotel}
             </div>

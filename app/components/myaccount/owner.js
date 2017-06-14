@@ -373,6 +373,27 @@ class EditRooms extends React.Component {
 	}
 }
 
+class RoomPricing extends React.Component {
+	render() {
+		let {ownerUserInfo : {activeLink}} = this.props;
+		let className = activeLink == 'room-pricing' ? "tab-pane fade in active" : "tab-pane fade";
+
+		return(
+			<div role="tabpanel" className={className} id="room-pricing">
+				<div className="row">
+					<div className="col-md-12">
+						<div className="row">
+							<div className="col-md-12">
+								This feature is under development, please check us on June 25th, 2017.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+
 
 class OwnerBody extends React.Component {
 	render(){
@@ -385,6 +406,9 @@ class OwnerBody extends React.Component {
 					</li>
 					<li role="presentation" className={activeLink == 'edit-rooms'? 'active' : ''}>
 						<a href="#edit-rooms" aria-controls="edit-rooms" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Rooms</a>
+					</li>
+					<li role="presentation" className={activeLink == 'room-pricing'? 'active' : ''}>
+						<a href="#room-pricing" aria-controls="room-pricing" role="tab" data-toggle="tab"><i className="fa fa-pencil"></i> Room Pricing</a>
 					</li>
 				</ul>
 				<div className="tab-content">
@@ -410,6 +434,7 @@ class Owner extends React.Component {
 			<OwnerBody ownerUserInfo = {ownerUserInfo}>
 				<EditGuestHouseSection user={user} ownerGuestHouse={ownerGuestHouse} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing} />
 				<EditRooms user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
+				<RoomPricing user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
 			</OwnerBody>
 		);
 	}

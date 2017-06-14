@@ -30,6 +30,11 @@ class myAccountMenu extends React.Component {
         Actions.setRoute('/owner-account');
     }
 
+    onOwnerRoomPricesClicked() {
+        Actions.ownerUserInfoUpdated({'activeLink' : 'room-pricing'});
+        Actions.setRoute('/owner-account');
+    }
+
     onSignInClicked(){
         AnHelper.logEvent(AnHelper.CATEGORY_SIGN_IN_PAGE, AnHelper.ACTION_CLICKED);
         Actions.setRoute('/sign-in')
@@ -64,6 +69,7 @@ class myAccountMenu extends React.Component {
                                 <ul className="dropdown-menu">
                                     <li><Anchor onClick={this.onOwnerAccommodationClicked.bind(this)}>Edit Accommodation</Anchor></li>
                                     <li><Anchor onClick={this.onOwnerRoomsClicked.bind(this)}>Edit Rooms</Anchor></li>
+                                    <li><Anchor onClick={this.onOwnerRoomPricesClicked.bind(this)}>Edit Prices</Anchor></li>
                                     <li><Anchor onClick={this.logOut.bind(this)}>Log Out</Anchor></li>
                                 </ul>
                             </li>;
