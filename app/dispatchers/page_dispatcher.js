@@ -176,17 +176,13 @@ module.exports = {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
-
-        //Sequence of this matter, this should be at the end
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     async bookApartmentClicked({apartmentKey}) {
         let apartment = await this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
-
-        //Sequence of this matter, this should be at the end
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     async bookBestApartmentClicked({apartmentKey}) {
@@ -200,9 +196,7 @@ module.exports = {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
-
-        //Sequence of this matter, this should be at the end
-        this.mergeStoreVal('bookingStage', {activeStage: 'additional'});
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     /*async viewOtherApartmentClicked({apartmentKey}) {

@@ -9,12 +9,22 @@ const {assetPath} = require('../../helpers/asset_helper');
 const CurrencyFormatter = require('currency-formatter');
 const PricingHelper = require('../../helpers/pricing_helper');
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 const onComboApartmentBookNowClicked = function (aptResponse) {
     const {apartmentKey} = aptResponse;
     Actions.cleanUpBookingData();
-    Actions.bookApartmentClicked({apartmentKey});
-    Actions.setRoute('/additional-services');
+    const bookApartmentResponse = Actions.bookApartmentClicked({apartmentKey});
+
+    bookApartmentResponse.then(response => {
+        if (response.status == 'fail') {
+            NotificationManager.error(response.error, 'Booking - Book apartment', Constants.ERROR_DISPLAY_TIME);
+        } else {
+            Actions.goToPersonalInfoClicked();
+            Actions.setRoute('/payment');
+        }
+    });
 }
 
 const onViewApartmentClickedFromSearch = function (aptResponse) {

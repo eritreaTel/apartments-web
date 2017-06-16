@@ -11,16 +11,39 @@ const Month = require('../shared/month');
 const Year  = require('../shared/year');
 const CurrencyFormatter = require('currency-formatter');
 const {stripKey} = require('../../../config/config');
+var onClickOutside = require('react-onclickoutside');
 
 import Checkbox from 'rc-checkbox';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import MDSpinner from "react-md-spinner";
 import CurrencyInput from 'react-currency-input';
+import TimeInput from 'react-time-input';
+import { SingleDatePicker } from 'react-dates';
 
 
-const goBackToAdditionalInfo = function (e) {
-    Actions.goBackToAdditional();
-    Actions.setRoute("/additional-services");
+function onArrivalDateChanged(date) {
+    Actions.additionalServicesUpdated({'arrival_date' : date});
+}
+
+function onArrivalDateFocused(focused) {
+    Actions.additionalServicesUpdated({'arrival_date_focused' : focused});
+}
+
+class ArrivalDate extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return <SingleDatePicker {...this.props} />
+    }
+
+    handleClickOutside() {
+        const {focused} = this.props;
+        if (focused) {
+            Actions.additionalServicesUpdated({'arrival_date_focused' : false});
+        }
+    }
 }
 
 class PersonalInfo extends React.Component {
@@ -33,6 +56,7 @@ class PersonalInfo extends React.Component {
 
     componentWillMount() {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
+
         const {user, apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
         let payment_amount = PricingHelper.getTotalPrice(totalPrice, additional);
 
@@ -51,6 +75,24 @@ class PersonalInfo extends React.Component {
             };
             Actions.personalInfoUpdated(personal);
         }
+        window.scrollTo(0, 0);
+    }
+
+    goBackToSearchInfo() {
+        Actions.goBackToSearch();
+        Actions.setRoute("/hotels");
+    }
+
+    onReserveCarPickUpCheckBoxChanged(e) {
+        const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
+
+        Actions.additionalServicesUpdated({'airport_pickup' : e.target.checked});
+        let payment_amount = PricingHelper.getTotalPrice(totalPrice, additional);
+        Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : true, 'payPartial' : false, 'payment_amount' : payment_amount});
+    }
+
+    onArrivalTimeChanged(val) {
+        Actions.additionalServicesUpdated({'arrival_time' : val});
     }
 
     onPayLater(e) {
@@ -153,17 +195,33 @@ class PersonalInfo extends React.Component {
 
     render() {
         const {apartmentResponse, bookingStage, acceptToS, user, isProcessing :{processingPayment}} = this.props;
-        let {personal, payment, additional} = bookingStage;
+        let {searchInfo, personal, payment, additional} = bookingStage;
         const loggedIn = (!!CookiesHelper.getSessionCookie());
 
         let {payLater, payFull, payPartial, number, exp_month, exp_year} = payment;
         let {first_name,last_name, city, phone_number, email}  = personal;
         let country = personal && personal.country ? personal.country : 'Select your country';
 
+        let airportPickup = 0, arrivalDateFocused = false;
+        let airportPickUpFee = CurrencyFormatter.format(30, { code: 'USD' });
         let disabled  = processingPayment;
         let spinnerClassName = processingPayment ? 'margin-right-20' : 'hide margin-right-20';
         let acctounInfoClass = loggedIn ? 'hide' : 'show';
 
+        let arrival_time;
+        let arrival_date = searchInfo.checkInDate;
+
+        let ArrivalDateInstance = onClickOutside(ArrivalDate);
+
+        if (additional) {
+            arrival_date  = additional.arrival_date ? additional.arrival_date : arrival_date;
+            arrival_time  = additional.arrival_time ? additional.arrival_time : '';
+            arrivalDateFocused = (additional.arrival_date_focused == 1) ? true : false;
+            airportPickup = (additional.airport_pickup == 1) ? 1 : 0 ;
+
+        }
+
+        let airportPickUpSectionCss = airportPickup? 'row margin-bottom-20' : 'hide';
         let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartmentResponse.totalPrice, additional), { code: 'USD' });
 
         return (
@@ -223,22 +281,52 @@ class PersonalInfo extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <h2 className="mg-sec-left-title">Card Details</h2>
 
+                            <h2 className="mg-sec-left-title">Additional Services</h2>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <div className="mg-book-form-input-additional-info">
+                                        <Checkbox  defaultChecked={airportPickup}  onChange={this.onReserveCarPickUpCheckBoxChanged.bind(this)}/><div className="margin-left-10 display-inline"><span>Private car pick from Entebbe airport to Kampala for, <strong>{airportPickUpFee}? </strong> Note: It is 42 kilometers/26 miles journey.</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={airportPickUpSectionCss}>
+                                <div className="row">
+                                    <div className="col-md-1"/>
+                                    <div className="col-md-4">
+                                        <div className="mg-book-form-input-additional-info">
+                                            <span>Arrival Date</span><span className='required-input'> * </span>
+                                            <ArrivalDateInstance className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-1"/>
+                                        <div className="col-md-4">
+                                            <div className="mg-book-form-input-additional-info">
+                                                <span>Arrival Time/24-hour clock</span><span className='required-input'> * </span>
+                                                <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
+                                            </div>
+                                        </div>
+                                    <div className="col-md-2" />
+                                </div>
+                            </div>
+
+
+                            <h2 className="mg-sec-left-title">Card Details</h2>
                             <div className="row">
                                 <div className="col-md-3">
-                                    <div className="mg-book-form-input">
+                                    <div className="mg-book-form-input-payment">
                                         <input disabled={disabled} type="radio" value="payFull" checked={payFull} onChange={this.onPayFull.bind(this)} /> Pay full amount.
                                     </div>
                                 </div>
 
                                 <div className="col-md-5">
-                                    <div className="mg-book-form-input">
+                                    <div className="mg-book-form-input-payment">
                                         <input disabled={disabled} type="radio" value="payPartial" checked={payPartial} onChange={this.onPayPartial.bind(this)} /> Pay <strong>{minimum_amount}</strong> - 15% of total price.
                                     </div>
                                 </div>
                                 <div className="col-md-4">
-                                    <div className="mg-book-form-input">
+                                    <div className="mg-book-form-input-payment">
                                         <input disabled={disabled} type="radio" value="payLater" checked={payLater} onChange={this.onPayLater.bind(this)} /> Pay later, at check-in.
                                     </div>
                                 </div>
@@ -271,16 +359,11 @@ class PersonalInfo extends React.Component {
                         </div>
 
 
-                        <div className="clearfix mg-book-form-input-payment">
-                            <div className="pull-right">
-                                By using UgandaBooking, you agree with our <Anchor onClick={()=>{Actions.setRoute('/terms-of-use')}}>terms of use</Anchor>
-                            </div>
-                        </div>
                         <div className="pull-right">
                             <MDSpinner className={spinnerClassName}  />
-                            <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
+                            <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="margin-top-10 btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
                         </div>
-                        <Anchor disabled={disabled} onClick={() => {goBackToAdditionalInfo(this)}} className="btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                        <Anchor disabled={disabled} onClick={this.goBackToSearchInfo.bind(this)} className="margin-top-10 btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 
                     </div>
                 </div>

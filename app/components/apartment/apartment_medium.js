@@ -5,11 +5,21 @@ const ApartmentHelper = require('../../helpers/apartment_helper');
 const Actions = require('../../actions/actions');
 const {assetPath} = require('../../helpers/asset_helper');
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 const bookBestApartmentClicked = function (aptResponse) {
     const {apartmentKey} = aptResponse;
     Actions.cleanUpBookingData();
-    Actions.bookBestApartmentClicked({apartmentKey});
-    Actions.setRoute('/additional-services');
+    let bookApartmentResponse = Actions.bookBestApartmentClicked({apartmentKey});
+
+    bookApartmentResponse.then(response => {
+        if (response.status == 'fail') {
+            NotificationManager.error(response.error, 'Booking - Book apartment', Constants.ERROR_DISPLAY_TIME);
+        } else {
+            Actions.goToPersonalInfoClicked();
+            Actions.setRoute('/payment');
+        }
+    });
 }
 
 const viewBestApartmentClicked = function (aptResponse) {

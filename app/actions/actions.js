@@ -146,11 +146,11 @@ const Actions = {
     },
 
     bookApartmentPageClicked(data) {
-        Dispatcher.dispatch({type: 'bookApartmentPageClicked', data});
+        return Dispatcher.dispatch({type: 'bookApartmentPageClicked', data});
     },
 
     bookApartmentClicked(data) {
-        Dispatcher.dispatch({type: 'bookApartmentClicked', data});
+        return Dispatcher.dispatch({type: 'bookApartmentClicked', data});
     },
 
     /*viewOtherApartmentClicked(data) {
@@ -158,7 +158,7 @@ const Actions = {
     },*/
 
     bookBestApartmentClicked(data) {
-        Dispatcher.dispatch({type: 'bookBestApartmentClicked', data});
+        return Dispatcher.dispatch({type: 'bookBestApartmentClicked', data});
     },
 
     viewBestApartmentClicked(data) {

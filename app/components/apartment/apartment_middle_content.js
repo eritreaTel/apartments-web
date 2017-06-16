@@ -10,10 +10,18 @@ const AllAmenities = require('./all_amenties');
 const Slider = require('react-slick');
 
 import MDSpinner from "react-md-spinner";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const onBookApartmentPageClicked = function (apartmentKey) {
-    Actions.bookApartmentPageClicked({apartmentKey});
-    Actions.setRoute('/additional-services');
+    let bookApartmentResponse = Actions.bookApartmentPageClicked({apartmentKey});
+    bookApartmentResponse.then(response => {
+        if (response.status == 'fail') {
+            NotificationManager.error(response.error, 'Booking - Book apartment', Constants.ERROR_DISPLAY_TIME);
+        } else {
+            Actions.goToPersonalInfoClicked();
+            Actions.setRoute('/payment');
+        }
+    });
 }
 
 const onKeepSearchingClicked = function () {

@@ -73,7 +73,8 @@ const WithUserLoaded = withDataLoaded({
                     }
                     Actions.getApartments(searchInfo);
                 },
-                checkDataFn: ({apartments}) => apartments != null
+                checkDataFn: ({apartments}) => apartments != null,
+                alwaysLoad : false
             }
         ]
 });
