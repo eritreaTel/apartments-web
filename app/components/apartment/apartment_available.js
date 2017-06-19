@@ -57,6 +57,7 @@ class ApartmentAvailable extends React.Component {
         let bestPhoto = ApartmentHelper.getComboApartmentBestPhoto(apartments);
         let comboAmenities = ApartmentHelper.getComboAmenities(aptResponse);
         let amenitiesWithValueOne = ApartmentHelper.getAmenitiesByValue(comboAmenities, 1);
+        let daysCaption = (daysCnt ==1)? ' Day' : ' Days';
 
         let apartmentType = _.startCase(_.toLower(guestHouse.type));
         title =  _.truncate(title, {length : 20, omission : '..'})
@@ -68,7 +69,7 @@ class ApartmentAvailable extends React.Component {
                         <img src = {assetPath(bestPhoto)} alt="" className="image-height-265 img-responsive"/>
                     </div>
                     <div className="col-md-7">
-                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} Days</span></h3>
+                        <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} {daysCaption}</span></h3>
                         <div className="apartment-details-section">
                             <div  className="row">
                                 <div className="col-md-6">

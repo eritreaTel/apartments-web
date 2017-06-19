@@ -4291,7 +4291,7 @@ div.cs-skin-elastic .cs-options .cs-selected span::after {
 }
 
 .required-input {
-  color: #FF0000;
+  color: #ff7777;
 }
 
 .error {
@@ -5554,4 +5554,37 @@ ul.list-inline {
 
 .panel-default-dark > .panel-heading {
   background: #585f69;
+}
+
+/* prepending icons with input forms */
+.icon-append {
+  top: 3px;
+  height: 32px;
+  font-size: 14px;
+  line-height: 33px;
+  background: inherit;
+  position: absolute;
+  border-left-style: solid;
+  border-left-width: 1px;
+  text-align: center;
+}
+.icon-append {
+  right: 1px;
+  padding: 0 3px;
+  min-width: 34px;
+}
+
+.icon-append {
+  color: #ff7777;
+}
+
+.icon-append {
+  border-color: #bbb;
+}
+
+.input-with-icon {
+  display: block;
+  position: relative;
+  font-size:14px;
+  font-weight: 500;
 }

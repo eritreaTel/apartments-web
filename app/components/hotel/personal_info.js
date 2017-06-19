@@ -232,19 +232,28 @@ class PersonalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <input placeholder="First Name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'first_name' : this.refs.first_name.value})}}/>
+                                        <label className="input-with-icon">
+                                            <i className="icon-append fa fa-asterisk"> </i>
+                                            <input placeholder="First Name" value={first_name} disabled={disabled} ref='first_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'first_name' : this.refs.first_name.value})}}/>
+                                        </label>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <input placeholder="Last Name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'last_name' : this.refs.last_name.value})}}/>
+                                        <label className="input-with-icon">
+                                            <i className="icon-append fa fa-asterisk"> </i>
+                                            <input placeholder="Last Name" value={last_name} disabled={disabled} ref='last_name' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'last_name' : this.refs.last_name.value})}}/>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <input placeholder="City" value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'city' : this.refs.city.value})}} />
+                                        <label className="input-with-icon">
+                                            <i className="icon-append fa fa-asterisk"> </i>
+                                            <input placeholder="City" value={city}  disabled={disabled} ref='city' type="text" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'city' : this.refs.city.value})}} />
+                                        </label>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
@@ -259,7 +268,10 @@ class PersonalInfo extends React.Component {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="mg-book-form-input-payment">
-                                            <input placeholder="Email" value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'email' : this.refs.email.value})}}/>
+                                            <label className="input-with-icon">
+                                                <i className="icon-append fa fa-envelope"> </i>
+                                                <input placeholder="Email" value={email} disabled={disabled} ref='email' type="email" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'email' : this.refs.email.value})}}/>
+                                            </label>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
@@ -271,12 +283,18 @@ class PersonalInfo extends React.Component {
                                 <div className="row">
                                     <div className="col-md-6">
                                         <div className="mg-book-form-input-payment">
-                                            <input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'password' : this.refs.password.value})}}/>
+                                            <label className="input-with-icon">
+                                                <i className="icon-append fa fa-asterisk"> </i>
+                                                <input placeholder="Password" disabled={disabled} ref='password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'password' : this.refs.password.value})}}/>
+                                            </label>
                                         </div>
                                     </div>
                                     <div className="col-md-6">
                                         <div className="mg-book-form-input-payment">
-                                            <input placeholder="Re-enter password" disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'renter_password' : this.refs.renter_password.value})}}/>
+                                            <label className="input-with-icon">
+                                                <i className="icon-append fa fa-asterisk"> </i>
+                                                <input placeholder="Re-enter password" disabled={disabled} ref='renter_password' type="password" className="input-with-validation form-control" onChange={() => {Actions.personalInfoUpdated({'renter_password' : this.refs.renter_password.value})}}/>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -335,12 +353,18 @@ class PersonalInfo extends React.Component {
                             <div className="row">
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <input placeholder="Card Number" disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'number' : this.refs.number.value})}}/>
+                                        <label className="input-with-icon">
+                                            <i className="icon-append fa fa-asterisk"> </i>
+                                            <input placeholder="Card Number" disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'number' : this.refs.number.value})}}/>
+                                        </label>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
+                                        <label className="input-with-icon">
+                                            <i className="icon-append fa fa-asterisk"> </i>
+                                            <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
