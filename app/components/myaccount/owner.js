@@ -5,6 +5,7 @@ const Actions = require('../../actions/actions');
 import MDSpinner from "react-md-spinner";
 const FormValidator = require('../../helpers/form_validation_helper');
 const Modal = require('../shared/modal');
+const ApartmentHelper = require('../../helpers/apartment_helper')
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 
@@ -318,7 +319,7 @@ class EditRooms extends React.Component {
 	}
 
 	render() {
-		const {isProcessing, ownerUserInfo : {myApartments, activeLink, updateApartmentInfo}, user} = this.props;
+		const {isProcessing, ownerUserInfo : {myApartments, activeLink, updateApartmentInfo}, ownerGuestHouse, user} = this.props;
 		let className = activeLink == 'edit-rooms' ? "tab-pane fade in active" : "tab-pane fade";
 		let spinnerClassName = (isProcessing.updatingApartment == true)? 'spinner-inline-display' : 'hide';
 
@@ -327,6 +328,8 @@ class EditRooms extends React.Component {
 			 content = myApartments.map(apartment =>{
 					 	 let modalId = "apartment" + apartment.id;
 						 let dataTarget = "#" + modalId;
+						 let apartmentUrl = ApartmentHelper.getAptUrlByApartmentAndGuesthouse(apartment, ownerGuestHouse);
+
 						 return <tr  key={apartment.id}>
 									<td> {apartment.title} </td>
 									<td> {apartment.bed} </td>
@@ -351,6 +354,7 @@ class EditRooms extends React.Component {
 												<MDSpinner className={spinnerClassName}  />
 											</div>
 										</Modal>
+										<a href ={apartmentUrl} target="_blank" className="btn btn-warning btn-xs" ><i className="fa fa-plus" /> Preview</a>
 									</td>
 								</tr>
 						});
@@ -452,7 +456,7 @@ class Owner extends React.Component {
 		return (
 			<OwnerBody ownerUserInfo = {ownerUserInfo}>
 				<EditGuestHouseSection user={user} ownerGuestHouse={ownerGuestHouse} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing} />
-				<EditRooms user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
+				<EditRooms ownerGuestHouse={ownerGuestHouse} user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
 				<RoomPricing user={user} ownerUserInfo={ownerUserInfo} isProcessing={isProcessing}/>
 			</OwnerBody>
 		);

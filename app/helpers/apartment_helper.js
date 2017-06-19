@@ -87,6 +87,15 @@ const ApartmentHelper = {
         return url;
     },
 
+    getAptUrlByApartmentAndGuesthouse(apartment, guesthouse) {
+        let urlDescription = guesthouse.city + '-' + guesthouse.name;
+
+        urlDescription = StringHelper.makeStringUrlFriendly(urlDescription);
+        let url  = '/apartment/' + urlDescription + '/' + apartment.id;
+
+        return url;
+    },
+
     getSkinyApartmentsRepresentation(apartments) {
         const skinnyApartments = [];
         apartments.forEach(function(apartment) {
