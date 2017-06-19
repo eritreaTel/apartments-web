@@ -23,6 +23,8 @@ class EditGuestHouseSection extends React.Component {
 				'city' : ownerGuestHouse.city,
 				'country' : ownerGuestHouse.country,
 				'email' : ownerGuestHouse.email,
+				'check_in_time' : ownerGuestHouse.check_in_time,
+				'check_out_time' : ownerGuestHouse.check_out_time
 			};
 			Actions.guestHouseInfoUpdated(guestHouseInfo);
 		}
@@ -75,6 +77,8 @@ class EditGuestHouseSection extends React.Component {
 		let city			= updateGuestHouse.city;
 		let country			= updateGuestHouse.country;
 		let email			= updateGuestHouse.email;
+		let check_in_time   = updateGuestHouse.check_in_time;
+		let check_out_time  = updateGuestHouse.check_out_time;
 
 
 		let className 		= ownerUserInfo.activeLink == 'edit-accommodation' ? "tab-pane fade in active" : "tab-pane fade";
@@ -154,8 +158,23 @@ class EditGuestHouseSection extends React.Component {
 							</div>
 							<div className="col-md-6">
 								<div className="mg-book-form-input">
-									<label>Star Rating</label><span className='required-input'> * </span>
-									<input placeholder="star_rating" value={star_rating} disabled={true} ref="star_rating" type="text" className="input-with-validation form-control" onChange={()=>{Actions.guestHouseInfoUpdated({'star_rating': this.refs.star_rating.value})}}/>
+									<label>Star Rating</label>
+									<input placeholder="star_rating" value={star_rating} disabled={true} ref="star_rating" type="text" className="input-with-validation form-control" />
+								</div>
+							</div>
+						</div>
+
+						<div className="row margin-left-20">
+							<div className="col-md-6">
+								<div className="mg-book-form-input">
+									<label>Check-In-Time</label><span className='required-input'> * </span> <span> example, 11:00 a.m</span>
+									<input placeholder="Check In Time" value={check_in_time} disabled={disabled} ref="check_in_time" type="text" className="input-with-validation form-control" onChange={()=>{Actions.guestHouseInfoUpdated({'check_in_time': this.refs.check_in_time.value})}}/>
+								</div>
+							</div>
+							<div className="col-md-6">
+								<div className="mg-book-form-input">
+									<label>Check-Out-Time</label><span className='required-input'> * </span> <span> example, 1:30 p.m</span>
+									<input placeholder="Check Out Time" value={check_out_time} disabled={disabled} ref="check_out_time" type="text" className="input-with-validation form-control" onChange={()=>{Actions.guestHouseInfoUpdated({'check_out_time': this.refs.check_out_time.value})}}/>
 								</div>
 							</div>
 						</div>

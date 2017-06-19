@@ -32,6 +32,8 @@ class BookingDetails extends React.Component {
             }
         }
 
+        let hotelCheckInTime = guestHouse.check_in_time;
+        let hotelCheckOutTime = guestHouse.check_out_time;
 
         return(
                 <div className="col-md-4">
@@ -49,11 +51,11 @@ class BookingDetails extends React.Component {
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check In:&nbsp;</strong>
-                                    <span>{checkInDate}</span>
+                                    <span>{checkInDate} at {hotelCheckInTime}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Check Out:</strong>
-                                    <span>{checkOutDate}</span>
+                                    <span>{checkOutDate} at {hotelCheckOutTime}</span>
                                 </div>
                                 <div className="mg-widget-cart-row">
                                     <strong>Room/s: </strong>
