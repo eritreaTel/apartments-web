@@ -28,6 +28,7 @@ class HeaderBar extends React.Component {
 
     onHotelsClicked() {
         AnHelper.logEvent(AnHelper.CATEGORY_HOTELS_PAGE, AnHelper.ACTION_CLICKED);
+        Actions.searchApartmentsClicked();
         Actions.setRoute('/hotels');
     }
 
