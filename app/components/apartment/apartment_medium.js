@@ -29,8 +29,12 @@ const viewBestApartmentClicked = function (aptResponse) {
         Actions.viewBestApartmentClicked({apartmentKey});
         Actions.setRoute(viewApartmentUrl);
     } else {
-        Actions.viewComboApartmentClickedFromHome({apartmentKey});
-        Actions.setRoute(viewApartmentUrl);
+        const clickComboResponse = Actions.viewComboApartmentClickedFromHome({apartmentKey});
+        clickComboResponse.then(response => {
+            if (response.status != 'fail') {
+            Actions.setRoute(viewApartmentUrl);
+            }
+        });
     }
 }
 

@@ -22,7 +22,6 @@ module.exports = {
         let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
         url = url + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children ;
 
-        console.log('get best apartments section - ' + url);
         if ( url !== this.getStoreVal('requestUrl') || this.getStoreVal('bestApartments') == null || this.getStoreVal('bestApartments').length == 0) {
             this.setStoreVal('requestUrl', url);
             if (this.acquireLock('getBestApartments')) {
@@ -135,6 +134,43 @@ module.exports = {
                     });
                 }
                 this.releaseLock('getOtherApartmentsInHotel');
+            }
+        }
+        return this.dispatch({type: 'prepareResponse'});
+    },
+
+    async getComboApartmentInHotel({guestHouseId, apartmentKey}) {
+        let url = 'available_combo_apartment_in_hotel?';
+        let bookingStage = this.getStoreVal('bookingStage');
+
+        let {searchInfo : {checkInDate, checkOutDate, room, adult, children, pageNumber}} = bookingStage;
+        let formattedCheckIn = checkInDate.format("YYYY-MM-DD");
+        let formattedCheckOut = checkOutDate.format("YYYY-MM-DD");
+
+        url = url + 'guest_house_id=' + guestHouseId + '&apartmentKey=' + apartmentKey + '&check_in_date=' + formattedCheckIn + '&check_out_date=' + formattedCheckOut + '&room=' + room + '&adult=' + adult + '&children=' + children;
+        if ( url !== this.getStoreVal('requestUrl') ) {
+            this.setStoreVal('requestUrl', url);
+
+            if (this.acquireLock('getComboApartmentInHotel')) {
+                try {
+                    const response = await FetchHelper.fetchJson(url, {method: 'GET'});
+                    const {object, errors} = ResponseHelper.processResponseReturnOne(response);
+
+                    if (errors.length > 0) {
+                        await this.dispatch({type: 'setErrorMessages', data: {errors}});
+                    } else {
+                        this.setStoreVal('apartment', object);
+                    }
+                } catch (error) {
+                    await this.dispatch({
+                        type: 'handleRequestError',
+                        data: {
+                            error,
+                            defaultErrorMessage: 'Cannot fetch other apartments in hotel'
+                        }
+                    });
+                }
+                this.releaseLock('getComboApartmentInHotel');
             }
         }
         return this.dispatch({type: 'prepareResponse'});

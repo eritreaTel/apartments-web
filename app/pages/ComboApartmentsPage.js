@@ -33,12 +33,7 @@ const ApartmentBody = function (props) {
 class ComboApartmentsPage extends React.Component {
 
 	componentWillMount() {
-		const {store : {apartment}} = this.props;
-		if (apartment == null) {
-			Actions.setRoute("/hotels");
-		} else {
-			Actions.getAuthenticatedUser();
-		}
+		Actions.getAuthenticatedUser();
 	}
 
 	componentDidMount(){
@@ -47,32 +42,24 @@ class ComboApartmentsPage extends React.Component {
 
 	render() {
 		const {store : {apartment, user, apartmentReviews, isProcessing}} = this.props;
-
-		let content = <ApartmentBody>Redirecting</ApartmentBody>;
-		if (apartment != null) {
-			const {daysCnt, totalPrice, title, apartmentKey} = apartment;
-			let guestHouse = ApartmentHelper.getGuestHouse(apartment);
-
-			content = <ApartmentBody>
-						<PageTitle parentClassName="mg-page-title parallax">
-						<h2>{guestHouse.name}</h2>
-						<h3>{title}</h3>
-						<p>&nbsp;</p>
-					   </PageTitle>
-
-						<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
-						<ApartmentMiddleContent  apartmentResponse={apartment} pageType='combo' isProcessing={isProcessing} />
-						<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
-					</ApartmentBody>
-		}
+		const {daysCnt, totalPrice, title, apartmentKey} = apartment;
+		let guestHouse = ApartmentHelper.getGuestHouse(apartment);
 
 		return (
-			<div>
-				{content}
-			</div>
+			<ApartmentBody>
+				<PageTitle parentClassName="mg-page-title parallax">
+					<h2>{guestHouse.name}</h2>
+					<h3>{title}</h3>
+					<p>&nbsp;</p>
+				</PageTitle>
+
+				<ApartmentPrice totalPrice={totalPrice} daysCnt={daysCnt} />
+				<ApartmentMiddleContent  apartmentResponse={apartment} pageType='combo' isProcessing={isProcessing} />
+				<ApartmentReviewSection isProcessing={isProcessing} user={user} apartmentResponse={apartment} apartmentReviews={apartmentReviews} />
+			</ApartmentBody>
 		);
 	}
-};
+}
 
 
 const WithUserLoaded = withDataLoaded({
@@ -89,9 +76,21 @@ const WithUserLoaded = withDataLoaded({
 	data: [
 		{
 			storeKeys: ['apartmentReviews'],
-			loadDataFn: ({view : {apartmentId}}) => Actions.getApartmentReviews({apartmentId}),
+			loadDataFn: ({view : {apartmentKey}}) => Actions.getApartmentReviews({'apartmentId' : apartmentKey}),
 			alwaysLoad : true,
 			checkDataFn: ({apartmentReviews}) => apartmentReviews != null
+		},
+		{
+			storeKeys: ['apartment'],
+			loadDataFn: ({view : {guestHouseId, apartmentKey}, bookingStage}) => {
+				let searchInfo = bookingStage.searchInfo;
+				if (searchInfo == null) {
+					searchInfo = ApartmentHelper.getDefaultSearchDates();
+					Actions.persistSearchInfo(searchInfo);
+				}
+				Actions.getComboApartmentInHotel({guestHouseId, apartmentKey});
+			},
+			alwaysLoad : true
 		}
 	]
 });

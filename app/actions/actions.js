@@ -25,6 +25,10 @@ const Actions = {
         return Dispatcher.dispatch({type: 'getApartments'});
     },
 
+    getComboApartmentInHotel(data) {
+        return Dispatcher.dispatch({type: 'getComboApartmentInHotel', data});
+    },
+
     getOtherApartmentsInHotel() {
         return Dispatcher.dispatch({type: 'getOtherApartmentsInHotel'});
     },
@@ -166,11 +170,11 @@ const Actions = {
     },
 
     viewComboApartmentClickedFromSearch(data) {
-        Dispatcher.dispatch({type: 'viewComboApartmentClickedFromSearch', data});
+        return Dispatcher.dispatch({type: 'viewComboApartmentClickedFromSearch', data});
     },
 
     viewComboApartmentClickedFromHome(data) {
-        Dispatcher.dispatch({type: 'viewComboApartmentClickedFromHome', data});
+        return Dispatcher.dispatch({type: 'viewComboApartmentClickedFromHome', data});
     },
 
     goToPersonalInfoClicked() {

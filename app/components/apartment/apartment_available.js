@@ -37,8 +37,12 @@ const onViewApartmentClickedFromSearch = function (aptResponse) {
         if (aptCnt == 1) {
             Actions.setRoute(viewApartmentUrl);
         } else {
-            Actions.viewComboApartmentClickedFromSearch({apartmentKey});
-            Actions.setRoute(viewApartmentUrl);
+            const clickComboResponse = Actions.viewComboApartmentClickedFromSearch({apartmentKey});
+            clickComboResponse.then(response => {
+                if (response.status != 'fail') {
+                Actions.setRoute(viewApartmentUrl);
+                }
+            });
         }
     }
 }

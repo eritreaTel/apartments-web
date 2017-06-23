@@ -69,7 +69,7 @@ const ApartmentHelper = {
     },
 
     generateViewApartmentUrl(apartmentResponse) {
-        let {apartments, aptCnt} = apartmentResponse;
+        let {apartments, aptCnt, apartmentKey} = apartmentResponse;
         let urlDescription = apartments[0].guestHouse.city + '-' +apartments[0].guestHouse.name;
 
         urlDescription = StringHelper.makeStringUrlFriendly(urlDescription);
@@ -78,11 +78,12 @@ const ApartmentHelper = {
         if (aptCnt ==1) {
             url  = '/apartment/' + urlDescription + '/' + apartments[0].id;
         } else {
+            let guestHouseId = apartments[0].guestHouse.id;
             let aptIds = [];
             apartments.forEach(function(apartment) {
                 aptIds.push(apartment.id);
             });
-            url  = '/combo-apartment/' + urlDescription + '/' + _.join(aptIds, '-');
+            url  = '/combo-apartment/' + urlDescription + '/' + guestHouseId + '/' + apartmentKey;
         }
         return url;
     },

@@ -9,7 +9,7 @@ module.exports = {
   "/sign-in/": "signIn",
   "/about-us/": "aboutUs",
   "/apartment/:description/:id/": "viewApartment",
-  "/combo-apartment/:description/:id/": "viewComboApartment",
+  "/combo-apartment/:description/:ghId/:id/": "viewComboApartment",
   "/contact-us/": "contactUs",
   "/blogs/": "blogs",
   "/your-trip/": "YourTrip",

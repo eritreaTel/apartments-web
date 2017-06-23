@@ -228,6 +228,7 @@ module.exports = {
     async viewComboApartmentClickedFromSearch({apartmentKey}) {
         let apartment = await this.getStoreVal('apartments').find(aptResponse => aptResponse.apartmentKey == apartmentKey);
         this.setStoreVal('apartment', apartment);
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     async  viewComboApartmentClickedFromHome({apartmentKey}) {
@@ -241,6 +242,7 @@ module.exports = {
             apartments.push(apartment);
             this.setStoreVal('apartments', apartments);
         }
+        return this.dispatch({type: 'prepareResponse'});
     },
 
     goToPersonalInfoClicked() {
