@@ -97,7 +97,7 @@ class PersonalInfo extends React.Component {
 
     onPayLater(e) {
         const {apartmentResponse : {totalPrice}, bookingStage : {payment, additional}} = this.props;
-        let payment_amount = PricingHelper.getTotalPrice(0, additional);
+        let payment_amount = 0;
         Actions.paymentInfoUpdated({'payLater' : e.target.checked, 'payFull' : false, 'payPartial' : false, 'payment_amount' : payment_amount});
     }
 
@@ -113,25 +113,52 @@ class PersonalInfo extends React.Component {
         Actions.paymentInfoUpdated({'payLater' : false, 'payFull' : false, 'payPartial' : e.target.checked, 'payment_amount' : payment_amount});
     }
 
+    onCompleteReservationClicked() {
+        const {bookingStage: {personal, payment}} = this.props;
+        let {payLater, payFull, payPartial, number, exp_month, exp_year} = payment;
+        if (payLater == true) {
+            this.reserveWithOutPayment();
+        } else {
+            this.processPayment();
+        }
+    }
+
+    validatePaymentProcessing(requiredFields){
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        const {bookingStage: {personal, payment}} = this.props;
+
+        let result = FormValidator.validateRequiredDatas(this, {...personal, ...payment} , requiredFields, 'Booking - Personal Information');
+        if (result == false) {
+            return false;
+        }
+
+        if (!loggedIn) {
+            let userRequiredFields = {'password' :"Please enter password",'renter_password':"Please enter password",'email': "Please enter email"};
+            let result = FormValidator.validateRequiredDatas(this, {...personal, ...payment} , userRequiredFields, 'Booking - Personal Information');
+            if (result == false) {
+                return false;
+            }
+        }
+
+        if (!loggedIn && personal.renter_password != personal.password) {
+            NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
+            e.refs.password.focus();
+            return false;
+        }
+
+        return true;
+    }
+
     processPayment() {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
         const {bookingStage: {personal, payment}} = this.props;
+
         let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
             'country'   : "Please select your country", 'number'   : 'Please enter card number',
             'cvc' : "Please enter cvc", 'exp_month' : "Please enter expiration month",
             'exp_year' : 'Please enter expiration year'};
-
-        if (!loggedIn) {
-            requiredFields = {...requiredFields, 'password' :"Please enter password",'renter_password':"Please enter password",'email': "Please enter email"};
-        }
-
-        let result = FormValidator.validateRequiredDatas(this, {...personal, ...payment} , requiredFields, 'Booking - Personal Information');
-        if (result == false) {
-            return ;
-        }
-        if (!loggedIn && personal.renter_password != personal.password) {
-            NotificationManager.error("Please enter matching password.", 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
-            e.refs.password.focus();
+        let isValid = this.validatePaymentProcessing(requiredFields);
+        if (isValid == false) {
             return;
         }
 
@@ -149,6 +176,37 @@ class PersonalInfo extends React.Component {
                     Actions.setIsProcessing(isProcessing);
                 } else {
                     this.makeStripePayment(payment);
+                }
+            });
+        }
+    }
+
+    reserveWithOutPayment() {
+        const loggedIn = (!!CookiesHelper.getSessionCookie());
+        const {bookingStage: {personal, payment}} = this.props;
+
+        let requiredFields = {'first_name' : "Please enter first name", 'last_name' : "Please enter last name",
+            'country'   : "Please select your country"};
+        let isValid = this.validatePaymentProcessing(requiredFields);
+        if (isValid == false) {
+            return;
+        }
+
+        let isProcessing = {processingPayment: true};
+        Actions.setIsProcessing(isProcessing);
+
+        if (loggedIn) {
+            //this.makeStripePayment(payment);
+            console.log('make reservation');
+        } else {
+            const createUserPromise = Actions.createUser({... personal, type :'seeker', 'is_active' : 1});
+            createUserPromise.then(response => {
+                if (response.status == 'fail') {
+                    NotificationManager.error(response.error, 'Booking - Personal Information', Constants.ERROR_DISPLAY_TIME);
+                    let isProcessing = {processingPayment: false};
+                    Actions.setIsProcessing(isProcessing);
+                } else {
+                    console.log('make reservation');
                 }
             });
         }
@@ -222,6 +280,7 @@ class PersonalInfo extends React.Component {
         }
 
         let airportPickUpSectionCss = airportPickup? 'row margin-bottom-20' : 'hide';
+        let showPaymentInfo = (payLater == true) ? 'hide' : 'show';
         let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartmentResponse.totalPrice, additional), { code: 'USD' });
 
         return (
@@ -349,35 +408,36 @@ class PersonalInfo extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                            <div className={showPaymentInfo}>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <label className="input-with-icon">
+                                                <i className="icon-append fa fa-asterisk"> </i>
+                                                <input placeholder="Card Number" disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'number' : this.refs.number.value})}}/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <label className="input-with-icon">
+                                                <i className="icon-append fa fa-asterisk"> </i>
+                                                <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input-payment">
-                                        <label className="input-with-icon">
-                                            <i className="icon-append fa fa-asterisk"> </i>
-                                            <input placeholder="Card Number" disabled={disabled} value={number} type="text" ref='number' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'number' : this.refs.number.value})}}/>
-                                        </label>
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        <div className="mg-book-form-input-payment">
+                                            <Month disabled={disabled} value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
                                     </div>
                                 </div>
                                 <div className="col-md-6">
                                     <div className="mg-book-form-input-payment">
-                                        <label className="input-with-icon">
-                                            <i className="icon-append fa fa-asterisk"> </i>
-                                            <input placeholder="CVC" disabled={disabled} type="password" ref='cvc' className="input-with-validation form-control" onChange={()=>{Actions.paymentInfoUpdated({'cvc' : this.refs.cvc.value})}}/>
-                                        </label>
+                                        <Year disabled={disabled} value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <div className="mg-book-form-input-payment">
-                                        <Month disabled={disabled} value={exp_month} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_month' : val.value});}}/>
-                                </div>
-                            </div>
-                            <div className="col-md-6">
-                                <div className="mg-book-form-input-payment">
-                                    <Year disabled={disabled} value={exp_year} onChange={(val)=>{Actions.paymentInfoUpdated({'exp_year' : val.value});}}/>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +445,7 @@ class PersonalInfo extends React.Component {
 
                         <div className="pull-right">
                             <MDSpinner className={spinnerClassName}  />
-                            <Anchor disabled={disabled} onClick={this.processPayment.bind(this)} className="margin-top-10 btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
+                            <Anchor disabled={disabled} onClick={this.onCompleteReservationClicked.bind(this)} className="margin-top-10 btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
                         </div>
                         <Anchor disabled={disabled} onClick={this.goBackToSearchInfo.bind(this)} className="margin-top-10 btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
 

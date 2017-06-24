@@ -6,16 +6,18 @@ const ApartmentHelper = require('../helpers/apartment_helper');
 
 module.exports = {
 
-    cleanUpBookingData() {
+    async cleanUpBookingData() {
         this.mergeStoreVal('bookingStage', {activeStage: null});
-        this.mergeStoreVal('bookingStage', {additional: {}});
-        this.mergeStoreVal('bookingStage', {personal: {}});
         this.mergeStoreVal('bookingStage', {confirmation: {}});
 
-        let data  = { 'payFull'    : true,   'payLater'   : false,
-                         'payPartial' : false,  'number'     : '',
-                         'exp_month'  : '',     'exp_year'   : '' };
-        this.mergeStoreVal('bookingStage', {payment: data});
+        //reset payment information
+        let bookingStage = this.getStoreVal('bookingStage');
+        let existingVal = (bookingStage.payment != null) ? bookingStage.payment : {};
+        let data  = {'payFull' : true, 'payLater' : false, 'payPartial' : false};
+        await _.forEach(data, function(value, key) {
+            existingVal[key] = value;
+        });
+        this.mergeStoreVal('bookingStage', {payment: existingVal});
     },
 
     async createApartmentBooking({stripe_token}) {

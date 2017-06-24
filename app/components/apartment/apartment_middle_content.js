@@ -25,7 +25,7 @@ const onBookApartmentPageClicked = function (apartmentKey) {
 }
 
 const onKeepSearchingClicked = function () {
-    Actions.goBackToSearch(null);
+    Actions.goBackToSearch();
     Actions.setRoute('/hotels');
 }
 
