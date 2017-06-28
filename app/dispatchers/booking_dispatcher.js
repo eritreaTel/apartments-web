@@ -36,6 +36,7 @@ module.exports = {
                 let {additional, personal, payment, searchInfo} = bookingStage;
                 let totalAmount = PricingHelper.getTotalPrice(totalPrice, additional);
                 let skinnyApartments = ApartmentHelper.getSkinyApartmentsRepresentation(apartments);
+                let arrivalDate = (additional.arrival_date == undefined)? startDate : additional.arrival_date.format("YYYY-MM-DD");
 
                 let carRental = (additional.car_rentals == 1) ? 1 : 0 ;
                 let tourGuide = (additional.tour_guides == 1) ? 1 : 0 ;
@@ -65,7 +66,7 @@ module.exports = {
 
                 if (airportPickup) {
                     bookingData = {...bookingData ,
-                        arrival_time : additional.arrival_date.format("YYYY-MM-DD") + ' ' + additional.arrival_time,
+                        arrival_time : arrivalDate + ' ' + additional.arrival_time,
                         airline_name : additional.airline_name,
                         airport : 'Entebbe International'
                     }

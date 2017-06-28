@@ -196,8 +196,7 @@ class PersonalInfo extends React.Component {
         Actions.setIsProcessing(isProcessing);
 
         if (loggedIn) {
-            //this.makeStripePayment(payment);
-            console.log('make reservation');
+            this.createApartmentBooking({stripe_token : null});
         } else {
             const createUserPromise = Actions.createUser({... personal, type :'seeker', 'is_active' : 1});
             createUserPromise.then(response => {
@@ -206,7 +205,7 @@ class PersonalInfo extends React.Component {
                     let isProcessing = {processingPayment: false};
                     Actions.setIsProcessing(isProcessing);
                 } else {
-                    console.log('make reservation');
+                    this.createApartmentBooking({stripe_token : null});
                 }
             });
         }
@@ -238,17 +237,22 @@ class PersonalInfo extends React.Component {
             this.refs[response.error.param] && this.refs[response.error.param].select();
         } else {
             var stripe_token = response.id;
-            let bookingPromise = Actions.createApartmentBooking({stripe_token});
-            bookingPromise.then(bookingResponse => {
-                Actions.setIsProcessing(isProcessing);
-                if (bookingResponse.status == 'fail') {
-                    NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
-                } else {
-                    Actions.goToConfirmationClicked();
-                    Actions.setRoute('/order-confirmation');
-                }
-            });
+            this.createApartmentBooking({stripe_token});
         }
+    }
+
+    createApartmentBooking(data){
+        let isProcessing = {processingPayment: false};
+        let bookingPromise = Actions.createApartmentBooking(data);
+        bookingPromise.then(bookingResponse => {
+            Actions.setIsProcessing(isProcessing);
+            if (bookingResponse.status == 'fail') {
+                NotificationManager.error(bookingResponse.error, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
+            } else {
+                Actions.goToConfirmationClicked();
+                Actions.setRoute('/order-confirmation');
+            }
+        });
     }
 
     render() {
