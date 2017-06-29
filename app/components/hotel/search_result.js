@@ -332,21 +332,26 @@ class SearchResult extends React.Component {
                                 </div>
                                 <div className= "col-md-9">
                                     <div className="row margin-bottom-5">
-                                        <div className="col-sm-5 result-category">
+                                        <div className="col-md-5 result-category">
                                             <h2>Results</h2>
                                             <small className="shop-bg-red badge-results">{filteredApartments.length}</small>
                                         </div>
-                                        <div className="col-sm-7">
+                                        <div className="col-md-7">
                                             <ul className="list-inline clear-both">
-                                                <li></li>
-                                                <li className="sort-list-btn">
-                                                    <h3>Sort By :</h3>
-                                                    <SortByResults className="sort-results-combo" value= {filterCriteria.sortBy} filteredApartments={filteredApartments}/>
-                                                </li>
-                                                <li className="sort-list-btn">
-                                                    <h3>Show :</h3>
-                                                    <ShowResults className="show-results-combo" value= {filterCriteria.showMe} filteredApartments={filteredApartments} />
-                                                </li>
+                                                <div className="row">
+                                                    <div className="col-xs-6">
+                                                        <li className="sort-list-btn">
+                                                            <h3>Sort By</h3>
+                                                            <SortByResults className="sort-results-combo" value= {filterCriteria.sortBy} filteredApartments={filteredApartments}/>
+                                                        </li>
+                                                    </div>
+                                                    <div className="col-xs-6">
+                                                        <li className="sort-list-btn">
+                                                            <h3>Show</h3>
+                                                            <ShowResults className="show-results-combo" value= {filterCriteria.showMe} filteredApartments={filteredApartments} />
+                                                        </li>
+                                                    </div>
+                                                </div>
                                             </ul>
                                         </div>
                                     </div>
