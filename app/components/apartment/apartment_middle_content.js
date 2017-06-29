@@ -156,7 +156,7 @@ const AmenitiesAndControlButtons = function(props) {
     let guestHouse = ApartmentHelper.getGuestHouse(apartmentResponse);
 
     return (
-        <div className="col-md-5 mg-room-fecilities">
+        <div className="col-md-5 mg-room-fecilities margin-top-30">
             <h3 className="mg-sec-left-title">{guestHouse.name} Amenities</h3>
             <Amenities amentiesToDisplay="10" amenities={amenities} outerDivClass="row" innerDivClass="col-xs-6" />
             <div className="row">
@@ -197,7 +197,7 @@ class ApartmentGalleries extends React.Component {
         }
 
         return (
-            <div className="col-md-7">
+            <div className="col-md-7 margin-top-30">
                 {sliderWithData}
             </div>
         )
