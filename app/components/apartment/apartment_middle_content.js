@@ -158,12 +158,12 @@ const AmenitiesAndControlButtons = function(props) {
     return (
         <div className="col-md-5 mg-room-fecilities">
             <h3 className="mg-sec-left-title">{guestHouse.name} Amenities</h3>
-            <Amenities amentiesToDisplay="10" amenities={amenities} outerDivClass="row" innerDivClass="col-sm-6" />
+            <Amenities amentiesToDisplay="10" amenities={amenities} outerDivClass="row" innerDivClass="col-xs-6" />
             <div className="row">
-                <div className="col-md-6">
-                    <Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark">Keep Searching</Anchor>
+                <div className="col-xs-6">
+                    <Anchor onClick={() => onKeepSearchingClicked()} className="btn btn-dark btn-next-tab">Keep Searching</Anchor>
                 </div>
-                <div className="col-md-6">
+                <div className="col-xs-6">
                     <Anchor onClick = {() => {onBookApartmentPageClicked(apartmentResponse.apartmentKey)}} className=" pull-left btn btn-main btn-next-tab">Book Now</Anchor>
                 </div>
             </div>

@@ -283,7 +283,7 @@ class PersonalInfo extends React.Component {
 
         }
 
-        let airportPickUpSectionCss = airportPickup? 'row margin-bottom-20' : 'hide';
+        let airportPickUpSectionCss = airportPickup? 'row' : 'hide';
         let showPaymentInfo = (payLater == true) ? 'hide' : 'show';
         let minimum_amount = CurrencyFormatter.format(PricingHelper.getMinimumPrice(apartmentResponse.totalPrice, additional), { code: 'USD' });
 
@@ -374,26 +374,26 @@ class PersonalInfo extends React.Component {
 
                             <div className={airportPickUpSectionCss}>
                                 <div className="row">
-                                    <div className="col-md-1"/>
-                                    <div className="col-md-4">
+                                    <div className="col-xs-1"/>
+                                    <div className="col-xs-4">
                                         <div className="mg-book-form-input-additional-info">
                                             <span>Arrival Date</span><span className='required-input'> * </span>
                                             <ArrivalDateInstance className="disabled-color" id="arrivalDate" placeholder='Arrival Date' date={arrival_date} numberOfMonths={1} focused={arrivalDateFocused} onFocusChange={({ focused }) => {onArrivalDateFocused(focused) }} onDateChange={(date) => { onArrivalDateChanged(date) }}/>
                                         </div>
                                     </div>
-                                    <div className="col-md-1"/>
-                                        <div className="col-md-4">
-                                            <div className="mg-book-form-input-additional-info">
-                                                <span>Arrival Time/24-hour clock</span><span className='required-input'> * </span>
-                                                <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
-                                            </div>
+                                    <div className="col-xs-1"/>
+                                    <div className="col-xs-5">
+                                        <div className="mg-book-form-input-additional-info">
+                                            <span>Arrival At/24-hour clock</span><span className='required-input'> * </span>
+                                            <TimeInput initTime={arrival_time} ref="arrival_time" className="input-with-validation form-control" onTimeChange={this.onArrivalTimeChanged.bind(this)} />
                                         </div>
-                                    <div className="col-md-2" />
+                                    </div>
+                                    <div className="col-xs-1"/>
                                 </div>
                             </div>
 
 
-                            <h2 className="mg-sec-left-title">Card Details</h2>
+                            <h2 className="mg-sec-left-title margin-top-20">Card Details</h2>
                             <div className="row">
                                 <div className="col-md-3">
                                     <div className="mg-book-form-input-payment">
@@ -451,7 +451,7 @@ class PersonalInfo extends React.Component {
                             <MDSpinner className={spinnerClassName}  />
                             <Anchor disabled={disabled} onClick={this.onCompleteReservationClicked.bind(this)} className="margin-top-10 btn btn-dark-main btn-next-tab">Complete Reservation</Anchor>
                         </div>
-                        <Anchor disabled={disabled} onClick={this.goBackToSearchInfo.bind(this)} className="margin-top-10 btn btn-dark-main btn-prev-tab pull-left">Back</Anchor>
+                        <Anchor disabled={disabled} onClick={this.goBackToSearchInfo.bind(this)} className="margin-top-10 btn btn-dark-main btn-next-tab pull-left">Back</Anchor>
 
                     </div>
                 </div>

@@ -194,9 +194,7 @@ class SearchControls extends React.Component {
                     </div>
                 </div>
                 <div className="col-md-2">
-                    <div className="row">
-                        <div className="col-sm-12"><button tabIndex="5" onClick={this.onSearchApartmentsClicked.bind(this)}  className="btn btn-main btn-block search-booknow">Search</button></div>
-                    </div>
+                    <button tabIndex="5" onClick={this.onSearchApartmentsClicked.bind(this)}  className="margin-left-0 btn btn-main btn-block search-booknow">Search</button>
                 </div>
             </div>
         );

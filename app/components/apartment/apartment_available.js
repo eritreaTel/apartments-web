@@ -76,28 +76,28 @@ class ApartmentAvailable extends React.Component {
                         <h3 className="mg-avl-room-title"><Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}}><label className="search-result-heading">{guestHouse.name}</label></Anchor> <span>{totalPriceIntegerPart}<sup>{totalPriceDecimalPart}</sup>/{daysCnt} {daysCaption}</span></h3>
                         <div className="apartment-details-section">
                             <div  className="row">
-                                <div className="col-md-6">
+                                <div className="col-xs-6">
                                     <span><span className="font-weight-400">Type: </span>{apartmentType} </span>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-xs-6">
                                     <span><span className="font-weight-400">Title: </span> {title} </span>
                                 </div>
                             </div>
                             <div  className="row">
-                                <div className="col-md-6">
+                                <div className="col-xs-6">
                                     <span><span className="font-weight-400">Price per Day: </span>${pricePerDay}</span>
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-xs-6">
                                     <span><span className="font-weight-400">Location: </span>{guestHouse.city}/{guestHouse.neighborhood}</span>
                                 </div>
                             </div>
                         </div>
-                        <Amenities amentiesToDisplay="6" amenities={amenitiesWithValueOne} outerDivClass="row mg-room-fecilities" innerDivClass="col-md-6" />
+                        <Amenities amentiesToDisplay="6" amenities={amenitiesWithValueOne} outerDivClass="row mg-room-fecilities" innerDivClass="col-xs-6" />
                         <div  className="row">
-                            <div className="col-md-6">
+                            <div className="col-xs-6">
                                 <Anchor onClick={()=>{onViewApartmentClickedFromSearch(aptResponse)}} className="btn btn-dark ">View Details <i className="fa fa-angle-double-right"></i></Anchor>
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-xs-6">
                                 <Anchor onClick={() => {onComboApartmentBookNowClicked(aptResponse)}} className="btn btn-main">Book Now</Anchor>
                             </div>
                         </div>
