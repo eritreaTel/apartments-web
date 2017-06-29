@@ -268,7 +268,7 @@ class Filters extends React.Component {
                                     </a>
                                 </h2>
                             </div>
-                            <div id="collapseFour" className="panel-collapse collapse in">
+                            <div id="collapseFour" className="panel-collapse collapse">
                                 <div className="panel-body">
                                     <Location locations={filterCriteria.locations} />
                                 </div>
