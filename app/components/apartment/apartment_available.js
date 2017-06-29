@@ -88,7 +88,7 @@ class ApartmentAvailable extends React.Component {
                                     <span><span className="font-weight-400">Price per Day: </span>${pricePerDay}</span>
                                 </div>
                                 <div className="col-xs-6">
-                                    <span><span className="font-weight-400">Location: </span>{guestHouse.city}/{guestHouse.neighborhood}</span>
+                                    <span><span className="font-weight-400">Neighborhood: </span>{guestHouse.neighborhood}</span>
                                 </div>
                             </div>
                         </div>
