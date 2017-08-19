@@ -63,7 +63,7 @@ const FooterMenu = function () {
                         </ul>
                     </div>
                     <div className="col-md-6">
-                        <p>&copy; 2016 Booking in Uganda, LTD. All rights reserved.</p>
+                        <p>&copy; 2017 Booking in Uganda, LTD. All rights reserved.</p>
                     </div>
                 </div>
             </div>
