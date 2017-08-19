@@ -170,7 +170,7 @@ function getDefaultProps() {
 			},
 			{
 				"id" : 6,
-				full_name: "Ruth Nakayima",
+				full_name: "Rhema Nanyanzi",
 				title: "Sales Manager",
 				photo : "images/team-members/ugandaBooking-sales-manager-2.jpg",
 				fb_link : "#",
