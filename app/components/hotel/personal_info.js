@@ -207,9 +207,16 @@ class PersonalInfo extends React.Component {
                 } else {
                     //Log-in user
                     let credentials = {email : personal.email, password : personal.password}
-                    Actions.logIn(credentials);
-                    // Create apartment booking
-                    this.createApartmentBooking({stripe_token : null});
+                    let logInResponse = Actions.logIn(credentials);
+
+                    logInResponse.then(response => {
+                        if (response.status == 'fail') {
+                            NotificationManager.error(response.error, 'Log In', Constants.ERROR_DISPLAY_TIME);
+                        } else {
+                        // Create apartment booking
+                        this.createApartmentBooking({stripe_token : null});
+                        }
+                    });
                 }
             });
         }
