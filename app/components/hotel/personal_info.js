@@ -205,6 +205,10 @@ class PersonalInfo extends React.Component {
                     let isProcessing = {processingPayment: false};
                     Actions.setIsProcessing(isProcessing);
                 } else {
+                    //Log-in user
+                    let credentials = {email : personal.email, password : personal.password}
+                    Actions.logIn(credentials);
+                    // Create apartment booking
                     this.createApartmentBooking({stripe_token : null});
                 }
             });
