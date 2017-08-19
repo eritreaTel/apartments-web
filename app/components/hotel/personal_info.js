@@ -236,11 +236,6 @@ class PersonalInfo extends React.Component {
         const loggedIn = (!!CookiesHelper.getSessionCookie());
         const {bookingStage: {personal}} = this.props;
 
-        if (!loggedIn) {
-            let credentials = {email : personal.email, password : personal.password}
-            Actions.logIn(credentials);
-        }
-
         if (response.error) {
             Actions.setIsProcessing(isProcessing);
             NotificationManager.error(response.error.message, 'Booking - Payment Information', Constants.ERROR_DISPLAY_TIME);
@@ -248,7 +243,20 @@ class PersonalInfo extends React.Component {
             this.refs[response.error.param] && this.refs[response.error.param].select();
         } else {
             var stripe_token = response.id;
-            this.createApartmentBooking({stripe_token});
+            if (!loggedIn) {
+                let credentials = {email : personal.email, password : personal.password}
+                let logInResponse = Actions.logIn(credentials);
+
+                logInResponse.then(response => {
+                    if (response.status == 'fail') {
+                        NotificationManager.error(response.error, 'Log In', Constants.ERROR_DISPLAY_TIME);
+                    } else {
+                        this.createApartmentBooking({stripe_token});
+                    }
+                });
+            } else {
+                this.createApartmentBooking({stripe_token});
+            }
         }
     }
 
