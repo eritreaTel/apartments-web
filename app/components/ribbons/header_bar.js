@@ -48,26 +48,31 @@ class HeaderBar extends React.Component {
             <Header className = 'header transp sticky'>
                 <nav className="navbar navbar-inverse">
                     <div className="container">
-                        <div className="navbar-header">
-                            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                <span className="sr-only">Toggle navigation</span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                                <span className="icon-bar"></span>
-                            </button>
-                            <img className="margin-top-5" src={assetPath("images/logo.png")} alt="logo"/>
-                        </div>
-
-                        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul className="nav navbar-nav navbar-right">
-                                <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={this.onHomeClicked.bind(this)}>Home</Anchor> </li>
-                                <li  className={(page == 'hotels' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onHotelsClicked.bind(this)}>Hotels</Anchor> </li>
-                                <li  className={(page == 'your-trip') ? 'active' : ''}><Anchor onClick={this.onPlanYourTripClicked.bind(this)}>Your Trip</Anchor> </li>
-                                <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsClicked.bind(this)}>Blog</Anchor> </li>
-                                <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
-                                <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={this.onContactUsClicked.bind(this)}>Contact Us</Anchor> </li>
-                                <MyAccountMenu page={page} />
-                            </ul>
+                        <div className="row">
+                            <div className="col-sm-4">
+                                <div className="navbar-header">
+                                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                        <span className="sr-only">Toggle navigation</span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                        <span className="icon-bar"></span>
+                                    </button>
+                                    <Anchor onClick={this.onHomeClicked.bind(this)}><img className="margin-top-5" src={assetPath("images/logo.png")} alt="logo"/> </Anchor>
+                                </div>
+                            </div>
+                            <div className="col-sm-8">
+                                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                    <ul className="nav navbar-nav navbar-right">
+                                        <li  className={page == 'home' ? 'active' : ''}><Anchor onClick={this.onHomeClicked.bind(this)}>Home</Anchor> </li>
+                                        <li  className={(page == 'hotels' || page == 'apartment') ? 'active' : ''}><Anchor onClick={this.onHotelsClicked.bind(this)}>Hotels</Anchor> </li>
+                                        <li  className={(page == 'your-trip') ? 'active' : ''}><Anchor onClick={this.onPlanYourTripClicked.bind(this)}>Your Trip</Anchor> </li>
+                                        <li  className={(page == 'blogs' || page == 'blog') ? 'active' : ''}><Anchor onClick={this.onBlogsClicked.bind(this)}>Blog</Anchor> </li>
+                                        <li  className={page == 'about-us' ? 'active' : ''}><Anchor onClick={this.onAboutUsClicked.bind(this)}>About Us</Anchor> </li>
+                                        <li  className={ page == 'contact-us' ? 'active' : ''}><Anchor onClick={this.onContactUsClicked.bind(this)}>Contact Us</Anchor> </li>
+                                        <MyAccountMenu page={page} />
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>

@@ -571,7 +571,7 @@ ul.styled-list.list-star li:before {
 }
 .header .navbar-default,
 .header .navbar-inverse {
-  text-align: right;
+  text-align: left;
 }
 .header .navbar-collapse.collapse {
   vertical-align: top;
@@ -748,7 +748,6 @@ ul.styled-list.list-star li:before {
   border-radius: 1px;
   border-color: #fff !important;
   margin-top: 20px;
-  margin-right: 110px;
   margin-bottom: 21px;
 }
 .navbar-toggle:hover,

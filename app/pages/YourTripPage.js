@@ -129,9 +129,13 @@ const LeftSection = function (props) {
 				<aside className="mg-widget-plan-your-trip">
 					<UgandaOverViewMenu  activeTripId={activeTripId}/>
 					<NationalParksMenu activeTripId={activeTripId}/>
-					<GorillaTrekkingMenu activeTripId={activeTripId}/>
-					<TouristAttractionsMenu activeTripId={activeTripId}/>
-					<PlanningYourItineraryMenu activeTripId={activeTripId}/>
+
+					{/*
+					 	<GorillaTrekkingMenu activeTripId={activeTripId}/>
+						<TouristAttractionsMenu activeTripId={activeTripId}/>
+						<PlanningYourItineraryMenu activeTripId={activeTripId}/>
+					 */}
+
 				</aside>
 			</div>
 		</div>
