@@ -4,7 +4,7 @@ const _ = require('lodash');
 module.exports = {
   getSeoInfo() {
     return (
-      {
+    {
       "/index/": {
         "url_path": "/index/",
         "title": "UgandaBooking.com - Hotels in Uganda",
@@ -53,8 +53,8 @@ module.exports = {
         "description": "UgandaBooking.com’s Official Website! Located in Uganda and have hundreds of hotels online. Get Instant Confirmation · No Booking Fees · Cheap Price",
         "keywords": "guest houses, bed and breakfast,  accommodation, guesthouses, cheap hotels in uganda, cheap guesthouses, guesthouses in kampala ,guesthouses in uganda, affordable accommodation in uganda, safari guesthouses in uganda, hotels in uganda, hotels in kampala, "
       },
-      "/seeker-account/": {
-        "url_path": "/seeker-account/",
+      "/my-account/": {
+        "url_path": "/my-account/",
         "title": "UgandaBooking.com - My Account",
         "description": "UgandaBooking.com’s Official Website! Located in Uganda and have hundreds of hotels online. Get Instant Confirmation · No Booking Fees · Cheap Price",
         "keywords": "guest houses, bed and breakfast,  accommodation, guesthouses, cheap hotels in uganda, cheap guesthouses, guesthouses in kampala ,guesthouses in uganda, affordable accommodation in uganda, safari guesthouses in uganda, hotels in uganda, hotels in kampala, "
@@ -1750,8 +1750,591 @@ module.exports = {
         "title": "UgandaBooking.com - Crystal Suites - Two Bedroom Apartment",
         "description": "UgandaBooking.com - Crystal Suites - Two Bedroom Apartment",
         "keywords": "Crystal Suites,suite in Kampala,suite in Uganda,Suite in Kampala,Suite in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-royal-prince-motel/72/": {
+        "url_path": "/apartment/kampala-royal-prince-motel/72/",
+        "title": "UgandaBooking.com - Royal Prince Motel - Single Bed",
+        "description": "Near major marketplaces and cultural areas such as the King’s Palace, this hotel lets guests settle into the heart of Kampala ...",
+        "keywords": "Royal Prince Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-royal-prince-motel/73/": {
+        "url_path": "/apartment/kampala-royal-prince-motel/73/",
+        "title": "UgandaBooking.com - Royal Prince Motel - Double Bed",
+        "description": "Near major marketplaces and cultural areas such as the King’s Palace, this hotel lets guests settle into the heart of Kampala ...",
+        "keywords": "Royal Prince Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-royal-prince-motel/74/": {
+        "url_path": "/apartment/kampala-royal-prince-motel/74/",
+        "title": "UgandaBooking.com - Royal Prince Motel - Luxury Double Bed",
+        "description": "Near major marketplaces and cultural areas such as the King’s Palace, this hotel lets guests settle into the heart of Kampala ...",
+        "keywords": "Royal Prince Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-royal-prince-motel/75/": {
+        "url_path": "/apartment/kampala-royal-prince-motel/75/",
+        "title": "UgandaBooking.com - Royal Prince Motel - Executive Bed",
+        "description": "Near major marketplaces and cultural areas such as the King’s Palace, this hotel lets guests settle into the heart of Kampala ...",
+        "keywords": "Royal Prince Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-karon-motel/114/": {
+        "url_path": "/apartment/kampala-karon-motel/114/",
+        "title": "UgandaBooking.com - Karon Motel - Double Room",
+        "description": "UgandaBooking.com - Karon Motel - Double Room",
+        "keywords": "Karon Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-karon-motel/115/": {
+        "url_path": "/apartment/kampala-karon-motel/115/",
+        "title": "UgandaBooking.com - Karon Motel - Single Room",
+        "description": "UgandaBooking.com - Karon Motel - Single Room",
+        "keywords": "Karon Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-karon-motel/116/": {
+        "url_path": "/apartment/kampala-karon-motel/116/",
+        "title": "UgandaBooking.com - Karon Motel - Single Deluxe",
+        "description": "UgandaBooking.com - Karon Motel - Single Deluxe",
+        "keywords": "Karon Motel,motel in Kampala,motel in Uganda,Motel in Kampala,Motel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/173/": {
+        "url_path": "/apartment/kampala-ivys-hotels/173/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Standard Room",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/174/": {
+        "url_path": "/apartment/kampala-ivys-hotels/174/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Deluxe",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/175/": {
+        "url_path": "/apartment/kampala-ivys-hotels/175/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Suite/Studio",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/176/": {
+        "url_path": "/apartment/kampala-ivys-hotels/176/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Executive Suite",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/177/": {
+        "url_path": "/apartment/kampala-ivys-hotels/177/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Twin Deluxe",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-ivys-hotels/178/": {
+        "url_path": "/apartment/kampala-ivys-hotels/178/",
+        "title": "UgandaBooking.com - Ivy's Hotels - Triple/Annex Room",
+        "description": "Ivys Hotel is a thoroughly modern facility in the quiet neighborhood of Rubaga, Offering visitors a world-class hotel, Ivys Hotel treats guests to a luxurious ...",
+        "keywords": "Ivy's Hotels,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-bativa-hotel/345/": {
+        "url_path": "/apartment/kampala-bativa-hotel/345/",
+        "title": "UgandaBooking.com - Bativa Hotel - Standard Single",
+        "description": "UgandaBooking.com - Bativa Hotel - Standard Single",
+        "keywords": "Bativa Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-bativa-hotel/346/": {
+        "url_path": "/apartment/kampala-bativa-hotel/346/",
+        "title": "UgandaBooking.com - Bativa Hotel - Standard Twin",
+        "description": "UgandaBooking.com - Bativa Hotel - Standard Twin",
+        "keywords": "Bativa Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-bativa-hotel/347/": {
+        "url_path": "/apartment/kampala-bativa-hotel/347/",
+        "title": "UgandaBooking.com - Bativa Hotel - Standard Double",
+        "description": "UgandaBooking.com - Bativa Hotel - Standard Double",
+        "keywords": "Bativa Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-makindye-country-club/348/": {
+        "url_path": "/apartment/kampala-makindye-country-club/348/",
+        "title": "UgandaBooking.com - Makindye Country Club - Double Room",
+        "description": "UgandaBooking.com - Makindye Country Club - Double Room",
+        "keywords": "Makindye Country Club,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-makindye-country-club/349/": {
+        "url_path": "/apartment/kampala-makindye-country-club/349/",
+        "title": "UgandaBooking.com - Makindye Country Club - Suite Room",
+        "description": "UgandaBooking.com - Makindye Country Club - Suite Room",
+        "keywords": "Makindye Country Club,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-makindye-country-club/350/": {
+        "url_path": "/apartment/kampala-makindye-country-club/350/",
+        "title": "UgandaBooking.com - Makindye Country Club - Deluxe Family Room",
+        "description": "UgandaBooking.com - Makindye Country Club - Deluxe Family Room",
+        "keywords": "Makindye Country Club,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kahonda-buffalo-hotel/351/": {
+        "url_path": "/apartment/kampala-kahonda-buffalo-hotel/351/",
+        "title": "UgandaBooking.com - Kahonda Buffalo Hotel - Standard Double",
+        "description": "UgandaBooking.com - Kahonda Buffalo Hotel - Standard Double",
+        "keywords": "Kahonda Buffalo Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kahonda-buffalo-hotel/352/": {
+        "url_path": "/apartment/kampala-kahonda-buffalo-hotel/352/",
+        "title": "UgandaBooking.com - Kahonda Buffalo Hotel - Deluxe Room",
+        "description": "UgandaBooking.com - Kahonda Buffalo Hotel - Deluxe Room",
+        "keywords": "Kahonda Buffalo Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-inter-tropics-hotel/354/": {
+        "url_path": "/apartment/kampala-inter-tropics-hotel/354/",
+        "title": "UgandaBooking.com - Inter Tropics Hotel - Standard Room",
+        "description": "UgandaBooking.com - Inter Tropics Hotel - Standard Room",
+        "keywords": "Inter Tropics Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-inter-tropics-hotel/355/": {
+        "url_path": "/apartment/kampala-inter-tropics-hotel/355/",
+        "title": "UgandaBooking.com - Inter Tropics Hotel - Deluxe Room",
+        "description": "UgandaBooking.com - Inter Tropics Hotel - Deluxe Room",
+        "keywords": "Inter Tropics Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-inter-tropics-hotel/356/": {
+        "url_path": "/apartment/kampala-inter-tropics-hotel/356/",
+        "title": "UgandaBooking.com - Inter Tropics Hotel - Executive Deluxe Room",
+        "description": "UgandaBooking.com - Inter Tropics Hotel - Executive Deluxe Room",
+        "keywords": "Inter Tropics Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tandem-hotel/357/": {
+        "url_path": "/apartment/kampala-tandem-hotel/357/",
+        "title": "UgandaBooking.com - Tandem Hotel - Single Room",
+        "description": "UgandaBooking.com - Tandem Hotel - Single Room",
+        "keywords": "Tandem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tandem-hotel/358/": {
+        "url_path": "/apartment/kampala-tandem-hotel/358/",
+        "title": "UgandaBooking.com - Tandem Hotel - Double Room",
+        "description": "UgandaBooking.com - Tandem Hotel - Double Room",
+        "keywords": "Tandem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tandem-hotel/359/": {
+        "url_path": "/apartment/kampala-tandem-hotel/359/",
+        "title": "UgandaBooking.com - Tandem Hotel - Twin Room",
+        "description": "UgandaBooking.com - Tandem Hotel - Twin Room",
+        "keywords": "Tandem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tandem-hotel/360/": {
+        "url_path": "/apartment/kampala-tandem-hotel/360/",
+        "title": "UgandaBooking.com - Tandem Hotel - Executive Room",
+        "description": "UgandaBooking.com - Tandem Hotel - Executive Room",
+        "keywords": "Tandem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tandem-hotel/361/": {
+        "url_path": "/apartment/kampala-tandem-hotel/361/",
+        "title": "UgandaBooking.com - Tandem Hotel - Super Executive Room",
+        "description": "UgandaBooking.com - Tandem Hotel - Super Executive Room",
+        "keywords": "Tandem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tristar-hotel/365/": {
+        "url_path": "/apartment/kampala-tristar-hotel/365/",
+        "title": "UgandaBooking.com - Tristar Hotel - Deluxe Double",
+        "description": "UgandaBooking.com - Tristar Hotel - Deluxe Double",
+        "keywords": "Tristar Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-tristar-hotel/366/": {
+        "url_path": "/apartment/kampala-tristar-hotel/366/",
+        "title": "UgandaBooking.com - Tristar Hotel - Executive Double",
+        "description": "UgandaBooking.com - Tristar Hotel - Executive Double",
+        "keywords": "Tristar Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/367/": {
+        "url_path": "/apartment/kampala-biyem-hotel/367/",
+        "title": "UgandaBooking.com - Biyem Hotel - Standard Single",
+        "description": "UgandaBooking.com - Biyem Hotel - Standard Single",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/368/": {
+        "url_path": "/apartment/kampala-biyem-hotel/368/",
+        "title": "UgandaBooking.com - Biyem Hotel - Standard Double",
+        "description": "UgandaBooking.com - Biyem Hotel - Standard Double",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/369/": {
+        "url_path": "/apartment/kampala-biyem-hotel/369/",
+        "title": "UgandaBooking.com - Biyem Hotel - Deluxe Double",
+        "description": "UgandaBooking.com - Biyem Hotel - Deluxe Double",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/370/": {
+        "url_path": "/apartment/kampala-biyem-hotel/370/",
+        "title": "UgandaBooking.com - Biyem Hotel - Executive Double",
+        "description": "UgandaBooking.com - Biyem Hotel - Executive Double",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/371/": {
+        "url_path": "/apartment/kampala-biyem-hotel/371/",
+        "title": "UgandaBooking.com - Biyem Hotel - Suite",
+        "description": "UgandaBooking.com - Biyem Hotel - Suite",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/372/": {
+        "url_path": "/apartment/kampala-biyem-hotel/372/",
+        "title": "UgandaBooking.com - Biyem Hotel - Cottage",
+        "description": "UgandaBooking.com - Biyem Hotel - Cottage",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-biyem-hotel/373/": {
+        "url_path": "/apartment/kampala-biyem-hotel/373/",
+        "title": "UgandaBooking.com - Biyem Hotel - Twin Bedroom",
+        "description": "UgandaBooking.com - Biyem Hotel - Twin Bedroom",
+        "keywords": "Biyem Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-grand-imperial-hotel/374/": {
+        "url_path": "/apartment/kampala-grand-imperial-hotel/374/",
+        "title": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Double",
+        "description": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Double",
+        "keywords": "Grand Imperial Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-grand-imperial-hotel/375/": {
+        "url_path": "/apartment/kampala-grand-imperial-hotel/375/",
+        "title": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Twin",
+        "description": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Twin",
+        "keywords": "Grand Imperial Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-grand-imperial-hotel/376/": {
+        "url_path": "/apartment/kampala-grand-imperial-hotel/376/",
+        "title": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Family",
+        "description": "UgandaBooking.com - Grand Imperial Hotel - Deluxe Family",
+        "keywords": "Grand Imperial Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-grand-imperial-hotel/377/": {
+        "url_path": "/apartment/kampala-grand-imperial-hotel/377/",
+        "title": "UgandaBooking.com - Grand Imperial Hotel - Superior Double",
+        "description": "UgandaBooking.com - Grand Imperial Hotel - Superior Double",
+        "keywords": "Grand Imperial Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-grand-imperial-hotel/378/": {
+        "url_path": "/apartment/kampala-grand-imperial-hotel/378/",
+        "title": "UgandaBooking.com - Grand Imperial Hotel - King Suite",
+        "description": "UgandaBooking.com - Grand Imperial Hotel - King Suite",
+        "keywords": "Grand Imperial Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-harambe/379/": {
+        "url_path": "/apartment/kampala-hotel-harambe/379/",
+        "title": "UgandaBooking.com - Hotel Harambe - Standard Room",
+        "description": "UgandaBooking.com - Hotel Harambe - Standard Room",
+        "keywords": "Hotel Harambe,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-harambe/380/": {
+        "url_path": "/apartment/kampala-hotel-harambe/380/",
+        "title": "UgandaBooking.com - Hotel Harambe - Twin Room",
+        "description": "UgandaBooking.com - Hotel Harambe - Twin Room",
+        "keywords": "Hotel Harambe,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-harambe/381/": {
+        "url_path": "/apartment/kampala-hotel-harambe/381/",
+        "title": "UgandaBooking.com - Hotel Harambe - Executive Room",
+        "description": "UgandaBooking.com - Hotel Harambe - Executive Room",
+        "keywords": "Hotel Harambe,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-best-western-premier-hotel/382/": {
+        "url_path": "/apartment/kampala-best-western-premier-hotel/382/",
+        "title": "UgandaBooking.com - Best Western Premier Hotel - Junior Suite",
+        "description": "UgandaBooking.com - Best Western Premier Hotel - Junior Suite",
+        "keywords": "Best Western Premier Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-best-western-premier-hotel/383/": {
+        "url_path": "/apartment/kampala-best-western-premier-hotel/383/",
+        "title": "UgandaBooking.com - Best Western Premier Hotel - Deluxe Room",
+        "description": "UgandaBooking.com - Best Western Premier Hotel - Deluxe Room",
+        "keywords": "Best Western Premier Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-best-western-premier-hotel/384/": {
+        "url_path": "/apartment/kampala-best-western-premier-hotel/384/",
+        "title": "UgandaBooking.com - Best Western Premier Hotel - Superior Room",
+        "description": "UgandaBooking.com - Best Western Premier Hotel - Superior Room",
+        "keywords": "Best Western Premier Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-best-western-premier-hotel/385/": {
+        "url_path": "/apartment/kampala-best-western-premier-hotel/385/",
+        "title": "UgandaBooking.com - Best Western Premier Hotel - Executive Suite",
+        "description": "UgandaBooking.com - Best Western Premier Hotel - Executive Suite",
+        "keywords": "Best Western Premier Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dual-apartment/388/": {
+        "url_path": "/apartment/kampala-dual-apartment/388/",
+        "title": "UgandaBooking.com - Dual Apartment - One Bedroom Apartment",
+        "description": "UgandaBooking.com - Dual Apartment - One Bedroom Apartment",
+        "keywords": "Dual Apartment,apartment in Kampala,apartment in Uganda,Apartment in Kampala,Apartment in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dual-apartment/389/": {
+        "url_path": "/apartment/kampala-dual-apartment/389/",
+        "title": "UgandaBooking.com - Dual Apartment - Two Bedroom Apartment",
+        "description": "UgandaBooking.com - Dual Apartment - Two Bedroom Apartment",
+        "keywords": "Dual Apartment,apartment in Kampala,apartment in Uganda,Apartment in Kampala,Apartment in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kk-trust-hotel/390/": {
+        "url_path": "/apartment/kampala-kk-trust-hotel/390/",
+        "title": "UgandaBooking.com - KK Trust Hotel - Standard Double",
+        "description": "UgandaBooking.com - KK Trust Hotel - Standard Double",
+        "keywords": "KK Trust Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-kk-trust-hotel/391/": {
+        "url_path": "/apartment/kampala-kk-trust-hotel/391/",
+        "title": "UgandaBooking.com - KK Trust Hotel - Standard Twin",
+        "description": "UgandaBooking.com - KK Trust Hotel - Standard Twin",
+        "keywords": "KK Trust Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-fair-way-hotel/395/": {
+        "url_path": "/apartment/kampala-fair-way-hotel/395/",
+        "title": "UgandaBooking.com - Fair Way Hotel - Standard Single",
+        "description": "UgandaBooking.com - Fair Way Hotel - Standard Single",
+        "keywords": "Fair Way Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-fair-way-hotel/396/": {
+        "url_path": "/apartment/kampala-fair-way-hotel/396/",
+        "title": "UgandaBooking.com - Fair Way Hotel - Executive Single",
+        "description": "UgandaBooking.com - Fair Way Hotel - Executive Single",
+        "keywords": "Fair Way Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-fair-way-hotel/397/": {
+        "url_path": "/apartment/kampala-fair-way-hotel/397/",
+        "title": "UgandaBooking.com - Fair Way Hotel - Standard Double",
+        "description": "UgandaBooking.com - Fair Way Hotel - Standard Double",
+        "keywords": "Fair Way Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-fair-way-hotel/398/": {
+        "url_path": "/apartment/kampala-fair-way-hotel/398/",
+        "title": "UgandaBooking.com - Fair Way Hotel - Executive Double",
+        "description": "UgandaBooking.com - Fair Way Hotel - Executive Double",
+        "keywords": "Fair Way Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-sanin-inn/399/": {
+        "url_path": "/apartment/kampala-sanin-inn/399/",
+        "title": "UgandaBooking.com - Sanin Inn - Single Room",
+        "description": "UgandaBooking.com - Sanin Inn - Single Room",
+        "keywords": "Sanin Inn,guest house in Kampala,guest house in Uganda,Guest house in Kampala,Guest house in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-sanin-inn/400/": {
+        "url_path": "/apartment/kampala-sanin-inn/400/",
+        "title": "UgandaBooking.com - Sanin Inn - Budget Single Room",
+        "description": "UgandaBooking.com - Sanin Inn - Budget Single Room",
+        "keywords": "Sanin Inn,guest house in Kampala,guest house in Uganda,Guest house in Kampala,Guest house in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-sanin-inn/401/": {
+        "url_path": "/apartment/kampala-sanin-inn/401/",
+        "title": "UgandaBooking.com - Sanin Inn - Twin Room",
+        "description": "UgandaBooking.com - Sanin Inn - Twin Room",
+        "keywords": "Sanin Inn,guest house in Kampala,guest house in Uganda,Guest house in Kampala,Guest house in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-sanin-inn/402/": {
+        "url_path": "/apartment/kampala-sanin-inn/402/",
+        "title": "UgandaBooking.com - Sanin Inn - Double Room",
+        "description": "UgandaBooking.com - Sanin Inn - Double Room",
+        "keywords": "Sanin Inn,guest house in Kampala,guest house in Uganda,Guest house in Kampala,Guest house in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-mellinium/403/": {
+        "url_path": "/apartment/kampala-hotel-mellinium/403/",
+        "title": "UgandaBooking.com - Hotel Mellinium - Budget Double",
+        "description": "UgandaBooking.com - Hotel Mellinium - Budget Double",
+        "keywords": "Hotel Mellinium,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-hotel-mellinium/404/": {
+        "url_path": "/apartment/kampala-hotel-mellinium/404/",
+        "title": "UgandaBooking.com - Hotel Mellinium - Standard Double",
+        "description": "UgandaBooking.com - Hotel Mellinium - Standard Double",
+        "keywords": "Hotel Mellinium,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-mamayiba-park-hotel/405/": {
+        "url_path": "/apartment/kampala-mamayiba-park-hotel/405/",
+        "title": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Single",
+        "description": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Single",
+        "keywords": "Mamayiba Park Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-mamayiba-park-hotel/406/": {
+        "url_path": "/apartment/kampala-mamayiba-park-hotel/406/",
+        "title": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Double",
+        "description": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Double",
+        "keywords": "Mamayiba Park Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-mamayiba-park-hotel/407/": {
+        "url_path": "/apartment/kampala-mamayiba-park-hotel/407/",
+        "title": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Twin",
+        "description": "UgandaBooking.com - Mamayiba Park Hotel - Deluxe Twin",
+        "keywords": "Mamayiba Park Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-forest-cottages/408/": {
+        "url_path": "/apartment/kampala-forest-cottages/408/",
+        "title": "UgandaBooking.com - Forest Cottages - Single Room",
+        "description": "UgandaBooking.com - Forest Cottages - Single Room",
+        "keywords": "Forest Cottages,cottage in Kampala,cottage in Uganda,Cottage in Kampala,Cottage in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-forest-cottages/409/": {
+        "url_path": "/apartment/kampala-forest-cottages/409/",
+        "title": "UgandaBooking.com - Forest Cottages - Twin Room",
+        "description": "UgandaBooking.com - Forest Cottages - Twin Room",
+        "keywords": "Forest Cottages,cottage in Kampala,cottage in Uganda,Cottage in Kampala,Cottage in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-laico-lake-victoria-hotel/410/": {
+        "url_path": "/apartment/kampala-laico-lake-victoria-hotel/410/",
+        "title": "UgandaBooking.com - Laico Lake Victoria Hotel - Executive Room",
+        "description": "UgandaBooking.com - Laico Lake Victoria Hotel - Executive Room",
+        "keywords": "Laico Lake Victoria Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-laico-lake-victoria-hotel/411/": {
+        "url_path": "/apartment/kampala-laico-lake-victoria-hotel/411/",
+        "title": "UgandaBooking.com - Laico Lake Victoria Hotel - Ministerial Suite",
+        "description": "UgandaBooking.com - Laico Lake Victoria Hotel - Ministerial Suite",
+        "keywords": "Laico Lake Victoria Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-laico-lake-victoria-hotel/412/": {
+        "url_path": "/apartment/kampala-laico-lake-victoria-hotel/412/",
+        "title": "UgandaBooking.com - Laico Lake Victoria Hotel - Presidential Suite",
+        "description": "UgandaBooking.com - Laico Lake Victoria Hotel - Presidential Suite",
+        "keywords": "Laico Lake Victoria Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-laico-lake-victoria-hotel/413/": {
+        "url_path": "/apartment/kampala-laico-lake-victoria-hotel/413/",
+        "title": "UgandaBooking.com - Laico Lake Victoria Hotel - Junior Suite",
+        "description": "UgandaBooking.com - Laico Lake Victoria Hotel - Junior Suite",
+        "keywords": "Laico Lake Victoria Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nyoni-hotel/417/": {
+        "url_path": "/apartment/kampala-shangri-la-nyoni-hotel/417/",
+        "title": "UgandaBooking.com - Shangri-La Nyoni Hotel - Deluxe Room",
+        "description": "UgandaBooking.com - Shangri-La Nyoni Hotel - Deluxe Room",
+        "keywords": "Shangri-La Nyoni Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nyoni-hotel/418/": {
+        "url_path": "/apartment/kampala-shangri-la-nyoni-hotel/418/",
+        "title": "UgandaBooking.com - Shangri-La Nyoni Hotel - Executive Room",
+        "description": "UgandaBooking.com - Shangri-La Nyoni Hotel - Executive Room",
+        "keywords": "Shangri-La Nyoni Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nyoni-hotel/419/": {
+        "url_path": "/apartment/kampala-shangri-la-nyoni-hotel/419/",
+        "title": "UgandaBooking.com - Shangri-La Nyoni Hotel - Suite Room",
+        "description": "UgandaBooking.com - Shangri-La Nyoni Hotel - Suite Room",
+        "keywords": "Shangri-La Nyoni Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nyoni-hotel/420/": {
+        "url_path": "/apartment/kampala-shangri-la-nyoni-hotel/420/",
+        "title": "UgandaBooking.com - Shangri-La Nyoni Hotel - Two Bedroom Apartment",
+        "description": "UgandaBooking.com - Shangri-La Nyoni Hotel - Two Bedroom Apartment",
+        "keywords": "Shangri-La Nyoni Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nyoni-hotel/421/": {
+        "url_path": "/apartment/kampala-shangri-la-nyoni-hotel/421/",
+        "title": "UgandaBooking.com - Shangri-La Nyoni Hotel - Three Bedroom Apartment",
+        "description": "UgandaBooking.com - Shangri-La Nyoni Hotel - Three Bedroom Apartment",
+        "keywords": "Shangri-La Nyoni Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-myenga-hotel/422/": {
+        "url_path": "/apartment/kampala-shangri-la-myenga-hotel/422/",
+        "title": "UgandaBooking.com - Shangri-La Myenga Hotel - Standard Room",
+        "description": "UgandaBooking.com - Shangri-La Myenga Hotel - Standard Room",
+        "keywords": "Shangri-La Myenga Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-myenga-hotel/423/": {
+        "url_path": "/apartment/kampala-shangri-la-myenga-hotel/423/",
+        "title": "UgandaBooking.com - Shangri-La Myenga Hotel - Cottage",
+        "description": "UgandaBooking.com - Shangri-La Myenga Hotel - Cottage",
+        "keywords": "Shangri-La Myenga Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nakasero-hotel/424/": {
+        "url_path": "/apartment/kampala-shangri-la-nakasero-hotel/424/",
+        "title": "UgandaBooking.com - Shangri-La Nakasero Hotel - Executive Room",
+        "description": "UgandaBooking.com - Shangri-La Nakasero Hotel - Executive Room",
+        "keywords": "Shangri-La Nakasero Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nakasero-hotel/425/": {
+        "url_path": "/apartment/kampala-shangri-la-nakasero-hotel/425/",
+        "title": "UgandaBooking.com - Shangri-La Nakasero Hotel - Suite Room",
+        "description": "UgandaBooking.com - Shangri-La Nakasero Hotel - Suite Room",
+        "keywords": "Shangri-La Nakasero Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-nakasero-hotel/426/": {
+        "url_path": "/apartment/kampala-shangri-la-nakasero-hotel/426/",
+        "title": "UgandaBooking.com - Shangri-La Nakasero Hotel - Superior Suite",
+        "description": "UgandaBooking.com - Shangri-La Nakasero Hotel - Superior Suite",
+        "keywords": "Shangri-La Nakasero Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-shangri-la-myenga-hotel/432/": {
+        "url_path": "/apartment/kampala-shangri-la-myenga-hotel/432/",
+        "title": "UgandaBooking.com - Shangri-La Myenga Hotel - Two Bedroom Apartment",
+        "description": "UgandaBooking.com - Shangri-La Myenga Hotel - Two Bedroom Apartment",
+        "keywords": "Shangri-La Myenga Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dana-hotel/433/": {
+        "url_path": "/apartment/kampala-dana-hotel/433/",
+        "title": "UgandaBooking.com - Dana Hotel - Single Room",
+        "description": "UgandaBooking.com - Dana Hotel - Single Room",
+        "keywords": "Dana Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dana-hotel/434/": {
+        "url_path": "/apartment/kampala-dana-hotel/434/",
+        "title": "UgandaBooking.com - Dana Hotel - Double Room",
+        "description": "UgandaBooking.com - Dana Hotel - Double Room",
+        "keywords": "Dana Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dana-hotel/435/": {
+        "url_path": "/apartment/kampala-dana-hotel/435/",
+        "title": "UgandaBooking.com - Dana Hotel - Double Deluxe",
+        "description": "UgandaBooking.com - Dana Hotel - Double Deluxe",
+        "keywords": "Dana Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-dana-hotel/436/": {
+        "url_path": "/apartment/kampala-dana-hotel/436/",
+        "title": "UgandaBooking.com - Dana Hotel - Double Deluxe Superior",
+        "description": "UgandaBooking.com - Dana Hotel - Double Deluxe Superior",
+        "keywords": "Dana Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/437/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/437/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Deluxe Single",
+        "description": "UgandaBooking.com - Golf Course Hotel - Deluxe Single",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/438/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/438/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Executive Suite",
+        "description": "UgandaBooking.com - Golf Course Hotel - Executive Suite",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/439/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/439/",
+        "title": "UgandaBooking.com - Golf Course Hotel - One Bedroom Suite",
+        "description": "UgandaBooking.com - Golf Course Hotel - One Bedroom Suite",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/440/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/440/",
+        "title": "UgandaBooking.com - Golf Course Hotel - One Bedroom Apartment",
+        "description": "UgandaBooking.com - Golf Course Hotel - One Bedroom Apartment",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/441/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/441/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Junior Suite",
+        "description": "UgandaBooking.com - Golf Course Hotel - Junior Suite",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/442/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/442/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Deluxe Family Room",
+        "description": "UgandaBooking.com - Golf Course Hotel - Deluxe Family Room",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/443/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/443/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Two Bedroom Apartment",
+        "description": "UgandaBooking.com - Golf Course Hotel - Two Bedroom Apartment",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/apartment/kampala-golf-course-hotel/444/": {
+        "url_path": "/apartment/kampala-golf-course-hotel/444/",
+        "title": "UgandaBooking.com - Golf Course Hotel - Three Bedroom Apartment",
+        "description": "UgandaBooking.com - Golf Course Hotel - Three Bedroom Apartment",
+        "keywords": "Golf Course Hotel,hotel in Kampala,hotel in Uganda,Hotel in Kampala,Hotel in Uganda,UgandaBooking"
+      },
+      "/your-trip/tourist-attractions-kampala-city/13/": {
+        "url_path": "/your-trip/tourist-attractions-kampala-city/13/",
+        "title": "UgandaBooking.com - Tourist Attractions: Kampala City",
+        "description": "Tourist Attractions: Kampala City. Find detailed information in UgandaBooking.com",
+        "keywords": "Uganda Tourist Attractions,kampala Tourist Attractions,Tourist Attractions Kampala City,Uganda, uganda, kampala, Kampala, UgandaBooking"
       }
     }
+
     )
   },
 
