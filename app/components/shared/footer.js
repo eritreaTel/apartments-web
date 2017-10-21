@@ -96,7 +96,7 @@ const ContactUs = function () {
 
 const Instagram = function (props) {
     const syledLi = props.instagramImages.map(imgInfo => {
-        return <li key={imgInfo.id}><Anchor><img src={assetPath(imgInfo.thumb)} alt=""/></Anchor></li>;
+        return <li key={imgInfo.id}><a target="_blank" href="https://www.instagram.com/ugandaBookiiing"><img src={assetPath(imgInfo.thumb)} alt=""/></a></li>;
     });
 
     return (
@@ -183,39 +183,39 @@ function getDefaultProps() {
         instagramImages : [
             {
                 'id' : 1,
-                'thumb' : "images/ins-01.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-1.jpg"
             },
             {
                 'id' : 2,
-                'thumb' : "images/ins-02.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-2.jpg"
             },
             {
                 'id' : 3,
-                'thumb' : "images/ins-03.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-3.jpg"
             },
             {
                 'id' : 4,
-                'thumb' : "images/ins-04.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-4.jpg"
             },
             {
                 'id' : 5,
-                'thumb' : "images/ins-05.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-5.jpg"
             },
             {
                 'id' : 6,
-                'thumb' : "images/ins-06.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-6.jpg"
             },
             {
                 'id' : 7,
-                'thumb' : "images/ins-07.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-7.jpg"
             },
             {
                 'id' : 8,
-                'thumb' : "images/ins-08.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-8.jpg"
             },
             {
                 'id' : 9,
-                'thumb' : "images/ins-09.png"
+                'thumb' : "images/instagramimages/ugandaBooking-instagram-icon-9.jpg"
             }
         ]
     }
