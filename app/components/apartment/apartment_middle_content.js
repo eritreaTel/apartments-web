@@ -38,7 +38,7 @@ const OneOtherRoom = function (props) {
     let totalPriceIntegerPart = '$' + Math.floor(totalApartmentPrice);
     let totalPriceDecimalPart = parseFloat(totalApartmentPrice % 1).toFixed(2).toString().substr(1, 3); // Take .00 instead of 0.00
 
-    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse);
+    let viewApartmentUrl = ApartmentHelper.generateViewApartmentUrl(aptResponse) + '/';
     let bed = 2;
     let maxAdults = 2;
     let maxChild = 1;
